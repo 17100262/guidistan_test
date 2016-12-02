@@ -1,0 +1,1 @@
+json.array! @degreeprograms, partial: 'degreeprograms/degreeprogram', as: :degreeprogram

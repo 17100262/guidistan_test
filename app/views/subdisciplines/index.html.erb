@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Subdisciplines</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Discipline</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subdisciplines.each do |subdiscipline| %>
+      <tr>
+        <td><%= subdiscipline.name %></td>
+        <td><%= subdiscipline.discipline.name %></td>
+        <td><%= link_to 'Show', subdiscipline %></td>
+        <td><%= link_to 'Edit', edit_subdiscipline_path(subdiscipline) %></td>
+        <td><%= link_to 'Destroy', subdiscipline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Subdiscipline', new_subdiscipline_path %>

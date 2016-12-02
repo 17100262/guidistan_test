@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Discipline Universities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>University</th>
+      <th>Discipline</th>
+      <th>Degreeprogram</th>
+      <th>Subdiscipline</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @discipline_universities.each do |discipline_university| %>
+      <tr>
+        <td><%= discipline_university.university.name %></td>
+        <td><%= discipline_university.discipline.name %></td>
+        <td><%= discipline_university.degreeprogram.name %></td>
+        <td><%= discipline_university.subdiscipline.name %></td>
+        <td><%= link_to 'Show', discipline_university %></td>
+        <td><%= link_to 'Edit', edit_discipline_university_path(discipline_university) %></td>
+        <td><%= link_to 'Destroy', discipline_university, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= collection_check_boxes(:discipline, :id, Discipline.all, :id, :name)%>
+</div>
+
+<br>
+
+<%= link_to 'New Discipline university', new_discipline_university_path %>
+</br>

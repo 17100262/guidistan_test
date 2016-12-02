@@ -1,0 +1,2 @@
+module DegreeprogramsHelper
+end

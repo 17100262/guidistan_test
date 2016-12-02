@@ -1,0 +1,1 @@
+json.partial! "degreeprograms/degreeprogram", degreeprogram: @degreeprogram

@@ -1,0 +1,1 @@
+json.array! @subdisciplines, partial: 'subdisciplines/subdiscipline', as: :subdiscipline

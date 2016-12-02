@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  university_id: 1
+  discipline_id: 1
+  degreeprogram_id: 1
+  subdiscipline_id: 1
+
+two:
+  university_id: 1
+  discipline_id: 1
+  degreeprogram_id: 1
+  subdiscipline_id: 1

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>University:</strong>
+  <%= @discipline_university.university.name %>
+</p>
+
+<p>
+  <strong>Discipline:</strong>
+  <%= @discipline_university.discipline.name %>
+</p>
+
+<p>
+  <strong>Degreeprogram:</strong>
+  <%= @discipline_university.degreeprogram.name %>
+</p>
+
+<p>
+  <strong>Subdiscipline:</strong>
+  <%= @discipline_university.subdiscipline.name %>
+</p>
+
+<%= link_to 'Edit', edit_discipline_university_path(@discipline_university) %> |
+<%= link_to 'Back', discipline_universities_path %>

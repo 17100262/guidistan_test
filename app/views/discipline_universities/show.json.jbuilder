@@ -1,0 +1,1 @@
+json.partial! "discipline_universities/discipline_university", discipline_university: @discipline_university
