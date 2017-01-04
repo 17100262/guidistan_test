@@ -1,0 +1,10 @@
+<h1>Profile#show</h1>
+<!--<=link_to image_tag(@profile.image.url(:med)), @profile.image.url %>-->
+<%= image_tag @profile.image.url(:large) %>
+<!--<= image_tag @profile.image.url %>-->
+<!--< if file? %>-->
+<!--<= file is there %>-->
+<!--< end %>-->
+<%= @profile.name %>
+<%= @profile.city %>
+<%= @profile.gender %>

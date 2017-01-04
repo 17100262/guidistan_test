@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+<div class = "container">
+<h1>Discussion Forum</h1>
+
+<!--<table class="table">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th>Title</th>-->
+<!--      <th>Description</th>-->
+<!--      <th>Discipline</th>-->
+<!--      <th colspan="3"></th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+
+  <!--<tbody>-->
+    
+  
+    <% @posts.each do |post| %>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h1><%= link_to post.title, post %></h1></div>
+        <p><b><%= post.description %></p></b>
+        <p><%= post.discipline.name %></p>
+        <p>Posted about <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>
+        <%= link_to 'Edit', edit_post_path(post),class: "btn btn-info" %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
+    </div>
+    <% end %>
+<br>
+
+<%= link_to 'New Post', new_post_path,class: "btn btn-primary"%>
+</div>

@@ -1,0 +1,6 @@
+<div class = "container">
+<% @disciplines.each do |d| %>
+<p><%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id } %></p>
+<% end %>
+</div>
+

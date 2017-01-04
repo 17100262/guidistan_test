@@ -6,4 +6,5 @@ class Discipline < ActiveRecord::Base
 	has_many :subdisciplines, :through => :subdisciplines 
 	# foreign_key: "id"
     has_many :degreeprogram, :through => :discipline_university
+    has_many :posts
 end

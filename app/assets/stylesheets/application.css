@@ -13,4 +13,37 @@
  *= require_tree .
  *= require_self
  *= require bootstrap.min
+ *= require rails_bootstrap_forms
+ *= require font-awesome
  */
+ 
+ .apni{
+     padding-right: 110px;
+     padding-left: 110px;
+     padding-top: 50px;
+     margin-right: auto;
+     margin-left: auto;
+     /*margin-top: auto;*/
+ }
+/*For discplines blocks*/
+#section { 
+    background-color: #eee;
+    padding: 1em;
+    text-align: center;
+    cursor: pointer;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    transition: all 0.15s linear;
+    display: block;
+    border-radius: 2.5%;
+}
+#section:hover {
+  background-color: #6aacf2
+}
+#header{
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#topMain a{
+    font-size:14px;
+}

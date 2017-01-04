@@ -1,44 +1,21 @@
 Rails.application.routes.draw do
-  get 'education/index'
 
-  get 'education/show'
-
-  get 'education/create'
-
-  get 'education/new'
-
-  get 'education/edit'
-
-  get 'education/update'
-
-  get 'education/delete'
-
-  get 'education/destroy'
-
-  get 'profile/index'
-
-  get 'profile/show'
-
-  get 'profile/create'
-
-  get 'profile/new'
-
-  get 'profile/edit'
-
-  get 'profile/update'
-
-  get 'profile/delete'
-
-  get 'profile/destroy'
-
+  resources :disciplines
+  resources :posts do 
+      resources :comments
+    end
+  resources :forum, only: [:index]
   devise_for :users
   root to: "disciplines#index"
   resources :degreeprograms
   resources :subdisciplines
   resources :discipline_universities
-  resources :disciplines
+  
   resources :cities
   resources :universities
+  resources :profiles
+  resources :education
+  resources :profile_education
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

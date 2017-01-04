@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202112624) do
+ActiveRecord::Schema.define(version: 20161203141808) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "comment"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "degreeprograms", force: :cascade do |t|
     t.string   "degree_type"
@@ -50,6 +61,15 @@ ActiveRecord::Schema.define(version: 20161202112624) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "discipline_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "profile_educations", force: :cascade do |t|
     t.integer  "profile_id"
     t.integer  "education_id"
@@ -59,10 +79,14 @@ ActiveRecord::Schema.define(version: 20161202112624) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
-    t.string   "gender",     limit: 1
+    t.string   "gender",             limit: 1
     t.string   "city"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "roles", force: :cascade do |t|

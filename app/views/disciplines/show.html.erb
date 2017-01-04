@@ -1,14 +1,29 @@
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @discipline.name %>
-</p>
+<div class="container" >
+    <!--<div class="page-header">-->
+    <h1 style="text-align:center"><%= @discipline.name %></h1>
+    <!--</div>-->
+    <div class="well">
+        <p style="text-align: justify"><%= @discipline.description %></p>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @discipline.description %>
-</p>
+<% if can? :update, @discipline %>
+    <%= link_to 'Edit', edit_discipline_path(@discipline),class:"btn btn-info" %> |
+<%end %>
+<%= link_to 'Back', disciplines_path,class:"btn btn-info" %>
+</div>
 
-<%= link_to 'Edit', edit_discipline_path(@discipline) %> |
-<%= link_to 'Back', disciplines_path %>
+<!------------ Personality test Box -->
+<section>
+  <div class ="container well"><p>
+    <img src="/StudentsSmall.jpg" alt="" class="logo pull-left"/>
+    <h2 style="margin:0">Take a Free Personality Test!</h2>
+    <h5 style="margin:0">Find out which Programmes match your personality!</h5>
+    <a href="#"><h5 style="color:#009cda">Take the Test</h5></a>
+    </p>
+  </div>
+</section>
+<br>
+<!--------------->

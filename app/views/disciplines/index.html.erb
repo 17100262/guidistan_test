@@ -1,24 +1,35 @@
-<p id="notice"><%= notice %></p>
-<!-- <div class="container"> -->
-<h1>Disciplines</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="container-fluid" >
+  <div class="services container" >
+    <p id="notice"><%= notice %></p>
+    <div align="center">
+      <h1>Explore Disciplines</h1>
+    </div>
     <% @disciplines.each do |discipline| %>
-      <tr>
-        <td><%= link_to discipline.name, discipline %></td>
-        <td><%= link_to 'Edit', edit_discipline_path(discipline) %></td>
-        <td><%= link_to 'Destroy', discipline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <section class="col-sm-6 col-md-4" id="section">
+        <h3><%= link_to discipline.name, discipline %></h3>
+        <% if can? :update, discipline %>
+          <td ><%= link_to 'Edit', edit_discipline_path(discipline),class:"btn btn-info"%></td>
+        <% end %>
+        <% if can? :delete, discipline %>
+          <td><%= link_to 'Destroy', discipline, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>
+        <% end %>
+      </section>
     <% end %>
+  </div> 
+</div>
 
-  </tbody>
-</table>
-
-<%= link_to 'New Discipline', new_discipline_path %>
+<!------------ Personality test Box -->
+<section>
+  <div class ="container well"><p>
+    <img src="/StudentsSmall.jpg" alt="" class="logo pull-left"/>
+    <h2 style="margin:0">Take a Free Personality Test!</h2>
+    <h5 style="margin:0">Find out which Programmes match your personality!</h5>
+    <a href="#"><h5 style="color:#009cda">Take the Test</h5></a>
+    </p>
+  </div>
+</section>
+<br>
+<!--------------->
+<% if can? :create, Discipline.new %>
+  <%= link_to 'New Discipline', new_discipline_path %>
+<% end %>

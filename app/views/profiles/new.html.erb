@@ -1,0 +1,15 @@
+<h1>Profile#new</h1>
+<p>Find me in app/views/profile/new.html.erb</p>
+<%= form_for (@profile), html: { multipart: true } do |f| %>
+ <%= f.label :Name %>
+  <%= f.text_field :name %><br />
+   <%= f.label :Gender %>
+  <%= f.text_field :gender %><br />
+   <%= f.label :City %>
+  <%= f.text_field :city %><br />
+   <%= f.label :Image %>
+  <%= f.file_field :image %>
+  <%= f.submit "Log In" %>
+<% end %>
+oyes
+<p>Find me in app/views/profile/index.html.erb</p>
