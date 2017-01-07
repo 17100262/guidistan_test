@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
 		@comment.save
 
 		if @comment.save
+			@comment.create_activity :create, owner:current_user
 			redirect_to post_path(@post)
 		else
 			render 'new'
@@ -33,6 +34,7 @@ class CommentsController < ApplicationController
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 		@comment.destroy
+		@comment.create_activity :destroy, owner:current_user
 		redirect_to post_path(@post)
 	end
     

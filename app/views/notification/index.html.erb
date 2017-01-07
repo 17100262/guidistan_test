@@ -1,0 +1,9 @@
+
+<div class="container">
+<h1> Notifications</h1>
+<% @activities.each do |activity| %>
+	<ul><%=activity.owner.email %>
+		<%= render_activity activity %>
+	</ul>
+<% end %>
+</div>

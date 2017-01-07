@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # get 'notification/index'
+  get 'notification' => 'notification#index'
+
+
   resources :disciplines
   resources :posts do 
       resources :comments
