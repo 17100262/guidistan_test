@@ -1,10 +1,51 @@
-<h1>Profile#show</h1>
+<!--<h1>Profile#show</h1>-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <%= image_tag @profile.image.url(:large) %>
+            <h2><%= @profile.name %></h2>
+        </div>
+    </div>
+    <div class ="row">
+    <div class="col-sm-3">
+        <ul class="list-group">
+            <li class="list-group-item text-center" contenteditable="false">Profile</li>
+            <li class="list-group-item text-center"><strong><%= @profile.city %></strong></li>
+            <li class="list-group-item text-center"><strong><%= @profile.gender %></strong></li>
+            <li class="list-group-item text-center"></li>
+            <li class="list-group-item text-center"></li>
+        </ul>
+        <div class="panel panel-default">
+          <div class="panel-heading">Education</div>
+              <div class="panel-body">
+                    Panel content
+              </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Interests</div>
+              <div class="panel-body">
+                    Panel content
+              </div>
+        </div>
+    
+    </div>
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">Panel heading without title</div>
+              <div class="panel-body">
+                    Panel content
+              </div>
+        </div>
+
+    </div>    
+    </div>
 <!--<=link_to image_tag(@profile.image.url(:med)), @profile.image.url %>-->
-<%= image_tag @profile.image.url(:large) %>
+
 <!--<= image_tag @profile.image.url %>-->
 <!--< if file? %>-->
 <!--<= file is there %>-->
 <!--< end %>-->
-<%= @profile.name %>
-<%= @profile.city %>
-<%= @profile.gender %>
+</div>
+
+</div>
+

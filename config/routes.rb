@@ -9,7 +9,13 @@ Rails.application.routes.draw do
       resources :comments
     end
   resources :forum, only: [:index]
-  devise_for :users
+  # devise_for :users
+  
+  Rails.application.routes.draw do
+    devise_for :users, controllers: {
+      registrations: 'user/registrations'
+    }
+  end
   root to: "disciplines#index"
   resources :degreeprograms
   resources :subdisciplines

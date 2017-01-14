@@ -8,12 +8,12 @@ class Ability
     if user.has_role?(:admin)
       can :manage, :all
     else
-      can :create, Post
-      can :create, Comment
-      can :update, Post,:user_id => user.id
-      can :destroy, Post, :user_id => user.id
-      can :destroy, Comment, :user_id => user.id
-      can :update, Comment, :user_id => user.id
+        can :create, Post
+        can :create, Comment
+        can :update, Post,:user_id => user.id
+        can :destroy, Post, :user_id => user.id
+        can :destroy, Comment, :user_id => user.id
+        can :update, Comment, :user_id => user.id
       can :read, :all
     end
     #

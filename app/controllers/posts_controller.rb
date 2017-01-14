@@ -1,15 +1,18 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!,except:[:index,:show]
+  before_action :authenticate_user!,except:[:index,:show]
   load_and_authorize_resource
   # GET /posts
   # GET /posts.json
   def index
+    @id = params[:filter_id]
     if (params[:filter_id] == nil)
-      @posts = Post.all.order("created_at DESC")
+      # @posts = Post.all.order("created_at DESC").
+
+      @posts = Post.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
     else
     # puts params[:filter_id], "helellaelasdlalsd"
-      @posts = Post.where(discipline_id: params[:filter_id]).all.order("created_at DESC")
+      @posts = Post.where(discipline_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
     end
   end
 
