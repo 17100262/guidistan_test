@@ -1,0 +1,107 @@
+
+<section class="page-header">
+        <div class="container">
+
+          <h1>Login</h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
+<div class="container register-form-main-page">
+
+<div class="col-md-6 col-sm-6 registeration-form-container login-form-container">
+
+							
+							
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'sky-form boxed' }) do |f| %>
+
+  <header class="size-18 margin-bottom-20">
+									I'm a returning Member
+	</header>
+	<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+	<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+	<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+	<fieldset class="nomargin">
+	  
+  <div class="form-inputs">
+    
+    <label class="input margin-bottom-10"> 
+       <%= f.input_field :email, required: false, autofocus: true , placeholder: "Email"%>
+    </label>
+    
+     <label class="input margin-bottom-10"> 
+       <%= f.input_field :password, required: false , placeholder: "Password"%>
+    </label>
+    
+    
+									
+    <div class="clearfix note margin-bottom-30">
+		
+				<%= link_to "Forgot Password?", new_password_path(resource_name), :class => "pull-right" %>
+		</div>
+     
+    <label class="checkbox weight-300 margin-bottom-20">
+					<%= f.input_field :remember_me, as: :boolean if devise_mapping.rememberable? %><i style="margin-top:-1px;"></i>Remember Me
+					
+		</label>
+    
+    
+  </div>
+
+  </fieldset>
+  
+  
+  
+  	<footer>
+			<div class="form-actions">
+        <%= f.button :submit, "Log in" %>
+      </div>
+		</footer>
+  
+  
+<% end %>
+
+</div>
+
+
+<div class="col-md-6 col-sm-6">
+  
+							<form action="#" method="post" class="sky-form boxed">
+
+								<header class="size-18 margin-bottom-20">
+									Sign In using your favourite social network
+								</header>
+								
+								<fieldset class="nomargin">
+
+									<div class="row">
+									
+										<div class="col-md-8 col-md-offset-2">
+
+											<a class="btn btn-block btn-social btn-facebook margin-bottom-10">
+												<i class="fa fa-facebook"></i> Sign in with Facebook
+											</a>
+
+											<a class="btn btn-block btn-social btn-twitter margin-bottom-10">
+												<i class="fa fa-twitter"></i> Sign in with Twitter
+											</a>
+
+											<a class="btn btn-block btn-social btn-google margin-bottom-10">
+												<i class="fa fa-google-plus"></i> Sign in with Google
+											</a>
+									
+										</div>
+									</div>
+
+								</fieldset>
+
+								<footer>
+									Don't have an account yet? <strong><%= link_to "Click to register!", new_registration_path(resource_name) %></strong><br />
+								</footer>
+
+							</form>
+
+</div>
+</div>

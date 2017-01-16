@@ -49,3 +49,64 @@
 #topMain a{
     font-size:14px;
 }
+.forum-dis-container{
+    overflow:hidden;
+}
+.forum-dis-container li {
+    margin: 0;
+    padding: 1em;
+    background-color: #EEEEEE;
+    height:130px;
+    border-right: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    text-align: center;
+    transition: background-color 0.15s linear;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+}
+.forum-dis-container li:hover {
+    background-color: #007db2;
+}
+.forum-dis-container li:hover a {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+
+.forum-dis-container li a {
+    color: #222222;
+    transition: none !important;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    vertical-align: top;
+    margin-top: -25px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register-form-main-page{
+    margin-top:80px;
+    margin-bottom:80px;
+}
+label.select select{
+    cursor:pointer;
+}
+.registeration-form-container #error_explanation {
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
+
+
+.registeration-form-container #error_explanation h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.registeration-form-container #error_explanation ul{
+    margin-bottom:10px;
+}
+.login-form-container .boolean.optional{
+    padding-left:0px;
+}
+

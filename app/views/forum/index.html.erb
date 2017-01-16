@@ -1,6 +1,13 @@
-<div class = "container" style="margin-top: 50px;">
-<% @disciplines.each do |d| %>
-<p><%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id } %></p>
-<% end %>
+<div class = "container" style="margin-top:60px;">
+    <ul class="forum-dis-container">
+        <% @disciplines.each do |d| %>
+        
+        <li class="forum-dis-list col-md-4"> 
+            <%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id } %>
+        </li>
+        
+        <% end %>
+        
+    </ul>
 </div>
 
