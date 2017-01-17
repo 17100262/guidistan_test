@@ -71,6 +71,6 @@ class DisciplinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discipline_params
-      params.require(:discipline).permit(:name, :description)
+      params.require(:discipline).permit(:name, :description, :image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
     end
 end

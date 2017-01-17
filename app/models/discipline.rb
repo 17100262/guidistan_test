@@ -7,4 +7,6 @@ class Discipline < ActiveRecord::Base
 	# foreign_key: "id"
     has_many :degreeprogram, :through => :discipline_university
     has_many :posts
+    has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+    validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 end

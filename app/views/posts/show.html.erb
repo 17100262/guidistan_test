@@ -28,5 +28,5 @@
 <h3> Reply to thread</h3>
 <%= render "comments/form" %>
 </br>
-<%= link_to 'Back', posts_path,class: "btn btn-primary" %>
+<%= link_to 'Back', {:controller => "posts", :action => "index", :filter_id => @post.discipline_id },class: "btn btn-primary" %>
 </div>

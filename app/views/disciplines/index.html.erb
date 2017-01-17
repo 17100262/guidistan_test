@@ -7,6 +7,7 @@
     <% @disciplines.each do |discipline| %>
       <section class="col-sm-6 col-md-4" id="section">
         <h3><%= link_to discipline.name, discipline %></h3>
+        <%= image_tag discipline.image.url(:large) %><br><br>
         <% if can? :update, discipline %>
           <td ><%= link_to 'Edit', edit_discipline_path(discipline),class:"btn btn-info"%></td>
         <% end %>

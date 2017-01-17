@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @id = params[:filter_id]
+    
     if (params[:filter_id] == nil)
       # @posts = Post.all.order("created_at DESC").
 
@@ -19,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    
   end
 
   # GET /posts/new
@@ -80,6 +82,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description,:discipline_id)
+      params.require(:post).permit(:title, :description,:discipline_id, :filter_id)
     end
 end
