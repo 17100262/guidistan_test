@@ -56,7 +56,7 @@
     margin: 0;
     padding: 1em;
     background-color: #EEEEEE;
-    height:130px;
+    height: 250px;
     border-right: 1px solid #FFFFFF;
     border-bottom: 1px solid #FFFFFF;
     text-align: center;
@@ -76,14 +76,10 @@
 .forum-dis-container li a {
     color: #222222;
     transition: none !important;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-    vertical-align: top;
-    margin-top: -25px;
-    display: flex;
-  align-items: center;
-  justify-content: center;
+    font-size: 30px;
+
+    
 }
 .register-form-main-page{
     margin-top:80px;
@@ -101,12 +97,93 @@ label.select select{
 
 .registeration-form-container #error_explanation h2 {
     font-size: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 6px 10px;
+}
+.registeration-form-container #flash_alert{
+     color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 6px 10px;
+    margin: 0px 15px;
 }
 .registeration-form-container #error_explanation ul{
     margin-bottom:10px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    /* padding: 6px 10px; */
+    padding-bottom: 10px;
 }
 .login-form-container .boolean.optional{
     padding-left:0px;
 }
+.forum-image-container{
 
+    width: 300px;
+    height: 180px;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.image_thumb_forum{
+    
+}
+.forum-list-link {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    margin-top:20px;
+    margin-top: 5px;
+    margin-left: 15px;
+    /* text-align: center; */
+    width: calc(100% - 343px);
+}
+.login-btn-main{
+    margin-top:-15px;
+}
+.forum-image-container{
+    width:300px;
+}
+.image_thumb_forum{
+    width:100%;
+}
+.forum-dis-list{
+    text-align:left !important;
+}
+.forum-image-container{
+    display:inline-block;
+}
+
+@media(max-width:992px){
+    
+    .forum-list-link {
+        width: 100%;
+    }
+    li.forum-dis-list {
+        height: auto;
+        margin-bottom: 1px;
+        text-align: center;
+    }
+    .forum-dis-container{
+        padding-left:0px;
+    }
+    .forum-image-container {
+        width: 100%;
+        text-align: center;
+        margin-left:0px;
+    }
+    
+    img.image_thumb_forum {
+        width: 75%;
+        text-align: center;
+    }
+    
+    .forum-list-link {
+        text-align: center;
+        margin-left: 0px;
+    }
+}

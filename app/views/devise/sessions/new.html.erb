@@ -42,11 +42,13 @@
 				<%= link_to "Forgot Password?", new_password_path(resource_name), :class => "pull-right" %>
 		</div>
      
-    <label class="checkbox weight-300 margin-bottom-20">
+    <label class="checkbox weight-300 margin-bottom-20" style="display:inline-block;">
 					<%= f.input_field :remember_me, as: :boolean if devise_mapping.rememberable? %><i style="margin-top:-1px;"></i>Remember Me
 					
 		</label>
-    
+    <div class="form-actions pull-right login-btn-main">
+				        <%= f.button :submit, "Log in" %>
+				    </div>
     
   </div>
 
@@ -54,11 +56,7 @@
   
   
   
-  	<footer>
-			<div class="form-actions">
-        <%= f.button :submit, "Log in" %>
-      </div>
-		</footer>
+  
   
   
 <% end %>

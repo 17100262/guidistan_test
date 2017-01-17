@@ -2,8 +2,34 @@
     <ul class="forum-dis-container">
         <% @disciplines.each do |d| %>
         
-        <li class="forum-dis-list col-md-4"> 
-            <%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id } %>
+        <script>
+            $(window).load(function(){
+                
+                var link_parent = $(".forum-list-link");
+                for(var i = 0 ; i < link_parent.length ; i++){
+                    
+                    var links = $($(link_parent[i])[0]).find("a");
+                	
+                    var href = links[0].href;
+                    var href_location = "window.location.href='" + href + "'";
+                    var main_parent = $(link_parent[i]).parent(".forum-dis-list");
+                	$(main_parent[0]).attr("onClick",href_location);
+                }
+            });    
+        </script>
+        
+        <li class="forum-dis-list col-md-6" onclick="window.location.href = ">
+            
+   
+            <div class="forum-image-container">
+                
+                <%= image_tag d.image.url(:large) , :class => "image_thumb_forum"%>
+            
+            </div>
+            
+            <div class="forum-list-link">
+                <%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id } %>
+            </div>
         </li>
         
         <% end %>
