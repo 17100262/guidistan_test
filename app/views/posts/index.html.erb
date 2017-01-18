@@ -27,7 +27,7 @@
 <% end %>
 <br>
 <% if can? :create, Post %>
-  <%= link_to 'New Post', new_post_path,class: "btn btn-primary"%><br/>
+  <%= link_to 'New Post', new_post_path(@post,:discipline_id => @id), class: "btn btn-primary"%><br/>
 <% end %>
 <div class = "pagination"><%= will_paginate @posts %></div>
 </div>
