@@ -13,7 +13,9 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-
+  # config.omniauth :facebook, "256656814763226", "e6f75056b75035db8d947c7ef32a5983"
+  # config.omniauth :twitter, "v1gbcUV2axQRu85FszKqyfZzu", "kLkD8pdKgoLlCMCFO82a0GhQSgo4uWlmZVP36zF3k8VbRXdo8g", callback_url: "https://ssppp-a17100262.c9users.io/"
+  
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

@@ -167,6 +167,10 @@ label.select select{
 .label-remember-me {
     padding-left: 27px !important;
 }
+.post-title-forum{
+    margin-bottom: 10px;
+    color: #8ab933;
+}
 
 @media(max-width:992px){
     

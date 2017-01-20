@@ -10,10 +10,10 @@ class PostsController < ApplicationController
     if (params[:filter_id] == nil)
       # @posts = Post.all.order("created_at DESC").
 
-      @posts = Post.paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
+      @posts = Post.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
     else
     # puts params[:filter_id], "helellaelasdlalsd"
-      @posts = Post.where(discipline_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 1).order("created_at DESC")
+      @posts = Post.where(discipline_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
     end
   end
 
@@ -26,6 +26,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @@dis_id = params[:discipline_id]
+    @id = params[:discipline_id]
   end
 
   # GET /posts/1/edit
@@ -35,8 +37,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    # puts @post.discipline_id,"hello"
     @post = Post.new(post_params)
+    # puts @id,'adasdasds'
     @post.user_id = current_user.id
+    @post.discipline_id = @@dis_id
+    
 
     respond_to do |format|
       if @post.save

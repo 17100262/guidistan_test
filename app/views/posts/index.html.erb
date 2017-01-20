@@ -1,33 +1,85 @@
-<p id="notice"><%= notice %></p>
-<div class = "container">
-  
 <section class="page-header">
 				<div class="container">
 
-					<h1><%= Discipline.find(@id).name %> Discussion Form</h1>
+					<h1><%= Discipline.find(@id).name %> Discussion Forum</h1>
 
 					
 
 				</div>
-			</section>
+</section>
+
+<p id="notice"><%= notice %></p>
+<div class = "container">
+  
+<div class="col-md-12">
+
+
+
   
 <% @posts.each do |post| %>
-  <div class="panel panel-default">
-      <div class="panel-heading"><h1><%= link_to post.title, post %></h1></div>
-        <p><b><%= post.description %></p></b>
-        <p><%= post.discipline.name %></p>
-        <p>Posted about <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></p>
+
+  <!--<div class="panel panel-default">
+      <div class="panel-heading"><h1><= link_to post.title, post %></h1></div>
+        <p><b><= post.description %></p></b>
+        <p><= post.discipline.name %></p>
+        <p>Posted about <= time_ago_in_words(post.created_at) %> ago by <= post.user.email %></p>
         <% if can? :update, post %>
           <%= link_to 'Edit', edit_post_path(post),class: "btn btn-info" %>
         <% end %>
         <% if can? :destroy, post %>
           <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
         <% end %>
-  </div>
+  </div>-->
+  
+        <div class="block-review-content">
+          <div class="block-review-body">
+              <div class="block-review-avatar text-center">
+                  <div class="push-bit">
+                    
+                    <% if post.user.profile.image_file_name.present? %> 
+
+
+                      <%= image_tag post.user.profile.image.url(:med) %>
+                      <% else %>
+                      
+                      <a href="javascript:;">
+                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                      </a>
+                      <% end %>
+                  </div>
+                  <small class="block"><%= 
+                  puts post.to_yaml
+                  post.user.profile.name
+                  %></small>
+                  <% if post.user.email %>
+                  <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
+                  <% end %>
+                  <hr>
+                 
+              </div>
+              <h2 class="post-title-forum">
+                <%= link_to post.title, post %>
+              </h2>
+              <p>
+                 <%= post.description %>
+              </p>
+              
+              <% if can? :update, post %>
+                <%= link_to 'Edit', edit_post_path(post),class: "btn btn-primary" %>
+              <% end %>
+              <% if can? :destroy, post %>
+                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
+              <% end %>
+              
+          </div>
+        </div>
+
 <% end %>
 <br>
 <% if can? :create, Post %>
-  <%= link_to 'New Post', new_post_path(@post,:discipline_id => @id), class: "btn btn-primary"%><br/>
+  <%= link_to 'New Post', new_post_path(@post => {:discipline_id => @id}), class: "btn btn-primary"%><br/>
 <% end %>
 <div class = "pagination"><%= will_paginate @posts %></div>
+</div>
+
 </div>

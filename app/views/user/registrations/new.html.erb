@@ -21,11 +21,11 @@
 </header>
 <fieldset class="nomargin">                   
 <div class="form-inputs">
-    <!--<= f.fields_for :profile_attributes do |f| %>-->
+    <%= f.fields_for :profile_attributes do |f| %>
       
-      <!--<label class="input margin-bottom-10">-->
-      <!--  <= f.input_field :name,required: true , placeholder: "Name"  %>-->
-      <!--</label>-->
+      <label class="input margin-bottom-10">
+        <%= f.input_field :name,required: true , placeholder: "Name"  %>
+      </label>
 
       <!--<label class="select margin-bottom-10 margin-bottom-10 margin-top-10">            -->
       <!--  <= f.select :gender,[["Gender","Gender"],["Male","Male"],["Female","Female"]] %>-->
@@ -35,7 +35,7 @@
       <!--  <= f.input_field :city, placeholder:"City" %>-->
       <!--</label>-->
    
-    
+     <% end %>
      <label class="input margin-bottom-10"> 
        <%= f.input_field :email, required: true, placeholder: "Email" %>
      </label>
@@ -49,10 +49,13 @@
           <%= f.input_field :password_confirmation, required: true , placeholder: "Confirm Password" %>
       </label>
 </div>
+
   <div class="form-actions">
     <%= f.button :submit, "Sign up", class: "btn btn-primary noradius pull-right" %>
   </div>
- <!--< end %>-->
+
+
+
 </fieldset>
 <% end %>
 </div> <!--Col-md-6 Forum Container-->

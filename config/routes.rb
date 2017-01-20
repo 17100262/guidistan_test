@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     devise_for :users, controllers: {
       registrations: 'user/registrations'
+      # :omniauth_callbacks => "users/omniauth_callbacks"
     }
   end
   root to: "disciplines#index"
