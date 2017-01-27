@@ -171,7 +171,9 @@ label.select select{
     margin-bottom: 10px;
     color: #8ab933;
 }
-
+.block-review-content{
+    min-height: 200px;
+}
 @media(max-width:992px){
     
     .forum-list-link {

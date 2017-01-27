@@ -6,7 +6,62 @@ class DisciplineUniversitiesController < ApplicationController
   # GET /discipline_universities
   # GET /discipline_universities.json
   def index
-    @discipline_universities = DisciplineUniversity.all
+    # @discipline_universities = DisciplineUniversity.all
+    
+    @filterrific = initialize_filterrific(
+      DisciplineUniversity,
+      params[:filterrific]
+    ) or return
+
+    # puts params[:discipline_university] == nil,"check"
+
+    if params[:discipline_university].present?
+      if params[:discipline_university][:discipline_ids].all?{|e| e==""}
+        params[:discipline_university][:discipline_ids]= Discipline.uniq.pluck(:id)
+        (params[:discipline_university][:discipline_ids]).map! { |e| e.to_s  }
+      else
+        (params[:discipline_university][:discipline_ids]).delete("")
+      end
+      
+      if params[:discipline_university][:cities_ids].all?{|e| e==""}
+        params[:discipline_university][:cities_ids] = City.uniq.pluck(:id)
+        (params[:discipline_university][:cities_ids]).map! { |e| e.to_s  }
+      else
+        (params[:discipline_university][:cities_ids]).delete("")
+      end
+      
+      if params[:discipline_university][:university_ids].all?{|e| e==""}
+        params[:discipline_university][:university_ids] = University.uniq.pluck(:id)
+        (params[:discipline_university][:university_ids]).map! { |e| e.to_s  }
+      else
+        (params[:discipline_university][:university_ids]).delete("")
+      end
+      
+      if params[:discipline_university][:subdiscipline_ids].all?{|e| e==""}
+        params[:discipline_university][:subdiscipline_ids] = Subdiscipline.uniq.pluck(:id)
+        (params[:discipline_university][:subdiscipline_ids]).map! { |e| e.to_s  }
+      else
+        (params[:discipline_university][:subdiscipline_ids]).delete("")
+      end
+
+
+      @discipline_universities = DisciplineUniversity.find_by_sql(["
+          SELECT DISTINCT *
+          FROM discipline_universities, universities
+          WHERE 
+            discipline_universities.university_id=universities.id 
+            AND discipline_id IN (?) 
+            AND university_id IN (?) 
+            AND city_id IN (?)
+            AND subdiscipline_id IN (?)",params[:discipline_university][:discipline_ids],params[:discipline_university][:university_ids],params[:discipline_university][:cities_ids],params[:discipline_university][:subdiscipline_ids]]) if params[:discipline_university].present?
+      else
+        @discipline_universities= DisciplineUniversity.all
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    # puts @discipline_universities
   end
 
   # GET /discipline_universities/1

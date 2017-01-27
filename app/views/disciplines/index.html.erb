@@ -1,22 +1,25 @@
 <div class="container-fluid" >
+  <br>
+<% if can? :create, Discipline.new %>
+  <%= link_to 'New Discipline', new_discipline_path ,class:"btn btn-primary pull-right" %>
+<% end %>
   <div class="services container" >
     <p id="notice"><%= notice %></p>
-    <div align="center">
-      <h1>Explore Disciplines</h1>
+    <div align="center"> <h1>Explore Disciplines</h1> </div>
+    <div class = "container" style="margin-top:60px;">
+        <ul class="forum-dis-container">
+            <% @disciplines.each do |discipline| %>
+              <li class="forum-dis-list col-md-6">
+                
+                  <div class="forum-image-container"> <%= image_tag discipline.image.url(:large) , :class => "image_thumb_forum"%></div>
+                  <div class="forum-list-link"> <%= link_to discipline.name, discipline %></div>
+                  
+                  
+              </li>
+            <% end %>
+        </ul>
     </div>
-    <% @disciplines.each do |discipline| %>
-      <section class="col-sm-6 col-md-4" id="section">
-        <h3><%= link_to discipline.name, discipline %></h3>
-        <%= image_tag discipline.image.url(:large) %><br><br>
-        <% if can? :update, discipline %>
-          <td ><%= link_to 'Edit', edit_discipline_path(discipline),class:"btn btn-info"%></td>
-        <% end %>
-        <% if can? :delete, discipline %>
-          <td><%= link_to 'Destroy', discipline, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>
-        <% end %>
-      </section>
-    <% end %>
-  </div> 
+</div> 
 </div>
 
 <!------------ Personality test Box -->
@@ -31,6 +34,22 @@
 </section>
 <br>
 <!--------------->
-<% if can? :create, Discipline.new %>
-  <%= link_to 'New Discipline', new_discipline_path %>
-<% end %>
+
+
+<!--------------->
+
+<script>
+    $(window).load(function(){
+        
+        var link_parent = $(".forum-list-link");
+        for(var i = 0 ; i < link_parent.length ; i++){
+            
+            var links = $($(link_parent[i])[0]).find("a");
+        	
+            var href = links[0].href;
+            var href_location = "window.location.href='" + href + "'";
+            var main_parent = $(link_parent[i]).parent(".forum-dis-list");
+        	$(main_parent[0]).attr("onClick",href_location);
+        }
+    });    
+</script>

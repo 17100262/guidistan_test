@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!,except:[:index,:show]
+  before_action :authenticate_user!, except:[:index,:show]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  
   load_and_authorize_resource
+  impressionist actions: [:show], unique: [:session_hash]
   # GET /posts
   # GET /posts.json
   def index
@@ -70,8 +72,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
@@ -80,6 +80,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def upvote
+    @post.upvote_from current_user
+    redirect_to :back
+  end
+  
+  def downvote
+    @post.downvote_from current_user
+    redirect_to :back
+  end
+  
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

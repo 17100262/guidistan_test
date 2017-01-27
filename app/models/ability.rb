@@ -7,14 +7,17 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role?(:admin)
       can :manage, :all
+      cannot :update, Post
     else
-        can :create, Post
-        can :create, Comment
-        can :update, Post,:user_id => user.id
-        can :destroy, Post, :user_id => user.id
-        can :destroy, Comment, :user_id => user.id
-        can :update, Comment, :user_id => user.id
+      can :create, Post
+      can :create, Comment
+      can :update, Post,:user_id => user.id
+      can :destroy, Post, :user_id => user.id
+      can :destroy, Comment, :user_id => user.id
+      can :update, Comment, :user_id => user.id
       can :read, :all
+      can :upvote, Post
+      can :downvote, Post
     end
     #
     # The first argument to `can` is the action you are giving the user

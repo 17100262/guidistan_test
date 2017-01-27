@@ -54,3 +54,9 @@ end
 
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
+gem 'impressionist'
+gem 'filterrific'
+
+gem 'acts_as_votable', '~> 0.10.0'

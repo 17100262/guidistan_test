@@ -1,5 +1,8 @@
 <!--<h1>Profile#show</h1>-->
 <div class="container">
+    <br>
+    <%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-primary pull-right" %>
+        
     <div class="row">
         <div class="col-sm-6">
             <%= image_tag @profile.image.url(:large) %>
@@ -9,39 +12,43 @@
     <div class ="row">
     <div class="col-sm-3">
         <ul class="list-group">
-            <li class="list-group-item text-center" contenteditable="false">Profile</li>
+            <li class="list-group-item text-center" contenteditable="false"><strong>Profile</strong></li>
             <li class="list-group-item text-center"><strong><%= @profile.city %></strong></li>
             <li class="list-group-item text-center"><strong><%= @profile.gender %></strong></li>
-            <li class="list-group-item text-center"></li>
-            <li class="list-group-item text-center"></li>
+            <!--<li class="list-group-item text-center"></li>-->
+            <!--<li class="list-group-item text-center"></li>-->
         </ul>
         <div class="panel panel-default">
           <div class="panel-heading">Education</div>
               <div class="panel-body">
-                    Panel content
+                    abc
               </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">Interests</div>
               <div class="panel-body">
-                    Panel content
+                    xyz
               </div>
         </div>
     
     </div>
+    
     <div class="col-sm-9">
         <div class="panel panel-default">
-          <div class="panel-heading">Panel heading without title</div>
+          <div class="panel-heading">Bio</div>
               <div class="panel-body">
-                    Panel content
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. 
+                    Nam et lacus neque.
+                    
               </div>
         </div>
 
     </div>    
     </div>
-<%=link_to image_tag(@profile.image.url(:med)), @profile.image.url %>
+<!--<=link_to image_tag(@profile.image.url(:med)), @profile.image.url %>-->
 
-<%= image_tag @profile.image.url %>
+<!--<= image_tag @profile.image.url %>-->
 <!--< if file? %>-->
 <!--file is there-->
 <!--<= file is there %>-->

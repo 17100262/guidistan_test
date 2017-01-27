@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_comment, only: [:upvote, :downvote]
     def create
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.create(params[:comment].permit(:comment))
@@ -38,4 +39,19 @@ class CommentsController < ApplicationController
 		redirect_to post_path(@post)
 	end
     
+	def upvote
+		@comment.upvote_from current_user
+		redirect_to :back
+	end
+  
+	def downvote
+		@comment.downvote_from current_user
+		redirect_to :back
+	end
+	  
+	private
+	# Use callbacks to share common setup or constraints between actions.
+	def set_comment
+		@comment = Comment.find(params[:id])
+	end
 end

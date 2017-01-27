@@ -1,20 +1,34 @@
 Rails.application.routes.draw do
 
+  get 'admin_panel/index'
+
   # get 'notification/index'
   get 'notification' => 'notification#index'
 
 
   resources :disciplines
-  resources :posts do 
-      resources :comments
+  resources :posts do
+    member do
+      put "like" => "posts#upvote"
+      put "dislike" => "posts#downvote"
+    end
+      resources :comments do
+        member do
+          put "like" => "comments#upvote"
+          put "dislike" => "comments#downvote"
+        end
+      end
+      
     end
   resources :forum, only: [:index]
   # devise_for :users
   
   Rails.application.routes.draw do
+  get 'admin_panel/index'
+
     devise_for :users, controllers: {
-      registrations: 'user/registrations'
-      # :omniauth_callbacks => "users/omniauth_callbacks"
+      registrations: 'users/registrations',
+      :omniauth_callbacks => "users/omniauth_callbacks"
     }
   end
   root to: "disciplines#index"

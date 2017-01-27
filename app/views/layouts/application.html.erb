@@ -588,6 +588,19 @@
 											<li><a href="shop-checkout-final.html">ORDER PLACED</a></li>
 										</ul>
 									</li>
+									<li> <%= link_to 'Forums', forum_index_url %></li>
+									<li>
+									        <% if user_signed_in? %>
+									          <%= link_to 'My Profile', profile_path(:id => current_user.profile.id) %>
+									        <% end %>
+									</li>
+									<li>
+										<!--< if  %>-->
+									        <% if user_signed_in? and current_user.has_role? :admin %>
+									          <%= link_to 'Admin Panel', admin_panel_index_path %>
+									        <!--< end %>-->
+										<% end %>
+									</li>
 									<li>
 									        <% if user_signed_in? %>
 									          <%= link_to 'Log Out', destroy_user_session_path, :method => :delete %>
@@ -595,7 +608,6 @@
 									          <%= link_to 'Login', new_user_session_path %>
 									        <% end %>
 									</li>
-									<li> <%= link_to 'Forum', forum_index_url %></li>
 								</ul>
 
 							</nav>
