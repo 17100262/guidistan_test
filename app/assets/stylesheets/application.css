@@ -161,6 +161,72 @@ label.select select{
     min-height: 0px;
     margin: 0px;
 }
+.label-key {
+    color: #9199a1;
+    font-size: 14px;
+    padding-bottom:0px;
+    margin-bottom:0px;
+}
+.description-container{
+    padding-left:0px !important;
+}
+.single-description-para{
+    min-height:20px;
+    display:inline-block;
+    vertical-align:top;
+}
+.single_postliker{
+    display:inline-block;
+}
+h2.post-title-forum{
+    font-weight:300;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.backbutton-single{
+    display: block !important;
+    clear: both;
+    width: 57px;
+    margin-left: 0px;
+    margin-bottom: 20px !important;
+}
+   
+.post-title-forum a{
+    color: #8ab933;
+}
+.user-details-post{
+    text-align:center;
+}
+.description-container{
+    min-height:100px;
+}
+.user-single-postpic{
+    padding-top:15px;
+}
+.label-value{
+    margin-bottom:0px;
+    padding-bottom:0px;
+}
+.user-details-post{
+    padding:15px;
+    background-color: rgba(0,0,0,0.05);
+    border:rgba(0,0,0,0.05) 1px solid;
+}
+.description-container {
+    padding-left:0px;
+}
+.forum_post_question_container{
+    clear: both;
+    padding: 5px 0;
+    border-bottom: 1px solid #e4e6e8;
+    margin-bottom: 1em;
+    padding-top: 20px;
+}
+.forum_post_question_container h1{
+    margin-bottom: .5em;
+    font-size: 27px;
+    font-weight: 500;
+}
 .hide-label-checkbox{
     padding-left:0px !important;
 }
@@ -174,6 +240,88 @@ label.select select{
 .block-review-content{
     min-height: 200px;
 }
+.comment-body{
+    border-right:0px !important;
+    border-left:0px !important;
+    border-top: 1px solid #e4e6e8;
+    border-bottom: 1px solid #e4e6e8;
+}
+.comment-body .panel-body{
+    padding-left:0px !important;
+    padding-right:0px !important;
+}
+form#new_comment{
+    margin-bottom:0px;
+}
+
+
+
+.up_vote_st {
+    transition:none !important;
+    text-indent: -9999em;
+    cursor: pointer;
+    display: block;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: -9999px;
+    width: 40px;
+    column-rule-color: rgb(0, 119, 204);
+    perspective-origin: 20px 15px;
+    transform-origin: 20px 15px;
+    background: url("./sprites.svg") no-repeat scroll -40px -170px / auto padding-box border-box, rgba(0, 0, 0, 0) none no-repeat scroll -40px -170px / auto padding-box border-box;
+    border: 0px none rgb(0, 119, 204);
+    font: normal normal normal normal 1px / 16.9px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin: 0px 3px 2px;
+    background-position: 0 -170px;
+   
+}/*#likerA_4*/
+
+.up_vote_selected{
+    background-position: -40px -170px !important;
+}
+.down_vote_selected{
+     background-position: -40px -220px !important;
+}
+.number_of_likes {
+    border-collapse: collapse;
+    color: rgb(106, 115, 124);
+    display: block;
+    height: 16px;
+    text-align: center;
+    width: 46px;
+    column-rule-color: rgb(106, 115, 124);
+    perspective-origin: 23px 8px;
+    transform-origin: 23px 8px;
+    border: 0px none rgb(106, 115, 124);
+    font: normal normal normal normal 20px / 16.9px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin: 8px 0px;
+    outline: rgb(106, 115, 124) none 0px;
+}/*#likerSPAN_5*/
+
+.down_vote_st {
+
+    cursor: pointer;
+    display: block;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: -9999px;
+    width: 40px;
+    column-rule-color: rgb(0, 119, 204);
+    perspective-origin: 20px 15px;
+    transform-origin: 20px 15px;
+    background: url("./sprites.svg") no-repeat scroll 0px -220px / auto padding-box border-box, rgba(0, 0, 0, 0) none no-repeat scroll 0px -220px / auto padding-box border-box;
+    border: 0px none rgb(0, 119, 204);
+    font: normal normal normal normal 1px / 16.9px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin: 0px 3px 10px;
+    outline: rgb(0, 119, 204) none 0px;
+    overflow: hidden;
+    transition:none !important;
+}/*#likerA_6*/
+
+
+
 @media(max-width:992px){
     
     .forum-list-link {

@@ -7,15 +7,22 @@ Rails.application.routes.draw do
 
 
   resources :disciplines
+  resources :comments do
+    resources :comments
+  end
   resources :posts do
     member do
       put "like" => "posts#upvote"
+      get "like" => "posts#upvote"
       put "dislike" => "posts#downvote"
+      get "dislike" => "posts#downvote"
+      put "count" => "posts#count"
     end
       resources :comments do
         member do
           put "like" => "comments#upvote"
           put "dislike" => "comments#downvote"
+          put "count" => "comments#count"
         end
       end
       

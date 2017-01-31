@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except:[:index,:show]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-  
   load_and_authorize_resource
   impressionist actions: [:show], unique: [:session_hash]
+  layout false , only: [:upvote, :downvote]
   # GET /posts
   # GET /posts.json
   def index
@@ -82,14 +82,22 @@ class PostsController < ApplicationController
 
   def upvote
     @post.upvote_from current_user
-    redirect_to :back
+    @post.user.profile.update( :reputation => @post.user.profile.reputation + 1)
+    # @post.downvote_from current_user
+    # redirect_to :back
   end
   
   def downvote
     @post.downvote_from current_user
-    redirect_to :back
+    @post.user.profile.update( :reputation => @post.user.profile.reputation - 1)
+    
+    # redirect_to :back
   end
   
+  def count
+    # @post.upvote_from current_user
+    # @post.downvote_from current_user
+  end
   
   private
     # Use callbacks to share common setup or constraints between actions.

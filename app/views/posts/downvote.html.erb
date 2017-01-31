@@ -1,0 +1,6 @@
+<% @a = @post.get_upvotes.size %>
+<% @b =  @post.get_downvotes.size %>
+<% @total = (@a-@b) %>
+
+{"upvote" : "<%= @post.get_upvotes.size %>","downvotes" : "<%= @post.get_downvotes.size %>","count":"<%=@total%>"}
+

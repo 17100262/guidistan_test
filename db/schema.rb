@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20170126132021) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "comment"
-    t.integer  "post_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "degreeprograms", force: :cascade do |t|
@@ -129,8 +129,9 @@ ActiveRecord::Schema.define(version: 20170126132021) do
     t.string   "name"
     t.string   "gender",             limit: 1
     t.string   "city"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "reputation",                   default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

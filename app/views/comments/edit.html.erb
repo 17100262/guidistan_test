@@ -1,0 +1,8 @@
+<div class="container">
+Edit Reply
+
+<%= bootstrap_form_for([@post, @comment]) do |f| %>
+	<%= f.text_area :comment %>
+	<%= f.submit %>
+<% end %>
+</div>
