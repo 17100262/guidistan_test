@@ -1,8 +1,12 @@
+<div class="container">
+<br/>
 <p id="notice"><%= notice %></p>
-
-<h1>Degreeprograms</h1>
-
-<table class="table">
+<% if can? :create, Degreeprogram.new %>
+  <a class="btn btn-success pull-right" href="/degreeprograms/new" role="button">New Degreeprogram</a>
+<% end %>
+<h1 >Degree Programs</h1>
+<br/>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th>Type</th>
@@ -26,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Degreeprogram', new_degreeprogram_path %>
+

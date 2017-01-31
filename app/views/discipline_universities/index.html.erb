@@ -1,6 +1,9 @@
+<br/>
 <div class="container">
   <p id="notice"><%= notice %></p>
-
+<% if can? :create, DisciplineUniversity.new %>
+  <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
+<% end %>
 <%= form_for_filterrific @filterrific do |f| %>
   
   <div class ="row">
@@ -56,9 +59,7 @@
 </div>
 
    
-<% if can? :create, DisciplineUniversity.new %>
-  <%= link_to 'New Discipline university', new_discipline_university_path %>
-<% end %>
+
 
   
 

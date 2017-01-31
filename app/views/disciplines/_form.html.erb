@@ -1,4 +1,6 @@
-<%= form_for(@discipline) do |f| %>
+
+
+<%= bootstrap_form_for(@discipline) do |f| %>
   <% if @discipline.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@discipline.errors.count, "error") %> prohibited this discipline from being saved:</h2>
@@ -12,15 +14,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <!--<= f.label :name %><br>-->
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <!--<= f.label :description %><br>-->
     <%= f.text_area :description %>
   </div>
   <div class="field">
-  <%= f.label :Image %>
+  <!--<= f.label :Image %>-->
   <%= f.file_field :image %>
   </div>
   <div class="actions">

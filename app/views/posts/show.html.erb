@@ -23,10 +23,10 @@
   
   <div class="single_postliker">
 
-		<a title="Up Vote" class="up_vote_st">up vote</a> 
+		<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
 		<span class="number_of_likes"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
-		<a title="Down Vote" class="down_vote_st">down vote</a> 
-
+		<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a> 
+<!--
 		                <%= link_to like_post_path(@post), class: "like", method: :put do%>
                   <button type="button" class="btn btn-info" aria-label="Left Align">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -42,16 +42,14 @@
                 <% end %>
                
  				<% if user_signed_in? and current_user.voted_up_on? @post %>
-    				<!--<= link_to like_post_path(@post), method: :put do %>-->
         			<button>
        				 ¡Liked!
         			</button>
-    				<!--< end %>-->
  				<% elsif user_signed_in? and current_user.voted_down_on? @post  %>
 					 you hate it
 				 <% else %>
 				    You dont like it yet
-				  <% end %>
+				  <% end %>-->
 			</div>
 	
   <p class="single-description-para">
@@ -184,6 +182,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	      
 	      down_vote.removeClass("down_vote_selected");
 	      up_vote.addClass("up_vote_selected");
+	     
 	      $.ajax({
 	      	url : link_to_like,
 	      	type : 'GET',

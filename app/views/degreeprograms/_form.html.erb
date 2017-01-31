@@ -1,4 +1,4 @@
-<%= form_for(@degreeprogram) do |f| %>
+<%= bootstrap_form_for(@degreeprogram) do |f| %>
   <% if @degreeprogram.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@degreeprogram.errors.count, "error") %> prohibited this degreeprogram from being saved:</h2>
@@ -12,19 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :degree_type %>
+    <!--<= f.label :degree_type %>-->
     <%= f.select :degree_type,[["Bachelors","Bachelors"],["Masters","Masters"],["Phd","Phd"]] %>
   </div>
   <div class="field">
-    <%= f.label :name %><br>
+    <!--<= f.label :name %><br>-->
     <%= f.text_field :name %>
   </div>
   <div class="field">
-     <%= f.label :subdiscipline_id %>
+     <!--<= f.label :subdiscipline_id %>-->
     <%= f.collection_select :subdiscipline_id, Subdiscipline.all,:id,:name %>
   </div>
   <div class="field">
-    <%= f.label :discipline_id %>
+    <!--<= f.label :discipline_id %>-->
     <%= f.collection_select :discipline_id, Discipline.all,:id,:name %>
   </div>
   <div class="actions">
