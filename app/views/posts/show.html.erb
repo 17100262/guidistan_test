@@ -58,15 +58,7 @@
     
   </p>
   
-  <div class="forum_post_question_container" style="border:0px;">
-    <h1 class="forum_post_title" > Comments</h1>
-  </div>
-
-  <%= render @post.comments %>
-  <h3> Reply to thread</h3>
-  <%= render "comments/form" %>
-  </br>
-
+  
 </div>
 
 <div class="user-description-container col-md-3">
@@ -122,6 +114,19 @@
 	   </div>
 	</div>
 
+</div>
+
+<div class="col-md-9" style="padding:0px;">
+	
+	<div class="forum_post_question_container" style="border:0px;">
+    <h1 class="forum_post_title" > Comments</h1>
+  </div>
+
+  <%= render @post.comments %>
+  <h3> Reply to thread</h3>
+  <%= render "comments/form" %>
+  </br>
+  
 </div>
 <!--<p id="notice"><%= notice %></p>-->
 

@@ -269,7 +269,7 @@ form#new_comment{
     column-rule-color: rgb(0, 119, 204);
     perspective-origin: 20px 15px;
     transform-origin: 20px 15px;
-    background: url("./sprites.svg") no-repeat scroll -40px -170px / auto padding-box border-box, rgba(0, 0, 0, 0) none no-repeat scroll -40px -170px / auto padding-box border-box;
+    background: url("./sprites.png") no-repeat scroll -40px -170px / auto padding-box border-box, rgba(0, 0, 0, 0) none no-repeat scroll -40px -170px / auto padding-box border-box;
     border: 0px none rgb(0, 119, 204);
     font: normal normal normal normal 1px / 16.9px Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin: 0px 3px 2px;
@@ -311,7 +311,7 @@ form#new_comment{
     column-rule-color: rgb(0, 119, 204);
     perspective-origin: 20px 15px;
     transform-origin: 20px 15px;
-    background: url("./sprites.svg") no-repeat scroll 0px -220px / auto padding-box border-box, rgba(0, 0, 0, 0) none no-repeat scroll 0px -220px / auto padding-box border-box;
+    background: url("./sprites.png") no-repeat scroll 0px -220px / auto padding-box border-box, rgba(0, 0, 0, 0) none no-repeat scroll 0px -220px / auto padding-box border-box;
     border: 0px none rgb(0, 119, 204);
     font: normal normal normal normal 1px / 16.9px Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin: 0px 3px 10px;
