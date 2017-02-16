@@ -14,7 +14,7 @@
  *= require_self
  *= require bootstrap.min
  *= require rails_bootstrap_forms
- *= require font-awesome
+
  */
  body,p, ol, ul, td,*{
      font-family:'Open Sans', Arial, Helvetica, sans-serif;;
