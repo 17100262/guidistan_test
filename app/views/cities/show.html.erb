@@ -1,12 +1,14 @@
+</br>
 <p id="notice"><%= notice %></p>
-
+<!--</br>-->
+<div class="container">
 <p>
-  <strong>Name:</strong>
+  <strong  class="post-title-forum post-title-all-posts" style="">Name:</strong>
   <%= @city.name %>
 </p>
 
 <p>
-  <strong>Univerities in this city:</strong>
+  <strong  class="post-title-forum post-title-all-posts" style="">Univerities in this city:</strong>
     <% for item in @university %>
       <%= link_to item.name, university_path(item) %></td>
     <% end %>
@@ -15,3 +17,5 @@
 
 <%= link_to 'Edit', edit_city_path(@city) %> |
 <%= link_to 'Back', cities_path %>
+
+</div>

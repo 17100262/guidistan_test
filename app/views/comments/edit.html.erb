@@ -1,7 +1,7 @@
 <div class="container">
 Edit Reply
 
-<%= bootstrap_form_for([@post, @comment]) do |f| %>
+<%= bootstrap_form_for([@commentable, @comment]) do |f| %>
 	<%= f.text_area :comment %>
 	<%= f.submit %>
 <% end %>

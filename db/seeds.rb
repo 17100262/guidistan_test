@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create!(email: 'admin@test.com',password: 'admin123').add_role :admin
 User.create!(email: 'test@gmail.com',password: 'password')
-Profile.create!(name:'Admin',city:'Lahore',gender:'Male',user_id:1)
-Profile.create!(name:'Test',city:'Lahore',gender:'Male',user_id:2)
+Profile.create!(name:'Admin',city:'Lahore',gender:'M',user_id:1)
+Profile.create!(name:'Test',city:'Lahore',gender:'M',user_id:2)
 City.create!(name: 'Lahore')
 City.create!(name: 'Karachi')
 City.create!(name: 'Rawalpindi')

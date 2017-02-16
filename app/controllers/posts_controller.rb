@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       @posts = Post.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
     else
     # puts params[:filter_id], "helellaelasdlalsd"
-      @posts = Post.where(discipline_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
+      @posts = Post.where(forum_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
     end
   end
 
@@ -28,8 +28,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    @@dis_id = params[:discipline_id]
-    @id = params[:discipline_id]
+    @@dis_id = params[:forum_id]
+    @id = params[:forum_id]
   end
 
   # GET /posts/1/edit
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     # puts @id,'adasdasds'
     @post.user_id = current_user.id
-    @post.discipline_id = @@dis_id
+    @post.forum_id = @@dis_id
     
 
     respond_to do |format|
@@ -107,6 +107,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description,:discipline_id, :filter_id)
+      params.require(:post).permit(:title, :description,:forum_id, :filter_id)
     end
 end

@@ -1,22 +1,24 @@
-<p id="notice"><%= notice %></p>
+<br>
+<div class="container">
+<br><p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong  class="post-title-forum post-title-all-posts" style="">Name:</strong>
   <%= @university.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">Description:</strong>
   <%= @university.description %>
 </p>
 <p>
-  <strong>Disciplines offered:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">Disciplines offered:</strong>
     <% for d in @discipline %>
       <%= d.name %>,
     <% end %>
 </p>
 <p>
-  <strong>City:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">City:</strong>
   <%= @city %>
 </p>
 
@@ -26,3 +28,5 @@
 
 <%= link_to 'Edit', edit_university_path(@university) %> |
 <%= link_to 'Back', universities_path %>
+
+</div>

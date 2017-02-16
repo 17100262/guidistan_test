@@ -1,24 +1,46 @@
+
+<br>
+<div class="container" >
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>University:</strong>
+  <strong  class="post-title-forum post-title-all-posts" style="">Degree Program Name:</strong>
+  <%= @discipline_university.degreeprogram.name %>
+</p>
+<p>
+  <strong class="post-title-forum post-title-all-posts" style="">University:</strong>
   <%= @discipline_university.university.name %>
+</p>
+<p>
+  <strong class="post-title-forum post-title-all-posts" style="">Tuition Fee per Semester:</strong>
+  <%= @discipline_university.tution_fee_per_semester %>
 </p>
 
 <p>
-  <strong>Discipline:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">HEC recognized:</strong>
+  <% if @discipline_university.hec_recognized %>Yes<% else %>No<% end %>
+</p>
+
+<p>
+  <strong class="post-title-forum post-title-all-posts" style="">Duration:</strong>
+  <%= @discipline_university.duration %>
+</p>
+
+
+
+<p>
+  <strong class="post-title-forum post-title-all-posts" style="">Discipline:</strong>
   <%= @discipline_university.discipline.name %>
 </p>
 
-<p>
-  <strong>Degreeprogram:</strong>
-  <%= @discipline_university.degreeprogram.name %>
-</p>
+
 
 <p>
-  <strong>Subdiscipline:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">Subdiscipline:</strong>
   <%= @discipline_university.subdiscipline.name %>
 </p>
 
 <%= link_to 'Edit', edit_discipline_university_path(@discipline_university) %> |
 <%= link_to 'Back', discipline_universities_path %>
+
+</div>

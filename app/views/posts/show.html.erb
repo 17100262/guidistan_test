@@ -24,32 +24,9 @@
   <div class="single_postliker">
 
 		<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
-		<span class="number_of_likes"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
+		<span class="number_of_likes" data-upvotes="<%= @post.get_upvotes.size %>" data-downvotes="<%= @post.get_downvotes.size %>"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
 		<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a> 
-<!--
-		                <%= link_to like_post_path(@post), class: "like", method: :put do%>
-                  <button type="button" class="btn btn-info" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                    <span class="badge"><%= @post.get_upvotes.size %></span>
-                  </button>
-                <% end %>
-                
-                <%= link_to dislike_post_path(@post), class: "like", method: :put do%>
-                  <button type="button" class="btn btn-info" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
-                    <span class="badge"><%= @post.get_downvotes.size %></span>
-                  </button>
-                <% end %>
-               
- 				<% if user_signed_in? and current_user.voted_up_on? @post %>
-        			<button>
-       				 ¡Liked!
-        			</button>
- 				<% elsif user_signed_in? and current_user.voted_down_on? @post  %>
-					 you hate it
-				 <% else %>
-				    You dont like it yet
-				  <% end %>-->
+
 			</div>
 	
   <p class="single-description-para">
@@ -91,7 +68,7 @@
 
 			                <td style="padding-left: 10px">
 			                    <p class="label-value">
-			                      <%= @post.discipline.name %>
+			                      <%= @post.forum.name %>
 			                    </p>
 			                </td>
 			            </tr>
@@ -119,11 +96,11 @@
 <div class="col-md-9" style="padding:0px;">
 	
 	<div class="forum_post_question_container" style="border:0px;">
-    <h1 class="forum_post_title" > Comments</h1>
+    <h1 class="forum_post_title" > Replies</h1>
   </div>
 
   <%= render @post.comments %>
-  <h3> Reply to thread</h3>
+  <!--<h3> Comment on this reply</h3>-->
   <%= render "comments/form" %>
   </br>
   
@@ -161,7 +138,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                                 
 
-<%= link_to 'Back', {:controller => "posts", :action => "index", :filter_id => @post.discipline_id },class: "btn btn-primary backbutton-single" %>
+<%= link_to 'Back', {:controller => "posts", :action => "index", :filter_id => @post.forum_id },class: "btn btn-primary backbutton-single" %>
 </div>
 
 
@@ -179,15 +156,31 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   var no_of_likes = $(".single_postliker .number_of_likes");
 	   var link_to_like = "/posts/<%= @post.id  %>/like";
 	   var link_to_dislike = "/posts/<%= @post.id  %>/dislike";
-
+	   var upvotes_attr = $(".single_postliker .number_of_likes").attr("data-upvotes");
+	   var downvotes_attr = $(".single_postliker .number_of_likes").attr("data-downvotes");
 	   
 	   $(up_vote).click(function(){
 	       
 	      var num = parseInt(no_of_likes.text());
 	      
-	      down_vote.removeClass("down_vote_selected");
-	      up_vote.addClass("up_vote_selected");
-	     
+	      if(down_vote.hasClass("down_vote_selected")){
+	      	
+	      	no_of_likes.attr("data-downvotes",parseInt(no_of_likes.attr("data-downvotes")) - 1);
+	      	down_vote.removeClass("down_vote_selected");
+	      	
+	      }
+	      
+	      
+	      
+	      if(!(up_vote.hasClass("up_vote_selected"))){
+	      	 up_vote.addClass("up_vote_selected");
+	      	 no_of_likes.attr("data-upvotes",parseInt(no_of_likes.attr("data-upvotes"))  + 1);
+	      }
+	      
+	      
+	      
+	      no_of_likes.text(no_of_likes.attr("data-upvotes") - no_of_likes.attr("data-downvotes"));
+	      
 	      $.ajax({
 	      	url : link_to_like,
 	      	type : 'GET',
@@ -195,20 +188,11 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	      	success : function(resp){
 	      		 
 	      		 console.log("Liked",resp);
-	      		  //if(up_vote.hasClass("up_vote_selected")){
-	          
-			          //up_vote.removeClass("up_vote_selected");
-			      			          
-			      //}
-			      //else{
-			          
-			          no_of_likes.text(resp.count);
-			      //}
 			      
 			      
 	      	},
 	      	error : function(respo){
-	      		window.alert("An error occured!");
+	      		window.alert("An error occured!\nPlease login if you're not logged in.");
 	      		console.log(respo);
 	      	}
 	      });
@@ -221,8 +205,28 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	      
 	      var num = parseInt(no_of_likes.text());
 	      
-	      up_vote.removeClass("up_vote_selected");
-	      down_vote.addClass("down_vote_selected");
+	      
+	     
+	      
+	      if(up_vote.hasClass("up_vote_selected")){
+	      	
+	      	no_of_likes.attr("data-upvotes",parseInt(no_of_likes.attr("data-upvotes")) - 1);
+	      	up_vote.removeClass("up_vote_selected");
+	      }
+	      
+	      
+	      
+	      if(!(down_vote.hasClass("down_vote_selected"))){
+	      	
+	      	 down_vote.addClass("down_vote_selected");
+	      	 no_of_likes.attr("data-downvotes",parseInt(no_of_likes.attr("data-downvotes"))  + 1);
+	      }
+	      
+	      
+	      
+	      no_of_likes.text(no_of_likes.attr("data-upvotes") - no_of_likes.attr("data-downvotes"));
+	      
+	      
 	      $.ajax({
 	      	url : link_to_dislike,
 	      	type : 'GET',
@@ -230,17 +234,6 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	      	success : function(resp){
 	      		 
 	      		  console.log("Disliked",resp);
-	      		  //if(down_vote.hasClass("down_vote_selected")){
-	          
-			          //down_vote.removeClass("down_vote_selected");
-			          //no_of_likes.text(num + 1);
-			          
-			      //}
-			      //else{
-			      	  
-			          no_of_likes.text(resp.count);
-			      //}
-			      
 			      
 	      	},
 	      	error : function(respo){

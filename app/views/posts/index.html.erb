@@ -1,7 +1,9 @@
 <section class="page-header">
 				<div class="container">
+				  <%if @id!=nil %>
 
-					<h1><%= Discipline.find(@id).name %> Discussion Forum</h1>
+					  <h1><%= Forum.find(@id).name %> Discussion Forum</h1>
+					<% end %>
 
 					
 
@@ -31,9 +33,31 @@
         <% end %>
   </div>-->
   
-        <div class="block-review-content">
-          <div class="block-review-body">
-              <div class="block-review-avatar text-center">
+        <div class="block-review-content all-posts-forum-page-content">
+          <div class="block-review-body" style="padding-left:0px;">
+            
+              <div class="block-all-post-detail-box-container hidden-xs">
+                
+            
+              
+                <div class="block-all-post-detail-box">
+                  <div class="block-all-post-value-box"><%= "#{post.impressionist_count}" %></div>
+                  <div class="block-all-post-title-box">views</div>
+                </div>
+                
+                <div class="block-all-post-detail-box">
+                  <div class="block-all-post-value-box"><%= post.get_upvotes.size-post.get_downvotes.size %> </div>
+                  <div class="block-all-post-title-box">Votes</div>
+                </div>
+                
+                <div class="block-all-post-detail-box">
+                  <div class="block-all-post-value-box"><%= post.comments.count %></div>
+                  <div class="block-all-post-title-box">Comments</div>
+                </div>
+                
+              </div>
+              
+              <div class="block-review-avatar block-box-review-post text-center hidden-xs">
                   <div class="push-bit">
                     
                     <% if post.user.profile.image_file_name.present? %> 
@@ -54,26 +78,89 @@
                   <% if post.user.email %>
                   <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
                   <% end %>
-                  <hr>
+                  
                  
               </div>
-              <h2 class="post-title-forum">
+              <h2 class="post-title-forum post-title-all-posts" style="">
                 <%= link_to post.title, post %>
               </h2>
               <p>
                  <%= post.description %>
               </p>
               
+              <!--For Mobile Start -->
               
-              
-              
-              <div class="caption" style="text-align:center;padding-top:15px;">
+              <div class="caption all-posts-end-buttons visible-xs" style="text-align:center;">
                 
                 <% if can? :update, post %>
                 <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: "text-danger pull-left" %>
+                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left btn-sm btn btn-danger replace_destroy" %>
+              <% end %>
+              
+              
+              </div>
+              
+              <div class="block-review-avatar block-box-review-post text-center visible-xs">
+                  <div class="push-bit">
+                    
+                    <% if post.user.profile.image_file_name.present? %> 
+
+
+                      <%= image_tag post.user.profile.image.url(:med) %>
+                      <% else %>
+                      
+                      <a href="javascript:;">
+                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                      </a>
+                      <% end %>
+                  </div>
+                  <small class="block" style="margin-top:5px";><%= 
+                  puts post.to_yaml
+                  post.user.profile.name
+                  %></small>
+                  <% if post.user.email %>
+                  <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
+                  <% end %>
+                  
+                 
+              </div>
+              
+              <!--For Mobile End-->
+              
+              
+              <div class="block-all-post-detail-box-container visible-xs">
+                
+              
+                <div class="block-all-post-detail-box">
+                  <div class="block-all-post-value-box"><%= "#{post.impressionist_count}" %></div>
+                  <div class="block-all-post-title-box">views</div>
+                </div>
+                
+                <div class="block-all-post-detail-box">
+                  <div class="block-all-post-value-box"><%= post.get_upvotes.size-post.get_downvotes.size %> </div>
+                  <div class="block-all-post-title-box">Votes</div>
+                </div>
+                
+                <div class="block-all-post-detail-box">
+                  <div class="block-all-post-value-box"><%= post.comments.count %></div>
+                  <div class="block-all-post-title-box">Comments</div>
+                </div>
+                
+              </div>
+              
+
+              <!--< b = post.get_downvotes.size %>-->
+              
+              
+              <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:15px;">
+                
+                <% if can? :update, post %>
+                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left" %>
+              <% end %>
+              <% if can? :destroy, post %>
+                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left btn-xs btn btn-danger replace_destroy" %>
               <% end %>
               
               
@@ -101,7 +188,7 @@
 <% end %>
 <br>
 <% if can? :create, Post %>
-  <%= link_to 'New Post', new_post_path(@post => {:discipline_id => @id}), class: "btn btn-primary"%><br/>
+  <%= link_to 'New Post', new_post_path(@post => {:forum_id => @id}), class: "btn btn-primary"%><br/>
 <% end %>
 <div class = "pagination"><%= will_paginate @posts %></div>
 </div>

@@ -1,0 +1,19 @@
+
+<p id="notice"><%= notice %></p>
+
+<div class="container fluid" >
+    <!--<div class="page-header">-->
+    <article>
+    <h1 style="text-align:center"><%= @forum.name %></h1>
+    <!--</div>-->
+    <!--<div class="well">-->
+        <p style="text-align: justify; margin-left:10%; margin-right:10%;"><%= @forum.description %></p>
+    <!--</div>-->
+</article>
+<% if can? :update, @forum %>
+    <%= link_to 'Edit', edit_forum_path(@forum),class:"btn btn-info" %> |
+<%end %>
+<%= link_to 'Back', forums_path,class:"btn btn-info" %> |
+</div>
+
+<br>

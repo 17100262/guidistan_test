@@ -83,7 +83,6 @@ class DisciplineUniversitiesController < ApplicationController
   # POST /discipline_universities.json
   def create
     @discipline_university = DisciplineUniversity.new(discipline_university_params)
-
     respond_to do |format|
       if @discipline_university.save
         format.html { redirect_to @discipline_university, notice: 'Discipline university was successfully created.' }
@@ -127,6 +126,6 @@ class DisciplineUniversitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discipline_university_params
-      params.require(:discipline_university).permit(:university_id, :discipline_id, :degreeprogram_id, :subdiscipline_id)
+      params.require(:discipline_university).permit(:university_id, :discipline_id, :degreeprogram_id, :subdiscipline_id, :hec_recognized, :tution_fee_per_semester, :duration)
     end
 end

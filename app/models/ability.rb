@@ -8,6 +8,8 @@ class Ability
     if user.has_role?(:admin)
       can :manage, :all
       cannot :update, Post
+      can :update, Post, :user_id => user.id
+      
     else
       can :create, Post
       can :create, Comment

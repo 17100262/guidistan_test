@@ -1,17 +1,20 @@
+<br>
+<div class="container">
+<br>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">Name:</strong>
   <%= @subdiscipline.name %>
 </p>
 
 <p>
-  <strong>Discipline:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">Discipline:</strong>
   <%= @subdiscipline.discipline.name %>
 </p>
 
 <p>
-  <strong>Degrees in <%=@subdiscipline.name %>:</strong>
+  <strong class="post-title-forum post-title-all-posts" style="">Degrees in <%=@subdiscipline.name %>:</strong>
   <ul>
   <% for degree in @degree %>
   <% for uni in degree.university %>
@@ -26,3 +29,4 @@
 
 <%= link_to 'Edit', edit_subdiscipline_path(@subdiscipline) %> |
 <%= link_to 'Back', subdisciplines_path %>
+</div>

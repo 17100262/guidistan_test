@@ -1,0 +1,49 @@
+<div id="contact-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Forum</h4>
+      </div>
+<%= bootstrap_form_for(@forum) do |f| %>
+<div class="modal-body">
+
+  <% if @forum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forum.errors.count, "error") %> prohibited this discipline from being saved:</h2>
+
+      <ul>
+      <% @forum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%#= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+  <% if @forum.image.exists? %>
+    <%= image_tag @forum.image.url(:large) %><br/>
+      <%#= f.hidden_field :image %>
+    <% end %>
+    <%= f.file_field :image, name: "forum[image]" %>
+  
+  <!--<= f.label :Image %>-->
+  <%#= f.file_field :image %>
+  </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  </div>
+  
+  <div class="modal-footer">
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  </div>
+<% end %>
+
+    </div>
+  </div>
+</div>

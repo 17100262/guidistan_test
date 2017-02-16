@@ -1,5 +1,52 @@
-<h1>New Post</h1>
+<section class="page-header">
+				<div class="container">
 
-<%= render 'form' %>
+					  <h1>Create New Post</h1>
 
-<%= link_to "Back", {:controller => "posts", :action => "index", :filter_id => @id } %>
+					
+
+				</div>
+</section>
+
+
+
+    
+<div class="container">
+  
+    <div class="col-md-9">
+    
+        <div class="newPostForm">
+            
+            <%= render 'form' %>
+        
+        </div>
+   
+   
+  
+        <div class="newpost_link_toback">
+            <%= link_to "Back", {:controller => "posts", :action => "index", :filter_id => @id } %>
+        </div>
+        
+
+    </div>
+    
+    <div class="col-md-3">
+        
+        <div class="question-sidebar">
+            Right Side Info Text
+        </div>
+        
+    </div>
+    
+    
+
+</div>
+
+<script>
+    
+    $(document).ready(function(){
+        $(".newPostForm br").hide();
+        $(".newPostForm input[type='submit']").addClass("btn btn-success");
+    });
+    
+</script>

@@ -1,0 +1,9 @@
+<% if @forum.errors.blank? %>
+  $('#contact-modal').modal('hide');
+  $(#forum-table').append('<%= j render "forum_row", forum: @forum %>');
+  console.log("kakakaakakak");
+  alert("done");
+<% else %>
+  <!--// TODO: show the errors in the UI-->
+  alert();
+<% end %>

@@ -27,16 +27,20 @@ class CommentsController < ApplicationController
 	end
 
 	def edit
-		@post = Post.find(params[:post_id])
-		@comment = @post.comments.find(params[:id])
+		# @post = Post.find(params[:post_id])
+		
+		# @comment = @post.comments.find(params[:id])
+		@comment = @commentable.comments.find(params[:id])
 	end
 
 	def update
-		@post = Post.find(params[:post_id])
-		@comment = @post.comments.find(params[:id])
+		# @post = Post.find(params[:post_id])
+		# @comment = @post.comments.find(params[:id])
+		@comment = @commentable.comments.find(params[:id])
 
 		if @comment.update(params[:comment].permit(:comment))
-			redirect_to post_path(@post)
+			# redirect_to post_path(@post)
+			redirect_to get_post_url
 		else
 			render 'edit'
 		end
@@ -73,5 +77,15 @@ class CommentsController < ApplicationController
 	def find_commentable
       @commentable = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
       @commentable = Post.find_by_id(params[:post_id]) if params[:post_id]
+    end
+    
+    def get_post_url
+    	@post = @comment.commentable
+    	if @post.respond_to?('commentable_type')
+    		@comment = @post
+    		get_post_url
+    	else
+    		return @post
+    	end
     end
 end

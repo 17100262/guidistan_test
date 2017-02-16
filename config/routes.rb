@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       end
       
     end
-  resources :forum, only: [:index]
+  resources :forums
   # devise_for :users
   
   Rails.application.routes.draw do

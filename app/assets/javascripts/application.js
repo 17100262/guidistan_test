@@ -15,3 +15,8 @@
 //= require_tree .
 //= require bootstrap.min
 //= require filterrific/filterrific-jquery
+$(document).ready(function(){
+   $(".replace_destroy").text("Delete");
+   $(".replace_destroy").prepend('<span class="glyphicon glyphicon-remove" style="top:1px"></span>&nbsp;');
+   
+});

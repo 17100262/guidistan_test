@@ -1,0 +1,5 @@
+$('<%= j render "form" %>').on('hidden.bs.modal', function (e) {
+  $(this).remove();
+  $('.modal-backdrop').remove();
+  console.log("hereasdasdasd");
+}).modal();

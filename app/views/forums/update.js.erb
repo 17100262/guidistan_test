@@ -1,0 +1,13 @@
+<% if @forum.errors.blank? %>
+  $('#contact-modal').modal('hide');
+  $(#forum-table').append('<%= j render "forum_row", forum: @forum %>');
+<% else %>
+  alert();
+  // TODO: show the errors in the UI
+<% end %>
+
+<!--$(document).ready ->-->
+<!--  $("#new_article").on("ajax:success", (e, data, status, xhr) ->-->
+<!--    $("#new_article").append xhr.responseText-->
+<!--  ).on "ajax:error", (e, xhr, status, error) ->-->
+<!--    $("#new_article").append "<p>ERROR</p>"-->
