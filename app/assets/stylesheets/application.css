@@ -393,7 +393,7 @@ text-align: center;
     margin-top: 20px;
 }
 .newPostForm input:focus,.newPostForm textarea:focus {
-    outline: Highlight auto 10px !important; !important
+    outline: Highlight auto 10px !important;
 }
 
 .newPostForm textarea {
