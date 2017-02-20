@@ -1,15 +1,29 @@
 <div class="panel panel-default comment-body">
-  <div class="panel-body ">
+  
+  <div class="multi_commentliker">
+
+		<a title="Up Vote" class="up_vote_st ">up vote</a> 
+		<span class="number_of_likes" data-upvotes="1" data-downvotes="0">1</span>
+		<a title="Down Vote" class="down_vote_st ">down vote</a> 
+
+	</div>
+			
+  <div class="panel-body comments-main-body">
     <h4><%= comment.comment %></h4>
-    <p>Posted by <%= comment.user.email %> <%= time_ago_in_words(comment.created_at) %></p>
+    <p>
+    <%= image_tag comment.user.profile.image.url(:small) %>
+    Answered <%= time_ago_in_words(comment.created_at) %> ago&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= comment.user.profile.name %>&nbsp;&nbsp;&nbsp;&nbsp;
+    Reputation: <%= comment.user.profile.reputation%> points
+    </p>
     <% if can? :update, comment %>
-      <%= link_to "Edit", edit_post_comment_path(comment.commentable, comment),class: "btn btn-info"%>
+      <%= link_to "Edit", edit_post_comment_path(comment.commentable, comment),class: "comments-small-btns"%>
     <% end %>
     <% if can? :destroy, comment %>
-    <%= link_to "Delete", [comment.commentable, comment], method: :delete, data: { confirm: "Are you sure?" },class: "btn btn-danger"%>
+    <%= link_to "Delete", [comment.commentable, comment], method: :delete, data: { confirm: "Are you sure?" },class: "comments-small-btns"%>
     <% end %>
     
-    <%= link_to like_post_comment_path(comment.commentable, comment), class: "like", method: :put do%>
+    <!--<%= link_to like_post_comment_path(comment.commentable, comment), class: "like", method: :put do%>
       <button type="button" class="btn btn-info" aria-label="Left Align">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
         <span class="badge"><%= comment.get_upvotes.size %></span>
@@ -21,15 +35,20 @@
         <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
         <span class="badge"><%= comment.get_downvotes.size %></span>
       </button>
-    <% end %>
+    <% end %>-->
     
-    <h4>Comment Replies</h4>
-    <%= render partial: 'comments/reply', collection: comment.comments %>
+    
+    <div class="comments-reply-container">
+      <%= render partial: 'comments/reply', collection: comment.comments %>
+      <a href="javascript:;" class="get-reply-option-btn">Add a reply</a>
+      <%= bootstrap_form_for [comment, Comment.new] do |f| %> 
+        <%= f.text_area :comment,placeholder: "Add a Reply"%>
+        <%= f.submit "Reply" %>
+      <% end %>
+    
+    </div>
 
-    <%= bootstrap_form_for [comment, Comment.new] do |f| %> 
-      <%= f.text_area :comment,placeholder: "Add a Reply"%>
-      <%= f.submit "Reply" %>
-    <% end %>
+    
     
   </div>
 </div>

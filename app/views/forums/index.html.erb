@@ -37,20 +37,23 @@
             </div>
             
             <div class="forum-list-link">
-                <%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id } %>
-                <!--<a href="/posts?filter_id="+< d.id %>>Upload Fee Voucher</a>-->
-            </div>
+                <%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id }, class:"tab-title" %>
+            
+            <div class="disc-edit-del-btns"> 
+            
+                <% if can? :update, d %>
+                        <%= link_to 'Edit', edit_forum_path(d),remote: true, class:"btn btn-info" %>
+                <% end %>
+                <% if can? :update, d %>
+                
+                    <%= link_to 'Destroy', d, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+                </div>
+            </div>   
             
         </li>
             
 
-        
-            <% if can? :update, d %>
-                    <%= link_to 'Edit', edit_forum_path(d),remote: true,class:"btn btn-info" %>
-            <% end %>
-            <% if can? :update, d %>
-            
-                <%= link_to 'Destroy', d, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+
             <% end %>
         <% end %>
         

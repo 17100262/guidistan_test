@@ -14,7 +14,7 @@
  *= require_self
  *= require bootstrap.min
  *= require rails_bootstrap_forms
-
+ *= require font-awesome
  */
  body,p, ol, ul, td,*{
      font-family:'Open Sans', Arial, Helvetica, sans-serif;;
@@ -73,7 +73,7 @@
     text-decoration: none;
 }
 
-.forum-dis-container li a {
+.forum-dis-container li a.tab-title {
     color: #222222;
     transition: none !important;
     height: 100%;
@@ -175,7 +175,7 @@ label.select select{
     /*display:inline-block;*/
     vertical-align:top;
 }
-.single_postliker{
+.single_postliker,.multi_commentliker{
     display:inline-block;
     float:left;
 }
@@ -184,11 +184,13 @@ h2.post-title-forum{
     margin-top:0px;
     margin-bottom:0px;
 }
+    
 .backbutton-single{
     display: block !important;
     clear: both;
     width: 57px;
     margin-left: 0px;
+    padding-top: 20px;
     margin-bottom: 20px !important;
 }
    
@@ -378,11 +380,12 @@ text-align: center;
 
 .newPostForm input[type="submit"] {
     width: 150px;
+    border:0px !important;
 }
 .newPostForm input, .newPostForm textarea {
     width: 85%;
     padding-left: 10px;
-    /* border: 1px solid yellow; */
+    border: 1px solid black; 
 }
 .newPostForm label[for="post_description"]{
     vertical-align:top !important;
@@ -393,7 +396,7 @@ text-align: center;
     margin-top: 20px;
 }
 .newPostForm input:focus,.newPostForm textarea:focus {
-    outline: Highlight auto 10px !important;
+    outline: #32cd32 auto 1px !important;
 }
 
 .newPostForm textarea {
@@ -411,6 +414,76 @@ text-align: center;
     display: block;
 }
 
+.disc-edit-del-btns{
+    margin-top:31px;
+}
+.new-post-showall{
+    background-color:#8ab933 !important;
+    border:none !important;
+}
+.edit-desc-btn a{
+    padding-top:10px;
+    color:#8ab933 !important;
+}
+.comment-body{
+    padding-top:10px;
+}
+.comments-main-body{
+    padding-top:0px !important;
+}
+.comments-main-body h4:first-child{
+    margin-top:5px;
+}
+.comments-reply-container {
+    padding-left: 65px;
+    padding-top: 10px;
+}
+.comments-reply-container .new_comment{
+    display:none;
+}
+.comments-reply-container .new_comment{
+    padding-top:15px;
+}
+.new_comment input[type="submit"]{
+    background-color: #8ab933 !important;
+    border:none !important;
+    color: white !important;
+}
+.backbutton-single{
+    color: #8ab933 !important;
+}
+
+.get-reply-option-btn{
+    display:block;
+    padding-top:10px;
+    color:#8ab933 !important;
+    
+}
+.get-reply-option-btn:hover,.get-reply-option-btn:focus{
+    text-decoration:none;
+}
+.comments-reply-container .control-label{
+    display:none;
+}
+.comments-reply-container li {
+    list-style-type: none;
+}
+
+a.comments-small-btns {
+    font-size: 12px;
+    color: #8ab933 !important;
+}
+.delete-btn-show-posts,.edit-btn-show-posts
+{
+    
+    color:#8ab933 !important;
+}
+.readmore-allpost{
+    color:#8ab933;
+}
+.delete-btn-show-posts{
+    padding-left:10px;
+}
 @media(max-width:992px){
     
     .forum-list-link {
@@ -441,8 +514,13 @@ text-align: center;
     }
 }
 
+
 @media(max-width:768px){
     
+    .disc-edit-del-btns{
+        margin-top:20px;
+    }
+
     .newPostForm input, .newPostForm textarea{
         width:75%;
     }

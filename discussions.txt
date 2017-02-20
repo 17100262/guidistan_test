@@ -1,0 +1,21 @@
+Changing DB from sqlite3 to Postgresql
+1. Remove gem sqlite3 and add gem 'pg' in GemFile
+2. In Config/Database.yml , change the adapter from sqlite3 to postgresql and add username and password to it.. 
+Refer to Config/database.yml of this repo.
+3.Bundle Install
+4. start the postgresql service by below code
+sudo service postgresql start
+5. create password for default user of postgresql by first opening its terminal by running "psql" on main terminal
+then 
+\passwd "username" e.g \passwd ubunutu OR \passwd admin
+use this username and password in your Config\database.yml file
+(for exiting psql terminal --> \q)
+6. On main terminal, drop database by rake db:drop
+7. create new database by below code
+createdb dbname e.g create guidistan
+use this db name in your config/database.yml file
+
+All done. now rake db:migrate and rake db:seed
+
+Note that now rake db:create command wouldn't work. To create db you will have yo use "createdb guidistan" in our main application
+as it is using guidistan DB. however rake will work for drop, migrate and seed.

@@ -58,6 +58,7 @@
               </div>
               
               <div class="block-review-avatar block-box-review-post text-center hidden-xs">
+                
                   <div class="push-bit">
                     
                     <% if post.user.profile.image_file_name.present? %> 
@@ -85,7 +86,18 @@
                 <%= link_to post.title, post %>
               </h2>
               <p>
-                 <%= post.description %>
+                
+                 <%= 
+                 truncate(post.description, :omission => "...", :length => 500)
+                 
+                  %>
+                  
+                  <% if post.description.length > 500 %>
+                  
+                    <%= link_to post.title, post ,class: "readmore-allpost" %>
+                    
+                  <% end %>
+  
               </p>
               
               <!--For Mobile Start -->
@@ -93,10 +105,10 @@
               <div class="caption all-posts-end-buttons visible-xs" style="text-align:center;">
                 
                 <% if can? :update, post %>
-                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left" %>
+                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left btn-sm btn btn-danger replace_destroy" %>
+                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
               <% end %>
               
               
@@ -154,13 +166,13 @@
               <!--< b = post.get_downvotes.size %>-->
               
               
-              <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:15px;">
+              <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:10px;">
                 
                 <% if can? :update, post %>
-                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left" %>
+                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left btn-xs btn btn-danger replace_destroy" %>
+                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
               <% end %>
               
               
@@ -188,7 +200,7 @@
 <% end %>
 <br>
 <% if can? :create, Post %>
-  <%= link_to 'New Post', new_post_path(@post => {:forum_id => @id}), class: "btn btn-primary"%><br/>
+  <%= link_to 'New Post', new_post_path(@post => {:forum_id => @id}), class: "btn btn-primary new-post-showall"%><br/>
 <% end %>
 <div class = "pagination"><%= will_paginate @posts %></div>
 </div>

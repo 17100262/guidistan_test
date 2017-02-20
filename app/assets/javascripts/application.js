@@ -16,7 +16,19 @@
 //= require bootstrap.min
 //= require filterrific/filterrific-jquery
 $(document).ready(function(){
-   $(".replace_destroy").text("Delete");
-   $(".replace_destroy").prepend('<span class="glyphicon glyphicon-remove" style="top:1px"></span>&nbsp;');
+   //$(".replace_destroy").text("Delete");
+   //$(".replace_destroy").prepend('<span class="glyphicon glyphicon-remove" style="top:1px"></span>&nbsp;');
+   $(".readmore-allpost").text("Read More");
    
+   $(".comments-reply-container form.new_comment").hide();
+   $(".get-reply-option-btn").click(function(){
+      
+      if($(this).parents(".comments-reply-container").find("form.new_comment").css('display') == 'none'){
+          $(this).parents(".comments-reply-container").find("form.new_comment").show(10);
+      }
+      else{
+          $(this).parents(".comments-reply-container").find("form.new_comment").hide(10);
+      }
+     
+   });
 });
