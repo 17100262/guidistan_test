@@ -5,6 +5,11 @@
   <%= form_tag :controller => :cities, :action => :export do %>
     <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
   <% end %>
+<%= form_tag import_cities_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <br>
+    <%= submit_tag "Import" %>
+<% end %>
 <h2  class="post-title-forum post-title-all-posts" style="">All Cities</h2>
 
 <table class="table">

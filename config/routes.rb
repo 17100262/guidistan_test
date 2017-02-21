@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get 'notification' => 'notification#index'
 
 
-  resources :disciplines
+  resources :disciplines do
+    collection { post :import }
+  end
   resources :comments do
     resources :comments
   end
@@ -46,12 +48,22 @@ Rails.application.routes.draw do
     }
   end
   root to: "disciplines#index"
-  resources :degreeprograms
-  resources :subdisciplines
-  resources :discipline_universities
+  resources :degreeprograms do
+    collection { post :import }
+  end
+  resources :subdisciplines do
+    collection { post :import }
+  end
+  resources :discipline_universities do
+    collection { post :import }
+  end
   
-  resources :cities
-  resources :universities
+  resources :cities  do
+    collection { post :import }
+  end
+  resources :universities do
+    collection { post :import }
+  end
   resources :profiles
   resources :education
   resources :profile_education

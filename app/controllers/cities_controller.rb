@@ -39,8 +39,6 @@ class CitiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cities/1
-  # PATCH/PUT /cities/1.json
   def update
     respond_to do |format|
       if @city.update(city_params)
@@ -61,12 +59,16 @@ class CitiesController < ApplicationController
     end
   end
 
+  def import
+    City.import(params[:file])
+    redirect_to cities_path, notice: "Cities imported"
+  end
 
   def export
     package = Axlsx::Package.new
     workbook = package.workbook
     workbook.add_worksheet(name: "Basic work sheet") do |sheet|
-      sheet.add_row ["Name"]
+      sheet.add_row ["name"]
       @cities=City.all
       @cities.each do |ct|
         sheet.add_row [ct.name]

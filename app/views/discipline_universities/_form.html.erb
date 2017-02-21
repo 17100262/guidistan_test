@@ -17,13 +17,13 @@
     <%= f.collection_select :university_id, University.all, :id, :name, :include_blank => true , :required => true %>
   <!--</div>-->
   <!--<div class="field">-->
-    <%= f.collection_select :discipline_id, Discipline.all, :id, :name , :include_blank => true, :required => true  %>
+    <!--<= f.collection_select :discipline_id, Discipline.all, :id, :name , :include_blank => true, :required => true  %>-->
   <!--</div>-->
   <!--<div class="field">-->
     <%= f.collection_select :degreeprogram_id, Degreeprogram.all, :id, :name , :include_blank => true , :required => true %>
   <!--</div>-->
   <!--<div class="field">-->
-    <%= f.collection_select :subdiscipline_id, Subdiscipline.all, :id, :name , :include_blank => true , :required => true %>
+    <!--<= f.collection_select :subdiscipline_id, Subdiscipline.all, :id, :name , :include_blank => true , :required => true %>-->
   <!--</div>-->
     <%= f.number_field :tution_fee_per_semester , placeholder: "e.g 50000"  %>
     

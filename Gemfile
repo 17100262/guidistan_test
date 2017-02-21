@@ -64,3 +64,5 @@ gem 'acts_as_votable', '~> 0.10.0'
 
 # for exporting to excel 
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
+# for importing from excel
+gem 'roo', "2.3.2"

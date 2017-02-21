@@ -63,6 +63,11 @@ class SubdisciplinesController < ApplicationController
     end
   end
 
+  def import
+    Subdiscipline.import(params[:file])
+    redirect_to subdisciplines_path, notice: "SubDisciplines imported"
+  end
+  
   def export
     package = Axlsx::Package.new
     workbook = package.workbook

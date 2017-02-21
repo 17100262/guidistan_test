@@ -63,6 +63,11 @@ class DisciplinesController < ApplicationController
     end
   end
 
+  def import
+    Discipline.import(params[:file])
+    redirect_to disciplines_path, notice: "Disciplines imported"
+  end
+  
   def export
     package = Axlsx::Package.new
     workbook = package.workbook

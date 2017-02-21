@@ -16,12 +16,12 @@ class DisciplineUniversitiesController < ApplicationController
     # puts params[:discipline_university] == nil,"check"
 
     if params[:discipline_university].present?
-      if params[:discipline_university][:discipline_ids].all?{|e| e==""}
-        params[:discipline_university][:discipline_ids]= Discipline.uniq.pluck(:id)
-        (params[:discipline_university][:discipline_ids]).map! { |e| e.to_s  }
-      else
-        (params[:discipline_university][:discipline_ids]).delete("")
-      end
+      # if params[:discipline_university][:discipline_ids].all?{|e| e==""}
+      #   params[:discipline_university][:discipline_ids]= Discipline.uniq.pluck(:id)
+      #   (params[:discipline_university][:discipline_ids]).map! { |e| e.to_s  }
+      # else
+      #   (params[:discipline_university][:discipline_ids]).delete("")
+      # end
       
       if params[:discipline_university][:cities_ids].all?{|e| e==""}
         params[:discipline_university][:cities_ids] = City.uniq.pluck(:id)
@@ -37,23 +37,21 @@ class DisciplineUniversitiesController < ApplicationController
         (params[:discipline_university][:university_ids]).delete("")
       end
       
-      if params[:discipline_university][:subdiscipline_ids].all?{|e| e==""}
-        params[:discipline_university][:subdiscipline_ids] = Subdiscipline.uniq.pluck(:id)
-        (params[:discipline_university][:subdiscipline_ids]).map! { |e| e.to_s  }
-      else
-        (params[:discipline_university][:subdiscipline_ids]).delete("")
-      end
+      # if params[:discipline_university][:subdiscipline_ids].all?{|e| e==""}
+      #   params[:discipline_university][:subdiscipline_ids] = Subdiscipline.uniq.pluck(:id)
+      #   (params[:discipline_university][:subdiscipline_ids]).map! { |e| e.to_s  }
+      # else
+      #   (params[:discipline_university][:subdiscipline_ids]).delete("")
+      # end
 
 
       @discipline_universities = DisciplineUniversity.find_by_sql(["
           SELECT DISTINCT *
           FROM discipline_universities, universities
           WHERE 
-            discipline_universities.university_id=universities.id 
-            AND discipline_id IN (?) 
+            discipline_universities.university_id=universities.id
             AND university_id IN (?) 
-            AND city_id IN (?)
-            AND subdiscipline_id IN (?)",params[:discipline_university][:discipline_ids],params[:discipline_university][:university_ids],params[:discipline_university][:cities_ids],params[:discipline_university][:subdiscipline_ids]]) if params[:discipline_university].present?
+            AND city_id IN (?)",params[:discipline_university][:university_ids],params[:discipline_university][:cities_ids]]) if params[:discipline_university].present?
       else
         @discipline_universities= DisciplineUniversity.all
     end
@@ -117,12 +115,15 @@ class DisciplineUniversitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def import
+    DisciplineUniversity.import(params[:file])
+    redirect_to discipline_universities_path, notice: "Degree Programs of Universities imported"
+  end
   def export
     package = Axlsx::Package.new
     workbook = package.workbook
     workbook.add_worksheet(name: "Basic work sheet") do |sheet|
-      sheet.add_row ["university_id","discipline_id","degreeprogram_id","subdiscipline_id","hec_recognized","tution_fee_per_semester","duration"]
+      sheet.add_row ["university_id","degreeprogram_id","hec_recognized","tution_fee_per_semester","duration"]
       @degrees=DisciplineUniversity.all
       @degrees.each do |dp|
         sheet.add_row [University.find(dp.university_id).name,Degreeprogram.find(dp.degreeprogram_id).name,dp.hec_recognized,dp.tution_fee_per_semester,dp.duration]

@@ -61,6 +61,10 @@ class DegreeprogramsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def import
+    Degreeprogram.import(params[:file])
+    redirect_to degreeprograms_path, notice: "Degree Programs imported"
+  end
   def export
     package = Axlsx::Package.new
     workbook = package.workbook

@@ -11,7 +11,7 @@ class UniversitiesController < ApplicationController
   # GET /universities/1
   # GET /universities/1.json
   def show
-    @discipline = @university.discipline
+    # @discipline = @university.degreeprogram.discipline
     @city = City.find(@university.city_id).name
   end
 
@@ -64,6 +64,11 @@ class UniversitiesController < ApplicationController
     end
   end
 
+  def import
+    University.import(params[:file])
+    redirect_to universities_path, notice: "Universities imported"
+  end
+ 
   def export
     package = Axlsx::Package.new
     workbook = package.workbook

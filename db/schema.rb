@@ -61,9 +61,7 @@ ActiveRecord::Schema.define(version: 20170211141739) do
 
   create_table "discipline_universities", force: :cascade do |t|
     t.integer  "university_id"
-    t.integer  "discipline_id"
     t.integer  "degreeprogram_id"
-    t.integer  "subdiscipline_id"
     t.integer  "tution_fee_per_semester"
     t.boolean  "hec_recognized"
     t.string   "duration"

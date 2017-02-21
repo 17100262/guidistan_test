@@ -6,6 +6,7 @@
   <%= form_tag :controller => :disciplines, :action => :export do %>
     <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
   <% end %>
+
   <div class="services container" >
     <p id="notice"><%= notice %></p>
     <div align="center"> <h1  class="post-title-forum post-title-all-posts" style="">Explore Disciplines</h1> </div>
@@ -37,10 +38,15 @@
 </section>
 <br>
 <!--------------->
-
+<div class="container" >
+<%= form_tag import_disciplines_path, multipart: true do %>
+  <%= file_field_tag :file, required: true %>
+  <br>
+  <%= submit_tag "Import" %>
+<% end %>  
 
 <!--------------->
-
+</div>
 <script>
     $(window).load(function(){
         

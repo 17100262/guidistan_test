@@ -7,6 +7,11 @@
   <%= form_tag :controller => :discipline_universities, :action => :export do %>
     <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
   <% end %>
+<%= form_tag import_discipline_universities_path, multipart: true do %>
+  <%= file_field_tag :file, required: true %>
+  <br>
+  <%= submit_tag "Import" %>
+<% end %>
 <%= form_for_filterrific @filterrific do |f| %>
   
   <div class ="row">
@@ -30,22 +35,7 @@
     
     <%# add an automated spinner to your form when the list is refreshed %>
     <%#=render_filterrific_spinner %>
-      <div class="panel panel-default">
-          <div class="panel-heading">Disciplines</div>
-              <div class="panel-body">
-                <%= collection_check_boxes(:discipline_university,:discipline_ids, Discipline.all, :id, :name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">Subdisciplines</div>
-              <div class="panel-body">
-                <%= collection_check_boxes(:discipline_university,:subdiscipline_ids, Subdiscipline.all, :id, :name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-        </div>
+
         <div class="panel panel-default">
           <div class="panel-heading">Cities</div>
               <div class="panel-body">
