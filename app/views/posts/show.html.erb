@@ -104,11 +104,16 @@
 	   
 	   <div class="user-single-postpic">
 
+        
+              <% if @post.user.profile.image_file_name.present? %> 
+                      <%= image_tag @post.user.profile.image.url(:large) %>
+                      <% else %>
                       
-       <a href="javascript:;">
-          <!--<img src="/avatar_generic.jpg" width="100" alt="<%= @post.user.profile.name %> Profile Image">-->
-          <%= image_tag @post.user.profile.image.url(:large) %>
-       </a>
+                      <a href="javascript:;">
+                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                      </a>
+                      <% end %>
+
 
        
 	   </div>

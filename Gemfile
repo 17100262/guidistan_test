@@ -60,3 +60,7 @@ gem 'impressionist'
 gem 'filterrific'
 
 gem 'acts_as_votable', '~> 0.10.0'
+
+
+# for exporting to excel 
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git'

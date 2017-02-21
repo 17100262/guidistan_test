@@ -5,13 +5,14 @@
         
     <div class="row">
         <div class="col-sm-6">
+            
                     <% if @profile.image_file_name.present? %> 
                       <%= image_tag @profile.image.url(:large) %>
                       <% else %>
                       
-                      <!--<a href="javascript:;">-->
+                      <a href="javascript:;">
                       <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-                      <!--</a>-->
+                      </a>
                       <% end %>
             
             <h2><%= @profile.name %></h2>

@@ -64,6 +64,19 @@ class UniversitiesController < ApplicationController
     end
   end
 
+  def export
+    package = Axlsx::Package.new
+    workbook = package.workbook
+    workbook.add_worksheet(name: "Basic work sheet") do |sheet|
+      sheet.add_row ["name","description","city_id"]
+      @unis=University.all
+      @unis.each do |dp|
+        sheet.add_row [dp.name,dp.description,City.find(dp.city_id).name]
+      end
+    end
+    send_data package.to_stream.read, :filename => "Universities.xlsx"
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_university

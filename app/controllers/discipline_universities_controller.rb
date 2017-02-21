@@ -118,6 +118,19 @@ class DisciplineUniversitiesController < ApplicationController
     end
   end
 
+  def export
+    package = Axlsx::Package.new
+    workbook = package.workbook
+    workbook.add_worksheet(name: "Basic work sheet") do |sheet|
+      sheet.add_row ["university_id","discipline_id","degreeprogram_id","subdiscipline_id","hec_recognized","tution_fee_per_semester","duration"]
+      @degrees=DisciplineUniversity.all
+      @degrees.each do |dp|
+        sheet.add_row [University.find(dp.university_id).name,Degreeprogram.find(dp.degreeprogram_id).name,dp.hec_recognized,dp.tution_fee_per_semester,dp.duration]
+      end
+    end
+    send_data package.to_stream.read, :filename => "DisciplineUniversities.xlsx"
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_discipline_university
@@ -126,6 +139,6 @@ class DisciplineUniversitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discipline_university_params
-      params.require(:discipline_university).permit(:university_id, :discipline_id, :degreeprogram_id, :subdiscipline_id, :hec_recognized, :tution_fee_per_semester, :duration)
+      params.require(:discipline_university).permit(:university_id, :degreeprogram_id, :hec_recognized, :tution_fee_per_semester, :duration)
     end
 end

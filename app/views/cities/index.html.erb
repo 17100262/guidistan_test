@@ -2,6 +2,9 @@
 <div class="container">
 <p id="notice"><%= notice %></p>
   <%= link_to 'New City', new_city_path, class: "btn btn-success pull-right" %>
+  <%= form_tag :controller => :cities, :action => :export do %>
+    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <% end %>
 <h2  class="post-title-forum post-title-all-posts" style="">All Cities</h2>
 
 <table class="table">

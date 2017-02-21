@@ -53,8 +53,7 @@ class DegreeprogramsController < ApplicationController
     end
   end
 
-  # DELETE /degreeprograms/1
-  # DELETE /degreeprograms/1.json
+
   def destroy
     @degreeprogram.destroy
     respond_to do |format|
@@ -62,7 +61,18 @@ class DegreeprogramsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def export
+    package = Axlsx::Package.new
+    workbook = package.workbook
+    workbook.add_worksheet(name: "Basic work sheet") do |sheet|
+      sheet.add_row ["degree_type","name","subdiscipline_id","discipline_id"]
+      @degrees=Degreeprogram.all
+      @degrees.each do |dp|
+        sheet.add_row [dp.degree_type,dp.name,Subdiscipline.find(dp.subdiscipline_id).name,Discipline.find(dp.discipline_id).name]
+      end
+    end
+    send_data package.to_stream.read, :filename => "DegreePrograms.xlsx"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_degreeprogram

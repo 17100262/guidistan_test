@@ -11,7 +11,15 @@
   <div class="panel-body comments-main-body">
     <h4><%= comment.comment %></h4>
     <p>
-    <%= image_tag comment.user.profile.image.url(:small) %>
+                <% if comment.user.profile.image_file_name.present? %> 
+                       <%= image_tag comment.user.profile.image.url(:small) %>
+                      <% else %>
+                      
+                      <a href="javascript:;">
+                      <img src="/generic_small.png" height=61 width=64 alt="User Profile Image">
+                      </a>
+                      <% end %>  
+   
     Answered <%= time_ago_in_words(comment.created_at) %> ago&nbsp;&nbsp;&nbsp;&nbsp;
     <%= comment.user.profile.name %>&nbsp;&nbsp;&nbsp;&nbsp;
     Reputation: <%= comment.user.profile.reputation%> points

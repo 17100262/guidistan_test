@@ -5,6 +5,9 @@
 <% if can? :create, University.new %>
   <a class="btn btn-success pull-right" href="/universities/new" role="button">New University</a>
 <% end %>
+  <%= form_tag :controller => :universities, :action => :export do %>
+    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <% end %>
 <h2 class="post-title-forum post-title-all-posts" style="">Universities</h2>
 
 <table class="table table-striped table-hover">

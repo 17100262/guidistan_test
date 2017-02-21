@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   get 'admin_panel/index'
-
+  post 'cities/export'
+  post 'degreeprograms/export'
+  post 'discipline_universities/export'
+  post 'disciplines/export'
+  post 'subdisciplines/export'
+  post 'universities/export'
   # get 'notification/index'
   get 'notification' => 'notification#index'
 
@@ -21,7 +26,9 @@ Rails.application.routes.draw do
       resources :comments do
         member do
           put "like" => "comments#upvote"
+          get "like" => "comments#upvote"
           put "dislike" => "comments#downvote"
+          get "dislike" => "comments#downvote"
           put "count" => "comments#count"
         end
       end

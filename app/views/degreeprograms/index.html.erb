@@ -4,6 +4,11 @@
 <% if can? :create, Degreeprogram.new %>
   <a class="btn btn-success pull-right" href="/degreeprograms/new" role="button">New Degreeprogram</a>
 <% end %>
+
+  <%= form_tag :controller => :degreeprograms, :action => :export do %>
+    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <% end %>
+  
 <h1 class="post-title-forum post-title-all-posts" style="" >Degree Programs</h1>
 <br/>
 <table class="table table-striped table-hover">

@@ -53,8 +53,6 @@ class CitiesController < ApplicationController
     end
   end
 
-  # DELETE /cities/1
-  # DELETE /cities/1.json
   def destroy
     @city.destroy
     respond_to do |format|
@@ -63,8 +61,21 @@ class CitiesController < ApplicationController
     end
   end
 
+
+  def export
+    package = Axlsx::Package.new
+    workbook = package.workbook
+    workbook.add_worksheet(name: "Basic work sheet") do |sheet|
+      sheet.add_row ["Name"]
+      @cities=City.all
+      @cities.each do |ct|
+        sheet.add_row [ct.name]
+      end
+    end
+    send_data package.to_stream.read, :filename => "cities.xlsx"
+  end
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_city
       @city = City.find(params[:id])
     end

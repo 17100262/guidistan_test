@@ -3,6 +3,9 @@
 <% if can? :create, Discipline.new %>
   <%= link_to 'New Discipline', new_discipline_path ,class:"btn btn-success pull-right" %>
 <% end %>
+  <%= form_tag :controller => :disciplines, :action => :export do %>
+    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <% end %>
   <div class="services container" >
     <p id="notice"><%= notice %></p>
     <div align="center"> <h1  class="post-title-forum post-title-all-posts" style="">Explore Disciplines</h1> </div>

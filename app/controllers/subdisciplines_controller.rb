@@ -63,6 +63,19 @@ class SubdisciplinesController < ApplicationController
     end
   end
 
+  def export
+    package = Axlsx::Package.new
+    workbook = package.workbook
+    workbook.add_worksheet(name: "Basic work sheet") do |sheet|
+      sheet.add_row ["name","discipline_id","description"]
+      @subdisciplines=Subdiscipline.all
+      @subdisciplines.each do |dp|
+        sheet.add_row [dp.name,Discipline.find(dp.discipline_id).name,dp.description]
+      end
+    end
+    send_data package.to_stream.read, :filename => "SubDisciplines.xlsx"
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subdiscipline

@@ -143,11 +143,11 @@ ActiveRecord::Schema.define(version: 20170211141739) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
-    t.string   "gender",             limit: 1
+    t.string   "gender"
     t.string   "city"
-    t.integer  "reputation",                   default: 0
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "reputation",         default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

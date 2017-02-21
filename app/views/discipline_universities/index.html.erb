@@ -4,6 +4,9 @@
 <% if can? :create, DisciplineUniversity.new %>
   <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
 <% end %>
+  <%= form_tag :controller => :discipline_universities, :action => :export do %>
+    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <% end %>
 <%= form_for_filterrific @filterrific do |f| %>
   
   <div class ="row">

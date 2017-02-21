@@ -63,6 +63,19 @@ class DisciplinesController < ApplicationController
     end
   end
 
+  def export
+    package = Axlsx::Package.new
+    workbook = package.workbook
+    workbook.add_worksheet(name: "Basic work sheet") do |sheet|
+      sheet.add_row ["name","description"]
+      @disciplines=Discipline.all
+      @disciplines.each do |dp|
+        sheet.add_row [dp.name,dp.description]
+      end
+    end
+    send_data package.to_stream.read, :filename => "Disciplines.xlsx"
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_discipline
