@@ -66,3 +66,4 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
 # for importing from excel
 gem 'roo', "2.3.2"
+gem 'acts-as-taggable-on'

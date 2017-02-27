@@ -31,4 +31,9 @@ $(document).ready(function(){
       }
      
    });
+   
+   if($(window).width() > 786){
+      $(".single_postliker").css("height",$(".single-description-para").height() + 5);
+   }
+   
 });

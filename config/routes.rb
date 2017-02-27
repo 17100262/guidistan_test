@@ -2,13 +2,13 @@ Rails.application.routes.draw do
 
   get 'admin_panel/index'
   post 'cities/export'
-  post 'degreeprograms/export'
   post 'discipline_universities/export'
   post 'disciplines/export'
   post 'subdisciplines/export'
   post 'universities/export'
   # get 'notification/index'
   get 'notification' => 'notification#index'
+  get 'tags/:tag', to: 'posts#index', as: :tag
 
 
   resources :disciplines do
@@ -48,9 +48,6 @@ Rails.application.routes.draw do
     }
   end
   root to: "disciplines#index"
-  resources :degreeprograms do
-    collection { post :import }
-  end
   resources :subdisciplines do
     collection { post :import }
   end

@@ -10,20 +10,29 @@
 			
   <div class="panel-body comments-main-body">
     <h4><%= comment.comment %></h4>
-    <p>
-                <% if comment.user.profile.image_file_name.present? %> 
+    
+    <div class="commentator-img-box pull-right hidden-xs">
+      
+                <div class="commentator-answer-txt">Answered <%= time_ago_in_words(comment.created_at) %> ago</div>
+                <div class="commentator-box-thumbimg">
+                  <% if comment.user.profile.image_file_name.present? %> 
                        <%= image_tag comment.user.profile.image.url(:small) %>
                       <% else %>
                       
                       <a href="javascript:;">
                       <img src="/generic_small.png" height=61 width=64 alt="User Profile Image">
                       </a>
-                      <% end %>  
-   
-    Answered <%= time_ago_in_words(comment.created_at) %> ago&nbsp;&nbsp;&nbsp;&nbsp;
-    <%= comment.user.profile.name %>&nbsp;&nbsp;&nbsp;&nbsp;
-    Reputation: <%= comment.user.profile.reputation%> points
-    </p>
+                      <% end %> 
+                      
+                      
+                </div>
+                 
+                <div class="commentator-box-right">
+                  <div class="commentator-box-name"><%= comment.user.profile.name %></div>
+                  <div class="commentator-box-repo">Reputation: <%= comment.user.profile.reputation%> points</div>
+                </div>
+                
+    </div>
     <% if can? :update, comment %>
       <%= link_to "Edit", edit_post_comment_path(comment.commentable, comment),class: "comments-small-btns"%>
     <% end %>
@@ -45,8 +54,31 @@
       </button>
     <% end %>-->
     
+    <div class="commentator-img-box mobile visible-xs">
+      
+                <div class="commentator-answer-txt">Answered <%= time_ago_in_words(comment.created_at) %> ago</div>
+                <div class="commentator-box-thumbimg">
+                  <% if comment.user.profile.image_file_name.present? %> 
+                       <%= image_tag comment.user.profile.image.url(:small) %>
+                      <% else %>
+                      
+                      <a href="javascript:;">
+                      <img src="/generic_small.png" height=61 width=64 alt="User Profile Image">
+                      </a>
+                      <% end %> 
+                      
+                      
+                </div>
+                 
+                <div class="commentator-box-right">
+                  <div class="commentator-box-name"><%= comment.user.profile.name %></div>
+                  <div class="commentator-box-repo">Reputation: <%= comment.user.profile.reputation%> points</div>
+                </div>
+                
+    </div>
     
     <div class="comments-reply-container">
+      <h4 class="visible-xs">Replies</h4>
       <%= render partial: 'comments/reply', collection: comment.comments %>
       <a href="javascript:;" class="get-reply-option-btn">Add a reply</a>
       <%= bootstrap_form_for [comment, Comment.new] do |f| %> 

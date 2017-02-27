@@ -1,4 +1,8 @@
-<%= bootstrap_form_for([@post, @post.comments.build]) do |f| %>
-	<%= f.text_area :comment %>
-	<%= f.submit "Post Your Answer" %>
-<% end %>
+<div class="addnewanswerform">
+	
+	<%= bootstrap_form_for([@post, @post.comments.build]) do |f| %>
+		<%= f.text_area :comment %>
+		<%= f.submit "Post Your Answer" %>
+	<% end %>
+
+</div>

@@ -3,7 +3,7 @@ class Subdiscipline < ActiveRecord::Base
     belongs_to :discipline
     # has_many :degreeprogram
     has_many :univeristy,:through => :discipline_university
-    has_many :degreeprogram
+    has_many :discipline_university
     def self.import(file)
         spreadsheet = open_spreadsheet(file)
         if spreadsheet
@@ -12,7 +12,7 @@ class Subdiscipline < ActiveRecord::Base
                 header = spreadsheet.row(i)
                 subdp = new
                 subdp.name = header[0]
-                if Degreeprogram.exists?(name: subdp.name)
+                if Subdiscipline.exists?(name: subdp.name)
                 else
                 	subdp.discipline_id = Discipline.find_by(name: header[1]).id
                 	subdp.description = header[2]

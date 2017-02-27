@@ -20,7 +20,10 @@
     <!--<= f.collection_select :discipline_id, Discipline.all, :id, :name , :include_blank => true, :required => true  %>-->
   <!--</div>-->
   <!--<div class="field">-->
-    <%= f.collection_select :degreeprogram_id, Degreeprogram.all, :id, :name , :include_blank => true , :required => true %>
+    <%= f.text_field :name,placeholder: "Name", hide_label: true  %>
+    <%= f.select :degree_type,[["Bachelors","Bachelors"],["Masters","Masters"],["Phd","Phd"]] %>
+  
+    <%= f.collection_select :subdiscipline_id, Subdiscipline.all, :id, :name , :include_blank => true , :required => true %>
   <!--</div>-->
   <!--<div class="field">-->
     <!--<= f.collection_select :subdiscipline_id, Subdiscipline.all, :id, :name , :include_blank => true , :required => true %>-->

@@ -10,7 +10,7 @@ class DisciplinesController < ApplicationController
   # GET /disciplines/1
   # GET /disciplines/1.json
   def show
-    @degrees = @discipline.degreeprogram.distinct
+    @degrees = @discipline.discipline_university
     @sub = Subdiscipline.where(discipline_id:@discipline.id)
   end
 

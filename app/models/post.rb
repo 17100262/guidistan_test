@@ -4,5 +4,6 @@ class Post < ActiveRecord::Base
     has_many :comments, as: :commentable, dependent: :destroy
     is_impressionable
     acts_as_votable
+    acts_as_taggable
     
 end

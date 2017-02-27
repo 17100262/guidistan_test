@@ -3,7 +3,7 @@
 	  
 	  <% @discipline_universities.each do |discipline_university| %>
 	  <div class="panel panel-default">  
-	      <div class="panel-heading"><strong>  <%= discipline_university.degreeprogram.name %></strong></div>
+	      <div class="panel-heading"><strong>  <%= discipline_university.name %></strong></div>
 	          <div class="panel-body">
 	                <%= discipline_university.university.name %> | <%= discipline_university.university.city.name %>
 	          </div>

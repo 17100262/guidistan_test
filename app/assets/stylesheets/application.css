@@ -473,6 +473,53 @@ a.comments-small-btns {
     font-size: 12px;
     color: #8ab933 !important;
 }
+.block-all-post-detail-box-container.visible-xs .block-all-post-detail-box {
+    width: 25%;
+    display: inline-block;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+.ask-a-question-btn{
+    margin-top:15px;
+    margin-bottom:0px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+.commentator-img-box{
+    padding: 10px 15px;
+    background-color: rgba(0,0,0,0.05);
+    border: rgba(0,0,0,0.05) 1px solid;
+}
+.commentator-img-box.mobile{
+    margin:0px auto;
+    margin-top: 15px;
+    max-width: 200px;
+}
+.
+.addnewanswerform textarea{
+    height:200px !Important;
+}
+.commentator-answer-txt {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.commentator-box-thumbimg img {
+    width: 50px !important;
+    height: auto !important;
+}
+
+.commentator-box-thumbimg {
+    display: inline-block;
+    width: 50px;
+}
+
+.commentator-box-right {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 2px;
+}
 .delete-btn-show-posts,.edit-btn-show-posts
 {
     
@@ -516,7 +563,16 @@ a.comments-small-btns {
 
 
 @media(max-width:768px){
-    
+    .comments-reply-container {
+        padding-left: 49px;
+        padding-top: 10px;
+    }
+    .single-description-para{
+        text-align:justify;
+    }
+    .ask-a-question-btn{
+        text-align:center;
+    }
     .disc-edit-del-btns{
         margin-top:20px;
     }

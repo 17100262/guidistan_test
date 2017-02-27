@@ -29,9 +29,9 @@
 
 			</div>
 	
-  <p class="single-description-para">
+  <div class="single-description-para">
    
-    <%= @post.description %>
+    <p><%= @post.description %></p>
     
     <div class="edit-desc-btn">
     	
@@ -41,7 +41,68 @@
 		
     </div>
     
-  </p>
+  </div>
+  
+  <div class="user-description-container col-md-3 visible-xs" style="margin-top: 25px;">
+  
+  <table>
+			         <tr>
+			                <td>
+			                    <p class="label-key">Posted</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-value"><%= time_ago_in_words(@post.created_at) %></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">Views</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-value">
+			                      <%= "#{@post.impressionist_count} views so far!" %>
+			                    </p>
+			                </td>
+			            </tr>
+			            
+			            <tr>
+			                <td>
+			                    <p class="label-key">Discipline</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-value">
+			                      <%= @post.forum.name %>
+			                    </p>
+			                </td>
+			            </tr>
+			            
+
+	</table>
+	
+	<div class="user-details-post">
+	  
+	   <div class="user-details-name"> Posted by <b><%= @post.user.profile.name %></b></div>
+	   
+	   <div class="user-single-postpic">
+
+        
+              <% if @post.user.profile.image_file_name.present? %> 
+                      <%= image_tag @post.user.profile.image.url(:large) %>
+                      <% else %>
+                      
+                      <a href="javascript:;">
+                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                      </a>
+                      <% end %>
+
+
+       
+	   </div>
+	</div>
+
+</div>
   
   <div class="" style="padding:0px;">
 	
@@ -60,7 +121,7 @@
   
 </div>
 
-<div class="user-description-container col-md-3">
+<div class="user-description-container col-md-3 hidden-xs">
   
   <table>
 			         <tr>

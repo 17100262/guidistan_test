@@ -7,9 +7,20 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    
     @id = params[:filter_id]
     
-    if (params[:filter_id] == nil)
+    # if (params[:filter_id] == nil)
+    #   # @posts = Post.all.order("created_at DESC").
+
+    #   @posts = Post.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
+    # else
+    # # puts params[:filter_id], "helellaelasdlalsd"
+    #   @posts = Post.where(forum_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
+    # end
+    if params[:tag]!=nil and params[:filter_id]!=nil
+      @posts = Post.tagged_with(params[:tag]).where(forum_id: params["filter_id"]).paginate(:page => params[:page],:per_page => 5)
+    elsif (params[:filter_id] == nil)
       # @posts = Post.all.order("created_at DESC").
 
       @posts = Post.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
@@ -107,6 +118,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description,:forum_id, :filter_id)
+      params.require(:post).permit(:title, :description,:forum_id, :filter_id,:tag_list,:tag)
     end
 end
