@@ -47,12 +47,12 @@ class DisciplineUniversitiesController < ApplicationController
 
       @discipline_universities = DisciplineUniversity.find_by_sql(["
           SELECT DISTINCT *
-          FROM discipline_universities, universities
+          FROM universities u,discipline_universities d 
           WHERE 
-            discipline_universities.university_id=universities.id 
-            AND discipline_id IN (?) 
-            AND university_id IN (?) 
-            AND city_id IN (?)
+            u.id = d.university_id 
+            AND d.discipline_id IN (?) 
+            AND d.university_id IN (?) 
+            AND u.city_id IN (?)
             AND subdiscipline_id IN (?)",params[:discipline_university][:discipline_ids],params[:discipline_university][:university_ids],params[:discipline_university][:cities_ids],params[:discipline_university][:subdiscipline_ids]]) if params[:discipline_university].present?
       else
         @discipline_universities= DisciplineUniversity.all
@@ -61,7 +61,8 @@ class DisciplineUniversitiesController < ApplicationController
       format.html
       format.js
     end
-    # puts @discipline_universities
+    
+    puts 'hello world', @discipline_universities.map{|n| }
   end
 
   # GET /discipline_universities/1
@@ -86,7 +87,7 @@ class DisciplineUniversitiesController < ApplicationController
     @discipline_university.discipline_id = Subdiscipline.find(@discipline_university.subdiscipline_id).discipline_id
     respond_to do |format|
       if @discipline_university.save
-        format.html { redirect_to "/discipline_universities/new", notice: 'Discipline university was successfully created.' }
+        format.html { redirect_to "/discipline_universities", notice: 'Discipline university was successfully created.' }
         format.json { render :show, status: :created, location: @discipline_university }
       else
         format.html { render :new }
@@ -126,10 +127,10 @@ class DisciplineUniversitiesController < ApplicationController
     package = Axlsx::Package.new
     workbook = package.workbook
     workbook.add_worksheet(name: "Basic work sheet") do |sheet|
-      sheet.add_row ["university_id","discipline_id","name","degree_type","subdiscipline_id","hec_recognized","tution_fee_per_semester","duration"]
+      sheet.add_row ["university_id","discipline_id","name","degree_type","subdiscipline_id","hec_recognized","tution_fee_per_semester","duration","criteria","link"]
       @degrees=DisciplineUniversity.all
       @degrees.each do |dp|
-        sheet.add_row [University.find(dp.university_id).name,Discipline.find(dp.discipline_id).name,dp.name,dp.degree_type,Subdiscipline.find(dp.subdiscipline_id).name,dp.hec_recognized,dp.tution_fee_per_semester,dp.duration]
+        sheet.add_row [University.find(dp.university_id).name,Discipline.find(dp.discipline_id).name,dp.name,dp.degree_type,Subdiscipline.find(dp.subdiscipline_id).name,dp.hec_recognized,dp.tution_fee_per_semester,dp.duration,dp.criteria,dp.link]
       end
     end
     send_data package.to_stream.read, :filename => "DisciplineUniversities.xlsx"
@@ -143,6 +144,6 @@ class DisciplineUniversitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discipline_university_params
-      params.require(:discipline_university).permit(:university_id, :discipline_id,:subdiscipline_id,:name,:degree_type, :hec_recognized, :tution_fee_per_semester, :duration)
+      params.require(:discipline_university).permit(:university_id, :discipline_id,:subdiscipline_id,:name,:degree_type, :hec_recognized, :tution_fee_per_semester, :duration,:criteria,:link)
     end
 end

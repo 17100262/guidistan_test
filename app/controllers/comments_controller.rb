@@ -2,7 +2,9 @@ class CommentsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_comment, only: [:upvote, :downvote]
     before_action :find_commentable
+    layout false , only: [:upvote, :downvote]
     def create
+ 
 		# @post = Post.find(params[:post_id])
 		# @comment = @post.comments.create(params[:comment].permit(:comment))
 		# @comment.user_id = current_user.id if current_user
@@ -19,6 +21,11 @@ class CommentsController < ApplicationController
 		@comment = @commentable.comments.new comment_params
 		@comment.user_id = current_user.id if current_user
 	    if @comment.save
+	    	if @comment.commentable_type == "Comment"
+	    		@comment.create_activity :create,{:commentable => @comment.commentable},{owner:current_user, recipient: @comment.commentable.commentable.user}
+	    	else
+	    		@comment.create_activity :create,{:commentable => @comment.commentable},{owner:current_user, recipient: @comment.commentable.user}
+	    	end
 	    	redirect_to :back, notice: 'Your comment was successfully posted!'
 	    else
 	    	redirect_to :back, notice: "Your comment wasn't posted!"
@@ -47,21 +54,29 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
-		@post = Post.find(params[:post_id])
-		@comment = @post.comments.find(params[:id])
+		@comment = Comment.find(params[:id])
+		if @comment.commentable_type == "Post"
+			post = @comment.commentable_type
+		elsif @comment.commentable_type == "Comment"
+			post = @comment.commentable.commentable
+		end
 		@comment.destroy
 		# @comment.create_activity :destroy, owner:current_user
-		redirect_to post_path(@post)
+		redirect_to post_path(post)
 	end
     
 	def upvote
 		@comment.upvote_from current_user
-		redirect_to :back
+		@comment.user.profile.update( :reputation => @comment.user.profile.reputation + 1)
+
+		# redirect_to :back
 	end
   
 	def downvote
 		@comment.downvote_from current_user
-		redirect_to :back
+		@comment.user.profile.update( :reputation => @comment.user.profile.reputation + 1)
+
+		# redirect_to :back
 	end
 	  
 	private
@@ -71,7 +86,7 @@ class CommentsController < ApplicationController
 	end
 	
 	def comment_params
-      params.require(:comment).permit(:comment)
+      params.require(:comment).permit(:comment,:user_id)
     end
 
 	def find_commentable

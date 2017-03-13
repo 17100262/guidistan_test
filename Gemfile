@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'database_cleaner'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
@@ -67,3 +67,4 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
 # for importing from excel
 gem 'roo', "2.3.2"
 gem 'acts-as-taggable-on'
+gem 'rails-jquery-tokeninput',:path=> "~/workspace/rails-jquery-tokeninput-master"

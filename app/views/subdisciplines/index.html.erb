@@ -2,6 +2,7 @@
 <div class="container">
 <p id="notice"><%= notice %></p>
 <br>
+<% if can? :create, Subdiscipline.new %>
 <%= link_to 'New Subdiscipline', new_subdiscipline_path, class: "btn btn-success pull-right" %>
   <%= form_tag :controller => :subdisciplines, :action => :export do %>
     <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
@@ -10,6 +11,7 @@
   <%= file_field_tag :file, required: true %>
   <br>
   <%= submit_tag "Import" %>
+<% end %>
 <% end %>
 <h2 class="post-title-forum post-title-all-posts" style="">Subdisciplines</h2>
 

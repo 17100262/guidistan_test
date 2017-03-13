@@ -1,12 +1,22 @@
 <section class="page-header">
-				<div class="container">
+<!--				<div class="container">-->
 
-					<h1>Posts > <%= @post.title %></h1>
+<!--					<h1>Posts > <%= @post.title %></h1>-->
 
 					
 
-</div>
+<!--</div>-->
+				  <ol class="breadcrumb pull-left">
+          <li class="breadcrumb-item"><a href="/forums"><h1>All Forums / </h1></a></li>
+          <li class="breadcrumb-item"><h1> <%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %> Forum / </h1></li>
+          <li class="breadcrumb-item active"><h1> Current Post </h1></li>
+          </ol>
 
+
+	   <% if (user_signed_in? and current_user.has_role? :admin) %>
+	   <div class = "adm">
+	   Admin</div>
+	   <% end %>
 </section>
 
 <div class="container">
@@ -83,8 +93,7 @@
 	
 	<div class="user-details-post">
 	  
-	   <div class="user-details-name"> Posted by <b><%= @post.user.profile.name %></b></div>
-	   
+
 	   <div class="user-single-postpic">
 
         
@@ -107,13 +116,16 @@
   <div class="" style="padding:0px;">
 	
 	<div class="forum_post_question_container" style="border:0px;">
-    <h1 class="forum_post_title" > Answers</h1>
+    <h1 class="forum_post_title"  style="margin-top:50px"> Answers</h1>
   </div>
-
+	
   <%= render @post.comments %>
+  
   <!--<h3> Comment on this reply</h3>-->
+  <div id='comment-form'>
   <%= render "comments/form" %>
   </br>
+  </div>
   
 </div>
 <!--<p id="notice"><%= notice %></p>-->

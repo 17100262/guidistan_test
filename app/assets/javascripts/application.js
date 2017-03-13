@@ -15,6 +15,16 @@
 //= require_tree .
 //= require bootstrap.min
 //= require filterrific/filterrific-jquery
+//= require rails-jquery-tokeninput
+
+// $(function() {
+//  $("#post_tags").tokenInput("/posts/tags.json", {
+//     prePopulate:       $("#post_tags").data("pre"),
+//     preventDuplicates: true,
+//     noResultsText:     "No results, needs to be created.",
+//     animateDropdown:   false
+//  });
+// });
 $(document).ready(function(){
    //$(".replace_destroy").text("Delete");
    //$(".replace_destroy").prepend('<span class="glyphicon glyphicon-remove" style="top:1px"></span>&nbsp;');
@@ -33,7 +43,11 @@ $(document).ready(function(){
    });
    
    if($(window).width() > 786){
+      
       $(".single_postliker").css("height",$(".single-description-para").height() + 5);
+      if($(".single-description-para").height() <= 90){
+         $(".single_postliker").css("height",90);
+      }
    }
    
 });

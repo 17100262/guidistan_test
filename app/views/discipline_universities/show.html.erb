@@ -41,16 +41,15 @@
 
 
 <p>
-  <strong class="post-title-forum post-title-all-posts" style="">Discipline:</strong>
-  <%= @discipline_university.discipline.name %>
+  <strong class="post-title-forum post-title-all-posts" style="">Eligibility Criteria:</strong>
+  <%= @discipline_university.criteria %>
 </p>
-
 
 
 <p>
-  <strong class="post-title-forum post-title-all-posts" style="">Subdiscipline:</strong>
-  <%= @discipline_university.subdiscipline.name %>
-</p>
+  <%= link_to 'For more Information Visit this link', @discipline_university.link %>
+  </p>
+
 
 <%= link_to 'Edit', edit_discipline_university_path(@discipline_university) %> |
 <%= link_to 'Back', discipline_universities_path %>

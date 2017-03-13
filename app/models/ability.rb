@@ -9,7 +9,6 @@ class Ability
       can :manage, :all
       cannot :update, Post
       can :update, Post, :user_id => user.id
-      
     else
       can :create, Post
       can :create, Comment
@@ -18,6 +17,7 @@ class Ability
       can :destroy, Comment, :user_id => user.id
       can :update, Comment, :user_id => user.id
       can :read, :all
+      cannot :read, [:tag,City]
       can :upvote, Post
       can :downvote, Post
     end

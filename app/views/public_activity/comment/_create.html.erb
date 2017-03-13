@@ -1,1 +1,20 @@
-added comment to <%= link_to activity.trackable.post.discipline.name+' post',activity.trackable.post%>
+<%#= activity.inspect %>
+<% if(activity.trackable.commentable_type == "Post") %>
+
+
+    <% if current_user.profile.name == activity.trackable.commentable.user.profile.name  %>
+        commented on your Post
+    <% else %>
+        commented on <%= activity.trackable.commentable.user.profile.name %>'s Post
+    <% end %>
+<%#= activity.trackable.co %>
+<% elsif (activity.trackable.commentable_type == "Comment") %>
+    
+    <% if current_user.profile.name == activity.trackable.commentable.commentable.user.profile.name  %>
+        replied to Comment on your Post
+    <% else %>
+        replied to Comment on <%= activity.trackable.commentable.commentable.user.profile.name %>'s Post
+    <% end %>
+
+
+<% end %>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get "dislike" => "posts#downvote"
       put "count" => "posts#count"
     end
+    # get "posts/tags" => "posts#tags", :as => :tags
       resources :comments do
         member do
           put "like" => "comments#upvote"
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
           put "count" => "comments#count"
         end
       end
+      
       
     end
   resources :forums
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :education
   resources :profile_education
+  resources :tags
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

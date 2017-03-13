@@ -22,10 +22,14 @@
   </div>
   <div class="field">
     <%= f.label :tag_list,"Tags(Seperated by commas)" %><br>
-    <%= f.text_area :tag_list %>
+    <%#= f.text_field :tag_list ,:id => "post_tags","data-pre" => @post.tags.map(&:attributes).to_json  %>
+    <%= f.text_field :tag_list, 'data-tokeninput' => { collection: @names ,options: @options}.to_json %>
+    <!--,"data-pre" => @post.tag_list.map(&:attributes).to_json-->
   </div>
  
   <div class="field">
+    <%#= f.text_field :tag_list, 'data-tokeninput' => { collection: @names }.to_json %>
+    
     <%#= @dis_id %>
     <%#= :discipline_id = @dis_id %><br>
     <%#= f.collection_select :discipline_id,Discipline.all,:id,:name %>

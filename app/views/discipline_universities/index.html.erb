@@ -1,75 +1,65 @@
-<br/>
+</br>&nbsp;
 <div class="container">
   <p id="notice"><%= notice %></p>
-<% if can? :create, DisciplineUniversity.new %>
-  <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
-<% end %>
-  <%= form_tag :controller => :discipline_universities, :action => :export do %>
-    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
-  <% end %>
-<%= form_tag import_discipline_universities_path, multipart: true do %>
-  <%= file_field_tag :file, required: true %>
-  <br>
-  <%= submit_tag "Import" %>
-<% end %>
-<%= form_for_filterrific @filterrific do |f| %>
-  
-  <div class ="row">
-    <div class="col-sm-3">
-      <div>
-      <%= link_to(
-        'Reset filters',
-        reset_filterrific_url,
-      ) %>
-    </div>
-      <%#= collection_check_boxes(:discipline_university,:university_ids,University.all,:id,:name) %>
-      <div class="panel panel-default">
-          <div class="panel-heading">Universities</div>
-              <div class="panel-body">
-                <%= collection_check_boxes(:discipline_university,:university_ids,University.all,:id,:name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-        </div>
-
-    
-    <%# add an automated spinner to your form when the list is refreshed %>
-    <%#=render_filterrific_spinner %>
-        <div class="panel panel-default">
-          <div class="panel-heading">Universities</div>
-              <div class="panel-body">
-                <%= collection_check_boxes(:discipline_university,:discipline_ids,Discipline.all,:id,:name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">Universities</div>
-              <div class="panel-body">
-                <%= collection_check_boxes(:discipline_university,:subdiscipline_ids,Subdiscipline.all,:id,:name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-        </div>
-        
-        <div class="panel panel-default">
-          <div class="panel-heading">Cities</div>
-              <div class="panel-body">
-                <%= collection_check_boxes(:discipline_university,:cities_ids, City.all, :id, :name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-        </div>
-    
-    </div>
+  <!-- FOR ADMIN-->
+  <% if can? :create, DisciplineUniversity.new %>
+    <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
+    <%= form_tag :controller => :discipline_universities, :action => :export do %>
+        <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+      <% end %>
+    <%= form_tag import_discipline_universities_path, multipart: true do %>
+      <%= file_field_tag :file, required: true %>
+      <br>
+      <%= submit_tag "Import" %>
     <% end %>
-    <%= render :partial =>'discipline_universities/index', :locals =>{ discipline_universities: @discipline_universities} %>
-
-</div>
-
-   
-
-
+  <% end %>
+  <!----------->
+  <%= form_for_filterrific @filterrific do |f| %>
+    <div class ="row">
+      <div class="col-md-2 col-sm-2">
+        <div>
+          <%= link_to('Reset filters',reset_filterrific_url) %>
+        </div>
+        <%#= collection_check_boxes(:discipline_university,:university_ids,University.all,:id,:name) %>
   
-
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-target="#city"><strong style="color: #8ab933;">Filter by Cities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
+            <div class="panel-body" class="collapse" id="city">
+              <%= collection_check_boxes(:discipline_university,:cities_ids, City.all.order('name ASC'), :id, :name) do |b| %>
+                <%= b.label { b.check_box + " " + b.text} %>
+              <% end %>
+            </div>
+          </div>
+  
+  
+        <div class="panel panel-default" >
+            <div class="panel-heading" data-toggle="collapse" data-target="#uni" style="color: #8ab933;"><strong>Filter by Universities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
+              <div class="panel-body" class="collapse" id="uni">
+                <%= collection_check_boxes(:discipline_university,:university_ids,University.all.order('name ASC'),:id,:name) do |b| %>
+                  <%= b.label { b.check_box + " " + b.text} %>
+                <% end %>
+              </div>
+            </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-target="#discipline" ><strong style="color: #8ab933;">Filter by Disciplines&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
+                <div class="panel-body" class="collapse" id="discipline">
+                  <%= collection_check_boxes(:discipline_university,:discipline_ids,Discipline.all.order('name ASC'),:id,:name) do |b| %>
+                    <%= b.label { b.check_box + " " + b.text} %>
+                  <% end %>
+                </div>
+            </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-target="#subdiscipline" style="color: #8ab933;"><strong>Filter by Subdisciplines&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
+              <div class="panel-body" class="collapse" id="subdiscipline">
+                <%= collection_check_boxes(:discipline_university,:subdiscipline_ids,Subdiscipline.all.order('name ASC'),:id,:name) do |b| %>
+                  <%= b.label { b.check_box + " " + b.text} %>
+                <% end %>
+              </div>
+            </div>
+          
+  
+      </div>
+  <% end %>
+  <%= render :partial =>'discipline_universities/index', :locals =>{ discipline_universities: @discipline_universities} %>
+    </div>
 </div>

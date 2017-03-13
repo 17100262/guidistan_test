@@ -1,4 +1,3 @@
-<form>
 <%= bootstrap_form_for(@university) do |f| %>
   <% if @university.errors.any? %>
     <div id="error_explanation">
@@ -28,11 +27,12 @@
     <!--<= f.label :city_id %>-->
     <%= f.url_field :link,placeholder: "e.g http://lums.edu.pk" %><br/>
   </div>
-  
+  <div class="field">
+  <!--<= f.label :Image %>-->
+  <%= f.file_field :image %>
+  </div>
   <div class="actions">
     <%= link_to 'Cancel', universities_path, class: "btn btn-info" %>
     <%= f.submit "Create", class: "btn btn-success" %>
   </div>
 <% end %>
-
-</form>

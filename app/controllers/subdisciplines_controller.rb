@@ -5,14 +5,19 @@ class SubdisciplinesController < ApplicationController
   # GET /subdisciplines
   # GET /subdisciplines.json
   def index
-    @subdisciplines = Subdiscipline.all
+    @subdisciplines = Subdiscipline.all.order('name ASC')
   end
 
   # GET /subdisciplines/1
   # GET /subdisciplines/1.json
   def show
     puts "here asdasdas"
-    @degree = @subdiscipline.degreeprogram.distinct
+    # begin 
+    #   @subdiscipline.degreeprogram
+    # rescue
+    # else
+      @degree = @subdiscipline.discipline_university.distinct
+    # end
   end
 
   # GET /subdisciplines/new

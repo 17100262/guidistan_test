@@ -7,8 +7,9 @@ class University < ActiveRecord::Base
 	has_many :subdiscipline, :through => :discipline_university
 	has_many :degreeprogram,:through => :discipline_university
 
-
     belongs_to :city
+    has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+    validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
     def self.import(file)
         spreadsheet = open_spreadsheet(file)

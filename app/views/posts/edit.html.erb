@@ -1,6 +1,61 @@
-<h1>Editing Post</h1>
+<!--<h1>Editing Post</h1>-->
 
-<%= render 'form' %>
-<br/>
-<%= link_to 'Show', @post , class: "btn btn-primary"%> |
-<%= link_to 'Back', posts_path(:filter_id => @post.forum_id), class: "btn btn-primary"%><br/>
+<%#= render 'form' %>
+<!--<br/>-->
+<%#= link_to 'Show', @post , class: "btn btn-primary"%> |
+<%#= link_to 'Back', posts_path(:filter_id => @post.forum_id), class: "btn btn-primary"%><br/>
+
+
+
+<section class="page-header">
+				<div class="container">
+
+					  <h1>Edit Post</h1>
+
+					
+
+				</div>
+</section>
+
+
+
+    
+<div class="container">
+  
+    <div class="col-md-9">
+    
+        <div class="newPostForm">
+            
+            <%= render 'form' %>
+        
+        </div>
+   
+   
+  
+        <div class="newpost_link_toback">
+            <%= link_to "Back", {:controller => "posts", :action => "index", :filter_id => @id } %>
+        </div>
+        
+
+    </div>
+    
+    <div class="col-md-3">
+        
+        <div class="question-sidebar">
+            Right Side Info Text
+        </div>
+        
+    </div>
+    
+    
+
+</div>
+
+<script>
+    
+    $(document).ready(function(){
+        $(".newPostForm br").hide();
+        $(".newPostForm input[type='submit']").addClass("btn btn-success");
+    });
+    
+</script>

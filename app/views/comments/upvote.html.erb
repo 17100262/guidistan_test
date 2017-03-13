@@ -1,0 +1,5 @@
+<% @a = @comment.get_upvotes.size %>
+<% @b =  @comment.get_downvotes.size %>
+<% @total = (@a-@b) %>
+
+{"upvote" : "<%= @comment.get_upvotes.size %>","downvotes" : "<%= @comment.get_downvotes.size %>","count":"<%=@total%>"}

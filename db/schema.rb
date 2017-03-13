@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225105661) do
+ActiveRecord::Schema.define(version: 20170306125819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,9 @@ ActiveRecord::Schema.define(version: 20170225105661) do
     t.integer  "discipline_id"
     t.integer  "tution_fee_per_semester"
     t.boolean  "hec_recognized"
-    t.string   "duration"
+    t.integer  "duration"
+    t.string   "criteria"
+    t.string   "link"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -198,8 +200,12 @@ ActiveRecord::Schema.define(version: 20170225105661) do
     t.text     "description"
     t.integer  "city_id"
     t.string   "link"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

@@ -43,12 +43,18 @@ class ProfilesController < ApplicationController
   end
 
   def delete
+    # @profile = Profile.find(params[:id])
   end
 
   def destroy
-        @profile.destroy
+    @profile = Profile.find(params[:id])
+    @user = User.find(@profile.user_id)
+    # if @user
+      @user.destroy
+    # end
+    @profile.destroy
     respond_to do |format|
-      format.html { redirect_to profile_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to profiles_path, notice: 'Profile was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

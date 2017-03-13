@@ -15,15 +15,19 @@
 
 <p>
   <strong class="post-title-forum post-title-all-posts" style="">Degrees in <%=@subdiscipline.name %>:</strong>
+  
+  <% if @degree %>
   <ul>
   <% for degree in @degree %>
-  <% for uni in degree.university %>
   	<li>
-  		<%= degree.name%> by <%= uni.name%>
+  		<%= degree.name%>
   	</li>
   	<% end %>
-  	<% end %>
-  </ul>
+  	</ul>
+  <% else %>
+    None
+  <% end %>
+  
 </p>
 
 

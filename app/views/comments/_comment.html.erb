@@ -28,7 +28,11 @@
                 </div>
                  
                 <div class="commentator-box-right">
-                  <div class="commentator-box-name"><%= comment.user.profile.name %></div>
+                  <div class="commentator-box-name"><%= comment.user.profile.name %>
+                  	   <% if (user_signed_in? and current_user.has_role? :admin) %>
+	                     <div class = "adm">
+                  	   Admin</div>
+                  	   <% end %></div>
                   <div class="commentator-box-repo">Reputation: <%= comment.user.profile.reputation%> points</div>
                 </div>
                 
@@ -80,10 +84,10 @@
     <div class="comments-reply-container">
       <h4 class="visible-xs">Replies</h4>
       <%= render partial: 'comments/reply', collection: comment.comments %>
-      <a href="javascript:;" class="get-reply-option-btn">Add a reply</a>
+      <a href="javascript:;" class="get-reply-option-btn">Add a Comment</a>
       <%= bootstrap_form_for [comment, Comment.new] do |f| %> 
-        <%= f.text_area :comment,placeholder: "Add a Reply"%>
-        <%= f.submit "Reply" %>
+        <%= f.text_area :comment,placeholder: "Add a Comment"%>
+        <%= f.submit "Post Comment" %>
       <% end %>
     
     </div>

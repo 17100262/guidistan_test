@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    
+    @profiles = Profile.all.order(reputation: :desc).limit(1)
     @id = params[:filter_id]
     
     # if (params[:filter_id] == nil)
@@ -33,6 +33,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @id = @post.forum_id
     
   end
 
@@ -41,24 +42,33 @@ class PostsController < ApplicationController
     @post = Post.new
     @@dis_id = params[:forum_id]
     @id = params[:forum_id]
+    @options = { tokenValue: 'name' }
+    
+    @names = ActsAsTaggableOn::Tag.all.map{|t| {id: t.id,name: t.name} }
   end
 
   # GET /posts/1/edit
   def edit
+    @names = ActsAsTaggableOn::Tag.all.map{|t| {id: t.id,name: t.name} }
+    @options = { tokenValue: 'name', prePopulate: @post.tag_list.map{|t| {name: t} } }
   end
-
+  
+  
   # POST /posts
   # POST /posts.json
   def create
     # puts @post.discipline_id,"hello"
+    puts post_params ,"head asdads"
     @post = Post.new(post_params)
     # puts @id,'adasdasds'
     @post.user_id = current_user.id
     @post.forum_id = @@dis_id
     
     
+    
     respond_to do |format|
       if @post.save
+        # format.json {render json: @names}
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -94,6 +104,7 @@ class PostsController < ApplicationController
   def upvote
     @post.upvote_from current_user
     @post.user.profile.update( :reputation => @post.user.profile.reputation + 1)
+    # @post.create_activity :like ,{owner:current_user, recipient: @post.user}
     # @post.downvote_from current_user
     # redirect_to :back
   end
@@ -113,11 +124,11 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+        @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description,:forum_id, :filter_id,:tag_list,:tag)
+      params.require(:post).permit(:title, :description,:forum_id, :filter_id,{:tag_list=>[]} ,:tag)
     end
 end

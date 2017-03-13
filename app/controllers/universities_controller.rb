@@ -5,7 +5,7 @@ class UniversitiesController < ApplicationController
   # GET /universities
   # GET /universities.json
   def index
-    @universities = University.all
+    @universities = University.all.order('name ASC')
   end
 
   # GET /universities/1
@@ -90,6 +90,6 @@ class UniversitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def university_params
-      params.require(:university).permit(:name, :description, :city_id)
+      params.require(:university).permit(:name, :description, :city_id, :image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
     end
 end

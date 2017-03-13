@@ -1,0 +1,33 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+  <%#= link_to 'New City', new_city_path, class: "btn btn-success pull-right" %>
+
+<%= render 'form' %>
+<h2  class="post-title-forum post-title-all-posts" style="">All Tags</h2>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Id</th>
+      <th>Tagging Count</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= tag.id %></td>
+        <td><%= tag.taggings_count %></td>
+        <td><%#= link_to 'Edit', edit_city_path(city) %></td>
+        <td><%= link_to 'Destroy',tag_path(tag), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>

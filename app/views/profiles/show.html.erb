@@ -1,12 +1,14 @@
 <!--<h1>Profile#show</h1>-->
-<div class="container">
+<div class="container showsingle-profile">
     <br>
     <%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-primary pull-right" %>
         
     <div class="row">
         <div class="col-sm-6">
-            
-                    <% if @profile.image_file_name.present? %> 
+                    
+                    <div class="image-box-ssp">
+                      
+                      <% if @profile.image_file_name.present? %> 
                       <%= image_tag @profile.image.url(:large) %>
                       <% else %>
                       
@@ -14,8 +16,25 @@
                       <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
                       </a>
                       <% end %>
+
+                      <div class="image-box-rep">
+                        416 <span>REPUTATION</span>
+                      </div>
+                    </div>
+                    
+                    <div class="user-profileinfo-box">
+                       <h3><%= @profile.name %> <% if (current_user.has_role? :admin) %>
+	                     <div class = "adm">
+                  	   Admin</div>
+                  	   <% end %></h3>
+                       <div class="user-profileinfo-little">
+                         <i class="fa fa-genderless" aria-hidden="true"></i>
+                         <span class="profile-info-little-span"><%= @profile.gender %></span>
+                       </div>
+                    </div>
+                    
             
-            <h2><%= @profile.name %></h2>
+           
         </div>
     </div>
     <div class ="row">
@@ -23,7 +42,7 @@
         <ul class="list-group">
             <li class="list-group-item text-center" contenteditable="false"><strong>Profile</strong></li>
             <li class="list-group-item text-center"><strong>City: <%= @profile.city %></strong></li>
-            <li class="list-group-item text-center"><strong>Gender: <%= @profile.gender %></strong></li>
+            <li class="list-group-item text-center"><strong>Gender: </strong></li>
             <li class="list-group-item text-center"><strong>Reputation: <%= @profile.reputation %> Points</strong></li>
             <li class="list-group-item text-center"><strong>Joined <%= time_ago_in_words(@profile.created_at) %> ago</strong></li>
             <!--<li class="list-group-item text-center"></li>-->

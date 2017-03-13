@@ -8,7 +8,9 @@ class CreateDisciplineUniversities < ActiveRecord::Migration
       t.integer :discipline_id
       t.integer :tution_fee_per_semester
       t.boolean :hec_recognized
-      t.string :duration
+      t.integer :duration
+      t.string :criteria
+      t.string :link
       t.timestamps null: false
     end
   end

@@ -1,12 +1,14 @@
 <div class="container-fluid" >
   <br/>
-<% if can? :create, Discipline.new %>
-  <%= link_to 'New Discipline', new_discipline_path ,class:"btn btn-success pull-right" %>
-<% end %>
-  <%= form_tag :controller => :disciplines, :action => :export do %>
-    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <!--FOR ADMIN ONLY------->
+  <% if can? :create, Discipline.new %>
+    <%= link_to 'New Discipline', new_discipline_path ,class:"btn btn-success pull-right" %>
+  
+    <%= form_tag :controller => :disciplines, :action => :export do %>
+      <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+    <% end %>
   <% end %>
-
+  <!------->
   <div class="services container" >
     <p id="notice"><%= notice %></p>
     <div align="center"> <h1  class="post-title-forum post-title-all-posts" style="">Explore Disciplines</h1> </div>
@@ -14,10 +16,10 @@
         <ul class="forum-dis-container">
             <% @disciplines.each do |discipline| %>
               <li class="forum-dis-list col-md-6">
-                
-                  <div class="forum-image-container"> <%= image_tag discipline.image.url(:large) , :class => "image_thumb_forum"%></div>
-                  <div class="forum-list-link"> <%= link_to discipline.name, discipline %></div>
-                  
+                  <div class="forum-image-container"> 
+                    <%= image_tag discipline.image.url(:large) , :class => "image_thumb_forum"%></div>
+                    <div class="forum-list-link"> <%= link_to discipline.name, discipline %>
+                  </div>
                   
               </li>
             <% end %>
@@ -38,13 +40,14 @@
 </section>
 <br>
 <!--------------->
-<div class="container" >
-<%= form_tag import_disciplines_path, multipart: true do %>
-  <%= file_field_tag :file, required: true %>
-  <br>
-  <%= submit_tag "Import" %>
-<% end %>  
-
+<% if can? :create, Discipline.new %>
+  <div class="container" >
+  <%= form_tag import_disciplines_path, multipart: true do %>
+    <%= file_field_tag :file, required: true %>
+    <br>
+    <%= submit_tag "Import" %>
+  <% end %>  
+<% end %>
 <!--------------->
 </div>
 <script>

@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_many :posts
-  has_many :comments
-  has_one :profile
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
   acts_as_voter
   # For OmniAuth-Facebook

@@ -1,0 +1,16 @@
+<br>
+<h2  class="post-title-forum post-title-all-posts" style="">Create Tag</h2>
+<div class="container">
+  <%= form_tag("/tags", :method=>'post') do %> 
+  
+    <div class="field">
+      <%= text_field_tag "name" %>
+    </div>
+    <div class="actions">
+      <%= submit_tag "Submit" %>
+      <%#= link_to 'Cancel', tags_path %>
+      
+    </div>
+  <% end %>
+</div>
+</br>
