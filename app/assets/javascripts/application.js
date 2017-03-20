@@ -16,6 +16,7 @@
 //= require bootstrap.min
 //= require filterrific/filterrific-jquery
 //= require rails-jquery-tokeninput
+//= require angular
 
 // $(function() {
 //  $("#post_tags").tokenInput("/posts/tags.json", {
@@ -25,6 +26,12 @@
 //     animateDropdown:   false
 //  });
 // });
+$(document).ready(function() {
+	$('[data-toggle="offcanvas"]').click(function() {
+		$('#side-menu').toggleClass('hidden-xs');
+	});
+});
+
 $(document).ready(function(){
    //$(".replace_destroy").text("Delete");
    //$(".replace_destroy").prepend('<span class="glyphicon glyphicon-remove" style="top:1px"></span>&nbsp;');

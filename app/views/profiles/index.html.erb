@@ -1,29 +1,56 @@
 <br/>
 <br/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-All Users
-<% @profiles.each do |profile| %>
-    <div class="commentator-img-box hidden-xs">
-      
-                <div class="commentator-box-thumbimg">
-                  <% if profile.image_file_name.present? %> 
-                       <%= image_tag profile.image.url(:small) %>
-                      <% else %>
-                      
-                      <a href="javascript:;">
-                      <img src="/generic_small.png" height=61 width=64 alt="User Profile Image">
-                      </a>
-                      <% end %> 
-                      
-                      
-                </div>
-                 
-                <div class="commentator-box-right">
-                  <div class="commentator-box-name"><%= profile.name %></div>
-                  <div class="commentator-box-repo">Reputation: <%= profile.reputation%> points</div>
-                </div>
-                    <%= link_to 'View', profile, :class => 'btn btn-xs btn-primary', :role => "button" %>
-                    <%= link_to 'Delete', profile, method: :delete, :class => 'btn btn-xs btn-danger', :role => "button", :data => {confirm: 'Are you sure you want to delete this?'} %>
-    </div>
+<div class="commentator-img-box hidden-xs">
+  <center><h1>All Site Users</h1></center>
+</div>
+<br/>
+<div class = "container">
+  <table class = "table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Code name</th>
+        <th>Category</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @profiles.each do |profile| %>
 
-<% end %>
+    <!--    <div class="commentator-img-box hidden-xs">-->
+    <tr>
+      <td>
+        <% if profile.image_file_name.present? %> 
+        <%= image_tag profile.image.url(:small) %>
+        <% else %>
+          <a href="javascript:;">
+          <img src="/generic_small.png" height=61 width=64 alt="User Profile Image">
+          </a>
+          <% end %> 
+      </td>
+      <td>
+        <%= profile.name %>
+      </td>
+      <td>
+        <%= profile.reputation %>
+      </td>
+    </tr>
+        
+              <!--<div class="commentator-box-thumbimg">-->
+
+                      
+                      
+              <!--  </div>-->
+                 
+    <!--            <div class="commentator-box-right">-->
+    <!--              <div class="commentator-box-name"></div>-->
+    <!--              <div class="commentator-box-repo">Reputation:  points</div>-->
+    <!--            </div>-->
+    <!--                <%= link_to 'View', profile, :class => 'btn btn-xs btn-primary', :role => "button" %>-->
+    <!--                <%= link_to 'Delete', profile, method: :delete, :class => 'btn btn-xs btn-danger', :role => "button", :data => {confirm: 'Are you sure you want to delete this?'} %>-->
+    <!--</div>-->
+    <% end %>
+      </tbody>
+</table>
+
+</div>

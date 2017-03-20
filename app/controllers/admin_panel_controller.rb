@@ -1,6 +1,6 @@
 class AdminPanelController < ApplicationController
   before_action :authenticate_user!
-  layout false
+ 
   
   def index
     if not current_user.has_role?(:admin)

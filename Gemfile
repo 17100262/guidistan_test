@@ -61,7 +61,7 @@ gem 'filterrific'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
-
+gem 'angularjs-rails'
 # for exporting to excel 
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
 # for importing from excel
