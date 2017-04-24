@@ -2,6 +2,7 @@ class City < ActiveRecord::Base
     require 'roo'
     validates :name, :uniqueness => {:message => 'already taken'}
     has_many :university
+    has_many :profile
     def self.import(file)
         spreadsheet = open_spreadsheet(file)
         if spreadsheet

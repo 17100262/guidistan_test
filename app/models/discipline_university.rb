@@ -29,18 +29,22 @@ class DisciplineUniversity < ActiveRecord::Base
                 header = spreadsheet.row(i)
                 degree = new
                 
-                if DisciplineUniversity.exists?(university_id: University.find_by!(name: header[0]).id,name: header[3])
+                if DisciplineUniversity.exists?(university_id: University.find_by!(name: header[0],campus: header[1]).id,name: header[4])
                 else
-                	degree.university_id = University.find_by(name: header[0]).id
-                	degree.discipline_id = Discipline.find_by(name: header[1]).id
-                	degree.subdiscipline_id = Subdiscipline.find_by(name: header[2]).id
-                	degree.name = header[3]
-                	degree.degree_type = header[4]
-                	degree.hec_recognized = header[5]
-                	degree.tution_fee_per_semester = header[6].to_i
-                	degree.duration = header[7].to_i
-                	degree.criteria = header[8]
-                	degree.link = header[9]
+                	degree.university_id = University.find_by(name: header[0],campus: header[1]).id
+                	degree.discipline_id = Discipline.find_by(name: header[2]).id
+                	degree.subdiscipline_id = Subdiscipline.find_by(name: header[3]).id
+                	degree.name = header[4]
+                	degree.degree_type = header[5]
+                	if header[5] == "Yes" or header[5] == "YES" or header[5] == 'yes'
+                	    degree.hec_recognized = true
+                	else
+                	    degree.hec_recognized = true
+                	end
+                	degree.tution_fee_per_semester = header[7].to_i
+                	degree.duration = header[8].to_i
+                	degree.criteria = header[9]
+                	degree.link = header[10]
                     degree.save!
                 end
             end

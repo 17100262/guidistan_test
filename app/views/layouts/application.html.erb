@@ -125,7 +125,7 @@
 								
 								<ul id="topMain" class="nav nav-pills nav-main">
 									
-																		<% if user_signed_in? and current_user.has_role? :admin %>
+								<% if user_signed_in? and current_user.has_role? :admin %>
 
 									<li class="dropdown"><!-- SHOP -->
 										<a class="dropdown-toggle" href="/admin_panel/index">
@@ -383,11 +383,39 @@
 									        <% end %>
 									</li>
 									<li>
-										<!--< if  %>-->
+											<% if user_signed_in? %>
+									        <a href="/notification">
+											Notifications
+											
 
 
-									          <!--<= link_to 'Admin Panel', admin_panel_index_path %>-->
-									        <!--< end %>-->
+
+<% #@activities.each do |activity| %>
+<!--
+<div class="notficiation-bar-tab arrow_box">
+		
+		<div class="single-notification">
+			<a href="#">
+				<div class="left-side-pic col-md-2">
+					<img src="/system/profiles/images/000/000/001/med/photo_%282%29.png?1490970931" alt="Photo %282%29">
+				</div>
+				
+				<div class="right-side-text col-md-10">
+					Blah Blah
+					
+					<div class="right-side-time">
+						11 minutes ago
+					</div>
+				</div>
+			</a>
+		</div>
+		
+	</div>-->
+	
+<% #render_activity activity %>
+<% #end %>	
+										</a>
+									        <% end %>
 									</li>
 									<li>
 									        <% if user_signed_in? %>
@@ -529,6 +557,12 @@
 			</div>
 		</div>
 	</footer>
+	
+	
+	
+	
+
+	
 <!--< end %>-->
 </body>
 </html>

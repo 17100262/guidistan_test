@@ -7,5 +7,12 @@ class ApplicationController < ActionController::Base
   end
   force_ssl :protocol => "https"
   include PublicActivity::StoreController
+  
+  before_action :set_activities
+
+  def set_activities
+    @activities = PublicActivity::Activity.all.order("created_at desc").where(recipient_id:current_user).where.not(owner_id:current_user)
+    # puts "hello application",@activities
+  end
 
 end

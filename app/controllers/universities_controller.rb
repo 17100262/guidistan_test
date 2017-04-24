@@ -13,6 +13,7 @@ class UniversitiesController < ApplicationController
   def show
     # @discipline = @university.degreeprogram.discipline
     @city = City.find(@university.city_id).name
+    @discipline = @university.discipline.distinct
   end
 
   # GET /universities/new

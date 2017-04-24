@@ -74,7 +74,7 @@ class CommentsController < ApplicationController
   
 	def downvote
 		@comment.downvote_from current_user
-		@comment.user.profile.update( :reputation => @comment.user.profile.reputation + 1)
+		@comment.user.profile.update( :reputation => @comment.user.profile.reputation - 1)
 
 		# redirect_to :back
 	end

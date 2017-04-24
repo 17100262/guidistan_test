@@ -12,6 +12,10 @@ class DisciplinesController < ApplicationController
   def show
     @degrees = @discipline.discipline_university
     @sub = Subdiscipline.where(discipline_id:@discipline.id)
+    @universities = @discipline.university.distinct
+    if (current_user!=nil)
+      ahoy.track "Clicked Discipline", {title: @discipline.name,id:@discipline.id}
+    end
   end
 
   # GET /disciplines/new

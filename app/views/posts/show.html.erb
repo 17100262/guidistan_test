@@ -1,22 +1,19 @@
+
+
 <section class="page-header">
-<!--				<div class="container">-->
+        <div class="container">
 
-<!--					<h1>Posts > <%= @post.title %></h1>-->
-
+          <h1>
+          	
+          	<a href="/forums">All Forums / </a>
+          
+            <%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %> Forum /  Current Post
+          
+          </h1>
 					
-
-<!--</div>-->
-				  <ol class="breadcrumb pull-left">
-          <li class="breadcrumb-item"><a href="/forums"><h1>All Forums / </h1></a></li>
-          <li class="breadcrumb-item"><h1> <%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %> Forum / </h1></li>
-          <li class="breadcrumb-item active"><h1> Current Post </h1></li>
-          </ol>
-
-
-	   <% if (user_signed_in? and current_user.has_role? :admin) %>
-	   <div class = "adm">
-	   Admin</div>
-	   <% end %>
+          <!-- breadcrumbs -->
+        
+        </div>
 </section>
 
 <div class="container">
@@ -32,7 +29,7 @@
 <div class="description-container col-md-9">
   
   <div class="single_postliker">
-
+    <div class="liker_error_message"><a href="/users/sign_in">An error occured! Please login if you're not logged in.</a></div>
 		<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
 		<span class="number_of_likes" data-upvotes="<%= @post.get_upvotes.size %>" data-downvotes="<%= @post.get_downvotes.size %>"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
 		<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a> 
@@ -238,7 +235,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	$(document).ready(function(){
     	
        
-       $(".new_comment .control-label").text("Add an answer");
+     $(".new_comment .control-label").text("Add an answer");
        
        
 	   var up_vote = $(".single_postliker .up_vote_st");
@@ -250,7 +247,9 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   var downvotes_attr = $(".single_postliker .number_of_likes").attr("data-downvotes");
 	   
 	   $(up_vote).click(function(){
-	       
+	      
+	      $(".liker_error_message").hide();
+	      
 	      var num = parseInt(no_of_likes.text());
 	      
 	      if(down_vote.hasClass("down_vote_selected")){
@@ -278,11 +277,12 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	      	success : function(resp){
 	      		 
 	      		 console.log("Liked",resp);
-			      
+			       
 			      
 	      	},
 	      	error : function(respo){
-	      		window.alert("An error occured!\nPlease login if you're not logged in.");
+	      		up_vote.removeClass("up_vote_selected");
+	      		$(".liker_error_message").show();
 	      		console.log(respo);
 	      	}
 	      });
@@ -295,7 +295,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	      
 	      var num = parseInt(no_of_likes.text());
 	      
-	      
+	      $(".liker_error_message").hide();
 	     
 	      
 	      if(up_vote.hasClass("up_vote_selected")){
@@ -327,7 +327,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 			      
 	      	},
 	      	error : function(respo){
-	      		window.alert("An error occured!");
+	      		down_vote.removeClass("down_vote_selected");
+	      	  $(".liker_error_message").show();
 	      		console.log(respo);
 	      	}
 	      });
@@ -337,4 +338,131 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   
    
 });
+</script>
+
+
+<script>
+	
+	//Code to Dislike/Like a comment
+	
+	$(document).ready(function(){
+
+
+	   
+	   $(".multi_commentliker .up_vote_st").click(function(){
+	   	
+	   	 var up_vote = $(this).parent('.multi_commentliker').find(".up_vote_st");
+		 var down_vote =  $(this).parent('.multi_commentliker').find(".down_vote_st");
+		 var no_of_likes = $(this).parent('.multi_commentliker').find(".number_of_likes");
+		 
+		 var old_val = $(this).parent('.multi_commentliker').find(".number_of_likes").attr("data-pageload-val");
+		 var upvotes_attr = $(this).parent('.multi_commentliker').find(".number_of_likes").attr("data-upvotes");
+		 var downvotes_attr = $(this).parent('.multi_commentliker').find(".number_of_likes").attr("data-downvotes");
+	     var comment_errormsg = $(this).parent('.multi_commentliker').find(".commentliker_error_message");
+	   	 var comment_id = $(this).parent('.multi_commentliker').attr('data-commentid');
+
+	   	 var link_to_like = "/posts/<%= @post.id  %>/comments/"+comment_id+"/like";
+	   	 var link_to_dislike = "/posts/<%= @post.id  %>/comments/"+comment_id+"/dislike";
+	      
+	      $(".commentliker_error_message").hide();
+	      
+	      var num = parseInt(no_of_likes.text());
+	      
+	      if(down_vote.hasClass("down_vote_selected")){
+	      	
+	      	no_of_likes.attr("data-downvotes",parseInt(no_of_likes.attr("data-downvotes")) - 1);
+	      	down_vote.removeClass("down_vote_selected");
+	      	
+	      }
+	      
+	      
+	      
+	      if(!(up_vote.hasClass("up_vote_selected"))){
+	      	 up_vote.addClass("up_vote_selected");
+	      	 no_of_likes.attr("data-upvotes",parseInt(no_of_likes.attr("data-upvotes"))  + 1);
+	      }
+	      
+	      
+	      
+	      no_of_likes.text(no_of_likes.attr("data-upvotes") - no_of_likes.attr("data-downvotes"));
+	      
+	      $.ajax({
+	      	url : link_to_like,
+	      	type : 'GET',
+	      	dataType : 'json',
+	      	success : function(resp){
+	      		 
+	      		 console.log("Liked",resp);
+			       
+			      
+	      	},
+	      	error : function(respo){
+	      		up_vote.removeClass("up_vote_selected");
+	      		comment_errormsg.show();
+	      		no_of_likes.text(old_val);
+
+	      	}
+	      });
+	      
+	      
+	   });
+	   
+	   $(".multi_commentliker .down_vote_st").click(function(){
+	      
+	     var up_vote = $(this).parent('.multi_commentliker').find(".up_vote_st");
+		 var down_vote =  $(this).parent('.multi_commentliker').find(".down_vote_st");
+		 var no_of_likes = $(this).parent('.multi_commentliker').find(".number_of_likes");
+		 var old_val = $(this).parent('.multi_commentliker').find(".number_of_likes").attr("data-pageload-val");
+		 
+		 var upvotes_attr = $(this).parent('.multi_commentliker').find(".number_of_likes").attr("data-upvotes");
+		 var downvotes_attr = $(this).parent('.multi_commentliker').find(".number_of_likes").attr("data-downvotes");
+	   	 var comment_errormsg = $(this).parent('.multi_commentliker').find(".commentliker_error_message");
+	   	 var comment_id = $(this).parent('.multi_commentliker').attr('data-commentid');
+
+	   	 var link_to_like = "/posts/<%= @post.id  %>/comments/"+comment_id+"/like";
+	   	 var link_to_dislike = "/posts/<%= @post.id  %>/comments/"+comment_id+"/dislike";
+	   	 
+	      var num = parseInt(no_of_likes.text());
+	      
+	      $(".commentliker_error_message").hide();
+	     
+	      
+	      if(up_vote.hasClass("up_vote_selected")){
+	      	
+	      	no_of_likes.attr("data-upvotes",parseInt(no_of_likes.attr("data-upvotes")) - 1);
+	      	up_vote.removeClass("up_vote_selected");
+	      }
+	      
+	      
+	      
+	      if(!(down_vote.hasClass("down_vote_selected"))){
+	      	
+	      	 down_vote.addClass("down_vote_selected");
+	      	 no_of_likes.attr("data-downvotes",parseInt(no_of_likes.attr("data-downvotes"))  + 1);
+	      }
+	      
+	      
+	      
+	      no_of_likes.text(no_of_likes.attr("data-upvotes") - no_of_likes.attr("data-downvotes"));
+	      
+	      
+	      $.ajax({
+	      	url : link_to_dislike,
+	      	type : 'GET',
+	      	dataType : 'json',
+	      	success : function(resp){
+	      		 
+	      		  console.log("Disliked",resp);
+			      
+	      	},
+	      	error : function(respo){
+	      		down_vote.removeClass("down_vote_selected");
+	      	 	comment_errormsg.show();
+				no_of_likes.text(old_val);
+
+	      	}
+	      });
+	      
+	   });
+	});
 </script>

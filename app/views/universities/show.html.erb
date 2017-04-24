@@ -1,32 +1,92 @@
-<br>
+<section class="page-header">
+        <div class="container">
+
+          <h1><%= @university.name %></h1>
+  
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
 <div class="container">
 <br><p id="notice"><%= notice %></p>
 
-<p>
-  <strong  class="post-title-forum post-title-all-posts" style="">Name:</strong>
-  <%= @university.name %>
-</p>
+<div class="col-md-12 single-uni-container">
+  
+  <div class="uni-image-container col-md-1">
+    <%= image_tag @university.image.url(:small) %>
+  </div>
+  
+  <div class="uni-right-side-container col-md-11">
+    
+    <h1 class="uni-name-container">
+       <%= @university.name %>
+    </h1>
+    
+    <div class="uni-city-container">
+      <%= @city %>
+    </div>
+    
+    <div class="uni-description">
+      <%= @university.description %>
+      
+    </div>
+    
+  </div>
+  
+  <div class="disc-offered-container">
+    
+      <h2 class="disc-offered-heading">Disciplines offered by this university</h2>
+      
+      <div class="panel-group" id="accordion">
+        
+         <% @discipline.each_with_index do |discipline,index| %>
+         
+            <div class="panel panel-default">
+              <div class="panel-heading"  data-toggle="collapse" data-target="#collapse<%= index %>">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse"><%= discipline.name %></a>
+                </h4>
+              </div>
+              <div id="collapse<%= index %>" class="panel-collapse collapse">
+                <div class="panel-body">
+                  
+                  <% degrees = DisciplineUniversity.where(university_id: @university.id, discipline_id: discipline.id)%>
+                  <% degrees.each do |degree| %>
+                    <%= link_to degree.name, "/discipline_universities/#{degree.id}",target: :_blank   %><br/>
+                  <% end %>
+                  
+                </div>
+              </div>
+            </div>
 
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Description:</strong>
-  <%= @university.description %>
-</p>
-<!--<p>-->
-<!--  <strong class="post-title-forum post-title-all-posts" style="">Disciplines offered:</strong>-->
-<!--    < for d in @discipline %>-->
-<!--      <= d.name %>,-->
-<!--    < end %>-->
-<!--</p>-->
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">City:</strong>
-  <%= @city %>
-</p>
-<%= image_tag @university.image.url(:small) %>
+          <% end %>
+        
+      </div> 
+  
+
+        
+     
+    
+  </div>
+  
+</div>
+
+
+
+
 <!-- <p> -->
   <!-- <strong>ID:</strong> -->
 <!-- </p> -->
 
-<%= link_to 'Edit', edit_university_path(@university) %> |
-<%= link_to 'Back', universities_path %>
+
+
+<div style="margin-left:15px;margin-bottom:15px;">
+  
+  <%= link_to 'Edit', edit_university_path(@university) %> |
+  <%= link_to 'Back', universities_path %>
+  
+</div>
+
 
 </div>

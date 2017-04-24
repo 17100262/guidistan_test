@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @profiles = Profile.all.order(reputation: :desc).limit(1)
+    @profiles = Profile.all.order(reputation: :desc).limit(5)
     @id = params[:filter_id]
     
     # if (params[:filter_id] == nil)

@@ -69,6 +69,9 @@ class DisciplineUniversitiesController < ApplicationController
   # GET /discipline_universities/1.json
   def show
     # puts params[:discipline][:id]
+    if (current_user!=nil)
+      ahoy.track "Clicked Degree", {title: @discipline_university.name,id:@discipline_university.id,discipline_name:@discipline_university.discipline.name,discipline_id:@discipline_university.discipline.id}
+    end
   end
 
   # GET /discipline_universities/new

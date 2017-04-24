@@ -1,32 +1,28 @@
+
+
 <section class="page-header">
-	<div class="container">
-	  <%if @id!=nil %>
-	  <!--<h1>-->
-  	  <ol class="breadcrumb pull-left">
-      <li class="breadcrumb-item"><a href="/forums"><h1>All Forums / </h1></a></li>
-      <!--<li class="breadcrumb-item"><a href="#"><h1> Library / </h1></a></li>-->
-      <li class="breadcrumb-item active"><h1> <%= Forum.find(@id).name %> Discussion Forum </h1></li>
-      </ol>
-		<% end %>
-	</div>
+        <div class="container">
+
+          <h1><a href="/forums">All Forums / </a>
+          
+          <%= Forum.find(@id).name %> Discussion Forum </h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
 </section>
+
 
 <p id="notice"><%= notice %></p>
 <div class = "container">
-  <div class="col-md-12">
+  <div class="col-md-9">
     <div class="ask-a-question-btn">
       <% if can? :create, Post %>
         <%= link_to 'Ask a Question', new_post_path(@post => {:forum_id => @id}), class: "btn btn-primary new-post-showall"%>
       <% end %>
     </div>
     
-    <!--top users code-->
-    Top Site users
-    <% @profiles.each do |profile| %>
-    <%= profile.name %>
-    <%= profile.reputation %>
-    <% end %>
-    <!--end of top users code-->
+
     
   <% @posts.each do |post| %>
   
@@ -58,7 +54,7 @@
                 
                 <div class="block-all-post-detail-box">
                   <div class="block-all-post-value-box"><%= post.comments.count %></div>
-                  <div class="block-all-post-title-box">Comments</div>
+                  <div class="block-all-post-title-box">Answers</div>
                 </div>
                 
               </div>
@@ -133,6 +129,10 @@
                   puts post.to_yaml
                   post.user.profile.name
                   %></small>
+                  <% if (current_user != nil && (current_user.has_role? :admin)) %>
+                     <div class = "adm">
+                	   Admin</div>
+                	   <% end %>
                   <% if post.user.email %>
                   <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
                   <% end %>
@@ -198,6 +198,51 @@
   <br>
   
   <div class = "pagination"><%= will_paginate @posts %></div>
+  </div>
+  
+  <div class="col-md-3">
+    <div class="top-user-col hidden-xs">
+      <div class="top-user-header">
+        Top site users
+      </div>
+      
+          <!--top users code-->
+
+    
+      <% @profiles.each do |profile| %>
+       
+
+      
+    
+        <div class="top-user-single-container">
+          
+          <div class="top-user-avatar">
+            
+            <% if profile.image_file_name.present? %> 
+                    <%= image_tag profile.image.url(:med) %>
+                  <% else %>
+                   
+                    <img src="/avatar_generic.jpg"  alt="User Profile Image">
+                    
+            <% end %>
+                  
+          </div>
+          
+          <div class="right-side-topuser">
+            
+            <div class="top-user-name">
+               <%= profile.name %>
+            </div>
+            <div class="top-user-ranking"><%= profile.reputation %></div>
+          
+          </div>
+            
+        </div>
+      
+      <% end %>
+      
+      
+    </div>
   </div>
 
 </div>

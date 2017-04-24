@@ -3,7 +3,8 @@
 <br>
 <p id="notice"><%= notice %></p>
 <% if can? :create, University.new %>
-  <a class="btn btn-success pull-right" href="/universities/new" role="button">New University</a>
+  <div class="disc_unis_admins">
+  <a class="btn btn-primary pull-right" href="/universities/new" role="button">New University</a>
 
   <%= form_tag :controller => :universities, :action => :export do %>
     <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
@@ -13,37 +14,82 @@
     <br>
     <%= submit_tag "Import" %>
   <% end %>
+  </div>
 <% end %>
-<h2 class="post-title-forum post-title-all-posts" style="">Universities</h2>
 
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-       <th>City</th>
-      <th>Actions</th>
-      <!-- <th>ID</th> -->
-      <!-- <th colspan="3"></th> -->
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @universities.each do |university| %>
-      <tr>
-        <!-- <td><%= university.name %></td> -->
-        <!-- <td><%= university.description %></td> -->
-        <!-- <td><%= university.id %></td> -->
-        <td><%= link_to university.name, university %></td>
-        <td><%= university.city.name %></td> 
-        <td><%= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<%= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<section class="page-header" style="padding-top: 23px !important;">
+  
+        <div class="container">
+          <div align="center"> <h1 class="post-title-forum post-title-all-posts" style="">Universities</h1> </div>
+        </div>
         
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</section>
 
-<br>
+
+<div class="universities-boxes-container col-md-12">
+  
+  <% @universities.each do |university| %>
+  
+    <div class="university-single-main-box col-md-4 col-sm-6">
+      <div class="university-single-box-container">
+      
+      <div class="university-imagebox col-md-4">
+        <% if university.image.present? %>
+  								<%= image_tag university.image.url(:med) %>
+  			<% else %>
+  								<img src="/avatar_generic.jpg">
+  			<% end %>
+  				
+      </div>
+      
+      <div class="university-namecity-box col-md-8">
+        <div class="uni-name">
+          <td><%= link_to university.name, university %></td>
+        </div>
+        
+        <div class="uni-city">
+          <%= university.city.name %>
+          
+         <!--<td><= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<%= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+
+        </div>
+      </div>
+      
+      <div class="university-description-box col-md-12">
+        
+        Description N/A
+        
+          
+      </div>
+      
+    </div>
+    </div>
+    
+  <% end %>
+  
+</div>
 
 <!--<= link_to 'New University', new_university_path %>-->
 
 </div>
+
+<script>
+  
+  
+  
+    $(window).load(function(){
+        
+        var link_parent = $(".uni-name");
+        
+        for(var i = 0 ; i < link_parent.length ; i++){
+            
+            var links = $($(link_parent[i])[0]).find("a");
+            var href = links[0].href;
+            var href_location = "window.location.href='" + href + "'";
+            var main_parent = $(link_parent[i]).parents(".university-single-box-container");
+        	  $(main_parent[0]).attr("onClick",href_location);
+        }
+    });    
+    
+</script>

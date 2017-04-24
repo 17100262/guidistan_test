@@ -1,8 +1,16 @@
+<section class="page-header">
+				<div class="container">
 
+					  <h1>Notifications</h1>
+
+					
+
+				</div>
+</section>
 <div class="container">
-<h1> Notifications</h1>
+
 <% @activities.each do |activity| %>
-	<ul><%=activity.owner.profile.name %>
+	<ul><%#=activity.owner.profile.name %>
 	<%#= activity.trackable.comment %>
 		<%= render_activity activity %>
 	</ul>

@@ -1,43 +1,105 @@
-</br>
-</br>
+
+<section class="page-header">
+        <div class="container">
+
+          <h1><%= @discipline.name %> Discipline</h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
 <p id="notice"><%= notice %></p>
 
 <div class="container fluid" >
     <!--<div class="page-header">-->
     <article>
-    <div class="container"  > 
-    <section class="col-sm-6 col-md-4 " id="section" >
-    <%= image_tag @discipline.image.url(:large) %>
-    <h3 style="text-align:center"><%= @discipline.name %></h3>
-    </section>
+    <div class="container no-padding"  > 
+        <div class="col-sm-12 col-md-12 no-padding" style="text-align:center;">
+            
+            <div class="show-dis-image">
+                <%= image_tag @discipline.image.url() %>
+            </div>
+            
+            <div style="text-align: center;" class="dis-description-text"><%= @discipline.description %></div>
+            
+           
+
+        </div>
+        
+        <div class="col-md-12 no-padding">
+            
+                <h2 style="text-align:center;margin-bottom:30px;color: #8ab933;">Subdisciplines in this discipline</h2>
+                
+                <div class="subdisc-main-container col-md-12 no-padding">
+                    
+                    <%  @sub.each do |sub| %>
+                    
+                      <div class="sub-dis-box col-md-3 ">
+                          
+                          <div class="sub-dis-inner-box">
+                              <div class="sub-dis-name">
+                                  <%= sub.name %>
+                              </div>
+                          </div>
+                          
+                      </div>
+                    <% end %>
+                    
+                </div>
+                
+                
+                <h2 style="clear:both;text-align:center;margin-bottom:30px;color: #8ab933;padding-top: 10px;">Suggested universities</h2>
+                
+                <div class="suggested-unis-container">
+                    
+                    <% @universities.each do |uni| %>
+                
+                        <div class="sub-dis-box col-md-3">
+                              
+                              <div class="sub-dis-inner-box">
+                                  <div class="sub-dis-name">
+                                      <%= uni.name %> <%= uni.campus %>
+                                  </div>
+                              </div>
+                              
+                        </div>
+                
+                
+
+                    <% end %>
+                
+                    
+                </div>
+                
+
+            
+        </div>
     </div>
     <!--<div class="well">-->
-        <p style="text-align: justify; margin-left:10%; margin-right:10%;"><%= @discipline.description %></p>
         
-        <%= @degrees.name %>
+        
+        <!--<%= @degrees.name %>-->
         <!--    <p>@degrees</p>-->
         <!--< end %>-->
     <!--</div>-->
     
-        <%= link_to 'Back', disciplines_path,class:"btn btn-success pull-right" %>
-</article>
         
-<% if can? :update, @discipline %>
-    <%= link_to 'Edit', edit_discipline_path(@discipline),class:"btn btn-info" %> |
-<%end %>
+</article>
 
-<!--<= link_to 'View Degrees in '+ @discipline.name, disciplines_path ,class:"btn btn-info" %>-->
+<div style="margin-top:20px;">
+    
+    <%= link_to 'Back', disciplines_path,class:"btn btn-success" %>  | 
+    <% if can? :update, @discipline %>
+        <%= link_to 'Edit', edit_discipline_path(@discipline),class:"btn btn-info" %>
+    <%end %>
+    
+</div>    
+
+
+<!--<== link_to 'View Degrees in '+ @discipline.name, disciplines_path ,class:"btn btn-info" %>-->
+<br/>
+
+
 </div>
 
-<!------------ Personality test Box -->
-<section>
-  <div class ="container well"><p>
-    <img src="/StudentsSmall.jpg" alt="" class="logo pull-left"/>
-    <h2 style="margin:0">Take a Free Personality Test!</h2>
-    <h5 style="margin:0">Find out which Programmes match your personality!</h5>
-    <a href="#"><h5 style="color:#009cda">Take the Test</h5></a>
-    </p>
-  </div>
-</section>
-<br>
-<!--------------->

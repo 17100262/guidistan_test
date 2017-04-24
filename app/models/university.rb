@@ -1,6 +1,5 @@
 class University < ActiveRecord::Base
-    validates :name, :uniqueness => {:message => 'already taken'}
-	
+
 	has_many :discipline_university
 	
 	has_many :discipline, :through => :discipline_university
@@ -19,10 +18,17 @@ class University < ActiveRecord::Base
                 header = spreadsheet.row(i)
                 uni = new
                 uni.name = header[0]
-                if University.exists?(name: uni.name)
+                uni.campus = header[4]
+                if University.exists?(name: uni.name,campus: uni.campus)
                 else
                 	uni.description = header[1]
-                	uni.city_id = City.find_by(name: header[2]).id
+                	if City.exists?(name: header[2])
+                	    uni.city_id = City.find_by(name: header[2]).id
+                    else
+                        City.create(name: header[2])
+                        uni.city_id = City.find_by(name: header[2]).id
+                    end
+                    uni.link = header[3]
                     uni.save!
                 end
             end

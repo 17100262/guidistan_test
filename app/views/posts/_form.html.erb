@@ -21,7 +21,10 @@
     <%= f.text_area :description, required: true %>
   </div>
   <div class="field">
-    <%= f.label :tag_list,"Tags(Seperated by commas)" %><br>
+    <%= f.label :tag_list,"Tags (Seperated by commas)" %><br>
+    <div class="small-text top-user-ranking">
+      Start typing to select tags, you can also select multiple tags
+    </div>
     <%#= f.text_field :tag_list ,:id => "post_tags","data-pre" => @post.tags.map(&:attributes).to_json  %>
     <%= f.text_field :tag_list, 'data-tokeninput' => { collection: @names ,options: @options}.to_json %>
     <!--,"data-pre" => @post.tag_list.map(&:attributes).to_json-->

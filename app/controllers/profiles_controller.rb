@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+    impressionist actions: [:show], unique: [:session_hash]
   def index
     @profiles = Profile.all
   end
@@ -27,10 +28,24 @@ class ProfilesController < ApplicationController
 
   def edit
     @profile = Profile.find(params[:id])
+    @names = Discipline.all.map{|record|  {id: record.id,name: record.name}}
+    # puts @names
+    @options = { tokenValue: 'id' }
   end
 
   def update
     @profile = Profile.find(params[:id])
+    
+    params[:profile][:interest_attributes][:interest_list].map{|r| @profile.student_interests_discipline.create(discipline_id:r).save!}
+    
+    params[:profile].delete(:interest_attributes)
+    # puts @profile.student_interests_discipline
+    @profile.errors.full_messages.each do |message|
+      puts message,"here"
+    end
+    
+    
+    
         respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
@@ -66,6 +81,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name,:gender,:city,:image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
+      params.require(:profile).permit(:name,:gender,:city_id,:image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image,[interest_attributes:[{:interest_list=>[]}]])
     end
 end

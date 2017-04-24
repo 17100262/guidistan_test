@@ -1,10 +1,15 @@
 <div class="panel panel-default comment-body">
   
-  <div class="multi_commentliker">
+  <div class="multi_commentliker" data-commentid=" <%= comment.id %> ">
 
-		<a title="Up Vote" class="up_vote_st ">up vote</a> 
-		<span class="number_of_likes" data-upvotes="1" data-downvotes="0">1</span>
-		<a title="Down Vote" class="down_vote_st ">down vote</a> 
+		<!--<a title="Up Vote" class="up_vote_st">up vote</a> -->
+		<div class="commentliker_error_message"><a href="/users/sign_in">An error occured! Please login if you're not logged in.</a></div>
+		<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? comment %>up_vote_selected<% end %>">up vote</a> 
+		<span class="number_of_likes" data-pageload-val="<%= comment.get_upvotes.size -  comment.get_downvotes.size %>" data-upvotes="<%= comment.get_upvotes.size %>" data-downvotes="<%= comment.get_downvotes.size %>"><%= comment.get_upvotes.size -  comment.get_downvotes.size %></span>
+		<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? comment %>down_vote_selected<% end %>">down vote</a> 
+
+		<!--<span class="number_of_likes" data-upvotes="1" data-downvotes="0">1</span>-->
+		<!--<a title="Down Vote" class="down_vote_st ">down vote</a> -->
 
 	</div>
 			
@@ -75,7 +80,12 @@
                 </div>
                  
                 <div class="commentator-box-right">
-                  <div class="commentator-box-name"><%= comment.user.profile.name %></div>
+                  <div class="commentator-box-name"><%= comment.user.profile.name %>
+                  <% if (user_signed_in? and current_user.has_role? :admin) %>
+	                     <div class = "adm">
+                  	   Admin</div>
+                  	   <% end %>
+                  </div>
                   <div class="commentator-box-repo">Reputation: <%= comment.user.profile.reputation%> points</div>
                 </div>
                 

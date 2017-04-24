@@ -3,17 +3,21 @@
 
 
     <% if current_user.profile.name == activity.trackable.commentable.user.profile.name  %>
-        commented on your Post
+        <!--commented on your Post -->
+        <%= link_to activity.owner.profile.name+" commented on your Post",activity.trackable.commentable %>
     <% else %>
-        commented on <%= activity.trackable.commentable.user.profile.name %>'s Post
+        <!--commented on <%#= activity.trackable.commentable.user.profile.name %>'s -->
+        <%= link_to activity.owner.profile.name+" commented on " + activity.trackable.commentable.user.profile.name + " 's Post",activity.trackable.commentable %>
     <% end %>
 <%#= activity.trackable.co %>
 <% elsif (activity.trackable.commentable_type == "Comment") %>
     
     <% if current_user.profile.name == activity.trackable.commentable.commentable.user.profile.name  %>
-        replied to Comment on your Post
+        <!--replied to Comment on your Post <%#= link_to "Post",activity.trackable.commentable.commentable %>-->
+        <%= link_to activity.owner.profile.name+" replied to comment on your Post",activity.trackable.commentable.commentable %>
     <% else %>
-        replied to Comment on <%= activity.trackable.commentable.commentable.user.profile.name %>'s Post
+        <!--replied to Comment on <%#= activity.trackable.commentable.commentable.user.profile.name %>'s Post-->
+        <%= link_to activity.owner.profile.name+" replied to comment on " + activity.trackable.commentable.commentable.user.profile.name + " 's Post" ,activity.trackable.commentable.commentable %>
     <% end %>
 
 

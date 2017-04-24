@@ -4,6 +4,7 @@ class CreateUniversities < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.integer :city_id
+      t.string :campus
       t.string :link
       t.timestamps null: false
     end

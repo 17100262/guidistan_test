@@ -1,8 +1,75 @@
-</br>
-</br>
-All Site Statistics</br>
-     Total Users: <%= Profile.all.count %></br>
-     Total Posts: <%= Post.all.count %></br>
-     Total Answers: <%= Comment.where(commentable_type:"Post").count %></br>
-     Total Votes by now: <%= ActsAsVotable::Vote.count %></br>
+<section class="page-header">
+        <div class="container">
+
+          <h1>All Site Statistics</h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
+<div class="container stats-container">
      
+
+<div class="col-md-3 stats-main-containers">
+     
+     <div class="stats-inner-container">
+          
+          <div class="heading">
+               Total Users:
+          </div>
+          <div class="data">
+                <%= Profile.all.count %>
+          </div>
+          
+          
+     </div>
+     
+</div>
+<div class="col-md-3 stats-main-containers">
+     
+     <div class="stats-inner-container">
+          
+          <div class="heading">
+               Total Posts:
+          </div>
+          <div class="data">
+                 <%= Post.all.count %>
+          </div>
+          
+          
+     </div>
+     
+</div>
+<div class="col-md-3 stats-main-containers">
+     
+     <div class="stats-inner-container">
+          
+          <div class="heading">
+               Total Answers:
+          </div>
+          <div class="data">
+                <%= Comment.where(commentable_type:"Post").count %></br>
+          </div>
+          
+          
+     </div>
+     
+</div>
+<div class="col-md-3 stats-main-containers">
+     
+     <div class="stats-inner-container">
+          
+          <div class="heading">
+               Total Votes by now:
+          </div>
+          <div class="data">
+                <%= ActsAsVotable::Vote.count %>
+          </div>
+          
+          
+     </div>
+     
+</div>
+
+</div>

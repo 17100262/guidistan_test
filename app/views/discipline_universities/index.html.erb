@@ -1,18 +1,41 @@
-</br>&nbsp;
+<script src="//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.concat.min.js"></script>
+<link href="//cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+
+<section class="page-header">
+        <div class="container">
+
+          <h1>Search Degree Programs</h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
+
 <div class="container">
   <p id="notice"><%= notice %></p>
   <!-- FOR ADMIN-->
-  <% if can? :create, DisciplineUniversity.new %>
-    <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
-    <%= form_tag :controller => :discipline_universities, :action => :export do %>
-        <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+<% if can? :create, DisciplineUniversity.new %> 
+  <div class="disc_unis_admins">
+    
+
+      <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
+      
+      <div class="pull-right download-in-excel-form">
+        <%= form_tag :controller => :discipline_universities, :action => :export do %>
+          <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+        <% end %>
+      </div>
+      
+      <%= form_tag import_discipline_universities_path, multipart: true do %>
+        <%= file_field_tag :file, required: true %>
+        <br>
+        <%= submit_tag "Import" %>
       <% end %>
-    <%= form_tag import_discipline_universities_path, multipart: true do %>
-      <%= file_field_tag :file, required: true %>
-      <br>
-      <%= submit_tag "Import" %>
-    <% end %>
-  <% end %>
+
+  
+  </div>
+<% end %>  
   <!----------->
   <%= form_for_filterrific @filterrific do |f| %>
     <div class ="row">
@@ -23,8 +46,8 @@
         <%#= collection_check_boxes(:discipline_university,:university_ids,University.all,:id,:name) %>
   
         <div class="panel panel-default">
-          <div class="panel-heading" data-toggle="collapse" data-target="#city"><strong style="color: #8ab933;">Filter by Cities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-            <div class="panel-body" class="collapse" id="city">
+          <div class="panel-heading" aria-expanded="true" data-toggle="collapse" data-target="#city"><strong style="color: #8ab933;">Filter by Cities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
+            <div class="panel-body collapse in mCustomScrollbar"  aria-expanded="true" data-mcs-theme="minimal-dark" id="city">
               <%= collection_check_boxes(:discipline_university,:cities_ids, City.all.order('name ASC'), :id, :name) do |b| %>
                 <%= b.label { b.check_box + " " + b.text} %>
               <% end %>
@@ -34,7 +57,7 @@
   
         <div class="panel panel-default" >
             <div class="panel-heading" data-toggle="collapse" data-target="#uni" style="color: #8ab933;"><strong>Filter by Universities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-              <div class="panel-body" class="collapse" id="uni">
+              <div class="panel-body collapse in mCustomScrollbar" class="collapse" id="uni" data-mcs-theme="minimal-dark">
                 <%= collection_check_boxes(:discipline_university,:university_ids,University.all.order('name ASC'),:id,:name) do |b| %>
                   <%= b.label { b.check_box + " " + b.text} %>
                 <% end %>
@@ -42,7 +65,7 @@
             </div>
           <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-target="#discipline" ><strong style="color: #8ab933;">Filter by Disciplines&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-                <div class="panel-body" class="collapse" id="discipline">
+                <div class="panel-body collapse in mCustomScrollbar" class="collapse" id="discipline" data-mcs-theme="minimal-dark">
                   <%= collection_check_boxes(:discipline_university,:discipline_ids,Discipline.all.order('name ASC'),:id,:name) do |b| %>
                     <%= b.label { b.check_box + " " + b.text} %>
                   <% end %>
@@ -50,7 +73,7 @@
             </div>
           <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-target="#subdiscipline" style="color: #8ab933;"><strong>Filter by Subdisciplines&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-              <div class="panel-body" class="collapse" id="subdiscipline">
+              <div class="panel-body collapse in mCustomScrollbar" id="subdiscipline" data-mcs-theme="minimal-dark">
                 <%= collection_check_boxes(:discipline_university,:subdiscipline_ids,Subdiscipline.all.order('name ASC'),:id,:name) do |b| %>
                   <%= b.label { b.check_box + " " + b.text} %>
                 <% end %>

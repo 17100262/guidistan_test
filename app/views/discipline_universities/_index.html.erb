@@ -1,24 +1,39 @@
+
 <div id="filterrific_results">
-	<ul >
+	<ul style="overflow:hidden;">
 		
 		<% @discipline_universities.each do |discipline_university| %>
 		
-			<li class="forum-dis-list col-sm-5 col-md-5 pull-right" style"margin-bottom: 10px;">
+			<li class="forum-dis-list col-sm-12 col-md-12" style"margin-bottom: 10px;">
 				<div class="degree-uni-container">
-					<h3><%= link_to  discipline_university.name , "/discipline_universities/#{discipline_university.id}",{:style => 'color: #009cda;'}%></h3>
-				</div>
-				<div class="degree-uni-subcontainer">
 					
-					<div Style="float:left; margin: 0px 20px 5px 0px;height: 50px;">
-						<% if discipline_university.university.image.present? %>
-							<%= image_tag discipline_university.university.image.url(:med) %>
-						<% else %>
-							<img src="/avatar_generic.jpg">
-						<% end %>
+					<div class="degree-uni-subcontainer col-md-5">
+					
+						<div class="uni-avatar-details-container">
+							<% if discipline_university.university.image.present? %>
+								<%= image_tag discipline_university.university.image.url(:small) %>
+							<% else %>
+								<img src="/avatar_generic.jpg">
+							<% end %>
+						</div>
+						<div class="university-title-cont">
+							
+							<p style="margin:0px;" class="university-name-container"><%= link_to  discipline_university.university.name , "/universities/#{discipline_university.university.id}",{:style => 'color: #009cda;'}%></p>
+							<p class="university-city-name"><%= discipline_university.university.city.name %></p>
+							
+						</div>
+						
 					</div>
-					<p><%= link_to  discipline_university.university.name , "/universities/#{discipline_university.university.id}",{:style => 'color: #009cda;'}%></p>
-					<p><%= discipline_university.university.city.name %></p>
+					
+					<div class="degree-name-container col-md-7">
+						<h3><%= link_to  discipline_university.name , "/discipline_universities/#{discipline_university.id}",{:style => 'color: #009cda;'}%></h3>
+					</div>
+					
+					
+					
+				
 				</div>
+				
 			</li>
 			
 		<% end %>

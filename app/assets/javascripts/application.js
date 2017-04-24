@@ -17,6 +17,7 @@
 //= require filterrific/filterrific-jquery
 //= require rails-jquery-tokeninput
 //= require angular
+//= require ahoy
 
 // $(function() {
 //  $("#post_tags").tokenInput("/posts/tags.json", {
