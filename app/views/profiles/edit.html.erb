@@ -20,7 +20,7 @@
    
     <div class="field">
      <%= f.label :Gender %>
-    <%= f.text_field :gender %><br />
+     <%= f.select :gender,[["M","M"],["F","F"]] %> <br />
    </div>
    
     <div class="field">
@@ -42,10 +42,6 @@
      <%= f.file_field :image %>
    </div>
   <% end %>
-    
-     
-     
-     
     <%= f.submit "Edit" %>
   <% end %>
  </div>

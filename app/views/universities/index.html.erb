@@ -1,5 +1,8 @@
+<br/>
+<br/>
+
 <br>
-<div class="container">
+<div class="container" >
 <br>
 <p id="notice"><%= notice %></p>
 <% if can? :create, University.new %>
@@ -21,58 +24,130 @@
 <section class="page-header" style="padding-top: 23px !important;">
   
         <div class="container">
-          <div align="center"> <h1 class="post-title-forum post-title-all-posts" style="">Universities</h1> </div>
+          <div align="center"> <h1 class="post-title-forum post-title-all-posts" style="">All Universities</h1> </div>
         </div>
         
 </section>
-
-
 <div class="universities-boxes-container col-md-12">
+<div class = "container" ng-app="Unisr" ng-controller="Student">
+  <div class="search-students-box">
+    <input type="text" class="form-control-special form-control" ng-model="searchString" placeholder="Search by University name, city or discipline"/>
+  </div>
+<table ng-show = "universities != null" class="table table-striped">
+  <div ng-repeat="university in universities | searchFor:searchString">
+
+ <div class="university-single-main-box col-md-4 col-sm-6"> 
+ <div class="university-single-box-container">
+   <div class="university-imagebox col-md-4">
+ 
   
-  <% @universities.each do |university| %>
-  
-    <div class="university-single-main-box col-md-4 col-sm-6">
-      <div class="university-single-box-container">
-      
-      <div class="university-imagebox col-md-4">
-        <% if university.image.present? %>
-  								<%= image_tag university.image.url(:med) %>
-  			<% else %>
-  								<img src="/avatar_generic.jpg">
-  			<% end %>
-  				
-      </div>
-      
-      <div class="university-namecity-box col-md-8">
-        <div class="uni-name">
-          <td><%= link_to university.name, university %></td>
+  <img ng-src="{{ university.image }}"/>
+  </div>
+        <div class="university-namecity-box col-md-8">
+        <div class="uni-name" style="margin-bottom:5px;">
+          {{university.name}}
         </div>
         
-        <div class="uni-city">
-          <%= university.city.name %>
+        <div class="uni-city" style="margin-bottom:5px">
+          {{university.city}}
           
-         <!--<td><= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<%= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+         <!--<= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %>-->
 
         </div>
-      </div>
-      
-      <div class="university-description-box col-md-12">
+              <!--<div class="university-description-box col-md-12">-->
         
-        Description N/A
+        <!--Description N/A-->
+        <!--{{university.discipline}}-->
         
           
-      </div>
+      <!--</div>-->
+  <!--{{university.name}}-->
+  <!--</div>-->
+   <!--{{university.city}}-->
+</div>
+</div>
+  </table>
+</div>
+</div>
+
+
+
+
+<!--<div class="universities-boxes-container col-md-12">-->
+<!--  <div class="search-students-box">-->
+<!--  <input type="text" class="form-control-special form-control" ng-model="searchString" placeholder="Search University"/>-->
+<!--</div>-->
+<!--<table ng-show = "universities != null" class="table table-striped">-->
+
+<!--  <tr ng-repeat="university in universities | searchFor:searchString">-->
+
+
+    <!--<div class="university-single-main-box col-md-4 col-sm-6">-->
+      <!--<div class="university-single-box-container">-->
       
-    </div>
-    </div>
-    
-  <% end %>
+      <!--<div class="university-imagebox col-md-4">-->
+      <!--  <img ng-src="{{ university.image }}"/>-->
+
+      <!--</div>-->
+
+
+<!--  <td>{{university.name}}</td>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+<!--    </tr>-->
+<!--    </table>-->
+<!--</div>-->
+
+
+  <!--< @universities.each do |university| %>-->
   
+  <!--  <div class="university-single-main-box col-md-4 col-sm-6">-->
+  <!--    <div class="university-single-box-container">-->
+      
+  <!--    <div class="university-imagebox col-md-4">-->
+  <!--      < if university.image.present? %>-->
+  <!--								<= image_tag university.image.url(:med) %>-->
+  <!--			< else %>-->
+  <!--								<img src="/avatar_generic.jpg">-->
+  <!--			< end %>-->
+  				
+  <!--    </div>-->
+      
+  <!--    <div class="university-namecity-box col-md-8">-->
+  <!--      <div class="uni-name">-->
+  <!--        <td><= link_to university.name, university %></td>-->
+  <!--      </div>-->
+        
+  <!--      <div class="uni-city">-->
+  <!--        <= university.city.name %>-->
+          
+         <!--<td><= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+
+  <!--      </div>-->
+  <!--    </div>-->
+      
+  <!--    <div class="university-description-box col-md-12">-->
+        
+  <!--      Description N/A-->
+        
+          
+<!--      </div>-->
+      
+<!--    </div>-->
+<!--    </div>-->
+    
+  <!--< end %>-->
+    <!--</tr>-->
+    <!--</table>-->
 </div>
 
 <!--<= link_to 'New University', new_university_path %>-->
 
-</div>
+<!--</div>-->
 
 <script>
   
@@ -92,4 +167,57 @@
         }
     });    
     
+ </script>
+
+<script>
+ console.log(1)
+  var stdMod = angular.module('Unisr', []); 
+  console.log(2)
+  stdMod.controller('Student', function ($rootScope, $http) {
+    $rootScope.universities = []
+    console.log("scope created")
+    <% if @universities!=nil%>
+      <% @universities.each do |university| %>
+
+        $rootScope.universities.push({
+          // console.log(university.name)
+          name:'<%= university.name %>',
+          city: '<%= university.city.name %>',
+          image: '<%= university.image.url(:small) %>',
+          discipline: '<%= university.discipline.first %>'
+          // city: '<= university.city.name %>',
+          // image: '<= university.image.url(:med) %>'
+        })
+        console.log($rootScope.universities.discipline)
+        console.log("stuff pushed")
+      <% end %>
+    <% end %>
+  });
+  stdMod.filter('searchFor', function(){
+  return function(arr, searchString){
+    console.log("entering search")
+    if(!searchString){
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    console.log(searchString)
+    angular.forEach(arr, function(item){
+      if(item.name.toLowerCase().indexOf(searchString) !== -1){
+
+        result.push(item);
+        console.log("khalli walli")
+      }
+      else if(item.city.toLowerCase().indexOf(searchString) !== -1){
+
+        result.push(item);
+      }
+    });
+    // console.log(item)
+    return result;
+    
+  };
+  });
 </script>
+
+

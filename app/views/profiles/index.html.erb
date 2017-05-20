@@ -26,7 +26,7 @@
        <% end %>
        </div>
        <div class = "col-md-11">
-  <table class = "table table-striped table-bordered table-hover  alluser-table">
+  <table ng-show = "profiles != null" class = "table table-striped table-bordered table-hover  alluser-table">
     <thead>
       <tr>
       <th>Image</th>
@@ -38,29 +38,34 @@
     <tbody>
       
 <div class="search-students-box">
-  <strong>Search for Students </strong>
-  <input type="text" class="form-control-special form-control" ng-model="searchString" placeholder="Search Students"/>
+
+  <input type="text" class="form-control-special form-control" ng-model="searchString" placeholder="Search for Site Users"/>
 </div>
         <!--<div class="commentator-img-box hidden-xs">-->
     <div class = "col-md-8">
-      
+<!--<table ng-show = "profiles != null" >      -->
     <tr ng-repeat="profile in profiles | searchFor:searchString">
 
-      <td class="profile-image"></td>
+      <!--<td class="profile-image"></td>-->
+      <td><img ng-src="{{ profile.image }}"/></td>
       <td >{{profile.name}}</td>
       <td>{{profile.reputation}}</td>
       <td>{{profile.gender}}</td>
+
     </tr>
+<!--</table>-->
       </div>  
              
       </tbody>
 </table>
 </div>
 </div>
+
 <script>
   var stdMod = angular.module('Studentsr', []); 
   stdMod.controller('StudentCtrl', function ($rootScope, $http) {
     $rootScope.profiles = []
+    
     <% if @profiles!=nil%>
       <% @profiles.each do |profile| %>
       // console.log(profile.name)
@@ -68,13 +73,9 @@
 
           name:'<%= profile.name %>',
           reputation: '<%= profile.reputation %>',
-          gender: '<%= profile.gender %>'
-          // monthly_income: '<= student.monthly_income %>',
-          // < if student.city %>
-          // city: '<= student.city.titleize() %>'
-          // < else %>
-          // city: '<= student.city %>'
-          // < end %>
+          gender: '<%= profile.gender %>',
+          image: '<%= profile.image.url(:small) %>',
+          gen: "/generic_small.png"
         })
 
     <% end %>
@@ -82,11 +83,13 @@
   });
   stdMod.filter('searchFor', function(){
   return function(arr, searchString){
+    
     if(!searchString){
       return arr;
     }
     var result = [];
     searchString = searchString.toLowerCase();
+    
     angular.forEach(arr, function(item){
       if(item.name.toLowerCase().indexOf(searchString) !== -1){
 

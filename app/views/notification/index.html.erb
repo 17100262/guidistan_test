@@ -8,11 +8,16 @@
 				</div>
 </section>
 <div class="container">
-
-<% @activities.each do |activity| %>
-	<ul><%#=activity.owner.profile.name %>
-	<%#= activity.trackable.comment %>
-		<%= render_activity activity %>
+<div class="notificat_holder">
+	<% @activities.each do |activity| %>
+	<ul>
+		<li>
+			<strong><%=activity.owner.profile.name %></strong>
+				<p><%= activity.trackable.comment %></p>
+		<span><%= render_activity activity %></span>
+		</li>
 	</ul>
 <% end %>
+</div>
+
 </div>

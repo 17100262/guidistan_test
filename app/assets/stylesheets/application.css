@@ -17,6 +17,7 @@
  *= require font-awesome
  *= require token-input
  */
+ 
  body,p, ol, ul, td,*{
      font-family:'Open Sans', Arial, Helvetica, sans-serif;;
  }
@@ -453,7 +454,102 @@ text-align: center;
     overflow: hidden;
     transition:none !important;
 }/*#likerA_6*/
+.notification{
+    position:relative;
+}
+.notification .view_all{
+    text-align:center;
+}
+.notification .dropdown-menu{
+    display:block;
+}
+.notification .dropdown-menu li a{
+    white-space:normal;
+}
+.notification:hover .dropdown-menu.notification-hide{
+    display:none !important;
+}
+.notification .dropdown-menu.notification-hide{
+    display:none;
+}
+.notification_count{
+    position: absolute;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #619500;
+    border-radius: 4px;
+    line-height: 18px;
+}
+.notificat_holder ul{
+    margin:15px 0;
+    padding:0;
+    list-style:none;
+}
+.notificat_holder ul li{
+    margin: 5px 0;
+    border-bottom: 2px solid #619500;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid #619500;
+    padding: 10px;
+    border-radius: 5px;
+}
+.notificat_holder ul li strong{
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+.notificat_holder ul li p{
+    margin: 5px 0;
+}
+.notificat_holder ul li span{
+        text-align: right;
+    display: block;
+}
+.notificat_holder ul li span a{
+    color:#619500;
+    text-decoration:none;
+}
+.profile_header h3{
+    text-align:left;
+}
+.profile_header span{
+    text-align:right;
+}
+.profile_detail{
+width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
 
+}
+.profile_detail .image_box img{
+    max-width: 130px;
+    margin-bottom: 30px;
+}
+.detail_holder h3{
+    font-size:16px;
+}
+.detail_holder > div{
+    margin-bottom:5px;
+}
+.detail_holder > div > label{
+    font-size:14px;
+}
+.detail_holder > div > label .adm{
+    margin-left:15px;
+}
+.detail_holder > div > span{
+    margin-left:5px;
+}
+@media(max-width:767px){
+    .notification_count{
+        top:10px;
+    }
+}
 .newPostForm label {
     display: inline-block;
     font-weight: 600;
@@ -756,7 +852,7 @@ section.page-header a:hover,section.page-header a:focus{
 .search-students-box input {
     width: 300px;
     display: inline-block;
-    height: 29px;
+    height: 35px;
 }
 
 .search-students-box {
@@ -1033,7 +1129,7 @@ h1.uni-name-container {
 }
 
 .uni-right-side-container.col-md-11 {
-    padding-left: 0px !important;
+    padding-left: 10px !important;
 }
 
 .disc-offered-container
@@ -1072,7 +1168,7 @@ h2.disc-offered-heading {
 }
 .university-single-box-container {
     background-color: rgba(0,0,0,0.05);
-    min-height: 170px;
+    min-height: 100px;
     padding-top: 20px;
 }
 .show-dis-image {
@@ -1086,6 +1182,13 @@ h2.disc-offered-heading {
 
 .university-single-box-container:hover {
     background-color: rgba(138, 185, 51, 0.96);
+}
+.university-single-box-container .uni-name{
+    color: #8ab933;
+}
+
+.university-single-box-container:hover .uni-name{
+    color:#fff;
 }
 .profile-page-leftside-container {
     padding-top: 40px;
@@ -1101,7 +1204,6 @@ h2.disc-offered-heading {
     color:white;
 }
 .university-imagebox {
-    height: 70px;
     overflow: hidden;
 }
 .uni-name a{
@@ -1112,10 +1214,8 @@ h2.disc-offered-heading {
     text-decoration:none;
 }
 .university-imagebox img {
-    width: 100%;
     border: 1px solid #ccc;
     vertical-align: middle;
-    min-height: 100%;
 }
 
 
@@ -1124,7 +1224,7 @@ h2.disc-offered-heading {
 }
 
 .uni-name {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -1364,4 +1464,30 @@ h2.disc-offered-heading {
     .block-all-post-detail-box-container{
         float:none;
     }
+}
+.degrees_holder{
+    width:100%;
+    padding:10px;
+}
+.degrees_holder h2{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+    padding:10px 5px;
+    border-bottom: 2px solid #619500;
+}
+.degrees_holder ul{
+    margin: 15px 0;
+    padding: 0;
+    list-style: none;
+}
+.degrees_holder ul li{
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+.degrees_holder a{
+    color: #98BA5A;
+    text-decoration: none;
 }

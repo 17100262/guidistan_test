@@ -30,14 +30,24 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @names = Discipline.all.map{|record|  {id: record.id,name: record.name}}
     # puts @names
-    @options = { tokenValue: 'id' }
+    # @options = { tokenValue: 'id' }
+    @options = { tokenValue: 'id', prePopulate: @profile.student_interests_discipline.map{|t| {name:t.discipline.name,id: t.discipline_id} } }
   end
 
   def update
     @profile = Profile.find(params[:id])
+    # all_interests = @profile.student_interests_discipline
     
-    params[:profile][:interest_attributes][:interest_list].map{|r| @profile.student_interests_discipline.create(discipline_id:r).save!}
+    @profile.student_interests_discipline.destroy_all
     
+    # params[:profile][:interest_attributes][:interest_list].compact!
+    # puts params[:profile][:interest_attributes][:interest_list],"compact list"
+    params[:profile][:interest_attributes][:interest_list].each do |i|
+      if(i!="")
+        @profile.student_interests_discipline.create(discipline_id:i).save!
+      end
+    end
+    # params[:profile][:interest_attributes][:interest_list].map{|r| @profile.student_interests_discipline.create(discipline_id:r).save!}
     params[:profile].delete(:interest_attributes)
     # puts @profile.student_interests_discipline
     @profile.errors.full_messages.each do |message|
@@ -46,7 +56,7 @@ class ProfilesController < ApplicationController
     
     
     
-        respond_to do |format|
+    respond_to do |format|
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }

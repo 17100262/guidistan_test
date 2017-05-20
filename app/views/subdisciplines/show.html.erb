@@ -1,36 +1,26 @@
-<br>
+<section class="page-header">
+        <div class="container">
+
+          <h1><%= @subdiscipline.discipline.name %> /<%= @subdiscipline.name %></h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
 <div class="container">
-<br>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Name:</strong>
-  <%= @subdiscipline.name %>
-</p>
-
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Discipline:</strong>
-  <%= @subdiscipline.discipline.name %>
-</p>
-
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Degrees in <%=@subdiscipline.name %>:</strong>
-  
-  <% if @degree %>
-  <ul>
-  <% for degree in @degree %>
-  	<li>
-  		<%= degree.name%>
-  	</li>
-  	<% end %>
-  	</ul>
-  <% else %>
-    None
-  <% end %>
-  
-</p>
-
-
-<%= link_to 'Edit', edit_subdiscipline_path(@subdiscipline) %> |
+  <div class="degrees_holder">
+    <h2>Degrees in <%=@subdiscipline.name %></h2>
+    <ul>
+    <% for degree in @degree %>
+    	<li>
+    		<%= degree.name%>
+    	</li>
+    	<% end %>
+    	</ul>
+    	<%= link_to 'Edit', edit_subdiscipline_path(@subdiscipline) %> |
 <%= link_to 'Back', subdisciplines_path %>
+  </div>
+
+</div>
+
 </div>

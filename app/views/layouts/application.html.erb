@@ -99,7 +99,7 @@
 
 						<!-- Logo -->
 						<a class="logo pull-left" href="/disciplines">
-							<img src="/edu logo.png" alt=""/>
+							<img src="/header_logo.png" alt=""/>
 							<!--<= image_tag("/edu logo.png", alt: "", height: 200, width: 200) %>-->
 						</a>
 
@@ -382,39 +382,33 @@
 									          <%= link_to 'My Profile', profile_path(:id => current_user.profile.id) %>
 									        <% end %>
 									</li>
-									<li>
+									<li class="dropdown notification hidden-lg hidden-md hidden-sm">
 											<% if user_signed_in? %>
-									        <a href="/notification">
+											<div class="notification_count"><span>2</span></div>
+									        <a href="/notification" class="dropdown-toggle" data-toggle="dropdown">
 											Notifications
 											
-
-
-
-<% #@activities.each do |activity| %>
-<!--
-<div class="notficiation-bar-tab arrow_box">
-		
-		<div class="single-notification">
-			<a href="#">
-				<div class="left-side-pic col-md-2">
-					<img src="/system/profiles/images/000/000/001/med/photo_%282%29.png?1490970931" alt="Photo %282%29">
-				</div>
-				
-				<div class="right-side-text col-md-10">
-					Blah Blah
-					
-					<div class="right-side-time">
-						11 minutes ago
-					</div>
-				</div>
-			</a>
-		</div>
-		
-	</div>-->
-	
-<% #render_activity activity %>
-<% #end %>	
+											</a>
+										
+										
+									        <% end %>
+									</li>
+									<li class="dropdown notification hidden-xs">
+											<% if user_signed_in? %>
+											<div class="notification_count  hidden-xs"><span>2</span></div>
+									        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-bell" aria-hidden="true"></i>
+										<% @activities1.each do |activity| %>
+										<% render_activity activity %>
+										<% end %>	
 										</a>
+										<ul class="dropdown-menu notification-hide" role="menu" aria-labelledby="dropdownMenu">
+										<% @activities1.each do |activity| %>
+											<li><a href="#"><%= render_activity activity %></a></li>
+										<% end %>
+										<li class="view_all"><a href="/notification">View all</a></li>
+										</ul>
+										
 									        <% end %>
 									</li>
 									<li>
@@ -453,7 +447,6 @@
 					<h2> Guidistan </h2>
 					<!-- Small Description -->
 					<p>Ensuring Better Tomorrow </p>
-					<p>Helping you to achieve your career objectives</p>
 	
 					<hr />
 	
@@ -548,8 +541,6 @@
 				<ul class="list-inline inline-links mobile-block pull-right nomargin">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About Us</a></li>
-					<li><a href="#">Portfolio</a></li>
-					<li><a href="#">Pricing</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
 	
@@ -557,8 +548,11 @@
 			</div>
 		</div>
 	</footer>
-	
-	
+	<script type="text/javascript">
+		$('.notification').on('click',function(){
+			$(this).find('ul.dropdown-menu').toggleClass('notification-hide');	
+		});
+	</script>
 	
 	
 

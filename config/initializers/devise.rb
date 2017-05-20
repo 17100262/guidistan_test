@@ -13,7 +13,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.omniauth :facebook, "256656814763226", "e6f75056b75035db8d947c7ef32a5983", secure_image_url: true, :image_size => 'large'
+  config.omniauth :facebook, "284565831991668", "8d0cdb4060cc8f20df9b070ea5994c4e", secure_image_url: true, :image_size => 'large'
   config.omniauth :twitter, "v1gbcUV2axQRu85FszKqyfZzu", "kLkD8pdKgoLlCMCFO82a0GhQSgo4uWlmZVP36zF3k8VbRXdo8g", callback_url: "https://ssppp-a17100262.c9users.io/"
   config.omniauth :google_oauth2, "191194749995-aaf58h9sb2hc59528kmnrl1rumtt9ceq.apps.googleusercontent.com", "MCJz6_eahY2yjDz2UNs1lb4v"
   

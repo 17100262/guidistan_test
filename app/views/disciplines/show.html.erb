@@ -2,7 +2,7 @@
 <section class="page-header">
         <div class="container">
 
-          <h1><%= @discipline.name %> Discipline</h1>
+          <h1><a href="/disciplines">All Disciplines / </a><%= @discipline.name %> Discipline</h1>
 
           <!-- breadcrumbs -->
         
@@ -39,7 +39,8 @@
                           
                           <div class="sub-dis-inner-box">
                               <div class="sub-dis-name">
-                                  <%= sub.name %>
+                                  <%= link_to sub.name, "/subdisciplines/#{sub.id}"  %>
+                                  <!--<= sub.name %>-->
                               </div>
                           </div>
                           
@@ -59,7 +60,10 @@
                               
                               <div class="sub-dis-inner-box">
                                   <div class="sub-dis-name">
-                                      <%= uni.name %> <%= uni.campus %>
+                                      <% myString = String.new(" ")%>
+                                      <% str = uni.name + myString + uni.campus %>
+                                      <%= link_to str, "/universities/#{uni.id}" %>
+                                      <!--<= uni.name %> <= uni.campus %>-->
                                   </div>
                               </div>
                               
@@ -89,7 +93,7 @@
 
 <div style="margin-top:20px;">
     
-    <%= link_to 'Back', disciplines_path,class:"btn btn-success" %>  | 
+    <%= link_to 'Back', disciplines_path,class:"btn btn-success" %>  
     <% if can? :update, @discipline %>
         <%= link_to 'Edit', edit_discipline_path(@discipline),class:"btn btn-info" %>
     <%end %>

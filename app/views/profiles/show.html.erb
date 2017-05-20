@@ -1,53 +1,67 @@
 <!--<h1>Profile#show</h1>-->
 <div class="container showsingle-profile">
-    <br>
-    <%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary pull-right" %>
+    <div class="profile_header">
+      <h3 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">My Profile</h3>
+       <span class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary pull-right" %></span>
+    </div>
+   
         
       <div class="row ">
-          <div class="col-md-9 profile-page-leftside-container">
-                      
-                      <div class="image-box-ssp">
-                        
-                        <% if @profile.image_file_name.present? %> 
-                        <%= image_tag @profile.image.url(:large) %>
-                        <% else %>
-                        
-                        <a href="javascript:;">
-                        <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-                        </a>
-                        <% end %>
-  
-                        <div class="image-box-rep">
-                          <%= @profile.reputation %> <span>REPUTATION</span>
-                        </div>
-                      </div>
-                      
-                      <div class="user-profileinfo-box">
-                         <h3><%= @profile.name %> <% if (current_user.has_role? :admin) %>
+          <div class="col-md-12 profile-page-leftside-container">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+              <div class="profile_detail">
+                <div class="image_box">
+                  <% if @profile.image_file_name.present? %> 
+                  <%= image_tag @profile.image.url(:large) %>
+                  <% else %>
+                  
+                  <a href="javascript:;">
+                  <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                  </a>
+                  <% end %>
+                </div>
+                <div class="reputation">
+                  <%= @profile.reputation %> <span>REPUTATION</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <div class="detail_holder">
+                <div><label><%= @profile.name %> 
+                <% if current_user.has_role? :admin %>
   	                     <div class = "adm">
                     	   Admin</div>
-                    	   <% end %></h3>
-                         <div class="user-profileinfo-little">
-                           <i class="fa fa-genderless" aria-hidden="true"></i>
-                           <span class="profile-info-little-span"><%= @profile.gender %></span>
-                         </div>
-                      </div>
-                      
-                      
-                      
-                      
-              
-             
+                <% end %></label></div>
+                <div class="gender">
+                  <label>Gender:</label><span><%= @profile.gender %></span>
+                  </div>
+                <div class="member_detail">
+                  <label>Member for:</label><span><%= time_ago_in_words(@profile.created_at) %></span>
+                </div>
+                <div class="view_detail">
+                  <label>Profile views:</label><span><%= "#{@profile.impressionist_count}" %></span>
+                </div>
+                <div class="question_detail">
+                  <label>Questions:</label><span><%= @profile.user.posts.count %></span>
+                </div>
+                 <div class="question_detail">
+                  <label>Answers:</label><span><%= @profile.user.comments.where(commentable_type:"Post").count %></span>
+                </div>
+                <div class="active_detail">
+                  <label>Last Sign in</label><span><%= time_ago_in_words(@profile.user.last_sign_in_at) %> ago</span>
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div class="col-md-3">
+          <div class="col-md-3 hidden">
           <ul class="list-group">
               <li class="list-group-item text-center" contenteditable="false"><strong>Profile</strong></li>
               <li class="list-group-item text-center"><strong>City: <%= @profile.city %></strong></li>
               <li class="list-group-item text-center"><strong>Gender: </strong></li>
               <li class="list-group-item text-center"><strong>Reputation: <%= @profile.reputation %> Points</strong></li>
               <li class="list-group-item text-center"><strong>Member for <%= time_ago_in_words(@profile.created_at) %></strong></li>
-              <li class="list-group-item text-center"><strong> <%= "#{@profile.impressionist_count} profile views" %></strong></li>
+              <li class="list-group-item text-center"><strong> </strong></li>
               <li class="list-group-item text-center"><strong>Last active <%= time_ago_in_words(@profile.user.last_sign_in_at) %> ago</strong></li>
               <li class="list-group-item text-center"><strong><%= @profile.user.posts.count %> Questions</strong></li>
               <li class="list-group-item text-center"><strong><%= @profile.user.comments.where(commentable_type:"Post").count %> Answers</strong></li>
