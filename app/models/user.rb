@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      if user.email?
+      # if user.email?
         user.save!
       
         profile= Profile.new
@@ -25,9 +25,9 @@ class User < ActiveRecord::Base
         profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
         profile.user_id = User.last.id
         profile.save!
-      else
-        user.email = "noone"
-      end
+      # else
+        # user.email = "noone"
+      # end
       
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.

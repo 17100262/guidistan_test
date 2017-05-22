@@ -1,5 +1,5 @@
 <li><%= reply.comment %> -
-<small> Posted by <%= reply.user.profile.name %> <%= time_ago_in_words(reply.created_at) %> ago</small>
+<small> Posted by <%= link_to reply.user.profile.name, profile_path(reply.user.profile.id) %> <%= time_ago_in_words(reply.created_at) %> ago</small>
 <% if can? :update, reply %>
     <%= link_to "Edit", edit_comment_comment_path(reply.commentable, reply),class: "comments-small-btns"%>
 <% end %>

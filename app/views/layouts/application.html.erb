@@ -73,28 +73,28 @@
 						</button>
 
 						<!-- BUTTONS -->
-						<ul class="pull-right nav nav-pills nav-second-main">
+						<!--<ul class="pull-right nav nav-pills nav-second-main">-->
 
 							<!-- SEARCH -->
-							<li class="search">
-								<a href="javascript:;">
-									<i class="fa fa-search"></i>
-								</a>
-								<div class="search-box">
-									<form action="page-search-result-1.html" method="get">
-										<div class="input-group">
-											<input type="text" name="src" placeholder="Search" class="form-control" />
-											<span class="input-group-btn">
-												<button class="btn btn-primary" type="submit">Search</button>
-											</span>
-										</div>
-									</form>
-								</div> 
-							</li>
+							<!--<li class="search">-->
+							<!--	<a href="javascript:;">-->
+							<!--		<i class="fa fa-search"></i>-->
+							<!--	</a>-->
+							<!--	<div class="search-box">-->
+							<!--		<form action="page-search-result-1.html" method="get">-->
+							<!--			<div class="input-group">-->
+							<!--				<input type="text" name="src" placeholder="Search" class="form-control" />-->
+							<!--				<span class="input-group-btn">-->
+							<!--					<button class="btn btn-primary" type="submit">Search</button>-->
+							<!--				</span>-->
+							<!--			</div>-->
+							<!--		</form>-->
+							<!--	</div> -->
+							<!--</li>-->
 							<!-- /SEARCH -->
 
 					
-						</ul>
+						<!--</ul>-->
 						<!-- /BUTTONS -->
 
 						<!-- Logo -->
@@ -125,23 +125,31 @@
 								
 								<ul id="topMain" class="nav nav-pills nav-main">
 									
-								<% if user_signed_in? and current_user.has_role? :admin %>
-
-									<li class="dropdown"><!-- SHOP -->
-										<a class="dropdown-toggle" href="/admin_panel/index">
-											Admin Panel
-										</a>
-										<ul class="dropdown-menu pull-right">
-											<li class="dropdown">
-												<a class="dropdown-toggle" href="/admin_panel/index">
-													Site Statistics
-												</a>
-												<a class="dropdown-toggle" href="/profiles">
-													All Users
-												</a>
-										</ul>
-
-									</li>
+								<% if user_signed_in? %>
+									<% if current_user.has_role? :admin %>
+										<li class="dropdown"><!-- SHOP -->
+											<a class="dropdown-toggle" href="/admin_panel/index">
+												Admin Panel
+											</a>
+											<ul class="dropdown-menu pull-right">
+												<li class="dropdown">
+													<a class="dropdown-toggle" href="/admin_panel/index">
+														Site Statistics
+													</a>
+													<a class="dropdown-toggle" href="/profiles">
+														All Users
+													</a>
+											</ul>
+	
+										</li>
+									<% else %>
+										<li class="dropdown"><!-- SHOP -->
+											<a class="dropdown-toggle" href="/suggestions">
+												Suggestions
+											</a>
+	
+										</li>
+									<% end %>
 								<% end %>
 									
 									
@@ -278,102 +286,108 @@
 										<a class="dropdown-toggle" href="/disciplines">
 											Disciplines
 										</a>
-										<ul class="dropdown-menu">
-											<li class="dropdown">
-												<a class="dropdown-toggle" href="/disciplines/new">
-													NEW
-												</a>
-												<!--<ul class="dropdown-menu">-->
-												<!--	<li><a href="page-about-us-1.html">ABOUT US - LAYOUT 1</a></li>-->
-												<!--	<li><a href="page-about-us-2.html">ABOUT US - LAYOUT 2</a></li>-->
-												<!--	<li><a href="page-about-us-3.html">ABOUT US - LAYOUT 3</a></li>-->
-												<!--	<li><a href="page-about-us-4.html">ABOUT US - LAYOUT 4</a></li>-->
-												<!--	<li><a href="page-about-us-5.html">ABOUT US - LAYOUT 5</a></li>-->
-												<!--	<li><a href="page-about-me-1.html">ABOUT ME - LAYOUT 1</a></li>-->
-												<!--	<li><a href="page-about-me-2.html">ABOUT ME - LAYOUT 2</a></li>-->
-												<!--</ul>-->
-											</li>
-							
-										</ul>
+										<% if user_signed_in? and current_user.has_role? :admin %>
+											<ul class="dropdown-menu">
+												<li class="dropdown">
+													<a class="dropdown-toggle" href="/disciplines/new">
+														NEW
+													</a>
+													<!--<ul class="dropdown-menu">-->
+													<!--	<li><a href="page-about-us-1.html">ABOUT US - LAYOUT 1</a></li>-->
+													<!--	<li><a href="page-about-us-2.html">ABOUT US - LAYOUT 2</a></li>-->
+													<!--	<li><a href="page-about-us-3.html">ABOUT US - LAYOUT 3</a></li>-->
+													<!--	<li><a href="page-about-us-4.html">ABOUT US - LAYOUT 4</a></li>-->
+													<!--	<li><a href="page-about-us-5.html">ABOUT US - LAYOUT 5</a></li>-->
+													<!--	<li><a href="page-about-me-1.html">ABOUT ME - LAYOUT 1</a></li>-->
+													<!--	<li><a href="page-about-me-2.html">ABOUT ME - LAYOUT 2</a></li>-->
+													<!--</ul>-->
+												</li>
+								
+											</ul>
+										<% end %>
 									</li>
 								
 									<li class="dropdown"><!-- BLOG -->
 										<a class="dropdown-toggle" href="/universities">
 											Universities
 										</a>
-										<ul class="dropdown-menu">
-											<li class="dropdown">
-												<a class="dropdown-toggle" href="/universities/new">
-													NEW
-												</a>
-											<!--	<ul class="dropdown-menu">-->
-											<!--		<li><a href="blog-default-aside-left.html">LEFT SIDEBAR</a></li>-->
-											<!--		<li><a href="blog-default-aside-right.html">RIGHT SIDEBAR</a></li>-->
-											<!--		<li><a href="blog-default-aside-both.html">BOTH SIDEBAR</a></li>-->
-											<!--		<li><a href="blog-default-fullwidth.html">FULL WIDTH</a></li>-->
-											<!--	</ul>-->
-											</li>
-								<!--</li>-->
-										</ul>
+										<% if user_signed_in? and current_user.has_role? :admin %>
+											<ul class="dropdown-menu">
+												<li class="dropdown">
+													<a class="dropdown-toggle" href="/universities/new">
+														NEW
+													</a>
+												<!--	<ul class="dropdown-menu">-->
+												<!--		<li><a href="blog-default-aside-left.html">LEFT SIDEBAR</a></li>-->
+												<!--		<li><a href="blog-default-aside-right.html">RIGHT SIDEBAR</a></li>-->
+												<!--		<li><a href="blog-default-aside-both.html">BOTH SIDEBAR</a></li>-->
+												<!--		<li><a href="blog-default-fullwidth.html">FULL WIDTH</a></li>-->
+												<!--	</ul>-->
+												</li>
+									<!--</li>-->
+											</ul>
+										<% end %>
 									</li>
 									<li class="dropdown"><!-- SHOP -->
 										<a class="dropdown-toggle" href="/subdisciplines">
 											Subdisciplines
 										</a>
-										<ul class="dropdown-menu pull-right">
-											<li class="dropdown">
-												<a class="dropdown-toggle" href="/subdisciplines/new">
-													New
-												</a>
-
-									</li>
-
-											<!--<li class="dropdown">-->
-											<!--	<a class="dropdown-toggle" href="#">-->
-											<!--		2 COLUMNS-->
-											<!--	</a>-->
-											<!--	<ul class="dropdown-menu">-->
-											<!--		<li><a href="shop-2col-left.html">LEFT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-2col-right.html">RIGHT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-2col-both.html">BOTH SIDEBAR</a></li>-->
-											<!--	</ul>-->
-											<!--</li>-->
-											<!--<li class="dropdown">-->
-											<!--	<a class="dropdown-toggle" href="#">-->
-											<!--		3 COLUMNS-->
-											<!--	</a>-->
-											<!--	<ul class="dropdown-menu">-->
-											<!--		<li><a href="shop-3col-left.html">LEFT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-3col-right.html">RIGHT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-3col-full.html">FULL WIDTH</a></li>-->
-											<!--	</ul>-->
-											<!--</li>-->
-											<!--<li class="dropdown">-->
-											<!--	<a class="dropdown-toggle" href="#">-->
-											<!--		4 COLUMNS-->
-											<!--	</a>-->
-											<!--	<ul class="dropdown-menu">-->
-											<!--		<li><a href="shop-4col-left.html">LEFT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-4col-right.html">RIGHT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-4col-full.html">FULL WIDTH</a></li>-->
-											<!--	</ul>-->
-											<!--</li>-->
-											<!--<li class="dropdown">-->
-											<!--	<a class="dropdown-toggle" href="#">-->
-											<!--		SINGLE PRODUCT-->
-											<!--	</a>-->
-											<!--	<ul class="dropdown-menu">-->
-											<!--		<li><a href="shop-single-left.html">LEFT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-single-right.html">RIGHT SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-single-both.html">BOTH SIDEBAR</a></li>-->
-											<!--		<li><a href="shop-single-full.html">FULL WIDTH</a></li>-->
-											<!--	</ul>-->
-											<!--</li>-->
-											<!--<li><a href="shop-compare.html">COMPARE</a></li>-->
-											<!--<li><a href="shop-cart.html">CART</a></li>-->
-											<!--<li><a href="shop-checkout.html">CHECKOUT</a></li>-->
-											<!--<li><a href="shop-checkout-final.html">ORDER PLACED</a></li>-->
-										</ul>
+										<% if user_signed_in? and current_user.has_role? :admin %>
+											<ul class="dropdown-menu pull-right">
+												<li class="dropdown">
+													<a class="dropdown-toggle" href="/subdisciplines/new">
+														New
+													</a>
+	
+										</li>
+	
+												<!--<li class="dropdown">-->
+												<!--	<a class="dropdown-toggle" href="#">-->
+												<!--		2 COLUMNS-->
+												<!--	</a>-->
+												<!--	<ul class="dropdown-menu">-->
+												<!--		<li><a href="shop-2col-left.html">LEFT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-2col-right.html">RIGHT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-2col-both.html">BOTH SIDEBAR</a></li>-->
+												<!--	</ul>-->
+												<!--</li>-->
+												<!--<li class="dropdown">-->
+												<!--	<a class="dropdown-toggle" href="#">-->
+												<!--		3 COLUMNS-->
+												<!--	</a>-->
+												<!--	<ul class="dropdown-menu">-->
+												<!--		<li><a href="shop-3col-left.html">LEFT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-3col-right.html">RIGHT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-3col-full.html">FULL WIDTH</a></li>-->
+												<!--	</ul>-->
+												<!--</li>-->
+												<!--<li class="dropdown">-->
+												<!--	<a class="dropdown-toggle" href="#">-->
+												<!--		4 COLUMNS-->
+												<!--	</a>-->
+												<!--	<ul class="dropdown-menu">-->
+												<!--		<li><a href="shop-4col-left.html">LEFT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-4col-right.html">RIGHT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-4col-full.html">FULL WIDTH</a></li>-->
+												<!--	</ul>-->
+												<!--</li>-->
+												<!--<li class="dropdown">-->
+												<!--	<a class="dropdown-toggle" href="#">-->
+												<!--		SINGLE PRODUCT-->
+												<!--	</a>-->
+												<!--	<ul class="dropdown-menu">-->
+												<!--		<li><a href="shop-single-left.html">LEFT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-single-right.html">RIGHT SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-single-both.html">BOTH SIDEBAR</a></li>-->
+												<!--		<li><a href="shop-single-full.html">FULL WIDTH</a></li>-->
+												<!--	</ul>-->
+												<!--</li>-->
+												<!--<li><a href="shop-compare.html">COMPARE</a></li>-->
+												<!--<li><a href="shop-cart.html">CART</a></li>-->
+												<!--<li><a href="shop-checkout.html">CHECKOUT</a></li>-->
+												<!--<li><a href="shop-checkout-final.html">ORDER PLACED</a></li>-->
+											</ul>
+										<% end %>
 									</li>
 
 									<li> <%= link_to 'Forums', forums_url %></li>

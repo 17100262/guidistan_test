@@ -72,8 +72,9 @@
                 </div>
                 <small class="block" style="margin-top:5px";><%= 
                 puts post.to_yaml
-                post.user.profile.name
+                # post.user.profile.name
                 %></small>
+                <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
                 <% if (current_user != nil && (current_user.has_role? :admin)) %>
                      <div class = "adm">
                 	   Admin</div>
@@ -127,8 +128,10 @@
                   </div>
                   <small class="block" style="margin-top:5px";><%= 
                   puts post.to_yaml
-                  post.user.profile.name
+                  
+                  
                   %></small>
+                  <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
                   <% if (current_user != nil && (current_user.has_role? :admin)) %>
                      <div class = "adm">
                 	   Admin</div>
@@ -231,7 +234,8 @@
           <div class="right-side-topuser">
             
             <div class="top-user-name">
-               <%= profile.name %>
+               <!--<= profile.name %>-->
+               <%= link_to profile.name , profile_path(profile.id) %>
             </div>
             <div class="top-user-ranking"><%= profile.reputation %></div>
           

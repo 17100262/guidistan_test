@@ -33,7 +33,7 @@
                 </div>
                  
                 <div class="commentator-box-right">
-                  <div class="commentator-box-name"><%= comment.user.profile.name %>
+                  <div class="commentator-box-name"><%= link_to comment.user.profile.name, profile_path(comment.user.profile.id) %>
                   	   <% if (user_signed_in? and current_user.has_role? :admin) %>
 	                     <div class = "adm">
                   	   Admin</div>

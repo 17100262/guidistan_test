@@ -23,9 +23,9 @@
 
 <section class="page-header" style="padding-top: 23px !important;">
   
-        <div class="container">
-          <div align="center"> <h1 class="post-title-forum post-title-all-posts" style="">All Universities</h1> </div>
-        </div>
+  <div class="container">
+    <div align="center"> <h1 class="post-title-forum post-title-all-posts" style="">All Universities</h1> </div>
+  </div>
         
 </section>
 <div class="universities-boxes-container col-md-12">
@@ -35,41 +35,28 @@
   </div>
 <table ng-show = "universities != null" class="table table-striped">
   <div ng-repeat="university in universities | searchFor:searchString">
-
- <div class="university-single-main-box col-md-4 col-sm-6"> 
- <div class="university-single-box-container">
-   <div class="university-imagebox col-md-4">
- 
-  
-  <img ng-src="{{ university.image }}"/>
-  </div>
+    <div class="university-single-main-box col-md-4 col-sm-6"> 
+      <div class="university-single-box-container">
+        <div class="university-imagebox col-md-4">
+          <img ng-src="{{ university.image }}"/>
+        </div>
         <div class="university-namecity-box col-md-8">
-        <div class="uni-name" style="margin-bottom:5px;">
-          {{university.name}}
+          <div class="uni-name" style="margin-bottom:5px;">
+            <%= link_to '{{ university.name}}', 
+                      URI::unescape( '/universities/{{ university.id}}' ) 
+          %>
+            <!--{{university.name}}-->
+          </div>
+          <div class="uni-city" style="margin-bottom:5px">
+            {{university.city}}
+            <!--<= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %>-->
+          </div>
         </div>
-        
-        <div class="uni-city" style="margin-bottom:5px">
-          {{university.city}}
-          
-         <!--<= link_to 'Edit', edit_university_path(university) %>&nbsp&nbsp&nbsp<= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %>-->
-
-        </div>
-              <!--<div class="university-description-box col-md-12">-->
-        
-        <!--Description N/A-->
-        <!--{{university.discipline}}-->
-        
-          
-      <!--</div>-->
-  <!--{{university.name}}-->
-  <!--</div>-->
-   <!--{{university.city}}-->
+      </div>
+</table>
+    </div>
+  </div>
 </div>
-</div>
-  </table>
-</div>
-</div>
-
 
 
 
@@ -143,17 +130,14 @@
   <!--< end %>-->
     <!--</tr>-->
     <!--</table>-->
-</div>
+
 
 <!--<= link_to 'New University', new_university_path %>-->
 
 <!--</div>-->
 
 <script>
-  
-  
-  
-    $(window).load(function(){
+  $(window).load(function(){
         
         var link_parent = $(".uni-name");
         
@@ -181,6 +165,7 @@
 
         $rootScope.universities.push({
           // console.log(university.name)
+          id: '<%= university.id %>',
           name:'<%= university.name %>',
           city: '<%= university.city.name %>',
           image: '<%= university.image.url(:small) %>',

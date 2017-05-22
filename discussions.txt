@@ -26,9 +26,9 @@ maueez
 generate all notifications and check reputations.
 
 saqib
-make things clickable in forum and universities page and subdiscipline show page
-add things in header like /suggestions page link.. remove new new and search thing
-fix facebook app
+make things clickable in forum and universities page and subdiscipline show page (done)
+add things in header like /suggestions page link.. remove new new and search thing (done)
+fix facebook app 
 
 
 sohail

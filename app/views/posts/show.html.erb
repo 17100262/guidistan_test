@@ -89,22 +89,14 @@
 	</table>
 	
 	<div class="user-details-post">
-	  
-
-	   <div class="user-single-postpic">
-
-        
+	  <div class="user-single-postpic">
               <% if @post.user.profile.image_file_name.present? %> 
                       <%= image_tag @post.user.profile.image.url(:large) %>
-                      <% else %>
-                      
-                      <a href="javascript:;">
-                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-                      </a>
-                      <% end %>
-
-
-       
+              <% else %>
+	              <a href="javascript:;">
+	              	<img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+	              </a>
+              <% end %>
 	   </div>
 	</div>
 
@@ -167,22 +159,21 @@
 			            
 
 	</table>
-	
 	<div class="user-details-post">
 	  
-	   <div class="user-details-name"> Posted by <b><%= @post.user.profile.name %></b></div>
+	   <div class="user-details-name"> Posted by <b><%= link_to @post.user.profile.name,  profile_path(@post.user.profile.id) %></b></div>
 	   
 	   <div class="user-single-postpic">
 
         
               <% if @post.user.profile.image_file_name.present? %> 
                       <%= image_tag @post.user.profile.image.url(:large) %>
-                      <% else %>
+          		<% else %>
                       
-                      <a href="javascript:;">
-                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-                      </a>
-                      <% end %>
+              <a href="javascript:;">
+              <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+              </a>
+              <% end %>
 
 
        

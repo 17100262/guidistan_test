@@ -13,7 +13,7 @@
     <ul>
     <% for degree in @degree %>
     	<li>
-    		<%= degree.name%>
+    		<%=link_to degree.name, discipline_university_path(degree.id)%>
     	</li>
     	<% end %>
     	</ul>

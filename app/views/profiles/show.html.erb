@@ -1,8 +1,11 @@
 <!--<h1>Profile#show</h1>-->
 <div class="container showsingle-profile">
     <div class="profile_header">
-      <h3 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">My Profile</h3>
-       <span class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary pull-right" %></span>
+      
+      <% if user_signed_in? and current_user==@profile.user %>
+        <h3 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">My Profile</h3>
+        <span class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary pull-right" %></span>
+      <% end %> 
     </div>
    
         
@@ -28,7 +31,7 @@
             <div class="col-md-9 col-sm-9 col-xs-12">
               <div class="detail_holder">
                 <div><label><%= @profile.name %> 
-                <% if current_user.has_role? :admin %>
+                <% if @profile.user.has_role? :admin %>
   	                     <div class = "adm">
                     	   Admin</div>
                 <% end %></label></div>
