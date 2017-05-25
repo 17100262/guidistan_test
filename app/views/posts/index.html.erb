@@ -24,21 +24,7 @@
     
 
     
-  <% @posts.each do |post| %>
-  
-    <!--<div class="panel panel-default">
-        <div class="panel-heading"><h1><= link_to post.title, post %></h1></div>
-          <p><b><= post.description %></p></b>
-          <p><= post.discipline.name %></p>
-          <p>Posted about <= time_ago_in_words(post.created_at) %> ago by <= post.user.email %></p>
-          <% if can? :update, post %>
-            <%= link_to 'Edit', edit_post_path(post),class: "btn btn-info" %>
-          <% end %>
-          <% if can? :destroy, post %>
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %>
-          <% end %>
-    </div>-->
-    
+  <% @posts.each do |post| %>   
           <div class="block-review-content all-posts-forum-page-content">
             <div class="block-review-body" style="padding-left:0px;">
               <div class="block-all-post-detail-box-container hidden-xs">
@@ -106,7 +92,7 @@
                 <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+                <%= link_to 'Destroy', post_path(:id => post,:forumm_id => @id), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
               <% end %>
               
               
@@ -176,7 +162,7 @@
                 <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+                <%= link_to 'Destroy', post_path(:id => post,:forumm_id => @id), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
               <% end %>
               
               

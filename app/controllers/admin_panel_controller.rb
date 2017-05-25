@@ -7,7 +7,10 @@ class AdminPanelController < ApplicationController
       
     # else
       flash[:notice] = "You don't have access to view this page"
-      redirect_to  disciplines_path
+      redirect_to  root
     end
+  end
+  def flag
+    @post = Post.where(flagi: true)
   end
 end

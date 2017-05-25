@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415191334) do
+ActiveRecord::Schema.define(version: 20170522141615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,10 +56,18 @@ ActiveRecord::Schema.define(version: 20170415191334) do
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "cached_votes_total", default: 0
+    t.integer  "cached_votes_score", default: 0
+    t.integer  "cached_votes_up",    default: 0
+    t.integer  "cached_votes_down",  default: 0
   end
 
+  add_index "comments", ["cached_votes_down"], name: "index_comments_on_cached_votes_down", using: :btree
+  add_index "comments", ["cached_votes_score"], name: "index_comments_on_cached_votes_score", using: :btree
+  add_index "comments", ["cached_votes_total"], name: "index_comments_on_cached_votes_total", using: :btree
+  add_index "comments", ["cached_votes_up"], name: "index_comments_on_cached_votes_up", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "discipline_universities", force: :cascade do |t|
@@ -138,6 +146,8 @@ ActiveRecord::Schema.define(version: 20170415191334) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "flag"
+    t.boolean  "flagi"
   end
 
   create_table "profile_educations", force: :cascade do |t|

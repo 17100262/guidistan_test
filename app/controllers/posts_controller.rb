@@ -10,14 +10,6 @@ class PostsController < ApplicationController
     @profiles = Profile.all.order(reputation: :desc).limit(5)
     @id = params[:filter_id]
     
-    # if (params[:filter_id] == nil)
-    #   # @posts = Post.all.order("created_at DESC").
-
-    #   @posts = Post.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
-    # else
-    # # puts params[:filter_id], "helellaelasdlalsd"
-    #   @posts = Post.where(forum_id: params[:filter_id]).paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
-    # end
     if params[:tag]!=nil and params[:filter_id]!=nil
       @posts = Post.tagged_with(params[:tag]).where(forum_id: params["filter_id"]).paginate(:page => params[:page],:per_page => 5)
     elsif (params[:filter_id] == nil)
@@ -33,8 +25,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @id = @post.forum_id
-    
+    @id = @post.forum_id  
   end
 
   # GET /posts/new
@@ -96,7 +87,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url(:filter_id => params[:forumm_id]), notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -111,8 +102,14 @@ class PostsController < ApplicationController
   
   def downvote
     @post.downvote_from current_user
-    @post.user.profile.update( :reputation => @post.user.profile.reputation - 1)
     
+    @post.user.profile.update( :reputation => @post.user.profile.reputation - 1)
+    if @post.get_downvotes.size > 0
+      puts @post.flagi
+      puts "lalalalalalalalalalalalalal"
+      @post.flagi = true
+      puts @post.flagi
+    end
     # redirect_to :back
   end
   
@@ -129,6 +126,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description,:forum_id, :filter_id,{:tag_list=>[]} ,:tag)
+      params.require(:post).permit(:title, :description,:forum_id, :filter_id,{:tag_list=>[]} ,:tag, :flagi)
     end
 end

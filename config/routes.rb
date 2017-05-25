@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get 'admin_panel/flag'
   get 'admin_panel/index'
   post 'cities/export'
   post 'discipline_universities/export'
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       :omniauth_callbacks => "users/omniauth_callbacks"
     }
   end
-  root to: "disciplines#index"
+  root to: "home#index"
   resources :subdisciplines do
     collection { post :import }
   end

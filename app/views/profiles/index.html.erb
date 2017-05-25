@@ -33,6 +33,7 @@
       <th>Name</th>
       <th>Reputation</th>
       <th>Gender</th>
+      <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -51,7 +52,12 @@
       <td >{{profile.name}}</td>
       <td>{{profile.reputation}}</td>
       <td>{{profile.gender}}</td>
+      <td>
+      <!--<= link_to 'View', URI::unescape(profiles_path(:id => '{{profile.id}}')), :class => 'btn btn-xs btn-primary', :role => "button" %>-->
+        <%= link_to 'View', URI::unescape('profiles/{{profile.id}}'), :class => 'btn btn-xs btn-primary', :role => "button" %>
 
+      <%= link_to 'Delete', URI::unescape('profiles/{{profile.id}}'), method: :delete, :class => 'btn btn-xs btn-danger', :role => "button", :data => {confirm: 'Are you sure you want to delete this?'} %>
+      </td>
     </tr>
 <!--</table>-->
       </div>  
@@ -70,7 +76,7 @@
       <% @profiles.each do |profile| %>
       // console.log(profile.name)
         $rootScope.profiles.push({
-
+          id: '<%= profile.id %>',
           name:'<%= profile.name %>',
           reputation: '<%= profile.reputation %>',
           gender: '<%= profile.gender %>',

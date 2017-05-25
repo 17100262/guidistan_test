@@ -1,54 +1,56 @@
+<section class="page-header">
+        <div class="container">
 
-<br><br>
+          <h1> <%= @discipline_university.name %> at <%= @discipline_university.university.name %></h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
 <div class="container" >
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong  class="post-title-forum post-title-all-posts" style="">Degree Program Name:</strong>
-  <%= @discipline_university.name %>
-</p>
-<p>
-  <strong  class="post-title-forum post-title-all-posts" style="">Degree type:</strong>
-  <%= @discipline_university.degree_type %>
-</p>
-<p>
-  <strong  class="post-title-forum post-title-all-posts" style="">Discipline Name:</strong>
-  <%= @discipline_university.discipline.name %>
-</p>
-<p>
-  <strong  class="post-title-forum post-title-all-posts" style="">Subdiscipline Name:</strong>
-  <%= @discipline_university.subdiscipline.name %>
-</p>
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">University:</strong>
-  <%= @discipline_university.university.name %>
-</p>
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Tuition Fee per Semester:</strong>
-  <%= @discipline_university.tution_fee_per_semester %>
-</p>
-
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">HEC recognized:</strong>
-  <% if @discipline_university.hec_recognized %>Yes<% else %>No<% end %>
-</p>
-
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Duration:</strong>
-  <%= @discipline_university.duration %>
-</p>
-
-
-
-<p>
-  <strong class="post-title-forum post-title-all-posts" style="">Eligibility Criteria:</strong>
-  <%= @discipline_university.criteria %>
-</p>
+  <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <td>Degree Program Name:</td>
+                <td> <%= @discipline_university.name %></td>
+            </tr> 
+            <tr>
+                <td>Degree type:</td>
+                <td> <%= @discipline_university.degree_type %></td>
+            </tr> 
+            <tr>
+                <td>Discipline Name:</td>
+                <td> <%= @discipline_university.discipline.name %></td>
+            </tr> 
+            <tr>
+                <td>Subdiscipline Name:</td>
+                <td> <%= @discipline_university.subdiscipline.name %></td>
+            </tr> 
+            <tr>
+                <td>University:</td>
+                <td> <%= @discipline_university.university.name %></td>
+            </tr> 
+            <tr>
+                <td>Tuition Fee per Semester:</td>
+                <td>  <%= @discipline_university.tution_fee_per_semester %></td>
+            </tr> 
+            <tr>
+                <td>HEC recognized:</td>
+                <td> <% if @discipline_university.hec_recognized %>Yes<% else %>No<% end %></td>
+            </tr> 
+            <tr>
+                <td>Duration:</td>
+                <td> <%= @discipline_university.duration %></td>
+            </tr>
+            <tr>
+                <td>Eligibility Criteria:</td>
+                <td> <%= @discipline_university.criteria %></td>
+            </tr>
+        </tbody>  
+    </table>
+  <a href="<% @discipline_university.link %>" class="btn btn-success">For more Information Visit this link</a><%= link_to 'For more Information Visit this link', @discipline_university.link %>
 
 
-<p>
-  <%= link_to 'For more Information Visit this link', @discipline_university.link %>
-  </p>
 
 
 <%= link_to 'Edit', edit_discipline_university_path(@discipline_university) %> |
