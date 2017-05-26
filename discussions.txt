@@ -34,12 +34,12 @@ fix facebook app
 sohail
 sort comments by votes (done)
 flag a post on too many negative votes (in progress)
-add pages in admin panel tags management/ add columns in all users pages (done)
+add pages in admin panel tags management/ add columns in all users pages (in progress)
 fix login page view
 design flash notices
 don't open pages in new tab. only open external links
-change architecture to question, Comment and reply (done)
---falan answered on your question
+change architecture to post, Comment and reply
+--falan answered on your post
 --falan replied to your answer
 home page (in progress)
 

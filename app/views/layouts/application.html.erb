@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  
   <script>
   	$(document).ready(function(){
   		$(window).scroll(function(){console.log($(window).scrollTop());
@@ -22,6 +23,7 @@
   	});
   </script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -455,125 +457,184 @@
 <p class="alert"><%= alert %></p>
 <%= yield %>
 <!--< if not controller_name == 'admin_panel' %>-->
-	<footer id="footer">
-		<div class="apni">
+	<!--<footer id="footer">-->
+	<!--	<div class="apni">-->
 	
-			<div class="row">
+	<!--		<div class="row">-->
 				
-				<div class="col-md-8">
+	<!--			<div class="col-md-8">-->
 	
 					<!-- Footer Logo -->
 					<!--<img class="footer-logo footer-2" src="/logo-footer.png" alt="" />-->
-					<h2> Guidistan </h2>
+	<!--				<h2> Guidistan </h2>-->
 					<!-- Small Description -->
-					<p>Ensuring Better Tomorrow </p>
+	<!--				<p>Ensuring Better Tomorrow </p>-->
 	
-					<hr />
+	<!--				<hr />-->
 	
-					<div class="row">
-						<div class="col-md-6 col-sm-6">
+	<!--				<div class="row">-->
+	<!--					<div class="col-md-6 col-sm-6">-->
 	
 							<!-- Newsletter Form -->
-							<p class="margin-bottom-10">Subscribe to Our <strong>Newsletter</strong></p>
+	<!--						<p class="margin-bottom-10">Subscribe to Our <strong>Newsletter</strong></p>-->
 	
-							<form id="newsletterForm" action="php/newsletter.php" role="form" method="post">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="email" id="email" name="email" class="form-control" placeholder="Enter your Email" required="required">
-									<span class="input-group-btn">
-										<button class="btn btn-success" type="submit">Subscribe</button>
-									</span>
-								</div>
-							</form>
+	<!--						<form id="newsletterForm" action="php/newsletter.php" role="form" method="post">-->
+	<!--							<div class="input-group">-->
+	<!--								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>-->
+	<!--								<input type="email" id="email" name="email" class="form-control" placeholder="Enter your Email" required="required">-->
+	<!--								<span class="input-group-btn">-->
+	<!--									<button class="btn btn-success" type="submit">Subscribe</button>-->
+	<!--								</span>-->
+	<!--							</div>-->
+	<!--						</form>-->
 							<!-- /Newsletter Form -->
-						</div>
+	<!--					</div>-->
 	
-						<div class="col-md-6 col-sm-6">
+	<!--					<div class="col-md-6 col-sm-6">-->
 	
 							<!-- Social Icons -->
-							<div class="margin-left-50 clearfix">
+	<!--						<div class="margin-left-50 clearfix">-->
 	
-								<p class="margin-bottom-10">Follow Us</p>
-								<a href="#" class="social-icon social-icon-sm social-icon-transparent social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-									<i class="fa fa-facebook-square"></i>
-									<i class="fa fa-facebook-square"></i>
-								</a>
+	<!--							<p class="margin-bottom-10">Follow Us</p>-->
+	<!--							<a href="#" class="social-icon social-icon-sm social-icon-transparent social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">-->
+	<!--								<i class="fa fa-facebook-square"></i>-->
+	<!--								<i class="fa fa-facebook-square"></i>-->
+	<!--							</a>-->
 	
-								<a href="#" class="social-icon social-icon-sm social-icon-transparent social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-									<i class="fa fa-twitter-square"></i>
-									<i class="fa fa-twitter-square"></i>
-								</a>
+	<!--							<a href="#" class="social-icon social-icon-sm social-icon-transparent social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">-->
+	<!--								<i class="fa fa-twitter-square"></i>-->
+	<!--								<i class="fa fa-twitter-square"></i>-->
+	<!--							</a>-->
 	
-								<a href="#" class="social-icon social-icon-sm social-icon-transparent social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-									<i class="fa fa-google-plus-square"></i>
-									<i class="fa fa-google-plus-square"></i>
-								</a>
+	<!--							<a href="#" class="social-icon social-icon-sm social-icon-transparent social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">-->
+	<!--								<i class="fa fa-google-plus-square"></i>-->
+	<!--								<i class="fa fa-google-plus-square"></i>-->
+	<!--							</a>-->
 	
-								<a href="#" class="social-icon social-icon-sm social-icon-transparent social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
-									<i class="fa fa-linkedin-square"></i>
-									<i class="fa fa-linkedin-square"></i>
-								</a>
+	<!--							<a href="#" class="social-icon social-icon-sm social-icon-transparent social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">-->
+	<!--								<i class="fa fa-linkedin-square"></i>-->
+	<!--								<i class="fa fa-linkedin-square"></i>-->
+	<!--							</a>-->
 	
 								<!--<a href="#" class="social-icon social-icon-sm social-icon-transparent social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">-->
 								<!--	<i class="icon-rss"></i>-->
 								<!--	<i class="icon-rss"></i>-->
 								<!--</a>-->
 	
-							</div>
+	<!--						</div>-->
 							<!-- /Social Icons -->
 	
-						</div>
+	<!--					</div>-->
 						
-					</div>
+	<!--				</div>-->
 	
 	
 	
-				</div>
+	<!--			</div>-->
 	
-				<div class="col-md-4">
+	<!--			<div class="col-md-4">-->
 	
-					<h4 class="letter-spacing-1">CONTACT US</h4>
+	<!--				<h4 class="letter-spacing-1">CONTACT US</h4>-->
 	
 					<!-- CONTACT MESSAGES -->
-					<p id="alert_success" class="alert alert-success alert-mini">Message sent! Thank You!</p>
-					<p id="alert_failed" class="alert alert-danger alert-mini">Message not sent!</p>
-					<p id="alert_mandatory" class="alert alert-danger alert-mini">Please, complete all mandatory fields</p>
+	<!--				<p id="alert_success" class="alert alert-success alert-mini">Message sent! Thank You!</p>-->
+	<!--				<p id="alert_failed" class="alert alert-danger alert-mini">Message not sent!</p>-->
+	<!--				<p id="alert_mandatory" class="alert alert-danger alert-mini">Please, complete all mandatory fields</p>-->
 	
 					<!-- CONTACT FORM -->
-					<form class="validate" method="post" action="php/contact.php">
+	<!--				<form class="validate" method="post" action="php/contact.php">-->
 						
-						<input type="text" value="" placeholder="Name*" maxlength="100" class="form-control required" name="contact[name]" />
-						<input type="email" value="" placeholder="Email*" data-msg-email="Please enter a valid email address." class="form-control required" name="contact[email]" />
-						<textarea maxlength="5000" placeholder="Message*" rows="3" class="form-control required" name="contact[message]"></textarea>
-						<input type="submit" value="SUBMIT MESSAGE" class="btn btn-success" />
+	<!--					<input type="text" value="" placeholder="Name*" maxlength="100" class="form-control required" name="contact[name]" />-->
+	<!--					<input type="email" value="" placeholder="Email*" data-msg-email="Please enter a valid email address." class="form-control required" name="contact[email]" />-->
+	<!--					<textarea maxlength="5000" placeholder="Message*" rows="3" class="form-control required" name="contact[message]"></textarea>-->
+	<!--					<input type="submit" value="SUBMIT MESSAGE" class="btn btn-success" />-->
 	
-					</form>
+	<!--				</form>-->
 					<!-- /CONTACT FORM -->
 	
+	<!--			</div>-->
+	
+	<!--		</div>-->
+	
+	<!--	</div>-->
+	
+	<!--	<div class="copyright">-->
+	<!--		<div class="container">-->
+	<!--			<ul class="list-inline inline-links mobile-block pull-right nomargin">-->
+	<!--				<li><a href="#">Home</a></li>-->
+	<!--				<li><a href="#">About Us</a></li>-->
+	<!--				<li><a href="#">Contact</a></li>-->
+	<!--			</ul>-->
+	
+	<!--			&copy; All Rights Reserved, Company LTD-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<!--</footer>-->
+			<footer class="footer-distributed">
+
+			<div class="footer-left">
+
+				<h3><span>Guidistan</span></h3>
+
+				<p class="footer-links">
+					<a href="#">Home</a>
+					·
+					<a href="/universities">Univsersities</a>
+					·
+					<a href="/disciplines">Disciplines</a>
+					·
+					<a href="/forums">Forums</a>
+					·
+					<a href="#">Contact</a>
+				</p>
+
+				<p class="footer-company-name">Guidistan &copy; 2017</p>
+			</div>
+
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>LUMS</span> Lahore, Pakistan</p>
 				</div>
-	
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+92 322 9499463</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com"><font color= #8ab933>info@guidistan.com</font></a></p>
+				</div>
+
 			</div>
-	
-		</div>
-	
-		<div class="copyright">
-			<div class="container">
-				<ul class="list-inline inline-links mobile-block pull-right nomargin">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About Us</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-	
-				&copy; All Rights Reserved, Company LTD
+
+			<div class="footer-right">
+
+				<p class="footer-company-about">
+					<span>About Guidistan</span>
+					Guidistan is an online platform which is providing free counseling and data access to all students of Pakistan.
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-github"></i></a>
+
+				</div>
+
 			</div>
-		</div>
-	</footer>
+
+		</footer>
 	<script type="text/javascript">
 		$('.notification').on('click',function(){
 			$(this).find('ul.dropdown-menu').toggleClass('notification-hide');	
 		});
 	</script>
-	
+
 	
 
 	

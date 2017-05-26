@@ -20,6 +20,7 @@ class University < ActiveRecord::Base
                 uni.name = header[0]
                 uni.campus = header[4]
                 if University.exists?(name: uni.name,campus: uni.campus)
+                    
                 else
                 	uni.description = header[1]
                 	if City.exists?(name: header[2])
