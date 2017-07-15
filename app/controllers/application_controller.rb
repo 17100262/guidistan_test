@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to main_app.root_url, :alert => exception.message
   end
-  force_ssl :protocol => "https"
+  # force_ssl :protocol => "http"
   include PublicActivity::StoreController
   
   before_action :set_activities
