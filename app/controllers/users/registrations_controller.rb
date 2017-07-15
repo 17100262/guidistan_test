@@ -18,15 +18,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource({})
     self.resource.profile = Profile.new
     respond_with self.resource
-    # puts "here in create"
+
 
   end
 
   # POST /resource
   def create
     # self.resource.profile.save!
-    # puts "here in create1"
-    # puts @profile.save
+    
     super
   end
 

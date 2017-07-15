@@ -6,7 +6,6 @@ class DisciplineUniversitiesController < ApplicationController
   # GET /discipline_universities
   # GET /discipline_universities.json
   def index
-    # @discipline_universities = DisciplineUniversity.all
     
     @filterrific = initialize_filterrific(
       DisciplineUniversity,
@@ -57,12 +56,12 @@ class DisciplineUniversitiesController < ApplicationController
       else
         @discipline_universities= DisciplineUniversity.all
     end
+    
     respond_to do |format|
       format.html
       format.js
     end
-    
-    puts 'hello world', @discipline_universities.map{|n| }
+    # puts 'hello world', @discipline_universities.map{|n| }
   end
 
   # GET /discipline_universities/1

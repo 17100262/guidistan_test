@@ -104,12 +104,12 @@ class PostsController < ApplicationController
     @post.downvote_from current_user
     
     @post.user.profile.update( :reputation => @post.user.profile.reputation - 1)
-    if @post.get_downvotes.size > 0
-      puts @post.flagi
-      puts "lalalalalalalalalalalalalal"
-      @post.flagi = true
-      puts @post.flagi
-    end
+    # if @post.get_downvotes.size > 0
+    #   puts @post.flagi
+    #   puts "lalalalalalalalalalalalalal"
+    #   @post.flagi = true
+    #   puts @post.flagi
+    # end
     # redirect_to :back
   end
   

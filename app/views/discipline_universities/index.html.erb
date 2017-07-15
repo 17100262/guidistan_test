@@ -37,7 +37,7 @@
   </div>
 <% end %>  
   <!----------->
-  <%= form_for_filterrific @filterrific do |f| %>
+  <%= form_for_filterrific @filterrific,:remote => true do |f| %>
     <div class ="row">
       <div class="col-md-2 col-sm-2">
         <div>
@@ -79,8 +79,6 @@
                 <% end %>
               </div>
             </div>
-          
-  
       </div>
   <% end %>
   <%= render :partial =>'discipline_universities/index', :locals =>{ discipline_universities: @discipline_universities} %>

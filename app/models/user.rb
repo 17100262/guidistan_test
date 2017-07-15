@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  after_create :send_welcome_mail
+  def send_welcome_mail
+    SendEmailJob.set(wait: 20.seconds).perform_later(self.email)    
+  end
+
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -17,6 +22,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       if user.email?
+        SendEmailJob.set(wait: 20.seconds).perform_later(user.email)
         user.save!
       
         profile= Profile.new

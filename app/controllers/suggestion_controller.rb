@@ -96,7 +96,7 @@ class SuggestionController < ApplicationController
     return inverse_count
     
     puts "degrees_count", all_degrees_count
-    # puts "document_frequency",inverse_count
+    puts "document_frequency",inverse_count
  end
   
  def user_discipline

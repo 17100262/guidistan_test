@@ -40,4 +40,19 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.web_console.whiny_requests = false
+  
+  config.active_job.queue_adapter = :delayed_job
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true 
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      :port           => 587,
+      :address        => "smtp.mailgun.org",
+      :domain         => ENV['domain'],
+      :user_name      => ENV['username'],
+      :password       => ENV['password'],
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
 end

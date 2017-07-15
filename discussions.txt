@@ -24,27 +24,25 @@ as it is using guidistan DB. however rake will work for drop, migrate and seed.
 
 maueez
 generate all notifications and check reputations.
+fix filters thingy
+flag a post on too many negative votes (in progress)
 
 saqib
-make things clickable in forum and universities page and subdiscipline show page (done)
-add things in header like /suggestions page link.. remove new new and search thing (done)
-fix facebook app 
+fix facebook app
+password reset system
 
 
 sohail
-sort comments by votes (done)
-flag a post on too many negative votes (in progress)
-add pages in admin panel tags management/ add columns in all users pages (in progress)
-fix login page view
 design flash notices
-don't open pages in new tab. only open external links
 change architecture to post, Comment and reply
 --falan answered on your post
 --falan replied to your answer
-home page (in progress)
+
 
 
 sohail+saqib
-Action mailer
 we need to decide:
 which forums to create in start
+
+https://launchschool.com/blog/handling-emails-in-rails
+bundle exec rake jobs:work
