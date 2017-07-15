@@ -68,7 +68,8 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
 # for importing from excel
 gem 'roo', "2.3.2"
 gem 'acts-as-taggable-on'
-gem 'rails-jquery-tokeninput',:path=> "~/workspace/rails-jquery-tokeninput-master"
+gem 'rails-jquery-tokeninput'
+# ,:path=> "~/workspace/rails-jquery-tokeninput-master"
 gem 'ahoy_matey'
 #for email sending
 gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
