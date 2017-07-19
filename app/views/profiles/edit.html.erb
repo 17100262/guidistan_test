@@ -34,7 +34,7 @@
     <%#= @profile.errors.full_messages.first if @profile.errors.any? %>
      <div class="field">
       <%= f.label :Interests %>
-       <%= ff.text_field :interest_list, 'data-tokeninput' => { collection: @names ,options: @options}.to_json %>
+       <%= ff.text_field :interest_list, 'data-tokeninput' => { collection: @names ,options: @options}.to_json, :required => true %>
       </div>
       
    <div class="field">

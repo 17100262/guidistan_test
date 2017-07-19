@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     devise_for :users, controllers: {
       registrations: 'users/registrations',
       :omniauth_callbacks => "users/omniauth_callbacks"
+      # passwords: 'users/passwords'
     }
   end
   root to: "home#index"

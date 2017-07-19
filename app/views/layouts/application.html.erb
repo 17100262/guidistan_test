@@ -100,7 +100,7 @@
 						<!-- /BUTTONS -->
 
 						<!-- Logo -->
-						<a class="logo pull-left" href="/disciplines">
+						<a class="logo pull-left" href="/">
 							<img src="/header_logo.png" alt=""/>
 							<!--<= image_tag("/edu logo.png", alt: "", height: 200, width: 200) %>-->
 						</a>
@@ -337,10 +337,13 @@
 										<% end %>
 									</li>
 									<li class="dropdown"><!-- SHOP -->
-										<a class="dropdown-toggle" href="/subdisciplines">
-											Subdisciplines
-										</a>
+										
 										<% if user_signed_in? and current_user.has_role? :admin %>
+											
+											<a class="dropdown-toggle" href="/subdisciplines">
+												Subdisciplines
+											</a>
+											
 											<ul class="dropdown-menu pull-right">
 												<li class="dropdown">
 													<a class="dropdown-toggle" href="/subdisciplines/new">
@@ -579,7 +582,7 @@
 				<p class="footer-links">
 					<a href="#">Home</a>
 					·
-					<a href="/universities">Univsersities</a>
+					<a href="/universities">Universities</a>
 					·
 					<a href="/disciplines">Disciplines</a>
 					·
@@ -598,10 +601,10 @@
 					<p><span>LUMS</span> Lahore, Pakistan</p>
 				</div>
 
-				<div>
-					<i class="fa fa-phone"></i>
-					<p>+92 322 9499463</p>
-				</div>
+				<!--<div>-->
+				<!--	<i class="fa fa-phone"></i>-->
+				<!--	<p>+92 322 9499463</p>-->
+				<!--</div>-->
 
 				<div>
 					<i class="fa fa-envelope"></i>
@@ -619,7 +622,7 @@
 
 				<div class="footer-icons">
 
-					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="https://www.facebook.com/guidistan/" target='blank'><i class="fa fa-facebook"></i></a>
 					<a href="#"><i class="fa fa-twitter"></i></a>
 					<a href="#"><i class="fa fa-linkedin"></i></a>
 					<a href="#"><i class="fa fa-github"></i></a>
