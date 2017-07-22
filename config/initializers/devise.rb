@@ -15,7 +15,7 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   config.omniauth :facebook, "110207142964086", "6868e81e0e94dc2613a070c5ecee7d4d", scope: 'email', info_fields: 'email', secure_image_url: true, :image_size => 'large'
   config.omniauth :twitter, "v1gbcUV2axQRu85FszKqyfZzu", "kLkD8pdKgoLlCMCFO82a0GhQSgo4uWlmZVP36zF3k8VbRXdo8g", callback_url: "https://ssppp-a17100262.c9users.io/"
-  config.omniauth :google_oauth2, "191194749995-aaf58h9sb2hc59528kmnrl1rumtt9ceq.apps.googleusercontent.com", "MCJz6_eahY2yjDz2UNs1lb4v"
+  config.omniauth :google_oauth2, "722714232124-jfs23eq1d21t39em5cg5rrk2lqqdg59e.apps.googleusercontent.com", "y4k5NWlTLNXnp0nRYVlphoiA"
   
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
