@@ -13,6 +13,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
+        SendEmailJob.set(wait: 5.seconds).perform_later(@profile.user.email)
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else

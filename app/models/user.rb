@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       if user.email?
-        SendEmailJob.set(wait: 20.seconds).perform_later(user.email)
+        SendEmailJob.set(wait: 5.seconds).perform_later(user.email)
         user.save!
       
         profile= Profile.new
