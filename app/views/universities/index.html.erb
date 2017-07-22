@@ -155,12 +155,9 @@
  </script>
 
 <script>
- console.log(1)
   var stdMod = angular.module('Unisr', []); 
-  console.log(2)
   stdMod.controller('Student', function ($rootScope, $http) {
     $rootScope.universities = []
-    console.log("scope created")
     <% if @universities!=nil%>
       <% @universities.each do |university| %>
 
@@ -169,13 +166,11 @@
           id: '<%= university.id %>',
           name:'<%= university.name %>',
           city: '<%= university.city.name %>',
-          image: '<%= university.image.url(:small) %>',
-          discipline: '<%= university.discipline.first %>'
+          image: '<%= university.image.url(:small) %>' //,
+          // discipline: '<= university.discipline.first %>'
           // city: '<= university.city.name %>',
           // image: '<= university.image.url(:med) %>'
         })
-        console.log($rootScope.universities.discipline)
-        console.log("stuff pushed")
       <% end %>
     <% end %>
   });
