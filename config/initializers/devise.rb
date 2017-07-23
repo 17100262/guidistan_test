@@ -6,19 +6,15 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'ae23730c11b34b1b2901e492d594201b6ce3480f81d1756271d58f20684e924170ce5c51f5349099461f2081b330f128be3253f6db08a5879732ed6603f62ac7'
+  # config.secret_key = '9769d3665fb73e79877a27b5301af9c708a78a0ff828d7b0b76f494c63ac7d9350913b80b3145722ed25eca44aecb39a4d115a7553f86f534780e80810d74c31'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.omniauth :facebook, "110207142964086", "6868e81e0e94dc2613a070c5ecee7d4d", scope: 'email', info_fields: 'email', secure_image_url: true, :image_size => 'large'
-  config.omniauth :twitter, "v1gbcUV2axQRu85FszKqyfZzu", "kLkD8pdKgoLlCMCFO82a0GhQSgo4uWlmZVP36zF3k8VbRXdo8g", callback_url: "https://ssppp-a17100262.c9users.io/"
-  config.omniauth :google_oauth2, "722714232124-jfs23eq1d21t39em5cg5rrk2lqqdg59e.apps.googleusercontent.com", "y4k5NWlTLNXnp0nRYVlphoiA"
-  
+
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
   # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
@@ -112,7 +108,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'a99979d9c4698e09395b075fc774f3dbc82b1f7846007f1d4808a698edc512c1b46c9d6e31b39e086c2a73971cd4cabfe070a1846f3e79ca75536d97df03709c'
+  # config.pepper = 'a2699dd4a730ed77a2c35978d799c5481453a301d01ae718f2f949ed516ef70229f1035ea7200ee03ef191c408ed4fc37f3c1bdb730b6eb08bba680acea4c121'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
