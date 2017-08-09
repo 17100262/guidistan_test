@@ -22,14 +22,20 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       # if user.email?
-      user.save!
+      # user.save! 
+      #Need to check proper way. user.save! not recommended
+      if user.save
+        profile= Profile.new
+        profile.name = auth.info.name   # assuming the user model has a name
+        profile.image = auth.info.image # assuming the user model has an image
+        profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
+        profile.user_id = user.id
+        profile.save!
+      else
+        redirect_to "users/sign_in",alert: user.errors
+      end
     
-      profile= Profile.new
-      profile.name = auth.info.name   # assuming the user model has a name
-      profile.image = auth.info.image # assuming the user model has an image
-      profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
-      profile.user_id = user.id
-      profile.save!
+
       # else
       #   user.email = "noone"
       # end
