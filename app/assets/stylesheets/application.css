@@ -545,6 +545,130 @@ width: 100%;
 .detail_holder > div > span{
     margin-left:5px;
 }
+.uni-description {
+    margin: 0 0 20px;
+}
+.uni-name-container {
+    border-bottom: 1px solid #dcdcdc;
+    padding: 0 0 13px;
+}
+/*------>University contact info<------*/
+.uni-contact ul{
+    margin: 0 auto 30px;
+    text-align: center;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 0;
+    width: 70%;
+    border-top: 1px solid #dcdcdc;
+}
+.uni-contact li a{
+    color:#888;
+    display:block;
+    
+}
+.uni-contact li a:hover,.uni-contact li a:active,.uni-contact li a:focus{
+    text-decoration:none;
+    color:#666666;
+    
+}
+.uni-contact li a:hover i{
+     transform:scale(1.2);
+}
+.uni-contact li i {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px 0 0;
+    transition:.3s ease transform;
+}
+/*------>University pages style<------*/
+#sidebar{
+    padding:0;   
+}
+.uni-link .inner-wrapper-sticky{
+    border:1px solid #ccc;
+    padding:25px;
+}
+
+.uni-link a{
+    display:block;
+    color:#fff;
+    background:#8ab933;
+    padding: 10px 0;
+    text-align:center;
+    border-radius:5px;
+    position:relative;
+}
+.uni-link a:hover,.uni-link a:active,.uni-link a:focus{
+    text-decoration:none;
+    color:#fff;
+    background:#a0ce4b;
+}
+.uni-link a:before{
+    font-family: FontAwesome;
+    content:'\f19c';
+    position:absolute;
+    left:19px;
+    top:50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index:1;
+}
+.uni-city-container{
+    position:relative;
+}
+.uni-city-container:before{
+    font-family: FontAwesome;
+    content:'\f041';
+    display:inline-block;
+}
+/*---->disciplines offered styles<-----*/
+.disc-offered-container{
+    background:	rgba(0,0,0,0.05);
+    padding:0 0 !important;
+    border:1px solid #dcdcdc;
+}
+.disc-offered-heading{
+    margin:0 !important;
+    border-bottom:1px solid #dcdcdc;
+    padding:10px 15px;
+}
+.panel-group .panel{
+    margin:0 !important;
+    border-radius:unset !important;
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+.disc-offered-container .panel-heading{
+    padding:0;
+}
+.disc-offered-container .panel-title i{
+    float:right;
+}
+.disc-offered-container .panel-title i:after{
+    content:'';
+    display:block;
+    clear:both;
+}
+.disc-offered-container .panel-title a{
+     color:#888 !important;
+     display:block;
+     padding:10px 15px;
+ }
+ .disc-offered-container .panel-body a{
+     display: block;
+    background: #fff;
+    padding: 6px 6px;
+    margin:0 0 10px;
+}
+
+ .disc-offered-container .panel-title a:hover{
+     color:#666666 !important;
+ }
+ 
 @media(max-width:767px){
     .notification_count{
         top:10px;

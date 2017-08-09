@@ -43,20 +43,20 @@
                 
     </div>
     <% if can? :update, comment %>
-      <%= link_to "Edit", edit_post_comment_path(comment.commentable, comment),class: "comments-small-btns"%>
+      <%= link_to "Edit", edit_comment_path(comment),class: "comments-small-btns"%>
     <% end %>
     <% if can? :destroy, comment %>
-    <%= link_to "Delete", [comment.commentable, comment], method: :delete, data: { confirm: "Are you sure?" },class: "comments-small-btns"%>
+    <%= link_to "Delete", [comment], method: :delete, data: { confirm: "Are you sure?" },class: "comments-small-btns"%>
     <% end %>
     
-    <!--<%= link_to like_post_comment_path(comment.commentable, comment), class: "like", method: :put do%>
+    <!--<%= link_to like_forum_post_comment_path(@forum,comment.commentable, comment), class: "like", method: :put do%>
       <button type="button" class="btn btn-info" aria-label="Left Align">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
         <span class="badge"><%= comment.get_upvotes.size %></span>
       </button>
     <% end %>
     
-    <%= link_to dislike_post_comment_path(comment.commentable, comment), class: "like", method: :put do%>
+    <%= link_to dislike_forum_post_comment_path(@forum,comment.commentable, comment), class: "like", method: :put do%>
       <button type="button" class="btn btn-info" aria-label="Left Align">
         <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
         <span class="badge"><%= comment.get_downvotes.size %></span>
@@ -93,9 +93,13 @@
     
     <div class="comments-reply-container">
       <h4 class="visible-xs">Replies</h4>
-      <%= render partial: 'comments/reply', collection: comment.comments %>
+      
+      <div class="reply_div" id="post_<%=@post.id %>_comment_<%= comment.id %>" >
+        <%= render partial: 'comments/reply', collection: comment.comments %>
+      </div>
+      
       <a href="javascript:;" class="get-reply-option-btn">Add a Reply</a>
-      <%= bootstrap_form_for [comment, Comment.new] do |f| %> 
+      <%= bootstrap_form_for [comment, Comment.new],:remote => true, :html => { :id => 'reply_form' } do |f| %> 
         <%= f.text_area :comment,placeholder: "Add a Reply"%>
         <%= f.submit "Post Reply" %>
       <% end %>

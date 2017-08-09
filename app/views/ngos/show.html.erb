@@ -1,0 +1,24 @@
+<section class="page-header">
+        <div class="container">
+
+          <h1><%= @ngo.name %></h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+<div class="container">
+  
+    <%= link_to 'Edit', edit_ngo_path(@ngo) %> |
+    <%= link_to 'Back', ngos_path %>
+    
+    <p><%= @ngo.name %></p>
+    <p><%= @ngo.description %></p>
+    <p><%= @ngo.link %></p>
+    <p><%= @ngo.lastdate %></p>
+    <p><%= @ngo.procedure %></p>
+
+    
+</div>
+
+</div>

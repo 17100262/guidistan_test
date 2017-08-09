@@ -1,0 +1,60 @@
+<br>
+<div class="container">
+<p id="notice"><%= notice %></p>
+<br>
+<% if can? :create, Ngo.new %>
+  <div class="disc_unis_admins">
+<%= link_to 'New NGO', new_ngo_path, class: "btn btn-primary pull-right" %>
+  <%= form_tag :controller => :ngos, :action => :export do %>
+    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+  <% end %>
+<%= form_tag import_ngos_path, multipart: true do %>
+  <%= file_field_tag :file, required: true %>
+  <br>
+  <%= submit_tag "Import" %>
+<% end %>
+</div>
+<% end %>
+<h2 class="post-title-forum post-title-all-posts" style="">All NGOs</h2>
+
+
+
+<%= bootstrap_form_tag url: ngos_path, :method => 'get' do |f| %>
+  <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] %>
+  <%= f.submit %>
+<% end %>
+
+
+
+
+
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Level</th>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ngos.each do |ngo| %>
+      <tr>
+        <td><%= ngo.name %></td>
+        <td><%= ngo.description %></td>
+        <td><%= ngo.level %></td>
+        <td><%= link_to 'Show', ngo %></td>
+        <td><%= link_to 'Edit', edit_ngo_path(ngo) %></td>
+        <td><%= link_to 'Destroy', ngo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+</div>

@@ -21,20 +21,18 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      if user.email?
-        # SendEmailJob.set(wait: 5.seconds).perform_later(user.email)
-        BasicMailer.send_email(user.email).deliver
-        user.save!
-      
-        profile= Profile.new
-        profile.name = auth.info.name   # assuming the user model has a name
-        profile.image = auth.info.image # assuming the user model has an image
-        profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
-        profile.user_id = User.last.id
-        profile.save!
-      else
-        user.email = "noone"
-      end
+      # if user.email?
+      user.save!
+    
+      profile= Profile.new
+      profile.name = auth.info.name   # assuming the user model has a name
+      profile.image = auth.info.image # assuming the user model has an image
+      profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
+      profile.user_id = user.id
+      profile.save!
+      # else
+      #   user.email = "noone"
+      # end
       
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.

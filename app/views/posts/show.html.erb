@@ -43,8 +43,8 @@
     <div class="edit-desc-btn">
     	
     	<% if can? :update, @post %>
-		  <%= link_to 'Edit', edit_post_path(@post) %>
-		   <%= link_to 'Destroy',post_path(:id => @post.id,:forumm_id => @id), method: :delete, data: { confirm: 'Are you sure?' } %>
+		  <%= link_to 'Edit', edit_forum_post_path(@forum,@post) %>
+		   <%= link_to 'Destroy',forum_post_path(@forum,@post), method: :delete, data: { confirm: 'Are you sure?' } %>
               
 		<% end %>
 		
@@ -112,7 +112,9 @@
 
 
 
-  <%= render @post.comments.order(cached_votes_score: :desc) %>
+  <div id="comment_div">
+	<%= render @post.comments.order(cached_votes_score: :desc) %>
+  </div>
   
   <!--<h3> Comment on this reply</h3>-->
   <div id='comment-form'>

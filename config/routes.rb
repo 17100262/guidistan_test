@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'disciplines/export'
   post 'subdisciplines/export'
   post 'universities/export'
+  post 'ngos/export'
   # get 'notification/index'
   get 'notification' => 'notification#index'
   get 'tags/:tag', to: 'posts#index', as: :tag
@@ -14,10 +15,9 @@ Rails.application.routes.draw do
   resources :disciplines do
     collection { post :import }
   end
-  resources :comments do
-    resources :comments
-  end
-  resources :posts do
+  
+  resources :forums, :except =>[:show] do 
+    resources :posts do
     member do
       put "like" => "posts#upvote"
       get "like" => "posts#upvote"
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       put "count" => "posts#count"
     end
     # get "posts/tags" => "posts#tags", :as => :tags
-      resources :comments do
+      resources :comments,:except =>[:index,:show,:new] do
         member do
           put "like" => "comments#upvote"
           get "like" => "comments#upvote"
@@ -38,7 +38,39 @@ Rails.application.routes.draw do
       
       
     end
-  resources :forums
+  end
+  
+  resources :comments,:except => [:index,:create,:new] do
+    resources :comments
+  end
+  
+  
+  # resources :comments do
+  #   resources :comments
+  # end
+  
+  # resources :posts do
+  #   member do
+  #     put "like" => "posts#upvote"
+  #     get "like" => "posts#upvote"
+  #     put "dislike" => "posts#downvote"
+  #     get "dislike" => "posts#downvote"
+  #     put "count" => "posts#count"
+  #   end
+  #   # get "posts/tags" => "posts#tags", :as => :tags
+  #     resources :comments do
+  #       member do
+  #         put "like" => "comments#upvote"
+  #         get "like" => "comments#upvote"
+  #         put "dislike" => "comments#downvote"
+  #         get "dislike" => "comments#downvote"
+  #         put "count" => "comments#count"
+  #       end
+  #     end
+      
+      
+  #   end
+  # resources :forums
   # devise_for :users
   
   Rails.application.routes.draw do
@@ -62,6 +94,9 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   resources :universities do
+    collection { post :import }
+  end
+  resources :ngos do
     collection { post :import }
   end
   resources :profiles

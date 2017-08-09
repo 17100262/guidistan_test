@@ -17,12 +17,12 @@ module Devise
         head = headers_for(action, opts)
         
         
-        RestClient.post "https://api:key-99bda9ea3ee959427139207059c14ea6"\
-        "@api.mailgun.net/v3/guidistan.com/messages",
-        :from => "Guidistan <noreply@guidistan.com>",
-        :to => head[:to],
-        :subject => "Password Reset Instructions",
-        :text => "For Password Reset please contact at saqib.lums@gmail.com."
+        # RestClient.post "https://api:key-99bda9ea3ee959427139207059c14ea6"\
+        # "@api.mailgun.net/v3/guidistan.com/messages",
+        # :from => "Guidistan <noreply@guidistan.com>",
+        # :to => head[:to],
+        # :subject => "Password Reset Instructions",
+        # :text => "For Password Reset please contact at saqib.lums@gmail.com."
         
         # :reply_to=>"please-change-me-at-config-initializers-devise@example.com"
         # :text => "Hello! \n Welcome to an amazing place, welcome to Guidistan."
@@ -37,8 +37,8 @@ module Devise
         # , {headers_for(action, opts)}
         
         
-        # mail headers_for(action, opts), &block
-        puts "mail gone"
+        mail headers_for(action, opts), &block
+        # puts "mail gone"
       end
 
       def initialize_from_record(record)

@@ -38,7 +38,8 @@
             </div>
             
             <div class="forum-list-link">
-                <%= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id }, class:"tab-title" %>
+                <%#= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id }, class:"tab-title" %>
+                <%= link_to d.name ,forum_posts_path(d), class:"tab-title" %>
             
             <div class="disc-edit-del-btns"> 
             

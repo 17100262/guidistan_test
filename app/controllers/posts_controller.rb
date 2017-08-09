@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except:[:index,:show]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_forum, only: [:index,:show,:edit,:destroy,:new,:update,:create]
   load_and_authorize_resource
   impressionist actions: [:show], unique: [:session_hash]
   layout false , only: [:upvote, :downvote]
@@ -25,14 +27,16 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @id = @post.forum_id  
+    @id = @post.forum_id
+    @reply = Comment.last
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
-    @@dis_id = params[:forum_id]
-    @id = params[:forum_id]
+    @post = @forum.posts.new
+    # @post = Post.new
+    # @@dis_id = params[:forum_id]
+    # @id = params[:forum_id]
     @options = { tokenValue: 'name' }
     
     @names = ActsAsTaggableOn::Tag.all.map{|t| {id: t.id,name: t.name} }
@@ -48,19 +52,17 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    # puts @post.discipline_id,"hello"
-    puts post_params ,"head asdads"
-    @post = Post.new(post_params)
-    # puts @id,'adasdasds'
+    # @post = Post.new(post_params)
+    @post = @forum.posts.new(post_params)
     @post.user_id = current_user.id
-    @post.forum_id = @@dis_id
+    # @post.forum_id = @@dis_id
     
     
     
     respond_to do |format|
       if @post.save
         # format.json {render json: @names}
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to forum_post_path(@forum,@post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -75,7 +77,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       @post.user_id = current_user.id
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to forum_post_path(@forum,@post), notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -87,7 +89,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url(:filter_id => params[:forumm_id]), notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to forum_posts_url(@forum), notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -122,6 +124,9 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
         @post = Post.find(params[:id])
+    end
+    def set_forum
+        @forum = Forum.find(params[:forum_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

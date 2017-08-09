@@ -12,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'noreply@guidistan.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -133,7 +133,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -248,6 +248,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  
+  config.omniauth :facebook, ENV["FB_APP_ID"],ENV["FB_APP_SECRET"],scope: 'email', info_fields: 'email', secure_image_url: true, :image_size => 'large'
+  # config.omniauth :facebook, "430476800679601", "342129fec2527d07285b80ab827d8759",scope: 'email', info_fields: 'email', secure_image_url: true, :image_size => 'large'
+  config.omniauth :google_oauth2, "722714232124-jfs23eq1d21t39em5cg5rrk2lqqdg59e.apps.googleusercontent.com", "y4k5NWlTLNXnp0nRYVlphoiA"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

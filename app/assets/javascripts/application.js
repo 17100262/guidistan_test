@@ -27,6 +27,13 @@
 //     animateDropdown:   false
 //  });
 // });
+
+$(document).ajaxError(function (e, xhr, settings) {
+        if (xhr.status == 401) {
+            alert(xhr.responseText);
+            window.location.replace('/users/sign_in')
+        }
+    });
 $(document).ready(function() {
 	$('[data-toggle="offcanvas"]').click(function() {
 		$('#side-menu').toggleClass('hidden-xs');

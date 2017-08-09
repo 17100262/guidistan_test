@@ -5,7 +5,7 @@
 
           <h1><a href="/forums">All Forums / </a>
           
-          <%= Forum.find(@id).name %> Discussion Forum </h1>
+          <%= @forum_name %> Discussion Forum </h1>
 
           <!-- breadcrumbs -->
         
@@ -18,7 +18,8 @@
   <div class="col-md-9">
     <div class="ask-a-question-btn">
       <% if can? :create, Post %>
-        <%= link_to 'Ask a Question', new_post_path(@post => {:forum_id => @id}), class: "btn btn-primary new-post-showall"%>
+        <%#= link_to 'Ask a Question', new_post_path(@post => {:forum_id => @id}), class: "btn btn-primary new-post-showall"%>
+        <%= link_to 'Ask a Question', new_forum_post_path, class: "btn btn-primary new-post-showall"%>
       <% end %>
     </div>
     
@@ -70,7 +71,8 @@
                 <% end %>
               </div>
               <h2 class="post-title-forum post-title-all-posts" style="">
-                <%= link_to post.title, post %>
+                <%#= link_to post.title, post %>
+                <%= link_to post.title, forum_post_path(@forum,post) %>
               </h2>
               <p style="text-align:justify;">
                 
@@ -89,10 +91,11 @@
               <div class="caption all-posts-end-buttons visible-xs" style="text-align:center;">
                 
                 <% if can? :update, post %>
-                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
+                <%#= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
+                <%= link_to 'Edit', edit_forum_post_url(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post_path(:id => post,:forumm_id => @id), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+                <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
               <% end %>
               
               
@@ -159,10 +162,10 @@
               <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:10px;">
                 
                 <% if can? :update, post %>
-                <%= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
+                <%= link_to 'Edit', edit_forum_post_path(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
               <% end %>
               <% if can? :destroy, post %>
-                <%= link_to 'Destroy', post_path(:id => post,:forumm_id => @id), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+                <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
               <% end %>
               
               

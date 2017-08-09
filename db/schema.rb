@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603114641) do
+ActiveRecord::Schema.define(version: 20170807091911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,23 @@ ActiveRecord::Schema.define(version: 20170603114641) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
+  create_table "ngos", force: :cascade do |t|
+    t.string   "name"
+    t.string   "level"
+    t.text     "description"
+    t.string   "category"
+    t.string   "link"
+    t.text     "procedure"
+    t.string   "criteria"
+    t.string   "lastdate"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -162,7 +179,6 @@ ActiveRecord::Schema.define(version: 20170603114641) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.boolean  "flag"
     t.boolean  "flagi"
   end
 
@@ -268,6 +284,10 @@ ActiveRecord::Schema.define(version: 20170603114641) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

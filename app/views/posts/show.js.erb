@@ -1,0 +1,21 @@
+
+$(".new_comment").bind("ajax:complete", function(event,xhr,status,error){
+    $('#comment_form')[0].reset();
+    $("#comment_div").append("<%= escape_javascript(render partial: "comments/comment",:locals =>{:comment=>@post.comments.last} ) %>");
+    <!--alert(status);-->
+    
+});
+
+$("#reply_form").bind("ajax:complete", function(event,data,xhr,status,error){
+    $('#reply_form')[0].reset();
+    location.reload();
+    <!--$('#reply_form').hide();-->
+    <!--var id = "post_" ++ <%=@post.id%>.to_str;-->
+     <!--++ "comment_" ++ <%#= @reply.commentable.id %>-->
+    <!--console.log(id);-->
+    <!--alert(id);-->
+    <!--$("#reply_div").append("<%#= escape_javascript(render partial: "comments/reply",:locals =>{:reply=>Comment.last} ) %>");-->
+    <!--var d = $(this);-->
+    <!--alert();-->
+    <!--console.log();-->
+});

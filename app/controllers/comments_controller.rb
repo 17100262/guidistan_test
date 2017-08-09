@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_comment
     before_action :set_comment, only: [:upvote, :downvote]
     before_action :find_commentable
     layout false , only: [:upvote, :downvote]
@@ -34,20 +35,18 @@ class CommentsController < ApplicationController
 	end
 
 	def edit
-		# @post = Post.find(params[:post_id])
-		
-		# @comment = @post.comments.find(params[:id])
-		@comment = @commentable.comments.find(params[:id])
+
+		# @comment = @commentable.comments.find(params[:id])
+		@comment = Comment.find(params[:id])
 	end
 
 	def update
-		# @post = Post.find(params[:post_id])
-		# @comment = @post.comments.find(params[:id])
-		@comment = @commentable.comments.find(params[:id])
+		# @comment = @commentable.comments.find(params[:id])
+		@comment = Comment.find(params[:id])
 
 		if @comment.update(params[:comment].permit(:comment))
 			# redirect_to post_path(@post)
-			redirect_to get_post_url
+			redirect_to getPostUrl
 		else
 			render 'edit'
 		end
@@ -62,7 +61,7 @@ class CommentsController < ApplicationController
 		end
 		@comment.destroy
 		# @comment.create_activity :destroy, owner:current_user
-		redirect_to post_path(post)
+		redirect_to getPostUrl
 	end
     
 	def upvote
@@ -94,13 +93,13 @@ class CommentsController < ApplicationController
       @commentable = Post.find_by_id(params[:post_id]) if params[:post_id]
     end
     
-    def get_post_url
+    def getPostUrl
     	@post = @comment.commentable
     	if @post.respond_to?('commentable_type')
     		@comment = @post
-    		get_post_url
+    		getPostUrl
     	else
-    		return @post
+    		return forum_post_path(@post.forum,@post)
     	end
     end
 end
