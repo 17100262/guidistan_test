@@ -11,7 +11,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -84,11 +84,16 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       :port           => 587,
-      :address        => "smtp.mailgun.org",
-      :domain         => ENV['domain'],
-      :user_name      => ENV['username'],
-      :password       => ENV['password'],
+      :address        => "smtp.gmail.com",
+      :domain         => "gmail.com",
+      :user_name      => ENV["GMAIL_ADDRESS"],
+      :password       => ENV["GMAIL_PASSWORD"],
+      # :address        => "smtp.mailgun.org",
+      # :domain         => ENV['domain'],
+      # :user_name      => ENV['username'],
+      # :password       => ENV['password'],
       :authentication => :plain,
-      :enable_starttls_auto => true
+      :enable_starttls_auto => true,
+      # :ssl => true
     }
 end
