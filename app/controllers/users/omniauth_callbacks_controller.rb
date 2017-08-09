@@ -5,7 +5,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # flash.now[:notice] = 'Please Provide Email'
       redirect_to "/users/sign_in", alert: "Please Provide your E-mail Address"
     else
+      
       @user = User.from_omniauth(request.env["omniauth.auth"])
+      if user.email == "exists"
+        redirect_to "/users/sign_in", alert: "email exists"
+      end
       if @user.persisted?
         sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
         set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
