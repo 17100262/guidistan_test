@@ -51,6 +51,7 @@
  **************************************************************** **/
 html, body {
 	height:100%;
+	background-color:#eee;
 }
 body {
 	color:#666;
@@ -70,6 +71,7 @@ body.has-video-bg section {
 body #wrapper {/* used by RTL*/
 	overflow:hidden; 
 	min-height:100%; /*  because short page hide long menus */
+	background:#eee;
 }
 
 body.bg-grey,
@@ -839,7 +841,8 @@ section.page-header {
 	border-top: 0;
 	margin-top: 0;
 	margin-bottom: 0 !important;
-	background-color: rgba(0,0,0,0.05);
+	background-color: #8ab933;
+	color:#fff;
 	border-bottom: rgba(0,0,0,0.05) 1px solid;
 
 	-webkit-transition: all 0s;
@@ -1016,7 +1019,7 @@ section.page-header {
 section.page-header h1 {
 	margin:0;
 	padding:0;
-	font-size:26px;
+	font-size:15px;
 	font-weight:300;
 }
 section.page-header span.font-lato {
@@ -2603,7 +2606,9 @@ section.dark.page-header ul.page-options a {
 		height:60px;
 		line-height:40px;
 	}
-
+	#header.fixed #topNav #topMain>li>a:hover {
+    	border-radius: 4px;
+	}
 
 	/* Static */
 	#header.static {

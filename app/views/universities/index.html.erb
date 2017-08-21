@@ -1,11 +1,12 @@
-<br/>
-<br/>
+<section class="page-header">
+  <div class="container">
+    <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      All Universities</h1>
+    <!-- breadcrumbs -->
+  </div>
+</section>
 
-<br>
 <div class="container" >
-<br/>
-<p id="notice"><%= notice %></p>
-<br/>
 <% if can? :create, University.new %>
   <div class="disc_unis_admins">
   <a class="btn btn-primary pull-right" href="/universities/new" role="button">New University</a>
@@ -22,13 +23,6 @@
 <% end %>
 
 
-<section class="page-header" style="padding-top: 23px !important;">
-  
-  <div class="container">
-    <div align="center"> <h1 class="post-title-forum post-title-all-posts" style="">All Universities</h1> </div>
-  </div>
-        
-</section>
 <div class="universities-boxes-container col-md-12">
 <div class = "container" ng-app="Unisr" ng-controller="Student">
   <div class="search-students-box">

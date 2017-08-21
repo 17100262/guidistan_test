@@ -441,13 +441,14 @@
 					</div>
 				</header>
 				<!-- /Top Nav -->
-
 			</div>
-			
 
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if notice %>
+	<p class="notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+	<p class="alert"><%= alert %></p>
+<% end %>
 <%= yield %>
 <!--< if not controller_name == 'admin_panel' %>-->
 	<!--<footer id="footer">-->

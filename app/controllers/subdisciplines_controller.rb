@@ -16,7 +16,7 @@ class SubdisciplinesController < ApplicationController
     #   @subdiscipline.degreeprogram
     # rescue
     # else
-      @degree = @subdiscipline.discipline_university.distinct
+      @degrees = @subdiscipline.discipline_university.limit(4).distinct
     # end
   end
 

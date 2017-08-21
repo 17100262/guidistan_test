@@ -47,6 +47,7 @@ $(document).ready(function(){
    $(".readmore-allpost").text("Read More");
    
    $(".comments-reply-container form.new_comment").hide();
+   
    $(".get-reply-option-btn").click(function(){
       
       if($(this).parents(".comments-reply-container").find("form.new_comment").css('display') == 'none'){
@@ -56,7 +57,8 @@ $(document).ready(function(){
           $(this).parents(".comments-reply-container").find("form.new_comment").hide(10);
       }
      
-   });
+});
+
    
    if($(window).width() > 786){
       

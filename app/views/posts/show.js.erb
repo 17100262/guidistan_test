@@ -1,16 +1,18 @@
 
 $(".new_comment").bind("ajax:complete", function(event,xhr,status,error){
     $('#comment_form')[0].reset();
-    $("#comment_div").append("<%= escape_javascript(render partial: "comments/comment",:locals =>{:comment=>@post.comments.last} ) %>");
+    <!--$("#comment_div").html("<%#= j (render partial: "comments/comment",:locals =>{:comment=>@post.comments.last} ) %>");-->
+    <%#= render @post.comments.order(cached_votes_score: :desc) %>
+    $("#comment_div").html("<%= j (render @post.comments.order(cached_votes_score: :desc) ) %>");
     <!--alert(status);-->
     
 });
 
-$("#reply_form").bind("ajax:complete", function(event,data,xhr,status,error){
-    $('#reply_form')[0].reset();
-    location.reload();
+<!--$("#reply_form").bind("ajax:complete", function(event,data,xhr,status,error){-->
+    <!--$('#reply_form')[0].reset();-->
+<!--    location.reload();-->
     <!--$('#reply_form').hide();-->
-    <!--var id = "post_" ++ <%=@post.id%>.to_str;-->
+    <!--var id = "post_" ++ <%#=@post.id%>.to_str;-->
      <!--++ "comment_" ++ <%#= @reply.commentable.id %>-->
     <!--console.log(id);-->
     <!--alert(id);-->
@@ -18,4 +20,4 @@ $("#reply_form").bind("ajax:complete", function(event,data,xhr,status,error){
     <!--var d = $(this);-->
     <!--alert();-->
     <!--console.log();-->
-});
+<!--});-->

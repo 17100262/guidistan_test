@@ -1,6 +1,15 @@
-<div class="container-fluid" >
-<br/>
-<br/>
+<section class="page-header">
+  <div class="container">
+    <!--<div align="center">-->
+      <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      Browse Information</h1>
+    <!--</div>-->
+    <!-- breadcrumbs -->
+    
+  </div>
+</section>
+<div class="container-fluid no-padding" >
+
   <!--FOR ADMIN ONLY------->
   <% if can? :create, Discipline.new %>
   <div class="disc_unis_admins">
@@ -16,38 +25,77 @@
   
   </div>
   <% end %>
-  <!------->
-  <div class="services container" >
-    <p id="notice"><%= notice %></p>
-     
-    <section class="page-header" style="padding-top: 23px !important;">
-        <div class="container">
-
-
-          
-          <div align="center"> <h1  class="post-title-forum post-title-all-posts" style="">Explore Disciplines</h1> </div>
-
-          <!-- breadcrumbs -->
-        
-        </div>
-</section>
-
+  <!------------------------>
+  
+  <div class="container-fluid no-padding disp-cover">
+    <!--<img src="/discpback.jpg" alt="rss feed" />-->
+      <%= bootstrap_form_tag url: discipline_universities_path, :method => 'get', :remote => true do |f| %>
+      
+    <div class="control-group string optional payslip_user_type_id">
+      <!--    <label class="string optional control-label" for="payslip_user_type_id"></label>-->
+      <!--    <div class="controls">-->
+      <!--<= f.collection_select :discipline_id, Discipline.all, "id", "name", id: 'payslip_user_type_id' %>-->
+      <!--    </div>-->
+      <%= select_tag('val', options_from_collection_for_select(Discipline.all, 'id', 'name') ,id: "payslip_user_type_id") %>
     
-    <div class = "container" style="padding-left: 0px;margin-top: 30px;">
-        <ul class="forum-dis-container" style="padding-left: 0px;">
-            <% @disciplines.each do |discipline| %>
-              <li class="forum-dis-list col-md-2 dis-dis-list">
-                  <div class="forum-image-container dis-image-container"> 
-                    <%= image_tag discipline.image.url(:large) , :class => "image_thumb_forum"%>
-                  </div>
-                  <div class="forum-list-link dist-list-link"> <%= link_to discipline.name, discipline %>
-                  </div>
-                  
-              </li>
-            <% end %>
-        </ul>
+      <div class="control-group string optional payslip_user_id">
+          <label class="string optional control-label" for="payslip_user_id"> </label>
+          <div class="controls">
+              <%= f.collection_select :subdiscipline_id, @subs, "id", "name", prompt: '--select--' %>    
+          </div>
+      </div>
+      <%= f.submit "Search"%>
+      <% end %>
     </div>
-</div> 
+  </div>
+  
+  
+  
+  
+  
+
+
+  <!-- DISCIPLINES  BLOCK   -->
+  <div class="services container" >
+    <h1 align="center">Browse by Discipline</h1>
+    <div class = "container" style="padding-left: 0px;margin-top: 30px;">
+      <ul class="forum-dis-container" style="padding-left: 0px;">
+          <% @disciplines.each do |discipline| %>
+            <li class="forum-dis-list col-md-2 dis-dis-list">
+                <div class="forum-image-container dis-image-container"> 
+                  <!--<= image_tag discipline.image.url(:large) , :class => "image_thumb_forum"%>-->
+                <i class="<%= discipline.font %> fa-4x" aria-hidden="true"></i>
+                
+                </div>
+                <div class="forum-list-link dist-list-link"> <strong><%= link_to discipline.name, discipline %>
+                </strong></div>
+                
+            </li>
+          <% end %>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="services container browse-uni" >
+    <h1 align="center">Browse by University</h1>
+    <div class = "container" style="padding-left: 0px;margin-top: 30px;">
+      <ul class="forum-dis-container" style="padding-left: 0px;">
+          <% @universities.each do |university| %>
+            <li class="forum-dis-list col-md-2 dis-dis-list">
+                <div class="forum-image-container dis-image-container"> 
+                  <%= image_tag university.image.url(:med) , :class => "image_thumb_forum"%>
+                
+                </div>
+                <div class="forum-list-link dist-list-link"> <strong><%= link_to university.name, university,title: university.name %>
+                </strong></div>
+                
+            </li>
+          <% end %>
+      </ul>
+      <div  class="button-contianer"><a href="/universities" class="view-all-button">View all Universities</a></div>
+      
+    </div>
+  </div>
 </div>
 
 <!------------ Personality test Box -->

@@ -23,7 +23,8 @@ class CommentsController < ApplicationController
 		@comment.user_id = current_user.id if current_user
 	    if @comment.save
 	    	if @comment.commentable_type == "Comment"
-	    		@comment.create_activity :create,{:commentable => @comment.commentable},{owner:current_user, recipient: @comment.commentable.commentable.user}
+	    		@comment.create_activity :create,{:commentable => @comment.commentable},{owner:current_user, recipient: @comment.commentable.commentable.user} #jis ki post hai usko notification
+	    		# @comment.create_activity :create,{:commentable => @comment.commentable},{owner:current_user, recipient: @comment.commentable.commentable.user} #jis ke comment ka reply hai usko notificationn
 	    	else
 	    		@comment.create_activity :create,{:commentable => @comment.commentable},{owner:current_user, recipient: @comment.commentable.user}
 	    	end

@@ -18,39 +18,27 @@ class User < ActiveRecord::Base
   # For OmniAuth-Facebook
   devise :omniauthable, :omniauth_providers => [:facebook,:twitter,:google_oauth2]
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    check = false
+    user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      
-      
-      if User.exists?(:email => user.email)
-        user.email="exists"
-      else
-      
-      
-      # if user.email?
-      user.save! 
-      #Need to check proper way. user.save! not recommended
-      # if user.save
-        profile= Profile.new
-        profile.name = auth.info.name   # assuming the user model has a name
-        profile.image = auth.info.image # assuming the user model has an image
-        profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
-        profile.user_id = user.id
-        profile.save!
-      # else
-      #   redirect_to "users/sign_in",alert: user.errors
-      end
-    
-
-      # else
-      #   user.email = "noone"
-      # end
+      check = true
       
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
+    
+    if check
+      profile= Profile.new
+      profile.name = auth.info.name   # assuming the user model has a name
+      profile.image = auth.info.image # assuming the user model has an image
+      profile.gender = auth.extra.raw_info.gender # assuming the user model has an image
+      profile.user_id = user.id
+      profile.save!
+    end
+    return user
+
   end
   def self.new_with_session(params, session)
     super.tap do |user|

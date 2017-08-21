@@ -4,15 +4,17 @@ class DisciplinesController < ApplicationController
   # GET /disciplines
   # GET /disciplines.json
   def index
+    @subs = Subdiscipline.where(discipline_id: params[:discipline_id])
     @disciplines = Discipline.all.order('name ASC')
+    @universities = University.all.limit(6)
   end
 
   # GET /disciplines/1
   # GET /disciplines/1.json
   def show
-    @degrees = @discipline.discipline_university
+    @degrees = @discipline.discipline_university.limit(4)
     @sub = Subdiscipline.where(discipline_id:@discipline.id)
-    @universities = @discipline.university.distinct
+    # @universities = @discipline.university.distinct
     if (current_user!=nil)
       ahoy.track "Clicked Discipline", {title: @discipline.name,id:@discipline.id}
     end
@@ -93,6 +95,6 @@ class DisciplinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def discipline_params
-      params.require(:discipline).permit(:name, :description, :image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
+      params.require(:discipline).permit(:name, :description,:font, :image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
     end
 end

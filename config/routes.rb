@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'admin_panel/flag'
   get 'admin_panel/index'
+  get 'universities/wishlist'
   post 'cities/export'
   post 'discipline_universities/export'
   post 'disciplines/export'

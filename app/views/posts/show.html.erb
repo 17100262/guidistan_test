@@ -1,199 +1,163 @@
-
-
+<!-- breadcrumbs -->
 <section class="page-header">
         <div class="container">
 
           <h1>
-          	
           	<a href="/forums">All Forums / </a>
-          
-            <%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %> Forum /  Current Post
-          
+          <%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %> Forum /  Current Post
+         
           </h1>
-					
-          <!-- breadcrumbs -->
-        
-        </div>
+		</div>
 </section>
 
+
 <div class="container">
-  
-<div class="forum_post_question_container">
-  
-	
+	<div class="forum_post_question_container"> <h1 class="forum_post_title" style="margin-top:5px;"> <%= @post.title %></h1></div>
 
+	<div class="description-container col-md-9">
+		  
+		<div class="single_postliker">
+		    <div class="liker_error_message">
+		    	<a href="/users/sign_in">An error occured! Please login if you're not logged in.</a>
+		    </div>
+			<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
+			
+			
 
-  <h1 class="forum_post_title" style="margin-top:5px;"> <%= @post.title %></h1>
-</div>
-
-<div class="description-container col-md-9">
-  
-  <div class="single_postliker">
-    <div class="liker_error_message"><a href="/users/sign_in">An error occured! Please login if you're not logged in.</a></div>
-		<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
-		<span class="number_of_likes" data-upvotes="<%= @post.get_upvotes.size %>" data-downvotes="<%= @post.get_downvotes.size %>"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
-		<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a> 
-
+			<span class="number_of_likes" data-upvotes="<%= @post.get_upvotes.size %>" data-downvotes="<%= @post.get_downvotes.size %>"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
+			<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a>
+			
+			
+		</div>
+			
+		<div class="single-description-para">
+			<p><%= @post.description %></p>
+		    <div class="edit-desc-btn">
+		    	<% if can? :update, @post %>
+					<%= link_to 'Edit', edit_forum_post_path(@forum,@post) %>
+					<%= link_to 'Destroy',forum_post_path(@forum,@post), method: :delete, data: { confirm: 'Are you sure?' } %>
+				<% end %>
 			</div>
-	
-  <div class="single-description-para">
-   
-    <p><%= @post.description %></p>
-    
-    <div class="edit-desc-btn">
-    	
-    	<% if can? :update, @post %>
-		  <%= link_to 'Edit', edit_forum_post_path(@forum,@post) %>
-		   <%= link_to 'Destroy',forum_post_path(@forum,@post), method: :delete, data: { confirm: 'Are you sure?' } %>
-              
-		<% end %>
+		</div>
+		  
+		<div class="user-description-container col-md-3 visible-xs" style="margin-top: 25px;">
 		
-    </div>
-    
-  </div>
-  
-  <div class="user-description-container col-md-3 visible-xs" style="margin-top: 25px;">
-  
-  <table>
-	<tr>
-        <td>
-            <p class="label-key">Posted</p>
-        </td>
-        <td style="padding-left: 10px">
-            <p class="label-value"><%= time_ago_in_words(@post.created_at) %></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p class="label-key">Views</p>
-        </td>
+			<table>
+				<tr>
+				    <td>
+				        <p class="label-key">Posted</p>
+				    </td>
+				    <td style="padding-left: 10px">
+				        <p class="label-value"><%= time_ago_in_words(@post.created_at) %></p>
+				    </td>
+				</tr>
+				<tr>
+				    <td>
+				        <p class="label-key">Views</p>
+				    </td>
+				
+				    <td style="padding-left: 10px">
+				        <p class="label-value">
+				          <%= "#{@post.impressionist_count} views so far!" %>
+				        </p>
+				    </td>
+				</tr>
+				<tr>
+				    <td>
+				        <p class="label-key">Discipline</p>
+				    </td>
+				
+				    <td style="padding-left: 10px">
+				        <p class="label-value">
+				          <%= @post.forum.name %>
+				        </p>
+				    </td>
+				</tr>
+			</table>
+		
+			<div class="user-details-post">
+			  <div class="user-single-postpic">
+			          <% if @post.user.profile.image_file_name.present? %> 
+			                  <%= image_tag @post.user.profile.image.url(:large) %>
+			          <% else %>
+			              <a href="javascript:;">
+			              	<img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+			              </a>
+			          <% end %>
+			   </div>
+			</div>
+		
+		</div>
+		  
+		<div class="" style="padding:0px;">
+			<div class="forum_post_question_container" style="border:0px;">
+				<h1 class="forum_post_title"  style="margin-top:50px"> Answers</h1>
+			</div>
+		
+			<div id="comment_div">
+				<%= render @post.comments.order(cached_votes_score: :desc) %>
+			</div>
+		  
+			<!--<h3> Comment on this reply</h3>-->
+			<div id='comment-form'>
+				<%= render "comments/form" %>
+				</br>
+			</div>
+		</div>
+		<!--<p id="notice"><%= notice %></p>-->
+		  
+	</div>
 
-        <td style="padding-left: 10px">
-            <p class="label-value">
-              <%= "#{@post.impressionist_count} views so far!" %>
-            </p>
-        </td>
-    </tr>
-    
-    <tr>
-        <td>
-            <p class="label-key">Discipline</p>
-        </td>
-
-        <td style="padding-left: 10px">
-            <p class="label-value">
-              <%= @post.forum.name %>
-            </p>
-        </td>
-    </tr>
-    
-
-</table>
-	
-	<div class="user-details-post">
-	  <div class="user-single-postpic">
-              <% if @post.user.profile.image_file_name.present? %> 
-                      <%= image_tag @post.user.profile.image.url(:large) %>
-              <% else %>
+	<div class="user-description-container col-md-3 hidden-xs">
+		<table>
+			<tr>
+			    <td>
+			        <p class="label-key">Posted</p>
+			    </td>
+			    <td style="padding-left: 10px">
+			        <p class="label-value"><%= time_ago_in_words(@post.created_at) %></p>
+			    </td>
+			</tr>
+			<tr>
+				<td>
+				    <p class="label-key">Views</p>
+				</td>
+			
+				<td style="padding-left: 10px">
+				    <p class="label-value">
+				      <%= "#{@post.impressionist_count} views so far!" %>
+				    </p>
+				</td>
+			</tr>
+				            
+			<tr>
+			    <td>
+			        <p class="label-key">Discipline</p>
+			    </td>
+			
+			    <td style="padding-left: 10px">
+			        <p class="label-value">
+			          <%= @post.forum.name %>
+			        </p>
+			    </td>
+			</tr>
+		</table>
+		<div class="user-details-post">
+			<div class="user-details-name"> Posted by <b><%= link_to @post.user.profile.name,  profile_path(@post.user.profile.id) %></b></div>
+		   
+		   <div class="user-single-postpic">
+				<% if @post.user.profile.image_file_name.present? %> 
+					<%= image_tag @post.user.profile.image.url(:large) %>
+				<% else %>
+	                      
 	              <a href="javascript:;">
-	              	<img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+	              <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
 	              </a>
-              <% end %>
-	   </div>
-	</div>
-
-</div>
-  
-  <div class="" style="padding:0px;">
+				<% end %>
+			</div>
+		</div>
 	
-	<div class="forum_post_question_container" style="border:0px;">
-    <h1 class="forum_post_title"  style="margin-top:50px"> Answers</h1>
-  </div>
-
-
-
-  <div id="comment_div">
-	<%= render @post.comments.order(cached_votes_score: :desc) %>
-  </div>
-  
-  <!--<h3> Comment on this reply</h3>-->
-  <div id='comment-form'>
-  <%= render "comments/form" %>
-  </br>
-  </div>
-  
-</div>
-<!--<p id="notice"><%= notice %></p>-->
-  
-  
-</div>
-
-<div class="user-description-container col-md-3 hidden-xs">
-  
-  <table>
-			         <tr>
-			                <td>
-			                    <p class="label-key">Posted</p>
-			                </td>
-			                <td style="padding-left: 10px">
-			                    <p class="label-value"><%= time_ago_in_words(@post.created_at) %></p>
-			                </td>
-			            </tr>
-			            <tr>
-			                <td>
-			                    <p class="label-key">Views</p>
-			                </td>
-
-			                <td style="padding-left: 10px">
-			                    <p class="label-value">
-			                      <%= "#{@post.impressionist_count} views so far!" %>
-			                    </p>
-			                </td>
-			            </tr>
-			            
-			            <tr>
-			                <td>
-			                    <p class="label-key">Discipline</p>
-			                </td>
-
-			                <td style="padding-left: 10px">
-			                    <p class="label-value">
-			                      <%= @post.forum.name %>
-			                    </p>
-			                </td>
-			            </tr>
-			            
-
-	</table>
-	<div class="user-details-post">
-	  
-	   <div class="user-details-name"> Posted by <b><%= link_to @post.user.profile.name,  profile_path(@post.user.profile.id) %></b></div>
-	   
-	   <div class="user-single-postpic">
-
-        
-              <% if @post.user.profile.image_file_name.present? %> 
-                      <%= image_tag @post.user.profile.image.url(:large) %>
-          		<% else %>
-                      
-              <a href="javascript:;">
-              <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-              </a>
-              <% end %>
-
-
-       
-	   </div>
 	</div>
-
-</div>
-
-
-
-
-
-
-
 
 
 <!--<h3>Comments</h3>-->
@@ -238,13 +202,13 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   var up_vote = $(".single_postliker .up_vote_st");
 	   var down_vote =  $(".single_postliker .down_vote_st");
 	   var no_of_likes = $(".single_postliker .number_of_likes");
-	   var link_to_like = "/posts/<%= @post.id  %>/like";
-	   var link_to_dislike = "/posts/<%= @post.id  %>/dislike";
+	   var link_to_like = "/forums/<%=@post.forum.id %>/posts/<%= @post.id  %>/like";
+	   var link_to_dislike = "/forums/<%=@post.forum.id %>/posts/<%= @post.id  %>/dislike";
 	   var upvotes_attr = $(".single_postliker .number_of_likes").attr("data-upvotes");
 	   var downvotes_attr = $(".single_postliker .number_of_likes").attr("data-downvotes");
 	   
 	   $(up_vote).click(function(){
-	      
+	      //alert();
 	      $(".liker_error_message").hide();
 	      
 	      var num = parseInt(no_of_likes.text());
@@ -288,6 +252,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   });
 	   
 	   $(down_vote).click(function(){
+	   	alert();
 	      
 	      
 	      var num = parseInt(no_of_likes.text());

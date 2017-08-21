@@ -9,11 +9,12 @@
 </section>
 <div class="container">
 <div class="notificat_holder">
+	
 	<% @activities.each do |activity| %>
 	<ul>
 		<li>
 			<strong><%=activity.owner.profile.name %></strong>
-				<p><%= activity.trackable.comment %></p>
+				<p><%#= activity.trackable.comment %></p>
 		<span><%= render_activity activity %></span>
 		</li>
 	</ul>

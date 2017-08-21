@@ -30,6 +30,11 @@ class University < ActiveRecord::Base
                         uni.city_id = City.find_by(name: header[2]).id
                     end
                     uni.link = header[3]
+                    uni.number = header[5]
+                    uni.email = header[6]
+                    uni.facebook = header[7]
+                    uni.address = header[8]
+                    uni.image = header[9]
                     uni.save!
                 end
             end

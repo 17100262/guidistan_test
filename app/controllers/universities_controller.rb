@@ -1,15 +1,13 @@
 class UniversitiesController < ApplicationController
-  before_action :set_university, only: [:show, :edit, :update, :destroy]
+  before_action :set_university, only: [:show, :edit, :update, :destroy,:wishlist]
   before_action :authenticate_user!,except:[:index,:show]
   load_and_authorize_resource
-  # GET /universities
-  # GET /universities.json
+
   def index
     @universities = University.all.order('name ASC')
   end
 
-  # GET /universities/1
-  # GET /universities/1.json
+
   def show
     # @discipline = @university.degreeprogram.discipline
     @city = City.find(@university.city_id).name
@@ -25,8 +23,7 @@ class UniversitiesController < ApplicationController
   def edit
   end
 
-  # POST /universities
-  # POST /universities.json
+
   def create
     @university = University.new(university_params)
 
@@ -41,8 +38,7 @@ class UniversitiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /universities/1
-  # PATCH/PUT /universities/1.json
+
   def update
     respond_to do |format|
       if @university.update(university_params)
@@ -55,8 +51,6 @@ class UniversitiesController < ApplicationController
     end
   end
 
-  # DELETE /universities/1
-  # DELETE /universities/1.json
   def destroy
     @university.destroy
     respond_to do |format|
@@ -64,7 +58,18 @@ class UniversitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  def wishlist
+    
+    if (WishlistUniversity.exists?(:user_id => current_user.id,:university_id =>  @university.id))
+      WishlistUniversity.where(:user_id => current_user.id,:university_id =>  @university.id).destroy_all
+      redirect_to "/universities/#{@university.id}", notice: "University removed from wishlist"
+    else
+      WishlistUniversity.create(:user_id => current_user.id,:university_id =>  @university.id)
+      redirect_to "/universities/#{@university.id}", notice: "University added to wishlist"
+    end
+  end
+  
   def import
     University.import(params[:file])
     redirect_to universities_path, notice: "Universities imported"
@@ -91,6 +96,6 @@ class UniversitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def university_params
-      params.require(:university).permit(:name, :description, :city_id, :image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
+      params.require(:university).permit(:name, :description, :city_id,:number,:email,:facebook,:address,:image_file_name, :image_content_type,:image_file_size,:image_updated_at, :image)
     end
 end

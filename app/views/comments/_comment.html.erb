@@ -99,7 +99,7 @@
       </div>
       
       <a href="javascript:;" class="get-reply-option-btn">Add a Reply</a>
-      <%= bootstrap_form_for [comment, Comment.new],:remote => true, :html => { :id => 'reply_form' } do |f| %> 
+      <%= bootstrap_form_for [comment, Comment.new], :html => { :id => 'reply_form' } do |f| %> 
         <%= f.text_area :comment,placeholder: "Add a Reply"%>
         <%= f.submit "Post Reply" %>
       <% end %>

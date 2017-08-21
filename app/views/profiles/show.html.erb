@@ -1,10 +1,21 @@
 <!--<h1>Profile#show</h1>-->
+<section class="page-header">
+        <div class="container">
+
+          <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <%= link_to "Search Degree Programs","/discipline_universities" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
 <div class="container showsingle-profile">
     <div class="profile_header">
       
       <% if user_signed_in? and current_user==@profile.user %>
-        <h3 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">My Profile</h3>
-        <span class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary pull-right" %></span>
+        <h3>My Profile</h3>
       <% end %> 
     </div>
    
@@ -28,32 +39,48 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-12 text-center">
               <div class="detail_holder">
-                <div><label><%= @profile.name %> 
-                <% if @profile.user.has_role? :admin %>
-  	                     <div class = "adm">
-                    	   Admin</div>
-                <% end %></label></div>
+                <div>
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <label><%= @profile.name %> 
+                    <% if @profile.user.has_role? :admin %>
+    	                 <div class = "adm">Admin</div>
+                    <% end %>
+                  </label>
+                </div>
                 <div class="gender">
-                  <label>Gender:</label><span><%= @profile.gender %></span>
-                  </div>
+                  <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                  <label>Gender:</label>
+                  <span><%= @profile.gender %></span>
+                </div>
                 <div class="member_detail">
-                  <label>Member for:</label><span><%= time_ago_in_words(@profile.created_at) %></span>
+                  <i class="fa fa-history" aria-hidden="true"></i>
+                  <label>Member for:</label>
+                  <span><%= time_ago_in_words(@profile.created_at) %></span>
                 </div>
                 <div class="view_detail">
-                  <label>Profile views:</label><span><%= "#{@profile.impressionist_count}" %></span>
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <label>Profile views:</label>
+                  <span><%= "#{@profile.impressionist_count}" %></span>
                 </div>
                 <div class="question_detail">
-                  <label>Questions:</label><span><%= @profile.user.posts.count %></span>
+                  <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                  <label>Questions:</label>
+                  <span><%= @profile.user.posts.count %></span>
                 </div>
                  <div class="question_detail">
-                  <label>Answers:</label><span><%= @profile.user.comments.where(commentable_type:"Post").count %></span>
+                  <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                  <label>Answers:</label>
+                  <span><%= @profile.user.comments.where(commentable_type:"Post").count %></span>
                 </div>
                 <div class="active_detail">
-                  <label>Last Sign in</label><span><%= time_ago_in_words(@profile.user.last_sign_in_at) %> ago</span>
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  <label>Last Sign in</label>
+                  <span><%= time_ago_in_words(@profile.user.last_sign_in_at) %> ago</span>
                 </div>
               </div>
+              <%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary edit-profile-btn" %>
             </div>
           </div>
           

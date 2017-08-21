@@ -46,3 +46,9 @@ which forums to create in start
 
 https://launchschool.com/blog/handling-emails-in-rails
 bundle exec rake jobs:work
+
+==check notifications--jis ke comment par reply hota hai usko notification nahi jaarha
+==comment ajax
+edit profile not working
+search box
+==facebook usr name -email issue

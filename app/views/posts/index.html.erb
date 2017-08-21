@@ -1,19 +1,10 @@
-
-
 <section class="page-header">
-        <div class="container">
-
-          <h1><a href="/forums">All Forums / </a>
-          
-          <%= @forum_name %> Discussion Forum </h1>
-
-          <!-- breadcrumbs -->
-        
-        </div>
+  <div class="container">
+    <h1><a href="/forums">All Forums / </a>
+    <%= @forum_name %> Discussion Forum </h1>
+  </div>
 </section>
 
-
-<p id="notice"><%= notice %></p>
 <div class = "container">
   <div class="col-md-9">
     <div class="ask-a-question-btn">
@@ -23,218 +14,194 @@
       <% end %>
     </div>
     
-
-    
-  <% @posts.each do |post| %>   
-          <div class="block-review-content all-posts-forum-page-content">
-            <div class="block-review-body" style="padding-left:0px;">
-              <div class="block-all-post-detail-box-container hidden-xs">
-                <div class="block-all-post-detail-box">
-                  <div class="block-all-post-value-box"><%= "#{post.impressionist_count}" %></div>
-                  <div class="block-all-post-title-box">views</div>
-                </div>
-                
-                <div class="block-all-post-detail-box">
-                  <div class="block-all-post-value-box"><%= post.get_upvotes.size-post.get_downvotes.size %> </div>
-                  <div class="block-all-post-title-box">Votes</div>
-                </div>
-                
-                <div class="block-all-post-detail-box">
-                  <div class="block-all-post-value-box"><%= post.comments.count %></div>
-                  <div class="block-all-post-title-box">Answers</div>
-                </div>
-                
-              </div>
-              
-              <div class="block-review-avatar block-box-review-post text-center hidden-xs">
-                
-                <div class="push-bit">
-                  <% if post.user.profile.image_file_name.present? %> 
-                    <%= image_tag post.user.profile.image.url(:med) %>
-                  <% else %>
-                    <a href="javascript:;">
-                    <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-                    </a>
-                  <% end %>
-                </div>
-                <small class="block" style="margin-top:5px";><%= 
-                puts post.to_yaml
-                # post.user.profile.name
-                %></small>
-                <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
-                <% if (current_user != nil && (current_user.has_role? :admin)) %>
-                     <div class = "adm">
-                	   Admin</div>
-                	   <% end %>
-                <% if post.user.email %>
-                <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
-                <% end %>
-              </div>
-              <h2 class="post-title-forum post-title-all-posts" style="">
-                <%#= link_to post.title, post %>
-                <%= link_to post.title, forum_post_path(@forum,post) %>
-              </h2>
-              <p style="text-align:justify;">
-                
-                 <%= 
-                 truncate(post.description, :omission => "...", :length => 500)
-                  %>
-                  <% if post.description.length > 500 %>
-                    <%= link_to post.title, post ,class: "readmore-allpost" %>  
-                  <% end %>
-  
-              </p>
-              <p> Tags: <%= raw post.tag_list.map {|t| link_to t, tag_path(t,:filter_id => @id)}.join(', ') %></p>
-              
-              <!--For Mobile Start -->
-              
-              <div class="caption all-posts-end-buttons visible-xs" style="text-align:center;">
-                
-                <% if can? :update, post %>
-                <%#= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
-                <%= link_to 'Edit', edit_forum_post_url(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
-              <% end %>
-              <% if can? :destroy, post %>
-                <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
-              <% end %>
-              
-              
-              </div>
-              
-              <div class="block-review-avatar block-box-review-post text-center visible-xs">
-                  <div class="push-bit">
-                    
-                    <% if post.user.profile.image_file_name.present? %> 
-
-
-                      <%= image_tag post.user.profile.image.url(:med) %>
-                      <% else %>
-                      
-                      <a href="javascript:;">
-                      <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
-                      </a>
-                      <% end %>
-                  </div>
-                  <small class="block" style="margin-top:5px";><%= 
-                  puts post.to_yaml
-                  
-                  
-                  %></small>
-                  <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
-                  <% if (current_user != nil && (current_user.has_role? :admin)) %>
-                     <div class = "adm">
-                	   Admin</div>
-                	   <% end %>
-                  <% if post.user.email %>
-                  <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
-                  <% end %>
-                  
-                 
-              </div>
-              
-              <!--For Mobile End-->
-              
-              
-              <div class="block-all-post-detail-box-container visible-xs">
-                
-              
-                <div class="block-all-post-detail-box">
-                  <div class="block-all-post-value-box"><%= "#{post.impressionist_count}" %></div>
-                  <div class="block-all-post-title-box">views</div>
-                </div>
-                
-                <div class="block-all-post-detail-box">
-                  <div class="block-all-post-value-box"><%= post.get_upvotes.size-post.get_downvotes.size %> </div>
-                  <div class="block-all-post-title-box">Votes</div>
-                </div>
-                
-                <div class="block-all-post-detail-box">
-                  <div class="block-all-post-value-box"><%= post.comments.count %></div>
-                  <div class="block-all-post-title-box">Comments</div>
-                </div>
-                
-              </div>
-              
-
-              <!--< b = post.get_downvotes.size %>-->
-              
-              
-              <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:10px;">
-                
-                <% if can? :update, post %>
-                <%= link_to 'Edit', edit_forum_post_path(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
-              <% end %>
-              <% if can? :destroy, post %>
-                <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
-              <% end %>
-              
-              
-                <!--<= link_to like_post_path(post), class: "like", method: :put do%>-->
-                <!--  <button type="button" class="btn btn-info" aria-label="Left Align">-->
-                <!--    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>-->
-                <!--    <span class="badge"><= post.get_upvotes.size %></span>-->
-                <!--  </button>-->
-                <!--< end %>-->
-                
-                <!--<= link_to dislike_post_path(post), class: "like", method: :put do%>-->
-                <!--  <button type="button" class="btn btn-info" aria-label="Left Align">-->
-                <!--    <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>-->
-                <!--    <span class="badge"><= post.get_downvotes.size %></span>-->
-                <!--  </button>-->
-                <!--< end %>-->
-              </div>
+    <% @posts.each do |post| %>   
+      <div class="block-review-content all-posts-forum-page-content">
+        <div class="block-review-body" style="padding-left:0px;">
+          <div class="block-all-post-detail-box-container hidden-xs">
+            <div class="block-all-post-detail-box">
+              <div class="block-all-post-value-box"><%= "#{post.impressionist_count}" %></div>
+              <div class="block-all-post-title-box">views</div>
             </div>
+            
+            <div class="block-all-post-detail-box">
+              <div class="block-all-post-value-box"><%= post.get_upvotes.size-post.get_downvotes.size %> </div>
+              <div class="block-all-post-title-box">Votes</div>
+            </div>
+            
+            <div class="block-all-post-detail-box">
+              <div class="block-all-post-value-box"><%= post.comments.count %></div>
+              <div class="block-all-post-title-box">Answers</div>
+            </div>
+            
           </div>
-  
-  <% end %>
-  <br>
-  
-  <div class = "pagination"><%= will_paginate @posts %></div>
+          
+          <div class="block-review-avatar block-box-review-post text-center hidden-xs">
+            
+            <div class="push-bit">
+              <% if post.user.profile.image_file_name.present? %> 
+                <%= image_tag post.user.profile.image.url(:med) %>
+              <% else %>
+                <a href="javascript:;">
+                <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                </a>
+              <% end %>
+            </div>
+            <small class="block" style="margin-top:5px";><%= 
+            puts post.to_yaml
+            # post.user.profile.name
+            %></small>
+            <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
+            <% if (current_user != nil && (current_user.has_role? :admin)) %>
+                 <div class = "adm">
+            	   Admin</div>
+            	   <% end %>
+            <% if post.user.email %>
+            <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
+            <% end %>
+          </div>
+          <h2 class="post-title-forum post-title-all-posts" style="">
+            <%#= link_to post.title, post %>
+            <%= link_to post.title, forum_post_path(@forum,post) %>
+          </h2>
+          <p style="text-align:justify;">
+            
+             <%= 
+             truncate(post.description, :omission => "...", :length => 500)
+              %>
+              <% if post.description.length > 500 %>
+                <%= link_to post.title, post ,class: "readmore-allpost" %>  
+              <% end %>
+
+          </p>
+          <p> Tags: <%= raw post.tag_list.map {|t| link_to t, tag_path(t,:filter_id => @id)}.join(', ') %></p>
+          
+          <!--For Mobile Start -->
+          
+          <div class="caption all-posts-end-buttons visible-xs" style="text-align:center;">
+            
+            <% if can? :update, post %>
+            <%#= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
+            <%= link_to 'Edit', edit_forum_post_url(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
+          <% end %>
+          <% if can? :destroy, post %>
+            <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+          <% end %>
+          
+          
+          </div>
+          
+          <div class="block-review-avatar block-box-review-post text-center visible-xs">
+              <div class="push-bit">
+                
+                <% if post.user.profile.image_file_name.present? %> 
+
+
+                  <%= image_tag post.user.profile.image.url(:med) %>
+                  <% else %>
+                  
+                  <a href="javascript:;">
+                  <img src="/avatar_generic.jpg" width="100" alt="User Profile Image">
+                  </a>
+                  <% end %>
+              </div>
+              <small class="block" style="margin-top:5px";><%= 
+              puts post.to_yaml
+              
+              
+              %></small>
+              <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
+              <% if (current_user != nil && (current_user.has_role? :admin)) %>
+                 <div class = "adm">
+            	   Admin</div>
+            	   <% end %>
+              <% if post.user.email %>
+              <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
+              <% end %>
+              
+             
+          </div>
+          
+          <!--For Mobile End-->
+          
+          
+          <div class="block-all-post-detail-box-container visible-xs">
+            
+          
+            <div class="block-all-post-detail-box">
+              <div class="block-all-post-value-box"><%= "#{post.impressionist_count}" %></div>
+              <div class="block-all-post-title-box">views</div>
+            </div>
+            
+            <div class="block-all-post-detail-box">
+              <div class="block-all-post-value-box"><%= post.get_upvotes.size-post.get_downvotes.size %> </div>
+              <div class="block-all-post-title-box">Votes</div>
+            </div>
+            
+            <div class="block-all-post-detail-box">
+              <div class="block-all-post-value-box"><%= post.comments.count %></div>
+              <div class="block-all-post-title-box">Comments</div>
+            </div>
+            
+          </div>
+          
+
+          <!--< b = post.get_downvotes.size %>-->
+          
+          
+          <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:10px;">
+            
+            <% if can? :update, post %>
+            <%= link_to 'Edit', edit_forum_post_path(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
+          <% end %>
+          <% if can? :destroy, post %>
+            <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+          <% end %>
+          
+          
+            <!--<= link_to like_post_path(post), class: "like", method: :put do%>-->
+            <!--  <button type="button" class="btn btn-info" aria-label="Left Align">-->
+            <!--    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>-->
+            <!--    <span class="badge"><= post.get_upvotes.size %></span>-->
+            <!--  </button>-->
+            <!--< end %>-->
+            
+            <!--<= link_to dislike_post_path(post), class: "like", method: :put do%>-->
+            <!--  <button type="button" class="btn btn-info" aria-label="Left Align">-->
+            <!--    <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>-->
+            <!--    <span class="badge"><= post.get_downvotes.size %></span>-->
+            <!--  </button>-->
+            <!--< end %>-->
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <br>
+    <div class = "pagination"><%= will_paginate @posts %></div>
   </div>
-  
+  <!--top users code-->
   <div class="col-md-3">
     <div class="top-user-col hidden-xs">
       <div class="top-user-header">
         Top site users
       </div>
-      
-          <!--top users code-->
-
-    
       <% @profiles.each do |profile| %>
-       
-
-      
-    
         <div class="top-user-single-container">
-          
           <div class="top-user-avatar">
-            
             <% if profile.image_file_name.present? %> 
-                    <%= image_tag profile.image.url(:med) %>
-                  <% else %>
-                   
-                    <img src="/avatar_generic.jpg"  alt="User Profile Image">
-                    
+              <%= image_tag profile.image.url(:med) %>
+            <% else %>
+             <img src="/avatar_generic.jpg"  alt="User Profile Image">
             <% end %>
-                  
           </div>
           
           <div class="right-side-topuser">
-            
             <div class="top-user-name">
-               <!--<= profile.name %>-->
                <%= link_to profile.name , profile_path(profile.id) %>
             </div>
             <div class="top-user-ranking"><%= profile.reputation %></div>
-          
           </div>
-            
         </div>
-      
       <% end %>
-      
-      
     </div>
   </div>
 

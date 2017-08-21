@@ -17,7 +17,7 @@ class Ability
       can :destroy, Comment, :user_id => user.id
       can :update, Comment, :user_id => user.id
       can :read, :all
-      cannot :read, Subdiscipline
+      # cannot :read, Subdiscipline
       cannot :read, [:tag,City]
       can :upvote, Post
       can :downvote, Post

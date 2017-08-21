@@ -1,27 +1,32 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
+    puts "the name
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+    .",request.env["omniauth.auth"]
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     if request.env["omniauth.auth"].info.email.blank?
       # flash.now[:notice] = 'Please Provide Email'
       redirect_to "/users/sign_in", alert: "Please Provide your E-mail Address"
+    elsif ( (User.exists?(:email => request.env["omniauth.auth"].info.email)) and (User.where(:email => request.env["omniauth.auth"].info.email).first.provider!="facebook" ) )
+      # return redirect email is already token 
+          redirect_to "/users/sign_in", alert: "email exists"
     else
-      
-      @user = User.from_omniauth(request.env["omniauth.auth"])
-      if user.email == "exists"
-        redirect_to "/users/sign_in", alert: "email exists"
-      end
-      if @user.persisted?
-        sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-      else
-        session["devise.facebook_data"] = request.env["omniauth.auth"]
-        # session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
-        redirect_to new_user_registration_url
-      end
-    
+        @user = User.from_omniauth(request.env["omniauth.auth"])
+        if (@user.persisted?)
+          sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+          set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+        else
+          session["devise.facebook_data"] = request.env["omniauth.auth"]
+      # session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
+          redirect_to new_user_registration_url
+        end
     end
-    
-    
   end
   
   def twitter
@@ -35,6 +40,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
       redirect_to new_user_registration_url
     end
+  
   end
 
   def google_oauth2
@@ -48,7 +54,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.google_oauth2_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
+  
   end
+  
+  
   def failure
     redirect_to root_path
   end

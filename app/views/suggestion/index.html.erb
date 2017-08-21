@@ -1,8 +1,42 @@
-</br>
-</br>
-</br>
+<section class="page-header">
+        <div class="container">
+
+          <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <%= link_to "Search Degree Programs","/discipline_universities" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </h1>
+
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+<div class="container-fluid no-padding discipline-title" >
+    <div class="col-sm-12 col-md-12 no-padding" style="text-align:center;">
+        
+        <h1>You might be interested in these degree programs</h1>
+    </div>
+</div>
 <div class="container">
-<% @suggest.each do |suggest| %>
-    <%= suggest.name %> <%= suggest.university.name %> </br>
-<% end %>
+
+
+
+<div class="suggested-unis-container suggestions-page">
+    
+    <% @suggest.each do |suggest| %>
+        <div class="sub-dis-box">
+            <div class="sub-dis-inner-box">
+                <div class="sub-dis-name">
+                    <span><%= suggest.degree_type %></span>
+                    <%= link_to suggest.name, "/discipline_universities/#{ suggest.id}" %>
+                </div>
+                <div class="sub-dis-university">
+                    <%= image_tag suggest.university.image.url(:med) , :class => "image_thumb_forum"%>
+                    <%= link_to suggest.university.name, "/universities/#{ suggest.university.id}"  %> 
+                    
+                    <span><%= suggest.university.city.name %></span>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
 </div>

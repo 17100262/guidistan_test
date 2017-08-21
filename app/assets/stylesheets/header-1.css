@@ -9,8 +9,8 @@
 } 
 #topMain.nav-pills>li:hover>a, 
 #topMain.nav-pills>li:focus>a {
-	color:#1F262D;
-	background-color:rgba(0,0,0,0.03);
+	color:#fff;
+	background-color:#8ab933;
 }
 #topMain.nav-pills>li.active>a {
 	color:#687482;
