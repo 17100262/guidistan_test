@@ -1,7 +1,9 @@
 
-<br/>
-<br/>
 
-<% @post.each do |post| %>
-<%= post.title %>
+<% @posts.each do |fpost| %>
+<%= fpost.post.title %>
+<h3>Description</h3>
+<%= fpost.post.description %>
+<%= link_to 'Delete',{ controller: "admin_panel",action: :del_post, id: fpost.post.id }, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %>
+
 <% end %>

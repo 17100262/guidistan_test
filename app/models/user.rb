@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_one :interested_user, dependent: :destroy
   accepts_nested_attributes_for :profile
   acts_as_voter
   # For OmniAuth-Facebook

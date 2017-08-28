@@ -4,8 +4,10 @@
 <section class="page-header">
         <div class="container">
 
-          <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            Search Degree Programs</h1>
+          <ul class="breadcrumbs">
+            <li><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+            <li class="active">Search Degree Programs</li>
+          </ul>
 
           <!-- breadcrumbs -->
         
@@ -13,30 +15,39 @@
 </section>
 
 
-<div class="container">
+<div class="container search-degree">
   <p id="notice"><%= notice %></p>
   <!-- FOR ADMIN-->
-<% if can? :create, DisciplineUniversity.new %> 
-  <div class="disc_unis_admins">
-    
-
-      <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
-      
-      <div class="pull-right download-in-excel-form">
-        <%= form_tag :controller => :discipline_universities, :action => :export do %>
-          <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
-        <% end %>
-      </div>
-      
-      <%= form_tag import_discipline_universities_path, multipart: true do %>
-        <%= file_field_tag :file, required: true %>
-        <br>
-        <%= submit_tag "Import" %>
-      <% end %>
-
-  
+  <div class="scholarship-search col-md-8 col-sm-12 col-centered">
+    <%= bootstrap_form_tag url: ngos_path, :method => 'get' do |f| %>
+      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <%= f.submit 'Search' %>
+    <% end %>
   </div>
-<% end %>  
+  
+  <% if can? :create, DisciplineUniversity.new %> 
+    <div class="disc_unis_admins">
+      
+  
+        <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
+        
+        <div class="pull-right download-in-excel-form">
+          <%= form_tag :controller => :discipline_universities, :action => :export do %>
+            <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+          <% end %>
+        </div>
+        
+        <%= form_tag import_discipline_universities_path, multipart: true do %>
+          <%= file_field_tag :file, required: true %>
+          <br>
+          <%= submit_tag "Import" %>
+        <% end %>
+  
+    
+    </div>
+  <% end %>  
   <!----------->
   <%= form_for_filterrific @filterrific,:remote => true do |f| %>
     <div class ="row">

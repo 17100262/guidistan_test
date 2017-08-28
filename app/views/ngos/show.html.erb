@@ -1,24 +1,57 @@
 <section class="page-header">
         <div class="container">
-
-          <h1><%= @ngo.name %></h1>
-
-          <!-- breadcrumbs -->
-        
+            <ul class="breadcrumbs">
+                <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><%= link_to "Browse Scholarships" , "/ngos" %><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li class="active"><%= @ngo.name %></li>
+            </ul>
         </div>
 </section>
-<div class="container">
-  
-    <%= link_to 'Edit', edit_ngo_path(@ngo) %> |
-    <%= link_to 'Back', ngos_path %>
-    
-    <p><%= @ngo.name %></p>
-    <p><%= @ngo.description %></p>
-    <p><%= @ngo.link %></p>
-    <p><%= @ngo.lastdate %></p>
-    <p><%= @ngo.procedure %></p>
 
+
+<div class="container-fluid scholarship-detail" >
     
+    <div class="pull-right">
+        <% if can? :update, @ngo %>
+            <%= link_to 'Edit', edit_ngo_path(@ngo), :class => "btn btn-success" %>
+            <%= link_to 'Destroy', @ngo, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+        <% end %>
+    </div>
+
+
+    <div class="container">
+        <span class="deg-level"><%= @ngo.level %></span>
+            
+        <h1><%=link_to @ngo.name , @ngo.link, {target: '_blank'} %></h1>
+        <p class="last-date"><i class="fa fa-calendar-times-o" aria-hidden="true"></i><span>Last Date: </span><%= @ngo.lastdate %> <i class="fa fa-exclamation wow flash infinite animated" aria-hidden="true" data-wow-duration="2s" data-wow-iteration="infinite"> </i></p>
+        <div class="tabs-block">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#detail" aria-controls="detail" role="tab" data-toggle="tab">Detail</a></li>
+                <li role="presentation"><a href="#criteria" aria-controls="criteria" role="tab" data-toggle="tab">Eligibility Criteria</a></li>
+                <li role="presentation"><a href="#apply" aria-controls="apply" role="tab" data-toggle="tab">How to Apply</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="detail">
+                    <p><%= @ngo.description %></p>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="criteria">
+                    <p><%= @ngo.criteria %></p>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="apply"> 
+                    <p><%= @ngo.procedure %></p>
+                </div>
+            </div>
+        </div>
+        <div class="button-contianer">
+            <a href="<%= @ngo.link %>" target="_blank" class="view-all-button">For more information visit this link</a>
+        </div>
+        
+    </div>
 </div>
 
-</div>
+<script>
+    $('#myTabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+</script>

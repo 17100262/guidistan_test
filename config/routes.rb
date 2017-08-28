@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'admin_panel/flag'
+
   get 'admin_panel/index'
   get 'universities/wishlist'
+  get 'discipline_universities/wishlist'
   post 'cities/export'
   post 'discipline_universities/export'
   post 'disciplines/export'
@@ -11,6 +12,10 @@ Rails.application.routes.draw do
   # get 'notification/index'
   get 'notification' => 'notification#index'
   get 'tags/:tag', to: 'posts#index', as: :tag
+  get 'admin_panel/del_post'
+  get 'admin_panel/make_mod/:id', :controller => "admin_panel", :action => "make_mod"
+  get 'admin_panel/remove_mod/:id', :controller => "admin_panel", :action => "remove_mod"
+  get 'flagged_posts/flag_this/:id' , :controller => "flagged_posts", :action => "flag_this"
 
 
   resources :disciplines do
@@ -44,8 +49,7 @@ Rails.application.routes.draw do
   resources :comments,:except => [:index,:create,:new] do
     resources :comments
   end
-  
-  
+
   # resources :comments do
   #   resources :comments
   # end
@@ -75,6 +79,32 @@ Rails.application.routes.draw do
   # devise_for :users
   
   Rails.application.routes.draw do
+  get 'flagged_posts/new'
+
+  get 'flagged_posts/create'
+
+  get 'flagged_posts/index'
+
+  get 'flagged_posts/delete'
+
+  get 'flagged_posts/destroy'
+
+  get 'interested_users/index'
+
+  get 'interested_users/create'
+
+  get 'interested_users/new'
+
+  get 'interested_users/destroy'
+
+  get 'interested_users/delete'
+
+  get 'interested_users/edit'
+
+  get 'interested_users/update'
+
+  get 'interested_users/show'
+
   get 'admin_panel/index'
 
     devise_for :users, controllers: {
@@ -104,6 +134,8 @@ Rails.application.routes.draw do
   resources :education
   resources :profile_education
   resources :tags
+  resources :interested_users
+  resources :flagged_posts
   get '/suggestions' => 'suggestion#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

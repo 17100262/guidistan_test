@@ -1,0 +1,32 @@
+<%= bootstrap_form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this university from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <!--<= f.label :name %><br>-->
+    <%= f.text_field :phone_number ,required: true,placeholder: "Phone number", hide_label: true %>
+  </div>
+  
+
+  <div class="field">
+    <!--<= f.label :description %>-->
+    <%= f.text_area :address,required: true,placeholder: "Address", hide_label: true %>
+  </div>
+  <div class="field">
+    <!--<= f.label :description %>-->
+    <%= f.text_area :universities,required: true,placeholder: "Which universities are you interested in?", hide_label: true %>
+  </div>
+  <div class="actions">
+    <%= link_to 'Cancel', root_path, class: "btn btn-info" %>
+    <%= f.submit "Create", class: "btn btn-success" %>
+  </div>
+<% end %>

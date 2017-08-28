@@ -2,9 +2,11 @@
 <section class="page-header">
         <div class="container">
 
-          <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            <%= link_to "All Universities","/universities" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            <%= @university.name %></h1>
+          <ul class="breadcrumbs">
+		        <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><%= link_to "All Universities","/universities" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+            <li class="active"><%= @university.name %></li>
+          </ul>
           <!-- breadcrumbs -->
         
         </div>
@@ -36,7 +38,7 @@
             <!--<a href="/universities/wishlist" class="uni-wish" >Add to Wishlist</a>-->
             
             <% if user_signed_in? && WishlistUniversity.exists?(user_id: current_user.id,university_id: @university.id) %>
-              <br/><%= link_to 'Added to Wishlist', {controller: "universities",action: "wishlist", id: @university.id}%>
+              <br/><%= link_to 'Added to Wishlist', {controller: "universities",action: "wishlist", id: @university.id}, class: "uni-wish-added"%>
             <% else %>
               <%= link_to 'Add to Wishlist', {controller: "universities",action: "wishlist", id: @university.id}, class: "uni-wish" %>
             <% end %> 
@@ -101,12 +103,13 @@
         
         
         <!-- UPDATE BLOCK   -->
-      <div style="margin-left:15px;margin-bottom:15px;">
+      
         <% if can? :update, @university %>
+        <div style="margin-left:15px;margin-bottom:15px;">
           <%= link_to 'Edit', edit_university_path(@university) %> |
+          <%= link_to 'Back', universities_path %>
+        </div>
         <% end %>
-        <%= link_to 'Back', universities_path %>
-      </div>
     </div>
     </div>
 

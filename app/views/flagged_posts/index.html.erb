@@ -1,0 +1,10 @@
+
+
+<% @posts.each do |fpost| %>
+    <h3>Title</h3>
+    <%= fpost.post.title %>
+    <h3>Description</h3>
+    <%= fpost.post.description %><hr/>
+    <%= link_to 'Delete', fpost , method: :delete , data: { confirm: 'Are you sure?' } %>
+    <!--<= link_to 'Destroy', fpost.post.id , method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%>-->
+<% end %>

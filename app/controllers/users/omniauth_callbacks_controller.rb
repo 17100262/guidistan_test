@@ -10,10 +10,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     .
     .",request.env["omniauth.auth"]
     # You need to implement the method below in your model (e.g. app/models/user.rb)
-    if request.env["omniauth.auth"].info.email.blank?
-      # flash.now[:notice] = 'Please Provide Email'
-      redirect_to "/users/sign_in", alert: "Please Provide your E-mail Address"
-    elsif ( (User.exists?(:email => request.env["omniauth.auth"].info.email)) and (User.where(:email => request.env["omniauth.auth"].info.email).first.provider!="facebook" ) )
+    
+    # if request.env["omniauth.auth"].info.email.blank?
+    #   # flash.now[:notice] = 'Please Provide Email'
+    #   redirect_to "/users/sign_in", alert: "Please Provide your E-mail Address"
+    if ((!(request.env["omniauth.auth"].info.email.blank?)) and (User.exists?(:email => request.env["omniauth.auth"].info.email)) and (User.where(:email => request.env["omniauth.auth"].info.email).first.provider!="facebook" ) )
       # return redirect email is already token 
           redirect_to "/users/sign_in", alert: "email exists"
     else

@@ -12,9 +12,12 @@ City.create!(name: 'Rawalpindi')
 City.create!(name: 'Islamabad')
 City.create!(name: 'Topi')
 User.create!(email: 'admin@test.com',password: 'admin123').add_role :admin
+User.create!(email: 'moderator@test.com',password: 'moderator123').add_role :moderator
 User.create!(email: 'test@gmail.com',password: 'password')
 Profile.create!(name:'Admin',city_id:1,gender:'M',user_id:1)
-Profile.create!(name:'Test',city_id:1,gender:'M',user_id:2)
+Profile.create!(name:'Test_Moderator',city_id:1,gender:'M',user_id:2)
+Profile.create!(name:'Test',city_id:1,gender:'M',user_id:3)
+
 # Discipline.create!(name:'Business',image_file_name:'business.jpg',description:'Business and management includes all the disciplines that deal with the organisation and coordination of enterprises that deal with products and services traded for profit. Business and management activities aim at accomplishing specific organisational goals, increasing the capital of the company and its overall efficiency.')
 # Discipline.create!(name:'Engineering',image_file_name:'engineering.jpg',description:'Engineering and technology is based on the application of existing technology within a field of engineering through the use of basic engineering principles and technical skills. As such, bachelor and master programmes in engineering and technology focus primarily on the applied aspects of science to equip graduates with practical technical skills in product improvement, manufacturing, construction or engineering operational functions.Universities provide a wide offer of Masters of Science (M.Sc.) in engineering and technology that keeps on growing and resulting in extensive specialisations and technological development. Studying engineering equips students with practical skills to acquire and apply scientific, mathematical, economic, social and practical ')
 # Discipline.create!(name:'Law',image_file_name:'law.jpg',description:'The unique five-year joint BA-LL.B is designed for students seeking a challenging, rigorous, interdisciplinary exposure to law and related vital disciplines. Furthermore, while the focal point is the Pakistani legal system, the teaching methodology encompasses a critical, comparative approach in order to broaden perspectives and sharpen analytical skills of the students. Additionally, the ambit of studies is not just laws as they exist and operate, but also how policy impacts laws, and how law and policy interplay.')

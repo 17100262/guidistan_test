@@ -1,7 +1,10 @@
 <section class="page-header">
         <div class="container">
 
-          <h1>All Discussion Forums</h1>
+            <ul class="breadcrumbs">
+                <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li class="active">Discussion Forums</li>
+            </ul>
 
           <!-- breadcrumbs -->
         
@@ -11,55 +14,46 @@
 <div class = "container" style="margin-top: 30px;margin-bottom: 15px;" id="forum-table">
     <ul class="forum-dis-container">
         <% @forums.each do |d| %>
-        
-        <script>
-            $(window).load(function(){
-                
-                var link_parent = $(".forum-list-link");
-                for(var i = 0 ; i < link_parent.length ; i++){
+            <script>
+                $(window).load(function(){
                     
-                    var links = $($(link_parent[i])[0]).find("a");
-                	
-                    var href = links[0].href;
-                    var href_location = "window.location.href='" + href + "'";
-                    var main_parent = $(link_parent[i]).parent(".forum-dis-list");
-                	$(main_parent[0]).attr("onClick",href_location);
-                }
-            });    
-        </script>
-        
-        <li class="forum-dis-list col-md-6">
+                    var link_parent = $(".forum-list-link");
+                    for(var i = 0 ; i < link_parent.length ; i++){
+                        
+                        var links = $($(link_parent[i])[0]).find("a");
+                    	
+                        var href = links[0].href;
+                        var href_location = "window.location.href='" + href + "'";
+                        var main_parent = $(link_parent[i]).parent(".forum-dis-list");
+                    	$(main_parent[0]).attr("onClick",href_location);
+                    }
+                });    
+            </script>
             
-   
-            <div class="forum-image-container">
-                
-                <%= image_tag d.image.url(:large) , :class => "image_thumb_forum"%>
-            
-            </div>
-            
-            <div class="forum-list-link">
-                <%#= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id }, class:"tab-title" %>
-                <%= link_to d.name ,forum_posts_path(d), class:"tab-title" %>
-            
-            <div class="disc-edit-del-btns"> 
-            
-                <% if can? :update, d %>
-                        <%= link_to 'Edit', edit_forum_path(d),remote: true, class:"btn btn-info" %>
-                <% end %>
-                <% if can? :update, d %>
-                
-                    <%= link_to 'Destroy', d, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+            <li class="forum-dis-list" style="width:49%;">
+                <div class="forum-image-container">
+                    <%= image_tag d.image.url(:small) , :class => "image_thumb_forum"%>
                 </div>
-            </div>   
+                
+                <div class="forum-list-link">
+                    <%#= link_to d.name ,{:controller => "posts", :action => "index", :filter_id => d.id }, class:"tab-title" %>
+                    <%= link_to d.name ,forum_posts_path(d), class:"tab-title" %>
+                    <div>
+                        <p><i class="fa fa-file-text-o" aria-hidden="true"></i> Posts: <%= d.posts.count %></p>
+                    </div>
+                </div> 
+                
+                <div class="disc-edit-del-btns"> 
+                    <% if can? :update, d %>
+                        <%= link_to 'Edit', edit_forum_path(d),remote: true, class:"btn btn-info" %>
+                        <%= link_to 'Destroy', d, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+                    <% end %>
+                </div>
+            </li>
+                    
+                
             
-        </li>
-            
-
-
-            <% end %>
         <% end %>
-        
-        
     </ul>
     <% if can? :create, Forum.new %>
       <%= link_to 'New Forum', new_forum_path ,remote: true,class:"btn btn-success pull-right" %>

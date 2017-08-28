@@ -18,12 +18,44 @@
 
 <section class="page-header">
     <div class="container">
-        <h1>Sign Up</h1>
-        <!-- breadcrumbs -->
+        <ul class="breadcrumbs">
+            <li><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+            <li class="active">Sign Up</li>
+        </ul>
     </div>
 </section>
 
 <div class="container register-form-main-page">
+
+    <div class="col-md-6 col-sm-6">
+        <form action="#" method="post" class="sky-form boxed">
+            <header class="size-18 margin-bottom-20">
+               <h4>Register using your favourite Social Network</h4> 
+            </header>
+            <fieldset class="nomargin">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <!--<a class="btn btn-block btn-social btn-facebook margin-bottom-10">-->
+                        <!--<i class="fa fa-facebook"></i> Sign up with Facebook-->
+                        <!--</a>-->
+                        <%= link_to '<i class="fa fa-facebook"></i>Sign in with Facebook'.html_safe, user_facebook_omniauth_authorize_path,:class => "btn btn-block btn-social btn-facebook margin-bottom-10" %>
+                        <!--<a class="btn btn-block btn-social btn-twitter margin-bottom-10">-->
+                        <!--<i class="fa fa-twitter"></i> Sign up with Twitter-->
+                        <!--</a>-->
+                        <!--<a class="btn btn-block btn-social btn-google margin-bottom-10">-->
+                        <!--<i class="fa fa-google-plus"></i> Sign up with Google-->
+                        <!--</a>-->
+                        <%= link_to '<i class="fa fa-google" aria-hidden="true"></i>Sign in with Google'.html_safe, user_google_oauth2_omniauth_authorize_path ,:class => "btn btn-block btn-social btn-google margin-bottom-10" %>
+                    </div>
+                </div>
+            </fieldset>
+            <footer>
+               <h5> Already have an account? <%= link_to 'Log In' , 'sign_in', class: "btn btn-success"  %></h5>
+            </footer>
+        </form>
+    </div>
+    
+    
 
     <div class="col-md-6 col-sm-6 registeration-form-container">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'nomargin sky-form boxed', novalidate: false } )   do |f| %>
@@ -61,39 +93,13 @@
                 </div>
             
                 <div class="form-actions">
-                    <%= f.button :submit, "Sign up", class: "btn btn-primary noradius pull-right" %>
+                    <%= f.button :submit, "Sign up", class: "btn btn-success noradius pull-right" %>
                 </div>
             </fieldset>
         <% end %>
     </div> <!--Col-md-6 Forum Container-->
 
-    <div class="col-md-6 col-sm-6">
-        <form action="#" method="post" class="sky-form boxed">
-            <header class="size-18 margin-bottom-20">
-                Register using your favourite Social Network
-            </header>
-            <fieldset class="nomargin">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <!--<a class="btn btn-block btn-social btn-facebook margin-bottom-10">-->
-                        <!--<i class="fa fa-facebook"></i> Sign up with Facebook-->
-                        <!--</a>-->
-                        <%= link_to '<i class="fa fa-facebook"></i>Sign in with Facebook'.html_safe, user_facebook_omniauth_authorize_path,:class => "btn btn-block btn-social btn-facebook margin-bottom-10" %>
-                        <!--<a class="btn btn-block btn-social btn-twitter margin-bottom-10">-->
-                        <!--<i class="fa fa-twitter"></i> Sign up with Twitter-->
-                        <!--</a>-->
-                        <!--<a class="btn btn-block btn-social btn-google margin-bottom-10">-->
-                        <!--<i class="fa fa-google-plus"></i> Sign up with Google-->
-                        <!--</a>-->
-                        <%= link_to '<i class="fa fa-google" aria-hidden="true"></i>Sign in with Google'.html_safe, user_google_oauth2_omniauth_authorize_path ,:class => "btn btn-block btn-social btn-google margin-bottom-10" %>
-                    </div>
-                </div>
-            </fieldset>
-            <footer>
-                Already have an account? <strong><%= link_to 'Log In' , 'sign_in'  %></strong>
-            </footer>
-        </form>
-    </div>
+    
 </div>
 <!--render "devise/shared/links"-->
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815103300) do
+ActiveRecord::Schema.define(version: 20170825094722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,12 @@ ActiveRecord::Schema.define(version: 20170815103300) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "flagged_posts", force: :cascade do |t|
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "forums", force: :cascade do |t|
     t.string   "name"
     t.string   "image_file_name"
@@ -155,6 +161,17 @@ ActiveRecord::Schema.define(version: 20170815103300) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
+
+  create_table "interested_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "universities"
+    t.string   "address"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "ngos", force: :cascade do |t|
     t.string   "name"
@@ -263,6 +280,10 @@ ActiveRecord::Schema.define(version: 20170815103300) do
     t.integer  "city_id"
     t.string   "campus"
     t.string   "link"
+    t.string   "number"
+    t.string   "email"
+    t.string   "address"
+    t.string   "facebook"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "image_file_name"
@@ -349,6 +370,13 @@ ActiveRecord::Schema.define(version: 20170815103300) do
 
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+
+  create_table "wishlist_degrees", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "discipline_university_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "wishlist_universities", force: :cascade do |t|
     t.integer  "user_id"

@@ -51,4 +51,7 @@ bundle exec rake jobs:work
 ==comment ajax
 edit profile not working
 search box
+
+last user sign in par condition lagani hai
+anyone can see the profiles/index but he should only be able to see profiles/show
 ==facebook usr name -email issue

@@ -1,7 +1,10 @@
 <section class="page-header">
   <div class="container">
-    <h1><a href="/forums">All Forums / </a>
-    <%= @forum_name %> Discussion Forum </h1>
+    <ul class="breadcrumbs">
+      <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li> 
+      <li><%= link_to "Discussion Forums","/forums" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+      <li class="active"><%= @forum.name %></li>
+    </ul>
   </div>
 </section>
 
@@ -51,10 +54,13 @@
             # post.user.profile.name
             %></small>
             <%= link_to post.user.profile.name , profile_path(post.user.profile.id) %>
-            <% if (current_user != nil && (current_user.has_role? :admin)) %>
+            <% if (post.user.has_role? :admin) %>
                  <div class = "adm">
             	   Admin</div>
-            	   <% end %>
+            <% elsif (post.user.has_role? :moderator) %>
+                 <div class = "mod">
+            	   Moderator</div>
+            <% end %>
             <% if post.user.email %>
             <small class="block">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
             <% end %>
@@ -80,22 +86,20 @@
           <div class="caption all-posts-end-buttons visible-xs" style="text-align:center;">
             
             <% if can? :update, post %>
-            <%#= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
-            <%= link_to 'Edit', edit_forum_post_url(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
-          <% end %>
-          <% if can? :destroy, post %>
-            <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
-          <% end %>
-          
-          
+              <%#= link_to 'Edit', edit_post_path(post),class: "text-primary pull-left edit-btn-show-posts" %>
+              <%= link_to 'Edit', edit_forum_post_url(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
+            <% end %>
+            <% if can? :destroy, post %>
+              <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
+            <% end %>
+            &nbsp;<%= link_to 'Flag this as inappropriate',{controller: 'flagged_posts',action: 'flag_this',id: post.id } ,class: "text-primary pull-left edit-btn-show-posts" %>
+            
           </div>
           
           <div class="block-review-avatar block-box-review-post text-center visible-xs">
               <div class="push-bit">
                 
-                <% if post.user.profile.image_file_name.present? %> 
-
-
+                <% if post.user.profile.image_file_name.present? %>
                   <%= image_tag post.user.profile.image.url(:med) %>
                   <% else %>
                   
@@ -150,13 +154,14 @@
           
           <div class="caption all-posts-end-buttons hidden-xs" style="text-align:center;padding-top:10px;">
             
-            <% if can? :update, post %>
+          <% if can? :update, post %>
             <%= link_to 'Edit', edit_forum_post_path(@forum,post),class: "text-primary pull-left edit-btn-show-posts" %>
           <% end %>
           <% if can? :destroy, post %>
             <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
           <% end %>
-          
+          &nbsp;<%= link_to 'Flag this as inappropriate',{controller: 'flagged_posts',action: 'flag_this',id: post.id } ,class: "text-primary pull-left edit-btn-show-posts" %>
+            
           
             <!--<= link_to like_post_path(post), class: "like", method: :put do%>-->
             <!--  <button type="button" class="btn btn-info" aria-label="Left Align">-->

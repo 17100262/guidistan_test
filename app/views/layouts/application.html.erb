@@ -140,8 +140,12 @@
 														<a class="dropdown-toggle" href="/tags">
 														Tags Management
 													</a>
-														<a class="dropdown-toggle" href="/admin_panel/flag">
+														<a class="dropdown-toggle" href="/flagged_posts">
 														Flagged Posts
+													</a>
+													</a>
+														<a class="dropdown-toggle" href="/interested_users">
+														Interested Users
 													</a>
 											</ul>
 	
@@ -444,10 +448,10 @@
 			</div>
 
 <% if notice %>
-	<p class="notice"><%= notice %></p>
+	<p class="notice alert alert-success" id="notice" role="alert"><%= notice %></p>
 <% end %>
 <% if alert %>
-	<p class="alert"><%= alert %></p>
+	<p class="alert alert-danger" id="notice" role="alert"><%= alert %></p>
 <% end %>
 <%= yield %>
 <!--< if not controller_name == 'admin_panel' %>-->
@@ -627,6 +631,7 @@
 		$('.notification').on('click',function(){
 			$(this).find('ul.dropdown-menu').toggleClass('notification-hide');	
 		});
+		$('#notice').fadeIn('slow').delay(3500).fadeOut('slow');
 	</script>
 
 	

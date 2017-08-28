@@ -20,6 +20,7 @@ class Discipline < ActiveRecord::Base
                 discipline = new
                 discipline.name = header[0]
                 discipline.description = header[1]
+                discipline.font = header[2]
                 if Discipline.exists?(name: discipline.name)
                 else
                     discipline.save!

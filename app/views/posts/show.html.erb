@@ -2,11 +2,13 @@
 <section class="page-header">
         <div class="container">
 
-          <h1>
-          	<a href="/forums">All Forums / </a>
-          <%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %> Forum /  Current Post
-         
-          </h1>
+          <ul class="breadcrumbs">
+		      <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li> 
+		      <li><%= link_to "Discussion Forums","/forums" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+          		<li><%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+          		<li class="active">Current Post</li>
+         </ul>
+          
 		</div>
 </section>
 
@@ -252,7 +254,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   });
 	   
 	   $(down_vote).click(function(){
-	   	alert();
+	   	// alert();
 	      
 	      
 	      var num = parseInt(no_of_likes.text());
@@ -323,8 +325,10 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	     var comment_errormsg = $(this).parent('.multi_commentliker').find(".commentliker_error_message");
 	   	 var comment_id = $(this).parent('.multi_commentliker').attr('data-commentid');
 
-	   	 var link_to_like = "/posts/<%= @post.id  %>/comments/"+comment_id+"/like";
-	   	 var link_to_dislike = "/posts/<%= @post.id  %>/comments/"+comment_id+"/dislike";
+	   	 var link_to_like = "/forums/<%= @post.forum.id %>/posts/<%= @post.id  %>/comments/"+comment_id+"/like";
+	   	 var link_to_dislike = "/forums/<%= @post.forum.id %>/posts/<%= @post.id  %>/comments/"+comment_id+"/dislike";
+	   	 
+	   	 ///forums/:forum_id/posts/:post_id/comments/:id/like
 	      
 	      $(".commentliker_error_message").hide();
 	      
@@ -381,8 +385,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 	   	 var comment_errormsg = $(this).parent('.multi_commentliker').find(".commentliker_error_message");
 	   	 var comment_id = $(this).parent('.multi_commentliker').attr('data-commentid');
 
-	   	 var link_to_like = "/posts/<%= @post.id  %>/comments/"+comment_id+"/like";
-	   	 var link_to_dislike = "/posts/<%= @post.id  %>/comments/"+comment_id+"/dislike";
+	   	 var link_to_like = "/forums/<%= @post.forum.id %>/posts/<%= @post.id  %>/comments/"+comment_id+"/like";
+	   	 var link_to_dislike = "/forums/<%= @post.forum.id %>/posts/<%= @post.id  %>/comments/"+comment_id+"/dislike";
 	   	 
 	      var num = parseInt(no_of_likes.text());
 	      

@@ -1,60 +1,75 @@
-<br>
-<div class="container">
-<p id="notice"><%= notice %></p>
-<br>
-<% if can? :create, Ngo.new %>
-  <div class="disc_unis_admins">
-<%= link_to 'New NGO', new_ngo_path, class: "btn btn-primary pull-right" %>
-  <%= form_tag :controller => :ngos, :action => :export do %>
-    <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
-  <% end %>
-<%= form_tag import_ngos_path, multipart: true do %>
-  <%= file_field_tag :file, required: true %>
+<section class="page-header">
+        <div class="container">
+          <ul class="breadcrumbs">
+            <li><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+            <li class="active"> Browse Scholarships</li>
+            
+          </ul>
+          <!-- breadcrumbs -->
+        
+        </div>
+</section>
+
+
+<div class="container-fluid no-padding discipline-title" >
+    <div class="col-sm-12 col-md-12 no-padding" style="text-align:center;">
+        
+        
+        <div style="text-align: center;" class="dis-description-text">
+            <h1>Explore All Scholarships</h1>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container scholarship">
   <br>
-  <%= submit_tag "Import" %>
-<% end %>
-</div>
-<% end %>
-<h2 class="post-title-forum post-title-all-posts" style="">All NGOs</h2>
-
-
-
-<%= bootstrap_form_tag url: ngos_path, :method => 'get' do |f| %>
-  <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] %>
-  <%= f.submit %>
-<% end %>
-
-
-
-
-
-
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Level</th>
-      
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @ngos.each do |ngo| %>
-      <tr>
-        <td><%= ngo.name %></td>
-        <td><%= ngo.description %></td>
-        <td><%= ngo.level %></td>
-        <td><%= link_to 'Show', ngo %></td>
-        <td><%= link_to 'Edit', edit_ngo_path(ngo) %></td>
-        <td><%= link_to 'Destroy', ngo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <% if can? :create, Ngo.new %>
+    <div class="disc_unis_admins">
+      <%= link_to 'New NGO', new_ngo_path, class: "btn btn-primary pull-right" %>
+      <%= form_tag :controller => :ngos, :action => :export do %>
+        <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+      <% end %>
+      <%= form_tag import_ngos_path, multipart: true do %>
+        <%= file_field_tag :file, required: true %>
+        <br>
+        <%= submit_tag "Import" %>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div class="scholarship-search col-md-8 col-sm-12 col-centered">
+    <%= bootstrap_form_tag url: ngos_path, :method => 'get' do |f| %>
+      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <%= f.submit 'Search' %>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
+  <% @ngos.each do |ngo| %>
 
+    <div class="scholarship-overview">
+        <h2><%= link_to ngo.name, "/ngos/#{ngo.id}",{title: ngo.name} %></h2>
+        <ul>
+          <li><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Level: </span><%= ngo.level %></li>
+          <li><i class="fa fa-calendar-times-o" aria-hidden="true"></i><span>Last Date: </span><%= ngo.lastdate %></li>
+        </ul>
+        
+          <p class="line-clamp line-clamp-3"><%= ngo.description %></p>
+         
+          <%= link_to 'Read More', "/ngos/#{ngo.id}",{title: ngo.name} %>
+        
+    </div>
+            
+  <% end %>
 
 </div>
+
+<script>
+  $(".scholarship-overview").click(function() {
+    window.location = $(this).find("a").attr("href"); 
+    return false;
+  });
+</script>

@@ -55,11 +55,13 @@ class CommentsController < ApplicationController
 
 	def destroy
 		@comment = Comment.find(params[:id])
+		
 		if @comment.commentable_type == "Post"
 			post = @comment.commentable_type
 		elsif @comment.commentable_type == "Comment"
 			post = @comment.commentable.commentable
 		end
+		@comment.activities.destroy_all
 		@comment.destroy
 		# @comment.create_activity :destroy, owner:current_user
 		redirect_to getPostUrl

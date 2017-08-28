@@ -1,11 +1,12 @@
 <section class="page-header">
         <div class="container">
 
-          <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          <%= link_to "Browse Information" , "/disciplines" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          <%= link_to @subdiscipline.discipline.name , "/disciplines/#{@subdiscipline.discipline.id}" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          <%= @subdiscipline.name %></h1>
-
+          <ul class="breadcrumbs">
+                <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+              <li><%= link_to "Browse Information" , "/disciplines" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+              <li><%= link_to @subdiscipline.discipline.name , "/disciplines/#{@subdiscipline.discipline.id}" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+              <li class="active"><%= @subdiscipline.name %></li>
+            </ul>
           <!-- breadcrumbs -->
         
         </div>
@@ -69,22 +70,25 @@
               </div>
                   
           <% end %>
-         
+          
+          
       </div>
       <div class="button-contianer">
           <a href="/universities" class="view-all-button">View all degree programs in <%= @subdiscipline.name %></a> 
       </div>
 
-      <div style="margin-top:20px;">
       
-          <%= link_to 'Back', subdisciplines_path,class:"btn btn-success" %>  
+           
           <% if can? :update, @subdiscipline %>
+           <div style="margin-top:20px;">
+     
+              <%= link_to 'Back', subdisciplines_path,class:"btn btn-success" %> 
               <%= link_to 'Edit', edit_subdiscipline_path(@subdiscipline),class:"btn btn-info" %>
               <%= link_to 'Delete', @subdiscipline, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-info" %>
-              
+            </div>
           <%end %>
           
-      </div> 
+       
 
   </div>  
 </article>

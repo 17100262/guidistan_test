@@ -1,9 +1,11 @@
 <section class="page-header">
         <div class="container">
 
-          <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          <%= link_to "Search Degree Programs","/discipline_universities" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-          <%= @discipline_university.name %> </h1>
+          <ul class="breadcrumbs">
+            <li><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+            <li><%= link_to "Search Degree Programs","/discipline_universities" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
+          <li class="active"><%= @discipline_university.name %></li>
+          </ul>
 
           <!-- breadcrumbs -->
         
@@ -11,10 +13,14 @@
 </section>
 <div class="container-fluid program_detail">
     <div class="bg-cover">
-        <a class="uni-wish" href="#">Add to Wishlist</a>
+            <% if user_signed_in? && WishlistDegree.exists?(user_id: current_user.id,discipline_university_id: @discipline_university.id) %>
+                  <%= link_to 'Added to Wishlist', {controller: "discipline_universities",action: "wishlist", id: @discipline_university.id} , class: "uni-wish-added" %>
+            <% else %>
+              <%= link_to 'Add to Wishlist', {controller: "discipline_universities",action: "wishlist", id: @discipline_university.id}, class: "uni-wish" %>
+            <% end %> 
         <div class="cover-content">
             <span class="deg"><%= @discipline_university.degree_type %></span>
-            <h1><%=link_to @discipline_university.name , @discipline_university.link, {target: '_blank'}%></h1>
+            <h1><%=link_to @discipline_university.name , @discipline_university.link, {target: '_blank'} %></h1>
         </div>
     </div>   
     
@@ -39,13 +45,17 @@
             
         </div>
          
-        
+        <% university = @discipline_university.university %>
+        <div class="uni-image-container col-md-2 col-md-offset-1 col-sm-12">
+            <%= image_tag university.image.url(:small) , :class => "image_thumb_forum"%>
+        </div>
         <div class="uni-info">
-            <h3><%= link_to @discipline_university.university.name,@discipline_university.university.link , {target: '_blank'} %></h3>
+            
+            <h3><%= link_to university.name, university.link , {target: '_blank'} %></h3>
             
             <div class="more-facts">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <%= @discipline_university.university.city.name %>
+                <%= university.city.name %>
             </div>
             
             <h4>Eligibility Criteria:</h4>
@@ -59,11 +69,16 @@
         
     
     
-        <div>
+        
             <% if can? :update, @discipline_university %>
-              <%= link_to 'Edit', edit_discipline_university_path(@discipline_university), :class => "btn btn-success" %> 
+                <div>
+                    <%= link_to 'Edit', edit_discipline_university_path(@discipline_university), :class => "btn btn-success" %> 
+                    <%= link_to 'Back', discipline_universities_path, :class => "btn btn-success" %>
+                    <%= link_to 'Delete', @discipline_university, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %>
+            
+                 </div>
             <% end %>
-            <%= link_to 'Back', discipline_universities_path, :class => "btn btn-success" %>
-        </div>
+            
+       
     </div> 
 </div>

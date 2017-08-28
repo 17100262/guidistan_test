@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except:[:index,:show]
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :authenticate_user!, except:[:index,:show,:flag_this]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote,:flag_this]
   before_action :set_forum, only: [:index,:show,:edit,:destroy,:new,:update,:create]
   load_and_authorize_resource
   impressionist actions: [:show], unique: [:session_hash]
@@ -62,7 +61,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         # format.json {render json: @names}
-        format.html { redirect_to forum_post_path(@forum,@post), notice: 'Post was successfully created.' }
+        format.html { redirect_to forum_post_path(@forum,@post), notice: 'You will receive an email when someone replies on your question.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -89,7 +88,8 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to forum_posts_url(@forum), notice: 'Post was successfully destroyed.' }
+        format.html { redirect_to forum_posts_url(@forum), notice: 'Post was successfully destroyed.' }
+      
       format.json { head :no_content }
     end
   end
@@ -106,15 +106,11 @@ class PostsController < ApplicationController
     @post.downvote_from current_user
     
     @post.user.profile.update( :reputation => @post.user.profile.reputation - 1)
-    # if @post.get_downvotes.size > 0
-    #   puts @post.flagi
-    #   puts "lalalalalalalalalalalalalal"
-    #   @post.flagi = true
-    #   puts @post.flagi
-    # end
+    if @post.get_downvotes.size > 0
+      FlaggedPost.create(post_id: @post.id)
+    end
     # redirect_to :back
   end
-  
   def count
     # @post.upvote_from current_user
     # @post.downvote_from current_user
@@ -131,6 +127,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description,:forum_id, :filter_id,{:tag_list=>[]} ,:tag, :flagi)
+      params.require(:post).permit(:title, :description,:forum_id, :filter_id,{:tag_list=>[]} ,:tag)
     end
 end

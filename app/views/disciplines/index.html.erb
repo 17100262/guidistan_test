@@ -1,8 +1,10 @@
 <section class="page-header">
   <div class="container">
     <!--<div align="center">-->
-      <h1><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      Browse Information</h1>
+      <ul class="breadcrumbs">
+        <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li class="active">Browse Information</li>
+      </ul>
     <!--</div>-->
     <!-- breadcrumbs -->
     
@@ -58,8 +60,8 @@
   <!-- DISCIPLINES  BLOCK   -->
   <div class="services container" >
     <h1 align="center">Browse by Discipline</h1>
-    <div class = "container" style="padding-left: 0px;margin-top: 30px;">
-      <ul class="forum-dis-container" style="padding-left: 0px;">
+    <div class = "container" style="margin-top: 30px;">
+      <ul class="forum-dis-container dis-dis-container" style="padding-left: 0px;">
           <% @disciplines.each do |discipline| %>
             <li class="forum-dis-list col-md-2 dis-dis-list">
                 <div class="forum-image-container dis-image-container"> 
@@ -78,8 +80,8 @@
   
   <div class="services container browse-uni" >
     <h1 align="center">Browse by University</h1>
-    <div class = "container" style="padding-left: 0px;margin-top: 30px;">
-      <ul class="forum-dis-container" style="padding-left: 0px;">
+    <div class = "container" style="margin-top: 30px;">
+      <ul class="forum-dis-container dis-dis-container" style="padding-left: 0px;">
           <% @universities.each do |university| %>
             <li class="forum-dis-list col-md-2 dis-dis-list">
                 <div class="forum-image-container dis-image-container"> 

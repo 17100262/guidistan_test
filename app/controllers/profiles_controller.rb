@@ -7,14 +7,21 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
   end
+  def new
+    @names = Discipline.all.map{|record|  {id: record.id,name: record.name}}
+    @options = { tokenValue: 'id', prePopulate: @profile.student_interests_discipline.map{|t| {name:t.discipline.name,id: t.discipline_id} } }
+    
+  end
 
   def create
     @profile = Profile.new(profile_params)
+   
+    
 
     respond_to do |format|
       if @profile.save
         # SendEmailJob.set(wait: 5.seconds).perform_later(@profile.user.email)
-        BasicMailer.send_email(email).deliver
+        # BasicMailer.send_email(email).deliver
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -38,6 +45,8 @@ class ProfilesController < ApplicationController
 
   def update
     @profile = Profile.find(params[:id])
+    
+    puts "we are here"
     # all_interests = @profile.student_interests_discipline
     
     @profile.student_interests_discipline.destroy_all

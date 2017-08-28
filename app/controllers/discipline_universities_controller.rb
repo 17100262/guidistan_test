@@ -98,8 +98,6 @@ class DisciplineUniversitiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /discipline_universities/1
-  # PATCH/PUT /discipline_universities/1.json
   def update
     respond_to do |format|
       if @discipline_university.update(discipline_university_params)
@@ -112,8 +110,7 @@ class DisciplineUniversitiesController < ApplicationController
     end
   end
 
-  # DELETE /discipline_universities/1
-  # DELETE /discipline_universities/1.json
+
   def destroy
     @discipline_university.destroy
     respond_to do |format|
@@ -121,6 +118,19 @@ class DisciplineUniversitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def wishlist
+    
+    if (WishlistDegree.exists?(:user_id => current_user.id,:discipline_university_id =>  @discipline_university.id))
+      WishlistDegree.where(:user_id => current_user.id,:discipline_university_id =>  @discipline_university.id).destroy_all
+      redirect_to "/discipline_universities/#{@discipline_university.id}", notice: "Degree program removed from wishlist"
+    else
+      WishlistDegree.create(:user_id => current_user.id,:discipline_university_id =>  @discipline_university.id)
+      redirect_to "/discipline_universities/#{@discipline_university.id}", notice: "Degree program added to wishlist"
+    end
+  end
+  
   def import
     DisciplineUniversity.import(params[:file])
     redirect_to discipline_universities_path, notice: "Degree Programs of Universities imported"

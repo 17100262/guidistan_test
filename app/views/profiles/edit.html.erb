@@ -2,60 +2,15 @@
 				<div class="container">
 
 					  <h1>Edit Profile</h1>
-
-					
-
 				</div>
 </section>
+<%= render 'form' %>
 
-<div class="container">
- 
- <div class="newPostForm editprofileForm">
-  <%= form_for (@profile), html: { multipart: true } do |f| %>
-  
-   <div class="field">
-     <%= f.label :Name %>
-     <%= f.text_field :name %><br />
-   </div>
-   
-    <div class="field">
-     <%= f.label :Gender %>
-     <%= f.select :gender,[["M","M"],["F","F"]] %> <br />
-   </div>
-   
-    <div class="field">
-     <%= f.label :City %>
-    <%= f.text_field :city %><br />
-   </div>
-   
-   
-   
-   <%= f.fields_for :interest_attributes do |ff| %>
-    <%#= @profile.errors.full_messages.first if @profile.errors.any? %>
-     <div class="field">
-      <%= f.label :Interests %>
-       <%= ff.text_field :interest_list, 'data-tokeninput' => { collection: @names ,options: @options}.to_json, :required => true %>
-      </div>
-      
-   <div class="field">
-     <%= f.label :Image %>
-     <%= f.file_field :image %>
-   </div>
-  <% end %>
-    <%= f.submit "Edit" %>
-  <% end %>
- </div>
-
-
- 
-</div>
-
-
-<script>
+//<script>
     
-    $(document).ready(function(){
-        $(".newPostForm br").hide();
-        $(".newPostForm input[type='submit']").addClass("btn btn-success");
-    });
+//     $(document).ready(function(){
+//         $(".newPostForm br").hide();
+//         $(".newPostForm input[type='submit']").addClass("btn btn-success");
+//     });
     
-</script>
+// </script>

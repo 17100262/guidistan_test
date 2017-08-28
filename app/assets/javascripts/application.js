@@ -27,7 +27,7 @@
 //     animateDropdown:   false
 //  });
 // });
-
+$('#notice').fadeIn('slow').delay(1000).fadeOut('slow');
 $(document).ajaxError(function (e, xhr, settings) {
         if (xhr.status == 401) {
             alert(xhr.responseText);
@@ -180,5 +180,4 @@ function _wrotate() {
 		
 		}
 	}
-	
 	
