@@ -5,6 +5,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Package</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -14,6 +15,13 @@
                     <td><%= user.name %></td>
                     <td><%= user.email %></td>
                     <td><%= user.phone_number %></td>
+                    <% if user.package == false%>
+                    <td>Standard</td>
+                    <% elsif user.package == true %>
+                    <td>Premium</td>
+                    <% else %>
+                    <td>Didn't select any</td>
+                    <% end %>
                     <td><%= link_to 'View Profile',"profiles/#{user.user.profile.id}", :class => 'btn btn-xs btn-primary', :role => "button" %>
         </td>
                 </tr>

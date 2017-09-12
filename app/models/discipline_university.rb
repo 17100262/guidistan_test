@@ -21,6 +21,44 @@ class DisciplineUniversity < ActiveRecord::Base
   	scope :by_uni_id,-> ids {where(university_id: ids) if ids.present? }
   	scope :by_discipline_id,-> ids {where(discipline_id: ids) if ids.present? }
   	
+  	def self.search(discp_param,subdiscp_param,uniname,city_param)
+        # puts discp_param=="",subdiscp_param=="",city_param=="",uniname=="","check here"
+        if !discp_param.nil? and discp_param != ""
+        #   puts !discp_param.nil?,discp_param,"hello world search_query",discp_param==""
+            if !uniname.nil? and uniname != ""
+                unid = University.find_by(name: uniname)
+                where(discipline_id: discp_param,subdiscipline_id: subdiscp_param,university_id: unid)
+            elsif subdiscp_param == ""
+                where(discipline_id: discp_param)
+            else
+                where(discipline_id: discp_param,subdiscipline_id: subdiscp_param)
+            end
+        elsif !subdiscp_param.nil? and subdiscp_param != ""
+            where(subdiscipline_id: subdiscp_param)
+        elsif !city_param.nil? and city_param != ""
+            unis = University.where(city_id: city_param)
+            if uniname != "" and !discp_param.nil? and discp_param != ""
+                where(university_id: uniname,discipline_id: discp_param,subdiscipline_id: subdiscp_param)
+            elsif  !uniname.nil? and uniname != "" and discp_param == ""
+                unid = University.find_by(name: uniname).id
+                where(university_id: unid)
+            else
+               where(university_id: unis) 
+            end
+
+        #     find_by_sql(["
+        #       SELECT DISTINCT *
+        #   FROM universities u,discipline_universities d 
+        #   WHERE 
+        #      u.id = d.university_id
+        #      AND u.city_id IN (?)",city_params]).take
+        elsif !uniname.nil? and uniname != ""
+            unid = University.find_by(name: uniname).id
+            where(university_id: unid)
+        else
+            all
+        end
+    end
     def self.import(file)
         spreadsheet = open_spreadsheet(file)
         if spreadsheet

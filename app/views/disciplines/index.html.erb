@@ -29,27 +29,42 @@
   <% end %>
   <!------------------------>
   
-  <div class="container-fluid no-padding disp-cover">
-    <!--<img src="/discpback.jpg" alt="rss feed" />-->
-      <%= bootstrap_form_tag url: discipline_universities_path, :method => 'get', :remote => true do |f| %>
+<div class="container-fluid no-padding disp-cover">
+  <!--    <= bootstrap_form_tag url: discipline_universities_path, :method => 'get', :remote => true do |f| %>-->
       
-    <div class="control-group string optional payslip_user_type_id">
+  <!--  <div class="control-group string optional payslip_user_type_id">-->
       <!--    <label class="string optional control-label" for="payslip_user_type_id"></label>-->
       <!--    <div class="controls">-->
       <!--<= f.collection_select :discipline_id, Discipline.all, "id", "name", id: 'payslip_user_type_id' %>-->
       <!--    </div>-->
-      <%= select_tag('val', options_from_collection_for_select(Discipline.all, 'id', 'name') ,id: "payslip_user_type_id") %>
+  <!--    <= select_tag('val', options_from_collection_for_select(Discipline.all, 'id', 'name') ,id: "payslip_user_type_id") %>-->
     
-      <div class="control-group string optional payslip_user_id">
-          <label class="string optional control-label" for="payslip_user_id"> </label>
-          <div class="controls">
-              <%= f.collection_select :subdiscipline_id, @subs, "id", "name", prompt: '--select--' %>    
-          </div>
-      </div>
-      <%= f.submit "Search"%>
+  <!--    <div class="control-group string optional payslip_user_id">-->
+  <!--        <label class="string optional control-label" for="payslip_user_id"> </label>-->
+  <!--        <div class="controls">-->
+  <!--            <= f.collection_select :subdiscipline_id, @subs, "id", "name", prompt: '--select--' %>    -->
+  <!--        </div>-->
+  <!--    </div>-->
+  <!--    <= f.submit "Search"%>-->
+  <!--    < end %>-->
+  <!--  </div>-->
+  <div class="disp-cover-content">
+    <div class="heading-text">
+      <h1>Explore All Your Opportunities</h1>
+      <h2>Discover thousands of Bachelor's degrees worldwide!</h2>
+    </div>
+    <div class="scholarship-search col-md-8 col-sm-12 col-centered">
+      <%= bootstrap_form_tag url: discipline_universities_path, :method => 'get' do |f| %>
+        <%= f.collection_select :city_id, City.all.order(:name), :id, :name, { :prompt => 'Choose a City...',:hide_label => true } %>
+        <%= f.collection_select :discipline_id, Discipline.all.order(:name), :id, :name, { id: 'discipline_selection',:prompt => 'Choose a Discipline...',:hide_label => true } %>
+        <%= f.grouped_collection_select :subdiscipline_id, Discipline.order(:name), :subdisciplines, :name, :id, :name,include_blank: true, :hide_label => true %>
+        <%= f.autocomplete_field :university_name, autocomplete_university_name_discipline_universities_path, placeholder: "Where do you want to Study..."  %>
+
+        <%= f.submit 'Search' %>
       <% end %>
     </div>
   </div>
+</div>
   
   
   
@@ -123,5 +138,33 @@
             var main_parent = $(link_parent[i]).parent(".forum-dis-list");
         	$(main_parent[0]).attr("onClick",href_location);
         }
-    });    
+    });
+
+$( document ).ready(function() {
+  var subdisciplines;
+  subdisciplines = $('#_subdiscipline_id').html();
+  // console.log(subdisciplines);
+  return $('#_discipline_id').change(function() {
+    var discipline, options;
+    discipline = $('#_discipline_id :selected').text();
+    
+    // console.log(discipline);
+    
+    // console.log(`optgroup[label=${discipline}]`)
+    options = $(subdisciplines).filter(`optgroup[label="${discipline}"]` ).html();
+    
+    // options = $(subdisciplines).filter(`optgroup[label="Computer Sciences"]` ).html();
+    
+    // options = $(states).filter("optgroup[label=" + country + "]").html();
+    
+  
+    // console.log(options);
+    if (options) {
+      return $('#_subdiscipline_id').html(options);
+    } else {
+      return $('#_subdiscipline_id').empty();
+    }
+  });
+  
+});
 </script>

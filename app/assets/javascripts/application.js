@@ -18,6 +18,8 @@
 //= require rails-jquery-tokeninput
 //= require angular
 //= require ahoy
+//= require jquery-ui
+//= require autocomplete-rails
 
 // $(function() {
 //  $("#post_tags").tokenInput("/posts/tags.json", {

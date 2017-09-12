@@ -1,24 +1,20 @@
 <section class="page-header">
-				<div class="container">
-
-					  <h1>Notifications</h1>
-
-					
-
-				</div>
+	<div class="container">
+		  <h1>Notifications</h1>
+	</div>
 </section>
 <div class="container">
-<div class="notificat_holder">
+	<div class="notificat_holder">
 	
-	<% @activities.each do |activity| %>
-	<ul>
-		<li>
-			<strong><%=activity.owner.profile.name %></strong>
-				<p><%#= activity.trackable.comment %></p>
-		<span><%= render_activity activity %></span>
-		</li>
-	</ul>
-<% end %>
-</div>
+		<% @activities.each do |activity| %>
+			<ul>
+				<li>
+					<!--<strong><%=activity.owner.profile.name %></strong>-->
+						<p><%#= activity.trackable.comment %></p>
+				<span><%= render_activity activity %></span>
+				</li>
+			</ul>
+		<% end %>
+	</div>
 
 </div>

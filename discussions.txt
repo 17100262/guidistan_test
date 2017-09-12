@@ -49,9 +49,9 @@ bundle exec rake jobs:work
 
 ==check notifications--jis ke comment par reply hota hai usko notification nahi jaarha
 ==comment ajax
-edit profile not working
+==edit profile not working
 search box
 
-last user sign in par condition lagani hai
+==last user sign in par condition lagani hai
 anyone can see the profiles/index but he should only be able to see profiles/show
 ==facebook usr name -email issue

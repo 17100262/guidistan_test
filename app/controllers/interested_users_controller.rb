@@ -1,6 +1,7 @@
 class InterestedUsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  before_action :authenticate_user!
   
   
   def index
@@ -19,7 +20,7 @@ class InterestedUsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to :back, notice: 'Application Submitted Successfully. Counselor will contact you soon.' }
+        format.html { redirect_to :back, notice: 'Application Submitted Successfully.A relevant Counselor will contact you soon.' }
         format.json { render :show, status: :created, location: @university }
       else
         format.html { render :new }
@@ -63,6 +64,6 @@ class InterestedUsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def interested_user_params
-    params.require(:interested_user).permit(:name, :email, :phone_number,:universities,:address,:user_id)
+    params.require(:interested_user).permit(:name, :email, :phone_number,:universities,:address,:user_id, :package)
   end
 end

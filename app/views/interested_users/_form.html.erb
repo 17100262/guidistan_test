@@ -1,3 +1,5 @@
+
+
 <%= bootstrap_form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -10,23 +12,131 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <!--<= f.label :name %><br>-->
-    <%= f.text_field :phone_number ,required: true,placeholder: "Phone number", hide_label: true %>
-  </div>
+  <div class="row">
+            
+    <div class="our-misson">
+      <div class="col-sm-12 box">
+      <h3>Heading</h3>
+          <div class="col-sm-6 col-sm-offset-3 center">
+              <p>Making professional counseling accessible, affordable, convenient - so anyone who struggles with life’s challenges can get help, anytime, anywhere.</p>
+          </div>
+      </div>
+      <div class="col-md-12 pricing">
+  				<h2>price plan</h2>
+  				<div class="col-md-4 col-sm-4 col-xs-4">
+  				    <div class="pricing-inner-wrap">
+      					<h3>Services</h3>
+      					<ul style="border-left:1px solid #8ab933 ;">
+      					    <li>Service 1</li>
+      					    <li>Service 2</li>
+      					    <li>Service 3</li>
+      					    <li>Service 4</li>
+      					    <li>Service 5</li>
+      					    <li>Service 6</li>
+      					    <li>Service 7</li>
+      					    <li>Service 8</li>
+      					    <li>Price</li>
+      					    <li>Select Package</li>
+      					</ul>
+  					</div>
+  				</div>
+  				<div class="col-md-4 col-sm-4 col-xs-4">
+  				    <div  class="pricing-inner-wrap">
+      					<h3>Package 1</h3>
+      					
+      					<ul>
+      					    <li><i class="fa fa-times" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-times" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-times" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-times" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-times" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><span>Only 500$</span></li>
+      					    <li>
+      					        <div class="radio-btn">
+      					          <%= f.radio_button :package, '0', :checked => true %>
+                          <%= label :package, ' Standard Package' %>
+                        </div>
+                    </li>
+      					</ul>
+  					</div>
+  				</div>
+  				<div class="col-md-4 col-sm-4 col-xs-4 services-box">
+  				    <div class="pricing-inner-wrap">
+      					<h3>Services</h3>
+      					<ul>
+      					    <li>Service 1</li>
+      					    <li>Service 2</li>
+      					    <li>Service 3</li>
+      					    <li>Service 4</li>
+      					    <li>Service 5</li>
+      					    <li>Service 6</li>
+      					    <li>Service 7</li>
+      					    <li>Service 8</li>
+      					    <li>Price</li>
+      					    <li>Select Package</li>
+      					</ul>
+  					</div>
+  				</div>
+  				<div class="col-md-4 col-sm-4 col-xs-4">
+  				    <div  class="pricing-inner-wrap">
+      					<h3>Package 2</h3>
+      					
+      					<ul>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><i class="fa fa-check" aria-hidden="true"></i></li>
+      					    <li><span>Only 700$</span></li>
+      					    <li>
+      					        <div class="radio-btn">
+      					          <%= f.radio_button :package, '1' %>
+                          <%= label :package, ' Premium Package' %>
+                        </div>
+                    </li>
+      					</ul>
+      				</div>
+  				</div>
+        </div>
+          
+      </div>
   
-
-  <div class="field">
-    <!--<= f.label :description %>-->
-    <%= f.text_area :address,required: true,placeholder: "Address", hide_label: true %>
+  
+  
+    <div class="form-wrap">
+      <div class=" col-md-12">
+        <div class="field col-md-3">
+          <!--<= f.label :name %><br>-->
+          <%= f.text_field :phone_number ,required: true,placeholder: "Phone number", hide_label: true %>
+        </div>
+        
+      
+        <div class="field col-md-5">
+          <!--<= f.label :description %>-->
+          <%= f.text_area :address,required: true,placeholder: "Address", hide_label: true %>
+        </div>
+        <div class="field col-md-4">
+          <!--<= f.label :description %>-->
+          <%= f.text_area :universities,required: true,placeholder: "Which universities are you interested in?", hide_label: true %>
+        </div>
+      </div>
+      <div class="submit-btn">
+        <%= f.submit "Submit", class: "btn btn-success" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <!--<= f.label :description %>-->
-    <%= f.text_area :universities,required: true,placeholder: "Which universities are you interested in?", hide_label: true %>
-  </div>
-  <div class="actions">
-    <%= link_to 'Cancel', root_path, class: "btn btn-info" %>
-    <%= f.submit "Create", class: "btn btn-success" %>
-  </div>
+  <!--<div class="radio">-->
+   
+  <!--</div>-->
+  
 <% end %>
+
+<script>
+   $("div").removeClass( "radio" );
+</script>

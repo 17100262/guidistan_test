@@ -73,9 +73,9 @@
           
           
       </div>
-      <div class="button-contianer">
-          <a href="/universities" class="view-all-button">View all degree programs in <%= @subdiscipline.name %></a> 
-      </div>
+        <div class="button-contianer">
+          <%= link_to "View all degree programs in #{@subdiscipline.name}", "/discipline_universities?utf8=✓&%5Bcity_id%5D=&%5Bdiscipline_id%5D=&%5Bsubdiscipline_id%5D=#{@subdiscipline.id}&%5Buniversity_name%5D=&commit=Search",class: "view-all-button" %>
+        </div>
 
       
            

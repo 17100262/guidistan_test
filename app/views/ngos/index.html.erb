@@ -1,10 +1,12 @@
 <section class="page-header">
         <div class="container">
+          <strong>
           <ul class="breadcrumbs">
             <li><%= link_to "Guidistan","/" %> <i class="fa fa-chevron-right" aria-hidden="true"></i></li>
             <li class="active"> Browse Scholarships</li>
             
           </ul>
+          </strong>
           <!-- breadcrumbs -->
         
         </div>
@@ -41,28 +43,28 @@
   
   <div class="scholarship-search col-md-8 col-sm-12 col-centered">
     <%= bootstrap_form_tag url: ngos_path, :method => 'get' do |f| %>
-      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
-      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
+      <!--<= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>-->
+      <!--<= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>-->
       <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
       <%= f.submit 'Search' %>
     <% end %>
   </div>
-
-  <% @ngos.each do |ngo| %>
-
-    <div class="scholarship-overview">
-        <h2><%= link_to ngo.name, "/ngos/#{ngo.id}",{title: ngo.name} %></h2>
-        <ul>
-          <li><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Level: </span><%= ngo.level %></li>
-          <li><i class="fa fa-calendar-times-o" aria-hidden="true"></i><span>Last Date: </span><%= ngo.lastdate %></li>
-        </ul>
-        
-          <p class="line-clamp line-clamp-3"><%= ngo.description %></p>
-         
-          <%= link_to 'Read More', "/ngos/#{ngo.id}",{title: ngo.name} %>
-        
-    </div>
-            
+  <% if @ngos.present? %>
+    <% @ngos.each do |ngo| %>
+      <div class="scholarship-overview">
+          <h2><%= link_to ngo.name, "/ngos/#{ngo.id}",{title: ngo.name} %></h2>
+          <ul>
+            <li><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Level: </span><%= ngo.level %></li>
+            <li><i class="fa fa-calendar-times-o" aria-hidden="true"></i><span>Last Date: </span><%= ngo.lastdate %></li>
+          </ul>
+            <p class="line-clamp line-clamp-3"><%= ngo.description %></p>
+            <%= link_to 'Read More', "/ngos/#{ngo.id}",{title: ngo.name} %>
+      </div>
+    <% end %>
+  <% else %>
+  	<div class="about-disc col-md-10 col-sm-12 col-centered">
+  		<h4>Sorry, No records match your search Results </h4>
+  	</div>
   <% end %>
 
 </div>

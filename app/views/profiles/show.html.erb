@@ -88,7 +88,9 @@
                   <% end %>
                 </div>
               </div>
+              <% if can? :update, Profile %>
               <%= link_to 'Edit Profile', edit_profile_path(:id => current_user.profile.id), class: "btn btn-sm btn-primary edit-profile-btn" %>
+              <% end %>
             </div>
           </div>
           

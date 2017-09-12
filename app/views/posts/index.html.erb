@@ -8,7 +8,7 @@
   </div>
 </section>
 
-<div class = "container">
+<div class = "container posts-page">
   <div class="col-md-9">
     <div class="ask-a-question-btn">
       <% if can? :create, Post %>
@@ -16,7 +16,24 @@
         <%= link_to 'Ask a Question', new_forum_post_path, class: "btn btn-primary new-post-showall"%>
       <% end %>
     </div>
-    
+    <div class="visible-sm  visible-xs">
+        
+        <div class="question-sidebar">
+            <h4>Receive Personalized Counselling About:</h4>
+            <ul>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>field/career selection</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>career prospects/scope</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>university selection</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>admission process &amp; application</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>securing scholarships</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>entry test prepation/guidelines</li>
+            </ul>
+            <div class="button-contianer">
+                <a href="#" class="view-all-button">Get Connected</a>
+            </div>
+        </div>
+        
+    </div>
     <% @posts.each do |post| %>   
       <div class="block-review-content all-posts-forum-page-content">
         <div class="block-review-body" style="padding-left:0px;">
@@ -92,7 +109,7 @@
             <% if can? :destroy, post %>
               <%= link_to 'Destroy', forum_post_path(@forum,post), method: :delete, data: { confirm: 'Are you sure?' },class: " pull-left delete-btn-show-posts" %>
             <% end %>
-            &nbsp;<%= link_to 'Flag this as inappropriate',{controller: 'flagged_posts',action: 'flag_this',id: post.id } ,class: "text-primary pull-left edit-btn-show-posts" %>
+            <%= link_to 'Flag this as inappropriate',{controller: 'flagged_posts',action: 'flag_this',id: post.id } ,{class: " text-primary pull-left edit-btn-show-posts "} %>
             
           </div>
           
@@ -184,29 +201,49 @@
     <div class = "pagination"><%= will_paginate @posts %></div>
   </div>
   <!--top users code-->
-  <div class="col-md-3">
-    <div class="top-user-col hidden-xs">
-      <div class="top-user-header">
-        Top site users
-      </div>
-      <% @profiles.each do |profile| %>
-        <div class="top-user-single-container">
-          <div class="top-user-avatar">
-            <% if profile.image_file_name.present? %> 
-              <%= image_tag profile.image.url(:med) %>
-            <% else %>
-             <img src="/avatar_generic.jpg"  alt="User Profile Image">
-            <% end %>
-          </div>
-          
-          <div class="right-side-topuser">
-            <div class="top-user-name">
-               <%= link_to profile.name , profile_path(profile.id) %>
+  <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="">
+        
+        <div class="question-sidebar">
+            <h4>Receive Personalized Counselling About:</h4>
+            <ul>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>field/career selection</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>career prospects/scope</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>university selection</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>admission process &amp; application</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>securing scholarships</li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i>entry test prepation/guidelines</li>
+            </ul>
+            <div class="button-contianer">
+                <a href="#" class="view-all-button">Get Connected</a>
             </div>
-            <div class="top-user-ranking"><%= profile.reputation %></div>
-          </div>
         </div>
-      <% end %>
+        
+    </div>
+    <div class="hidden-sm hidden-xs">
+      <div class="top-user-col">
+        <div class="top-user-header">
+          Top site users
+        </div>
+        <% @profiles.each do |profile| %>
+            <div class="top-user-single-container">
+              <div class="top-user-avatar">
+                <% if profile.image_file_name.present? %> 
+                  <%= image_tag profile.image.url(:med) %>
+                <% else %>
+                 <img src="/avatar_generic.jpg"  alt="User Profile Image">
+                <% end %>
+              </div>
+              
+              <div class="right-side-topuser">
+                <div class="top-user-name">
+                   <%= link_to profile.name , profile_path(profile.id) %>
+                </div>
+                <div class="top-user-ranking"><%= profile.reputation %></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
     </div>
   </div>
 

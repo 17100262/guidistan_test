@@ -23,27 +23,7 @@
 	   -moz-border-radius: 0;
 			border-radius: 0;
 }
-#topMain.nav-pills>li>a.dropdown-toggle:after {
-	display: block;
-	content: "\f107";
-	position: absolute;
-	top: 50%;
-	right: 10px;
-	margin: -5px 0 0;
-	font-family: FontAwesome;
-	font-size: 12px;
-	opacity: .3;
-	line-height: 1em;
 
-	-webkit-transition: -webkit-transform .2s ease-in;
-	-moz-transition: -moz-transform .2s ease-in;
-	-ms-transition: -ms-transform .2s ease-in;
-	-o-transition: -o-transform .2s ease-in;
-	transition: transform .2s ease-in;
-}
-#header.bottom.dropup #topMain.nav-pills>li>a.dropdown-toggle:after {
-	content: "\f106";
-}
 
 #topNav .navbar-collapse {
 	float:right;

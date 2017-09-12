@@ -3,7 +3,7 @@ class Discipline < ActiveRecord::Base
 
 	has_many :discipline_university
 	has_many :university, :through => :discipline_university
-	has_many :subdisciplines, :through => :subdisciplines 
+	has_many :subdisciplines
     has_many :posts
     
     has_many :student_interests_discipline,dependent: :destroy

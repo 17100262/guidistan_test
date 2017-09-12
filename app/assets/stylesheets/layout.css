@@ -3048,7 +3048,6 @@ section.dark.page-header ul.page-options a {
 		#topNav div.nav-main-collapse {
 			float: none;
 			overflow-x:hidden;
-			max-height:350px;
 		}
 		#topNav div.nav-main-collapse.collapse {
 			display: none !important;
@@ -3145,9 +3144,6 @@ section.dark.page-header ul.page-options a {
 	}
 	
 	@media only screen and (max-width: 500px) {
-		#topNav div.nav-main-collapse {
-			max-height:250px;
-		}
 	}
 
 
@@ -6829,7 +6825,7 @@ ul.search-history {
  **************************************************************** **/
 .block-review-content div.block-review-body {
 	position:relative;
-	padding:20px 0 20px 150px;
+	overflow: hidden;
 }
 .block-review-content div.block-review-avatar {
 	width:130px;

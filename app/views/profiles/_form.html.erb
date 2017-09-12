@@ -1,4 +1,4 @@
-<div class="container">
+
  
  <div class="newPostForm editprofileForm">
   <%= form_for (@profile), html: { multipart: true } do |f| %>
@@ -32,12 +32,13 @@
      <%= f.label :Image %>
      <%= f.file_field :image %>
    </div>
-  <% end %>
-    <%= f.submit "Edit" %>
-  <% end %>
+   <div class="button-contianer" style="width:85%;">
+    <% end %>
+      <%= f.submit "Edit" %>
+    <% end %>
+  </div>
  </div>
 
 
  
-</div>
 

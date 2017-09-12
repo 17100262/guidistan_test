@@ -1,9 +1,89 @@
+<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 
-<div class="container">
-<!--<br>-->
-<!--<h2 class="post-title-forum post-title-all-posts" style="">New University</h2>-->
-<!--<br>-->
-<%= render 'form' %>
-
-
+<div class="interested-user">
+    <div class="container">
+        <div class="row header-row">
+            <div class="col-md-12 interested-user-bg">
+                <h1>Guidistan is the world's largest e‑counseling platform</h1>
+            </div>
+        </div>
+        <div class="row header-row">
+            <div class="col-md-12 green-bar">
+                <a href="#">Any link</a>
+            </div>
+        </div>
+        <div class="row about-boxes">
+            <div class="col-sm-12  about-numbers-box">
+                <div id="our-numbers">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <div>
+                                <div class="counter">16,326,283</span></div>
+                                <p>Sessions</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div>
+                                <div class="counter"><span>1,595</span></div>
+                                <p>Therapists</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div>
+                                <div class="counter"><span>11,018</span></div>
+                                <p>Testimonials</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 box">
+                <div class="our-misson">
+                    <h3>Our Mission</h3>
+                    <div class="col-sm-6 col-sm-offset-3 center">
+                        <p>Making professional counseling accessible, affordable, convenient - so anyone who struggles with life’s challenges can get help, anytime, anywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        
+            
+                
+                <%= render 'form' %>
+            
+        
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+        <div class="row">
+            
+        </div>
+    </div>
+    
 </div>
+
+<script>
+    /*!
+* jquery.counterup.js 1.0
+*
+* Copyright 2013, Benjamin Intal http://gambit.ph @bfintal
+* Released under the GPL v2 License
+*
+* Date: Nov 26, 2013
+*/
+(function(e){"use strict";e.fn.counterUp=function(t){var n=e.extend({time:400,delay:10},t);return this.each(function(){var t=e(this),r=n,i=function(){var e=[],n=r.time/r.delay,i=t.text(),s=/[0-9]+,[0-9]+/.test(i);i=i.replace(/,/g,"");var o=/^[0-9]+$/.test(i),u=/^[0-9]+\.[0-9]+$/.test(i),a=u?(i.split(".")[1]||[]).length:0;for(var f=n;f>=1;f--){var l=parseInt(i/n*f);u&&(l=parseFloat(i/n*f).toFixed(a));if(s)while(/(\d+)(\d{3})/.test(l.toString()))l=l.toString().replace(/(\d+)(\d{3})/,"$1,$2");e.unshift(l)}t.data("counterup-nums",e);t.text("0");var c=function(){t.text(t.data("counterup-nums").shift());if(t.data("counterup-nums").length)setTimeout(t.data("counterup-func"),r.delay);else{delete t.data("counterup-nums");t.data("counterup-nums",null);t.data("counterup-func",null)}};t.data("counterup-func",c);setTimeout(t.data("counterup-func"),r.delay)};t.waypoint(i,{offset:"100%",triggerOnce:!0})})}})(jQuery);
+
+    
+jQuery(document).ready(function($) {
+    $('.counter').counterUp({
+        delay: 10,
+        time: 1000
+    });
+});
+
+</script>

@@ -1,61 +1,67 @@
 class DisciplineUniversitiesController < ApplicationController
   before_action :set_discipline_university, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_user!
-  load_and_authorize_resource
+  autocomplete :university, :name
 
+  load_and_authorize_resource :except => [:autocomplete_university_name]
+
+  
   # GET /discipline_universities
   # GET /discipline_universities.json
   def index
-    
-    @filterrific = initialize_filterrific(
-      DisciplineUniversity,
-      params[:filterrific]
-    ) or return
+    @discipline_universities= DisciplineUniversity.search(params[:discipline_id],params[:subdiscipline_id],params[:university_name],params[:city_id]).paginate(:page => params[:page],:per_page => 10)
+  
+    # @filterrific = initialize_filterrific(
+    #   DisciplineUniversity,
+    #   params[:filterrific]
+    # ) or return
 
-    # puts params[:discipline_university] == nil,"check"
+    # # puts params[:discipline_university] == nil,"check"
 
-    if params[:discipline_university].present?
-      if params[:discipline_university][:discipline_ids].all?{|e| e==""}
-        params[:discipline_university][:discipline_ids]= Discipline.uniq.pluck(:id)
-        (params[:discipline_university][:discipline_ids]).map! { |e| e.to_s  }
-      else
-        (params[:discipline_university][:discipline_ids]).delete("")
-      end
+    # if params[:discipline_university].present?
+    #   if params[:discipline_university][:discipline_ids].all?{|e| e==""}
+    #     params[:discipline_university][:discipline_ids]= Discipline.uniq.pluck(:id)
+    #     (params[:discipline_university][:discipline_ids]).map! { |e| e.to_s  }
+    #   else
+    #     (params[:discipline_university][:discipline_ids]).delete("")
+    #   end
       
-      if params[:discipline_university][:cities_ids].all?{|e| e==""}
-        params[:discipline_university][:cities_ids] = City.uniq.pluck(:id)
-        (params[:discipline_university][:cities_ids]).map! { |e| e.to_s  }
-      else
-        (params[:discipline_university][:cities_ids]).delete("")
-      end
+    #   if params[:discipline_university][:cities_ids].all?{|e| e==""}
+    #     params[:discipline_university][:cities_ids] = City.uniq.pluck(:id)
+    #     (params[:discipline_university][:cities_ids]).map! { |e| e.to_s  }
+    #   else
+    #     (params[:discipline_university][:cities_ids]).delete("")
+    #   end
       
-      if params[:discipline_university][:university_ids].all?{|e| e==""}
-        params[:discipline_university][:university_ids] = University.uniq.pluck(:id)
-        (params[:discipline_university][:university_ids]).map! { |e| e.to_s  }
-      else
-        (params[:discipline_university][:university_ids]).delete("")
-      end
+    #   if params[:discipline_university][:university_ids].all?{|e| e==""}
+    #     params[:discipline_university][:university_ids] = University.uniq.pluck(:id)
+    #     (params[:discipline_university][:university_ids]).map! { |e| e.to_s  }
+    #   else
+    #     (params[:discipline_university][:university_ids]).delete("")
+    #   end
       
-      if params[:discipline_university][:subdiscipline_ids].all?{|e| e==""}
-        params[:discipline_university][:subdiscipline_ids] = Subdiscipline.uniq.pluck(:id)
-        (params[:discipline_university][:subdiscipline_ids]).map! { |e| e.to_s  }
-      else
-        (params[:discipline_university][:subdiscipline_ids]).delete("")
-      end
+    #   if params[:discipline_university][:subdiscipline_ids].all?{|e| e==""}
+    #     params[:discipline_university][:subdiscipline_ids] = Subdiscipline.uniq.pluck(:id)
+    #     (params[:discipline_university][:subdiscipline_ids]).map! { |e| e.to_s  }
+    #   else
+    #     (params[:discipline_university][:subdiscipline_ids]).delete("")
+    #   end
 
 
-      @discipline_universities = DisciplineUniversity.find_by_sql(["
-          SELECT DISTINCT *
-          FROM universities u,discipline_universities d 
-          WHERE 
-            u.id = d.university_id 
-            AND d.discipline_id IN (?) 
-            AND d.university_id IN (?) 
-            AND u.city_id IN (?)
-            AND subdiscipline_id IN (?)",params[:discipline_university][:discipline_ids],params[:discipline_university][:university_ids],params[:discipline_university][:cities_ids],params[:discipline_university][:subdiscipline_ids]]) if params[:discipline_university].present?
-      else
-        @discipline_universities= DisciplineUniversity.all
-    end
+    #   @discipline_universities = DisciplineUniversity.find_by_sql(["
+    #       SELECT DISTINCT *
+    #       FROM universities u,discipline_universities d 
+    #       WHERE 
+    #         u.id = d.university_id 
+    #         AND d.discipline_id IN (?) 
+    #         AND d.university_id IN (?) 
+    #         AND u.city_id IN (?)
+    #         AND subdiscipline_id IN (?)",params[:discipline_university][:discipline_ids],params[:discipline_university][:university_ids],params[:discipline_university][:cities_ids],params[:discipline_university][:subdiscipline_ids]]) if params[:discipline_university].present?
+    #   else
+    #     @discipline_universities= DisciplineUniversity.search(params[:discipline_id],params[:subdiscipline_id]).paginate(:page => params[:page],:per_page => 10)
+    #     # @discipline_universities= DisciplineUniversity.all
+        
+    # end
     
     respond_to do |format|
       format.html

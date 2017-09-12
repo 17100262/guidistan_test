@@ -14,31 +14,33 @@
 
 
 <div class="container">
-	<div class="forum_post_question_container"> <h1 class="forum_post_title" style="margin-top:5px;"> <%= @post.title %></h1></div>
+	<div class="forum_post_question_container"> <h1 class="forum_post_title"> <%= @post.title %></h1></div>
 
 	<div class="description-container col-md-9">
 		  
-		<div class="single_postliker">
-		    <div class="liker_error_message">
-		    	<a href="/users/sign_in">An error occured! Please login if you're not logged in.</a>
-		    </div>
-			<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
-			
-			
-
-			<span class="number_of_likes" data-upvotes="<%= @post.get_upvotes.size %>" data-downvotes="<%= @post.get_downvotes.size %>"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
-			<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a>
-			
-			
-		</div>
-			
-		<div class="single-description-para">
-			<p><%= @post.description %></p>
-		    <div class="edit-desc-btn">
-		    	<% if can? :update, @post %>
-					<%= link_to 'Edit', edit_forum_post_path(@forum,@post) %>
-					<%= link_to 'Destroy',forum_post_path(@forum,@post), method: :delete, data: { confirm: 'Are you sure?' } %>
-				<% end %>
+		<div class="post-wrap panel panel-default">
+			<div class="single_postliker">
+			    <div class="liker_error_message">
+			    	<a href="/users/sign_in">An error occured! Please login if you're not logged in.</a>
+			    </div>
+				<a title="Up Vote" class="up_vote_st <% if user_signed_in? and current_user.voted_up_on? @post %>up_vote_selected<% end %>">up vote</a> 
+				
+				
+	
+				<span class="number_of_likes" data-upvotes="<%= @post.get_upvotes.size %>" data-downvotes="<%= @post.get_downvotes.size %>"><%= @post.get_upvotes.size -  @post.get_downvotes.size %></span>
+				<a title="Down Vote" class="down_vote_st <% if user_signed_in? and current_user.voted_down_on? @post %>down_vote_selected<% end %>">down vote</a>
+				
+				
+			</div>
+				
+			<div class="single-description-para">
+				<p><%= @post.description %></p>
+			    <div class="edit-desc-btn">
+			    	<% if can? :update, @post %>
+						<%= link_to 'Edit', edit_forum_post_path(@forum,@post) %>
+						<%= link_to 'Destroy',forum_post_path(@forum,@post), method: :delete, data: { confirm: 'Are you sure?' } %>
+					<% end %>
+				</div>
 			</div>
 		</div>
 		  
@@ -91,9 +93,9 @@
 		
 		</div>
 		  
-		<div class="" style="padding:0px;">
+		<div class="" style="padding:0px; clear:both;">
 			<div class="forum_post_question_container" style="border:0px;">
-				<h1 class="forum_post_title"  style="margin-top:50px"> Answers</h1>
+				<h1 class="forum_post_title"> Answers</h1>
 			</div>
 		
 			<div id="comment_div">

@@ -33,7 +33,7 @@
                 <h1>About</h1>
                 <h3>Find out more information about <%= @discipline.name %></h3>
                 <p>
-                    <%= @discipline.description.html_safe %>
+                    <%= @discipline.description.html_safe? %>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean metus ligula, dictum elementum massa non, pharetra pretium leo. Donec vitae enim varius, laoreet justo nec, porttitor libero. Nulla a nisi quam. Vestibulum eget posuere erat. Etiam porttitor justo mi, sed gravida massa rutrum ac. Aliquam erat volutpat. Quisque nec risus a ipsum feugiat fermentum ut vitae ex. Cras ultricies nisi diam, quis ultricies mauris posuere fringilla.
                 </p>
                 <p>
@@ -94,7 +94,8 @@
            
         </div>
         <div class="button-contianer">
-            <a href="/universities" class="view-all-button">View all degree programs in <%= @discipline.name %></a> 
+            <%= link_to "View all degree programs in #{@discipline.name}", "/discipline_universities?utf8=✓&%5Bcity_id%5D=&%5Bdiscipline_id%#{@discipline.id}D=3&%5Bsubdiscipline_id%5D=12&%5Buniversity_name%5D=&commit=Search",class: "view-all-button" %>
+            <!--<a href="/universities" class="view-all-button">View all degree programs in <= @discipline.name %></a> -->
         </div>
             
 

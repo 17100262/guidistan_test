@@ -14,85 +14,88 @@
         </div>
 </section>
 
+  
+  <div class="container search-degree">
+    <!-- FOR ADMIN-->
+    <div class="scholarship-search col-md-8 col-sm-12 col-centered">
+      <%= bootstrap_form_tag url: discipline_universities_path, :method => 'get' do |f| %>
+        <%= f.collection_select :city_id, City.all.order(:name), :id, :name, { :prompt => 'Choose a City...',:hide_label => true } %>
+        <%= f.collection_select :discipline_id, Discipline.all.order(:name), :id, :name, { id: 'discipline_selection',:prompt => 'Choose a Discipline...',:hide_label => true } %>
+        <%= f.grouped_collection_select :subdiscipline_id, Discipline.order(:name), :subdisciplines, :name, :id, :name,include_blank: true, :hide_label => true %>
+        <%= f.autocomplete_field :university_name, autocomplete_university_name_discipline_universities_path, placeholder: "Where do you want to Study..."  %>
 
-<div class="container search-degree">
-  <p id="notice"><%= notice %></p>
-  <!-- FOR ADMIN-->
-  <div class="scholarship-search col-md-8 col-sm-12 col-centered">
-    <%= bootstrap_form_tag url: ngos_path, :method => 'get' do |f| %>
-      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
-      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
-      <%= f.select :level,[["Intermediate","Intermediate"],["Bachelors","Bachelors"],["Masters","Masters"]] , hide_label: true%>
-      <%= f.submit 'Search' %>
-    <% end %>
-  </div>
-  
-  <% if can? :create, DisciplineUniversity.new %> 
-    <div class="disc_unis_admins">
-      
-  
-        <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
-        
-        <div class="pull-right download-in-excel-form">
-          <%= form_tag :controller => :discipline_universities, :action => :export do %>
-            <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
-          <% end %>
-        </div>
-        
-        <%= form_tag import_discipline_universities_path, multipart: true do %>
-          <%= file_field_tag :file, required: true %>
-          <br>
-          <%= submit_tag "Import" %>
-        <% end %>
-  
+        <%= f.submit 'Search' %>
+      <% end %>
+    </div>
     
-    </div>
-  <% end %>  
-  <!----------->
-  <%= form_for_filterrific @filterrific,:remote => true do |f| %>
-    <div class ="row">
-      <div class="col-md-2 col-sm-2">
-        <div>
-          <%= link_to('Reset filters',reset_filterrific_url) %>
-        </div>
-        <%#= collection_check_boxes(:discipline_university,:university_ids,University.all,:id,:name) %>
-  
-        <div class="panel panel-default">
-          <div class="panel-heading" aria-expanded="true" data-toggle="collapse" data-target="#city"><strong style="color: #8ab933;">Filter by Cities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-            <div class="panel-body collapse in mCustomScrollbar"  aria-expanded="true" data-mcs-theme="minimal-dark" id="city">
-              <%= collection_check_boxes(:discipline_university,:cities_ids, City.all.order('name ASC'), :id, :name) do |b| %>
-                <%= b.label { b.check_box + " " + b.text} %>
-              <% end %>
-            </div>
+    
+    
+    
+    
+    <% if can? :create, DisciplineUniversity.new %> 
+      <div class="disc_unis_admins">
+        
+    
+          <%= link_to 'New Discipline university', new_discipline_university_path ,class:"btn btn-success pull-right" %>
+          
+          <div class="pull-right download-in-excel-form">
+            <%= form_tag :controller => :discipline_universities, :action => :export do %>
+              <%= submit_tag "Download in Excel", class: "btn btn-primary pull-right", id: "export" %>
+            <% end %>
           </div>
-  
-  
-        <div class="panel panel-default" >
-            <div class="panel-heading" data-toggle="collapse" data-target="#uni" style="color: #8ab933;"><strong>Filter by Universities&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-              <div class="panel-body collapse in mCustomScrollbar" class="collapse" id="uni" data-mcs-theme="minimal-dark">
-                <%= collection_check_boxes(:discipline_university,:university_ids,University.all.order('name ASC'),:id,:name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-            </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-target="#discipline" ><strong style="color: #8ab933;">Filter by Disciplines&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-                <div class="panel-body collapse in mCustomScrollbar" class="collapse" id="discipline" data-mcs-theme="minimal-dark">
-                  <%= collection_check_boxes(:discipline_university,:discipline_ids,Discipline.all.order('name ASC'),:id,:name) do |b| %>
-                    <%= b.label { b.check_box + " " + b.text} %>
-                  <% end %>
-                </div>
-            </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-target="#subdiscipline" style="color: #8ab933;"><strong>Filter by Subdisciplines&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></strong></div>
-              <div class="panel-body collapse in mCustomScrollbar" id="subdiscipline" data-mcs-theme="minimal-dark">
-                <%= collection_check_boxes(:discipline_university,:subdiscipline_ids,Subdiscipline.all.order('name ASC'),:id,:name) do |b| %>
-                  <%= b.label { b.check_box + " " + b.text} %>
-                <% end %>
-              </div>
-            </div>
+          
+          <%= form_tag import_discipline_universities_path, multipart: true do %>
+            <%= file_field_tag :file, required: true %>
+            <br>
+            <%= submit_tag "Import" %>
+          <% end %>
+    
+      
       </div>
-  <% end %>
-  <%= render :partial =>'discipline_universities/index', :locals =>{ discipline_universities: @discipline_universities} %>
-    </div>
+    <% end %>  
+    <!----------->
+    <%= will_paginate @discipline_universities %>
+    <%= render :partial =>'discipline_universities/index', :locals =>{ discipline_universities: @discipline_universities} %>
+    <%= will_paginate @discipline_universities %>
+  </div>
 </div>
+<script>
+  $("#deg-uni").click(function() {
+    window.location = $(this).find("a").attr("href"); 
+    return false;
+  });
+  
+  $("#deg-name").click(function() {
+    window.location = $(this).find("a").attr("href"); 
+    return false;
+  });
+
+
+$( document ).ready(function() {
+  var subdisciplines;
+  subdisciplines = $('#_subdiscipline_id').html();
+  // console.log(subdisciplines);
+  return $('#_discipline_id').change(function() {
+    var discipline, options;
+    discipline = $('#_discipline_id :selected').text();
+    
+    // console.log(discipline);
+    
+    // console.log(`optgroup[label=${discipline}]`)
+    options = $(subdisciplines).filter(`optgroup[label="${discipline}"]` ).html();
+    
+    // options = $(subdisciplines).filter(`optgroup[label="Computer Sciences"]` ).html();
+    
+    // options = $(states).filter("optgroup[label=" + country + "]").html();
+    
+  
+    // console.log(options);
+    if (options) {
+      return $('#_subdiscipline_id').html(options);
+    } else {
+      return $('#_subdiscipline_id').empty();
+    }
+  });
+  
+});
+</script>
