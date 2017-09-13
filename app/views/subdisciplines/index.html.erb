@@ -1,3 +1,5 @@
+<% if user_signed_in? and current_user.has_role? :admin %>
+
 <br>
 <div class="container">
 <p id="notice"><%= notice %></p>
@@ -43,3 +45,12 @@
 
 
 </div>
+
+
+<% else %>
+<h3>You are not authorized to see this page</h3>
+// <script type="text/javascript">
+//     window.location.href="/"  // put your correct path in a string here
+//   </script>
+<% controller.redirect_to root_path, alert: "You are not authorized to see this page" %>
+<% end %>

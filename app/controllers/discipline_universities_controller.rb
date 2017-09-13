@@ -1,6 +1,6 @@
 class DisciplineUniversitiesController < ApplicationController
   before_action :set_discipline_university, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:edit,:create,:new,:update,:destroy,:wishlist]
   autocomplete :university, :name
 
   load_and_authorize_resource :except => [:autocomplete_university_name]

@@ -109,6 +109,8 @@ GEM
     filterrific (2.1.2)
     font-awesome-rails (4.7.0.0)
       railties (>= 3.2, < 5.1)
+    friendly_id (5.2.1)
+      activerecord (>= 4.0.0)
     geocoder (1.4.3)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -294,6 +296,7 @@ DEPENDENCIES
   devise
   filterrific
   font-awesome-rails
+  friendly_id
   impressionist
   jbuilder (~> 2.0)
   jquery-rails

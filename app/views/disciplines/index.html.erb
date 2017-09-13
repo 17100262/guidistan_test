@@ -1,10 +1,12 @@
 <section class="page-header">
   <div class="container">
     <!--<div align="center">-->
+    <strong>
       <ul class="breadcrumbs">
         <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
         <li class="active">Browse Information</li>
       </ul>
+      </strong>
     <!--</div>-->
     <!-- breadcrumbs -->
     
@@ -58,7 +60,7 @@
         <%= f.collection_select :city_id, City.all.order(:name), :id, :name, { :prompt => 'Choose a City...',:hide_label => true } %>
         <%= f.collection_select :discipline_id, Discipline.all.order(:name), :id, :name, { id: 'discipline_selection',:prompt => 'Choose a Discipline...',:hide_label => true } %>
         <%= f.grouped_collection_select :subdiscipline_id, Discipline.order(:name), :subdisciplines, :name, :id, :name,include_blank: true, :hide_label => true %>
-        <%= f.autocomplete_field :university_name, autocomplete_university_name_discipline_universities_path, placeholder: "Where do you want to Study..."  %>
+        <%= f.autocomplete_field :university_name, autocomplete_university_name_discipline_universities_path, placeholder: "Where do you want to Study...", class: "ui-autocomplete-input form-control2"  %>
 
         <%= f.submit 'Search' %>
       <% end %>

@@ -2,12 +2,12 @@
 <section class="page-header">
         <div class="container">
 
-          <ul class="breadcrumbs">
+          <strong><ul class="breadcrumbs">
 		      <li><%= link_to "Guidistan","/" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li> 
 		      <li><%= link_to "Discussion Forums","/forums" %> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
           		<li><%= link_to Forum.find(@id).name ,{:controller => "posts", :action => "index", :filter_id => Forum.find(@id).id }, class:"tab-title" %><i class="fa fa-angle-right" aria-hidden="true"></i></li>
           		<li class="active">Current Post</li>
-         </ul>
+         </ul></strong>
           
 		</div>
 </section>

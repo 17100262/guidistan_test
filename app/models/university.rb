@@ -1,5 +1,6 @@
 class University < ActiveRecord::Base
-
+    extend FriendlyId
+    friendly_id :name, use: :slugged
 	has_many :discipline_university
 	
 	has_many :discipline, :through => :discipline_university

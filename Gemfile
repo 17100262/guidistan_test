@@ -77,3 +77,5 @@ gem 'delayed_job_active_record'
 
 gem 'rails4-autocomplete'
 gem "jquery-ui-rails"
+
+gem "friendly_id"
