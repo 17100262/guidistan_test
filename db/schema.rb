@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912143806) do
+ActiveRecord::Schema.define(version: 20170913140818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,10 @@ ActiveRecord::Schema.define(version: 20170912143806) do
     t.string   "link"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "slug"
   end
+
+  add_index "discipline_universities", ["slug"], name: "index_discipline_universities_on_slug", unique: true, using: :btree
 
   create_table "disciplines", force: :cascade do |t|
     t.string   "name"
@@ -111,7 +114,10 @@ ActiveRecord::Schema.define(version: 20170912143806) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "font"
+    t.string   "slug"
   end
+
+  add_index "disciplines", ["slug"], name: "index_disciplines_on_slug", unique: true, using: :btree
 
   create_table "educations", force: :cascade do |t|
     t.string   "stream"
@@ -133,7 +139,10 @@ ActiveRecord::Schema.define(version: 20170912143806) do
     t.datetime "image_updated_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "slug"
   end
+
+  add_index "forums", ["slug"], name: "index_forums_on_slug", unique: true, using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -211,7 +220,6 @@ ActiveRecord::Schema.define(version: 20170912143806) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.boolean  "flagi"
   end
 
   create_table "profile_educations", force: :cascade do |t|
@@ -259,7 +267,10 @@ ActiveRecord::Schema.define(version: 20170912143806) do
     t.text     "description"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "slug"
   end
+
+  add_index "subdisciplines", ["slug"], name: "index_subdisciplines_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

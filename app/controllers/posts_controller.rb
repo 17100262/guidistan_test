@@ -122,7 +122,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
     end
     def set_forum
-        @forum = Forum.find(params[:forum_id])
+        @forum = Forum.friendly.find(params[:forum_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

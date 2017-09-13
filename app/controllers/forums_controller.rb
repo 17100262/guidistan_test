@@ -50,7 +50,7 @@ class ForumsController < ApplicationController
   	end
 
   	def set_discipline
-      @forum = Forum.find(params[:id])
+      @forum = Forum.friendly.find(params[:id])
     end
     
     def forum_params

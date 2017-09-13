@@ -1,5 +1,8 @@
 class Subdiscipline < ActiveRecord::Base
     validates :name, :uniqueness => {:message => 'already taken'}
+    extend FriendlyId
+    friendly_id :name, use: :slugged
+	
     belongs_to :discipline
     has_many :univeristy,:through => :discipline_university
     has_many :discipline_university

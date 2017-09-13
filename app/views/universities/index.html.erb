@@ -40,7 +40,7 @@
         <div class="university-namecity-box col-md-8">
           <div class="uni-name" style="margin-bottom:5px;">
             <%= link_to '{{ university.name}}', 
-                      URI::unescape( '/universities/{{ university.id}}' ) 
+                      URI::unescape( '/universities/{{ university.slug}}' ) 
           %>
             <!--{{university.name}}-->
           </div>
@@ -162,6 +162,7 @@
           id: '<%= university.id %>',
           name:'<%= university.name %>',
           city: '<%= university.city.name %>',
+          slug: '<%= university.slug %>',
           image: '<%= university.image.url(:small) %>' //,
           // discipline: '<= university.discipline.first %>'
           // city: '<= university.city.name %>',

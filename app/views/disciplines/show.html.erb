@@ -55,7 +55,7 @@
                 <ul>
                     <%  @sub.each do |sub| %>
                     
-                    <li> <%= link_to sub.name, "/subdisciplines/#{sub.id}"  %></li>
+                    <li> <%= link_to sub.name, "/subdisciplines/#{sub.slug}"  %></li>
                     
                     <% end %>
                 </ul>

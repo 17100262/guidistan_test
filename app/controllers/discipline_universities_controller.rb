@@ -157,7 +157,7 @@ class DisciplineUniversitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_discipline_university
-      @discipline_university = DisciplineUniversity.find(params[:id])
+      @discipline_university = DisciplineUniversity.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -18,7 +18,7 @@
 							</div>
 							<div class="university-title-cont">
 								
-								<p style="margin:0px;" class="university-name-container"><%= link_to  discipline_university.university.name , "/universities/#{discipline_university.university.id}",{:style => 'color: #009cda;'}%></p>
+								<p style="margin:0px;" class="university-name-container"><%= link_to  discipline_university.university.name , "/universities/#{discipline_university.university.slug}",{:style => 'color: #009cda;'}%></p>
 								<p class="university-city-name"><%= discipline_university.university.city.name %></p>
 								
 							</div>
@@ -26,7 +26,7 @@
 						</div>
 						
 						<div class="degree-name-container col-md-9 col-sm-9 col-xs-12" id="deg-name">
-							<h3><%= link_to  discipline_university.name , "/discipline_universities/#{discipline_university.id}",{:style => 'color: #009cda;'}%></h3>
+							<h3><%= link_to  discipline_university.name , "/discipline_universities/#{discipline_university.slug}",{:style => 'color: #009cda;'}%></h3>
 						</div>
 					</div>
 				</li>

@@ -3,7 +3,9 @@ class DisciplineUniversity < ActiveRecord::Base
 	belongs_to :discipline
 	belongs_to :subdiscipline
     # belongs_to :degreeprogram, foreign_key: "degreeprogram_id"
-    
+    extend FriendlyId
+    friendly_id :name, use: :slugged
+	
     
     filterrific(
 	  default_filter_params: { sorted_by: 'created_at_desc'},
