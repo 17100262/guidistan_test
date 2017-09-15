@@ -7,7 +7,7 @@ class CreateInterestedUsers < ActiveRecord::Migration
       t.string :phone_number
       t.string :universities
       t.string :address
-      t.bool :package
+      t.boolean :package
       t.timestamps null: false
     end
   end

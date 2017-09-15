@@ -107,13 +107,13 @@ ActiveRecord::Schema.define(version: 20170913140818) do
   create_table "disciplines", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.string   "font"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.string   "font"
     t.string   "slug"
   end
 
@@ -191,9 +191,9 @@ ActiveRecord::Schema.define(version: 20170913140818) do
     t.string   "phone_number"
     t.string   "universities"
     t.string   "address"
+    t.boolean  "package"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.boolean  "package"
   end
 
   create_table "ngos", force: :cascade do |t|
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 20170913140818) do
     t.string   "category"
     t.string   "link"
     t.text     "procedure"
-    t.string   "criteria"
+    t.text     "criteria"
     t.string   "lastdate"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -231,7 +231,9 @@ ActiveRecord::Schema.define(version: 20170913140818) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
+    t.integer  "user_id"
     t.string   "gender"
+    t.integer  "city_id"
     t.integer  "reputation",         default: 0
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
@@ -239,8 +241,6 @@ ActiveRecord::Schema.define(version: 20170913140818) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "user_id"
-    t.integer  "city_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -315,7 +315,6 @@ ActiveRecord::Schema.define(version: 20170913140818) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.string   "student_type"
     t.string   "slug"
   end
 

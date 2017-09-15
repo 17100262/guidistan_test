@@ -70,10 +70,10 @@ class NgosController < ApplicationController
     package = Axlsx::Package.new
     workbook = package.workbook
     workbook.add_worksheet(name: "Basic work sheet") do |sheet|
-      sheet.add_row ["name","description","category","procedure","criteria","link","last date","how to apply"]
+      sheet.add_row ["name","description","category","procedure","criteria","link","last date"]
       @ngos=Ngo.all
       @ngos.each do |dp|
-        sheet.add_row [dp.name,dp.description,dp.category,dp.procedure,dp.criteria,dp.link,dp.lastdate,dp.procedure]
+        sheet.add_row [dp.name,dp.description,dp.category,dp.procedure,dp.criteria,dp.link,dp.lastdate]
       end
     end
     send_data package.to_stream.read, :filename => "NGOs.xlsx"
