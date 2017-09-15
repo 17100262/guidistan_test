@@ -6,7 +6,9 @@ class DisciplinesController < ApplicationController
   def index
     @subs = Subdiscipline.where(discipline_id: params[:discipline_id])
     @disciplines = Discipline.all.order('name ASC')
-    @universities = University.all.limit(6)
+    @universities = University.all.limit(10)
+    @meta_title = meta_title 'Browse Information for all universities of Pakistan'
+    @meta_description = "Browse Information for all universities of Pakistan"
   end
 
   # GET /disciplines/1

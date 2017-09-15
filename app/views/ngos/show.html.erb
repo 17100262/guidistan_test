@@ -34,13 +34,13 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="detail">
-                    <p><%= @ngo.description %></p>
+                    <p><%= @ngo.description.html_safe %></p>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="criteria">
-                    <p><%= @ngo.criteria %></p>
+                    <p><%= @ngo.criteria.html_safe %></p>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="apply"> 
-                    <p><%= @ngo.procedure %></p>
+                    <p><%= @ngo.procedure.html_safe %></p>
                 </div>
             </div>
         </div>

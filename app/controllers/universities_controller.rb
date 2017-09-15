@@ -5,6 +5,8 @@ class UniversitiesController < ApplicationController
 
   def index
     @universities = University.all.order('name ASC')
+    @meta_title = meta_title 'Browse Information for all universities of Pakistan'
+    @meta_description = "Browse Information for all universities of Pakistan"
   end
 
 

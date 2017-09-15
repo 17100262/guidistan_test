@@ -57,7 +57,7 @@
             <li><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Level: </span><%= ngo.level %></li>
             <li><i class="fa fa-calendar-times-o" aria-hidden="true"></i><span>Last Date: </span><%= ngo.lastdate %></li>
           </ul>
-            <p class="line-clamp line-clamp-3"><%= ngo.description %></p>
+            <p class="line-clamp line-clamp-3"><%= ngo.description.html_safe %></p>
             <%= link_to 'Read More', "/ngos/#{ngo.id}",{title: ngo.name} %>
       </div>
     <% end %>

@@ -79,3 +79,5 @@ gem 'rails4-autocomplete'
 gem "jquery-ui-rails"
 
 gem "friendly_id"
+
+gem 'sitemap_generator'

@@ -7,7 +7,7 @@ class CreateNgos < ActiveRecord::Migration
       t.string :category
       t.string :link
       t.text :procedure
-      t.string :criteria
+      t.text :criteria
       t.string :lastdate
       t.string   "image_file_name"
       t.string   "image_content_type"

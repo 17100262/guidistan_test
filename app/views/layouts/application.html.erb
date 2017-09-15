@@ -4,7 +4,12 @@
 <html>
 <head>
 	<link rel="SHORTCUT ICON" href="/title icon.png" type="image/x-icon">
-  <title>Guidistan</title>
+	<title>Guidistan</title>
+	<title><%= @meta_title ? @meta_title : ApplicationController::BRAND_NAME %></title>
+	<% if @meta_description.present? %>
+		<meta name=”description” content=”<%= @meta_description %>”>
+	<% end %>
+  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>

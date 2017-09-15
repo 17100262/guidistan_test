@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
   end
   # force_ssl :protocol => "http"
   include PublicActivity::StoreController
-  
+  BRAND_NAME = 'Guidistan'.freeze
+
+  def meta_title(title)
+    [title, BRAND_NAME].reject(&:empty?).join(' | ')
+  end
   before_action :set_activities
 
   def set_activities
