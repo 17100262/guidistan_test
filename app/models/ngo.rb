@@ -24,9 +24,10 @@ class Ngo < ActiveRecord::Base
                 	ngo.level = header[1]
                     ngo.description = header[2]
                     ngo.category = header[3]
-                    ngo.link = header[4]
+                    ngo.procedure = header[4]
                     ngo.criteria = header[5]
-                    ngo.procedure = header [6]
+                    ngo.link = header[6]
+                    ngo.lastdate = header [7]
                     ngo.save!
                 end
             end

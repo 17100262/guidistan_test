@@ -4,7 +4,7 @@ class NgosController < ApplicationController
     load_and_authorize_resource
     def index
       # @ngos = Ngo.all.order('name ASC')
-      @ngos =Ngo.search(params[:level])
+      @ngos =Ngo.search(params[:level]).paginate(:page => params[:page],:per_page => 10)
     end
 
 
@@ -70,13 +70,13 @@ class NgosController < ApplicationController
     package = Axlsx::Package.new
     workbook = package.workbook
     workbook.add_worksheet(name: "Basic work sheet") do |sheet|
-      sheet.add_row ["name","description","category","procedure","criteria","link","last date"]
+      sheet.add_row ["name","level","description","category","procedure","criteria","link","last date"]
       @ngos=Ngo.all
       @ngos.each do |dp|
-        sheet.add_row [dp.name,dp.description,dp.category,dp.procedure,dp.criteria,dp.link,dp.lastdate]
+        sheet.add_row [dp.name,dp.level,dp.description,dp.category,dp.procedure,dp.criteria,dp.link,dp.lastdate]
       end
     end
-    send_data package.to_stream.read, :filename => "NGOs.xlsx"
+    send_data package.to_stream.read, :filename => "Scholarships.xlsx"
   end
   
   private

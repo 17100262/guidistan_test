@@ -50,6 +50,8 @@
     <% end %>
   </div>
   <% if @ngos.present? %>
+  
+  <%= will_paginate @ngos %>
     <% @ngos.each do |ngo| %>
       <div class="scholarship-overview">
           <h2><%= link_to ngo.name, "/ngos/#{ngo.id}",{title: ngo.name} %></h2>
@@ -61,12 +63,13 @@
             <%= link_to 'Read More', "/ngos/#{ngo.id}",{title: ngo.name} %>
       </div>
     <% end %>
+    
+  <%= will_paginate @ngos %>
   <% else %>
   	<div class="about-disc col-md-10 col-sm-12 col-centered">
   		<h4>Sorry, No records match your search Results </h4>
   	</div>
   <% end %>
-
 </div>
 
 <script>

@@ -72,7 +72,6 @@ gem 'rails-jquery-tokeninput'
 # ,:path=> "~/workspace/rails-jquery-tokeninput-master"
 gem 'ahoy_matey'
 #for email sending
-gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
 gem 'delayed_job_active_record'
 
 gem 'rails4-autocomplete'

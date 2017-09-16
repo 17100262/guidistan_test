@@ -81,10 +81,10 @@ class UniversitiesController < ApplicationController
     package = Axlsx::Package.new
     workbook = package.workbook
     workbook.add_worksheet(name: "Basic work sheet") do |sheet|
-      sheet.add_row ["name","description","city_id"]
+      sheet.add_row ["name","description","city_id","link","campus","number","email","facebook","address"]
       @unis=University.all
       @unis.each do |dp|
-        sheet.add_row [dp.name,dp.description,City.find(dp.city_id).name]
+        sheet.add_row [dp.name,dp.description,City.find(dp.city_id).name,dp.name,dp.campus,dp.number,dp.email,dp.facebook,dp.address]
       end
     end
     send_data package.to_stream.read, :filename => "Universities.xlsx"

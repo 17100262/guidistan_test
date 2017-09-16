@@ -35,7 +35,6 @@ class University < ActiveRecord::Base
                     uni.email = header[6]
                     uni.facebook = header[7]
                     uni.address = header[8]
-                    uni.image = header[9]
                     uni.save!
                 end
             end
