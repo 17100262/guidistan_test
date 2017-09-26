@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  after_create :send_welcome_mail
-  def send_welcome_mail
-    SendEmailJob.set(wait: 20.seconds).perform_later(self.email)    
-  end
+  # after_create :send_welcome_mail
+  # def send_welcome_mail
+  #   SendEmailJob.set(wait: 20.seconds).perform_later(self.email)    
+  # end
 
   rolify
   # Include default devise modules. Others available are:

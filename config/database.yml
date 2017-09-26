@@ -21,6 +21,15 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  adapter: postgresql
+  template: template0
+  pool: 5
+  timeout: 5000
+  database: guidistan_test
+  username: ubuntu
+  password: admin123
+  
+  
 
 production:
   <<: *default

@@ -80,3 +80,13 @@ gem "jquery-ui-rails"
 gem "friendly_id"
 
 gem 'sitemap_generator'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+  gem 'devise-specs'
+  gem 'capybara'
+  gem 'pry'
+
+end
