@@ -14,5 +14,16 @@ class BasicMailer < ApplicationMailer
         :to => email,
         :subject => "Welcome",
         :text => "Hello! \n Welcome to an amazing place, welcome to Guidistan."
+        
     end
+    
+    
+    # default from: 'notifications@example.com'
+ 
+    def welcome_email(user)
+        @user = user
+        # @url  = 'http://example.com/login'
+        mail(to: @user.email, subject: 'Welcome to Guidistan')
+    end
+    
 end

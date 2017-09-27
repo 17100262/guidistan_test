@@ -41,7 +41,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.web_console.whiny_requests = false
   
-  config.active_job.queue_adapter = :delayed_job
+  config.active_job.queue_adapter = :sidekiq
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true 
