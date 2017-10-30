@@ -72,7 +72,7 @@ gem 'rails-jquery-tokeninput'
 # ,:path=> "~/workspace/rails-jquery-tokeninput-master"
 gem 'ahoy_matey'
 #for email sending
-gem 'delayed_job_active_record'
+# gem 'delayed_job_active_record'
 
 gem 'rails4-autocomplete'
 gem "jquery-ui-rails"
@@ -90,3 +90,5 @@ group :development, :test do
   gem 'pry'
 
 end
+
+gem 'sidekiq'

@@ -25,8 +25,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     # self.resource.profile.save!
-    
     super
+    SendEmailJob.perform_later(resource) unless resource.invalid?
+    # BasicMailer.delay.welcome_email(resource) unless resource.invalid?
   end
 
   # GET /resource/edit

@@ -1,4 +1,9 @@
+require 'sidekiq/web'
+
+
 Rails.application.routes.draw do
+  
+  mount Sidekiq::Web => '/sidekiq'
 
   get 'admin_panel/index'
   get 'universities/wishlist'
@@ -112,3 +117,4 @@ Rails.application.routes.draw do
   resources :flagged_posts
   get '/suggestions' => 'suggestion#index'
 end
+

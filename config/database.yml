@@ -8,6 +8,7 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
+  template: template0
   database: guidistan
   username: ubuntu
   password: admin123
